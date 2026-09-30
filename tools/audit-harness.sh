@@ -127,7 +127,7 @@ if [[ "$inst" == "pass" ]]; then
     "$(contains_pattern "$ipath" "(MUST|MUST NOT|must not|must never|constraint|forbidden|never)")" \
     "Add a Constraints section to $ipath with explicit MUST / MUST NOT rules."
   check_recommended "State files are enumerated (PROGRESS.md, feature_list)" \
-    "$(contains_pattern "$ipath" "(PROGRESS|feature_list|DECISIONS)")" \
+    "$(contains_pattern "$ipath" "(PROGRESS\.md|feature_list|DECISIONS\.md|docs/decisions)")" \
     "Reference PROGRESS.md, DECISIONS.md, and feature_list.json in $ipath so agents know where state lives."
   check_recommended "Documentation staleness rule present (update docs with code, no stale docs)" \
     "$(contains_pattern "$ipath" "(stale|staleness|same commit|doc.*update|update.*doc|outdated)")" \
@@ -139,8 +139,8 @@ if [[ "$inst" == "pass" ]]; then
   # L04: Split instructions
   _inst_lines="$(wc -l < "$REPO/$ipath" 2>/dev/null || echo 999)"
   check_recommended "Entry file is 50–200 lines (router, not encyclopedia) [L04]" \
-    "$([[ $_inst_lines -le 200 ]] && echo "pass" || echo "fail")" \
-    "$ipath is $_inst_lines lines — split detailed sections into docs/ topic files and link to them from $ipath."
+    "$([[ $_inst_lines -ge 50 && $_inst_lines -le 200 ]] && echo "pass" || echo "fail")" \
+    "$ipath is $_inst_lines lines (target 50–200) — if longer, split detailed sections into docs/ topic files and link to them; if shorter, add the missing router sections (overview, verification, constraints, state files)."
   check_recommended "Entry file links to topic documents in docs/ [L04]" \
     "$(contains_pattern "$ipath" "(docs/[a-z])")" \
     "Add links in $ipath to topic docs in docs/ (e.g. 'See [Architecture](docs/architecture.md)')."
