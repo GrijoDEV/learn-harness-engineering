@@ -93,21 +93,13 @@ Python 3.11 FastAPI 后端，PostgreSQL 15 数据库。
 
 OpenAI 和 Anthropic 都隐性支持拆分的做法。OpenAI 说入口文件应"短小且以路由为导向"，Anthropic 说长运行 agent 的控制信息应"简洁且高优先级"。两家都在说同一件事：别把什么都塞进一个文件里。
 
-## 示意性示例
+## OpenAI：简短入口加文档导航
 
-> 本示例为教学示意，并非已发表的真实案例——文中数字仅为让概念更具体，并非来自真实项目的实测数据。
+OpenAI 尝试过一个巨型 AGENTS.md，发现它挤占任务上下文、混淆优先级、积累过时规则，也难以检查。后来团队用约 100 行的入口文件作为地图，把详细知识放进结构化的 docs 目录，并用专门的 lint 和 CI 检查维护知识库。原文没有报告这次调整前后的任务成功率或安全约束遵循率。 [OpenAI: Harness engineering](https://openai.com/index/harness-engineering/)
 
-一个 SaaS 团队的 `AGENTS.md` 从最初的 50 行膨胀到 600 行。内容混合了技术栈版本、编码规范、历史 bug 修复笔记、API 使用说明、部署流程、和团队成员的个人偏好，什么都有，但很难快速找到跟当前任务相关的部分。
+效果取决于内容和任务。ETH Zurich 的研究发现，在其评估设置中，仓库上下文文件并未普遍提高任务成功率，却使推理成本增加了 20% 以上，因而建议人工编写的要求保持精简。文件变短不等于效果必然变好，需要在实际任务上验证。 [ETH Zurich: Evaluating AGENTS.md](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd)
 
-Agent 表现开始明显下降：简单 bug 修复任务中 agent 花大量上下文处理无关的部署指令；安全约束"所有数据库查询必须用参数化查询"埋在第 300 行，经常被忽略；三条矛盾的代码风格规则导致 agent 随机选择。
-
-团队做了一次拆分重构：
-1. `AGENTS.md` 裁剪到 80 行：只保留项目概览、运行命令、15 条全局硬约束
-2. 创建专题文档：`docs/api-patterns.md`（120 行）、`docs/database-rules.md`（60 行）、`docs/testing-standards.md`（80 行）
-3. 入口文件添加指向专题文档的链接
-4. 历史笔记要么转成测试用例，要么删除
-
-重构后：同一任务集的成功率从 45% 提升到 72%。安全约束遵循率从 60% 提升到 95%，因为规则从文件中间移到了入口文件顶部，不再被"中间迷失"了。
+一项配对研究使用 gpt-5.2-codex，在 10 个仓库的 124 个 PR 派生任务上，对比相同任务和仓库快照有无 AGENTS.md。表 1 中，中位耗时从 98.57 秒降到 70.34 秒，降低 28.64%；输出 token 中位数从 2,925 降到 2,440，降低 16.58%。任务最多改动 100 行、5 个文件。这测量的是效率，而非拆分巨型文件的效果；完整功能正确性验证不在研究范围内。 [Lulla et al., Table 1](https://arxiv.org/html/2601.20404v2)
 
 ## 核心要点
 
@@ -124,6 +116,10 @@ Agent 表现开始明显下降：简单 bug 修复任务中 agent 花大量上�
 - [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)
 - [HumanLayer: Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
 - [Nielsen Norman Group: Progressive Disclosure](https://www.nngroup.com/articles/progressive-disclosure/)
+
+- [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): 仓库上下文文件的实证研究：任务成功率、推理成本，以及保持要求精简的建议。见摘要和结论。
+
+- [Lulla et al., Table 1](https://arxiv.org/html/2601.20404v2)
 
 ## 练习
 

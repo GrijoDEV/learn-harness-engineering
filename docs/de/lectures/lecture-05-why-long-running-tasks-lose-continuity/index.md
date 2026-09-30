@@ -145,15 +145,15 @@ Anthropics tatsächliche Daten: Bei Sonnet 4.5 ist die Context Anxiety so stark,
 
 > Quelle: [Anthropic: Harness design for long-running application development](https://www.anthropic.com/engineering/harness-design-long-running-apps)
 
-## Praxisbeispiel
+## Anthropic: Übergabe zwischen Coding-Sitzungen
 
-Ein Agent wurde beauftragt, ein Blog-System mit Benutzerauthentifizierung zu implementieren — 12 Feature-Punkte, geschätzte 5 Sessions nötig.
+Anthropic beschreibt einen Nachbau der Claude-Website, bei dem der Initialisierungsagent mehr als 200 Funktionen definierte und zunächst als nicht bestanden markierte. Er erstellte außerdem init.sh, eine Fortschrittsdatei und einen ersten Git-Commit. Spätere Sitzungen lasen Fortschritt und Git-Historie, implementierten Funktionen schrittweise, prüften das Verhalten und hinterließen Aktualisierungen.
 
-**Baseline ohne Tagebuch**: Session 1 implementierte das Benutzermodell und grundlegende Routen. Session 2 startete ohne dass sich der Agent an den Interface-Vertrag der Auth-Middleware erinnerte und verbrachte ~15 Minuten damit, die vorherige Designabsicht zu erschließen. In Session 3 führte akkumulierter Drift dazu, dass der Agent bereits abgeschlossene Features neu zu implementieren begann. In Session 5 enthielt das Repo viel redundanten Code, aber das Kern-Auth-Feature hatte die End-to-End-Tests noch nicht bestanden. Nur 7 von 12 Feature-Punkten abgeschlossen, 3 mit versteckten Korrektheitsproblemen. Wie der Handwerker, der nie in sein Tagebuch schreibt — an Tag fünf ist die Baustelle das Chaos, einige Mauern doppelt gebaut, einige, die hätten gebaut werden sollen, nie begonnen.
+Der Fall dokumentiert einen Kontinuitätsmechanismus, nicht die zuvor hier genannten Abschluss-, Fehler- oder Wiederaufbauquoten. Der Begleitcode ist eine Lehrsimulation, keine Messung der Modellleistung.
 
-**Mit Tagebuch**: Unter Verwendung von Fortschrittsdateien, Entscheidungsprotokollen, Verifizierungsaufzeichnungen und Git-Kontrollpunkten. Zustandsbericht automatisch am Ende jeder Session aktualisiert. Session 2s Rebuild-Kosten fielen auf ~3 Minuten. Bis Session 5 waren alle 12 Feature-Punkte abgeschlossen und verifiziert.
+[Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
-Quantitativer Vergleich: Rebuild-Zeit um ~78% reduziert, Feature-Abschlussrate von 58% auf 100%, versteckte Fehlerrate von 43% auf 8%. Der Handwerker ist immer noch amnestisch, aber mit dem Tagebuch beginnt jeder Tag dort, wo der vorherige aufgehört hat — nicht bei null.
+LangChain berichtet bei gleichem gpt-5.2-codex auf Terminal Bench 2.0 mit 89 Aufgaben einen Anstieg von 52,8% auf 66,5%, also 13,7 Prozentpunkte. Die Änderungen umfassten Verifikationsanweisungen, Middleware und Kontextmanagement. Dies ist der gemeinsame Effekt mehrerer Harness-Änderungen, nicht allein der Fortschrittsdateien. [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
 
 ## Wichtigste Erkenntnisse
 
@@ -170,6 +170,8 @@ Quantitativer Vergleich: Rebuild-Zeit um ~78% reduziert, Feature-Abschlussrate v
 - [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)
 - [Claude Code Documentation](https://docs.anthropic.com/de/docs/claude-code)
 - [HumanLayer: Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
+
+- [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
 
 ## Übungen
 

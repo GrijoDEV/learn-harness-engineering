@@ -9,6 +9,10 @@
 - [`coding-agent-startup-flow.md`](./coding-agent-startup-flow.md): фиксированный флоу старта сессии для последующих кодовых прогонов
 - [`prompt-calibration.md`](./prompt-calibration.md): как держать корневые инструкции острыми, не делая их раздутыми и хрупкими
 
+- [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): Исследование файлов контекста: успешность, стоимость инференса и минимальные требования. См. аннотацию и выводы.
+
+- [On the Impact of AGENTS.md Files on the Efficiency of AI Coding Agents](https://arxiv.org/html/2601.20404v2): gpt-5.2-codex; 10 repos / 124 PR tasks; Table 1.
+
 ## Рекомендуемый порядок чтения
 
 1. `method-map.md`

@@ -98,21 +98,15 @@ This analogy comes from database transaction management. You might feel like thi
 - **Isolation**: When multiple agents work concurrently, design state files to avoid race conditions. Simple approach: each agent uses its own progress file, or use git branches for isolation. Concurrent writes to the same file are a common source of trouble.
 - **Durability**: Critical project knowledge lives in git-tracked files. Temporary state can stay in session memory, but knowledge that must survive across sessions has to be written to files. What's in your head doesn't count — only what's written down counts.
 
-## Illustrative Example
+## OpenAI: Repository Knowledge as the System of Record
 
-> This example is a teaching illustration, not a published case study — the numbers are illustrative rather than measured from a real project.
+OpenAI describes keeping architecture, design decisions, execution plans, and progress in versioned repository files while developing an internal product with Codex. Knowledge in chat threads or external documents cannot guide the agent unless it is made accessible in its working context. The team organized this knowledge into a structured docs directory, with checks for freshness and cross-links.
 
-A team maintained an e-commerce platform with roughly 30 microservices. Architecture decisions — inter-service communication protocols, data consistency strategies, API versioning rules — were scattered across: Confluence (partially outdated), Slack (hard to search), a few senior engineers' heads (not scalable), and sporadic code comments (not systematic).
+This is a documented engineering practice, not a controlled measurement of how much repository documentation improves success rates.
 
-After introducing AI agents, 70% of tasks required human intervention. Nearly every failure involved the agent violating some implicit constraint that "everyone knows but nobody ever wrote down." The agent had no way to know what it didn't know — it could only act on its own understanding, and then step right into the trap.
+[OpenAI](https://openai.com/index/harness-engineering/)
 
-The team executed a transformation:
-1. Created `AGENTS.md` in the repo root with project overview, tech stack versions, and global hard constraints
-2. Added `ARCHITECTURE.md` in each microservice directory describing that service's responsibilities, interfaces, and dependencies
-3. Created a centralized `CONSTRAINTS.md` using explicit "MUST / MUST NOT" language for hard constraints
-4. Added `PROGRESS.md` in each service directory tracking current work status
-
-After transformation: the same agent could answer all key project questions on a fresh session, and task completion quality improved significantly.
+OpenAI reports roughly 1,500 opened and merged PRs over five months, driven by a small team of three engineers using Codex, and an average throughput of 3.5 PRs per engineer per day. The team later grew to seven. These are reported production outcomes for the whole engineering setup; the article does not isolate the contribution of repository documentation. [OpenAI: Harness engineering](https://openai.com/index/harness-engineering/)
 
 ## Key Takeaways
 

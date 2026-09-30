@@ -145,15 +145,15 @@ Anthropic の実際のデータ: Sonnet 4.5 では、コンテキスト不安が
 
 > 出典: [Anthropic: Harness design for long-running application development](https://www.anthropic.com/engineering/harness-design-long-running-apps)
 
-## 実例
+## Anthropic：コーディングセッション間の引き継ぎ
 
-エージェントにユーザー認証付きブログシステムの実装を依頼しました — 12の機能ポイント、5セッションが必要と推定。
+Anthropic は Claude のウェブサイトを再現する事例で、初期化エージェントが 200 を超える機能を定義し、最初はすべて未達成として記録したと説明しています。init.sh、進捗ファイル、最初の Git コミットも作成しました。後続セッションは進捗と Git 履歴を読み、機能を段階的に実装・検証して次回への記録を残しました。
 
-**日記なしのベースライン**: セッション1でユーザーモデルと基本ルートを実装。セッション2はエージェントが認証ミドルウェアのインターフェース契約を覚えておらず、前回の設計意図を推測するのに約15分を費やしました。セッション3までに蓄積されたドリフトにより、エージェントはすでに完了した機能の再実装を始めました。セッション5までに、リポジトリには大量の冗長なコードが含まれていましたが、コアの認証機能は依然としてエンドツーエンドテストに合格していませんでした。12の機能ポイントのうち7つしか完了せず、3つには隠れた正確性の問題がありました。日記を一切書かない職人のように — 5日目には建設現場は混乱し、一部の壁は2度建てられ、建てるべきだった壁はまだ着手されていません。
+この事例が示すのは継続性の仕組みであり、以前ここに記載されていた完成率、欠陥率、コンテキスト再構築時間の比率ではありません。付属コードは教育用シミュレーションで、モデル性能の実測ではありません。
 
-**日記あり**: 進捗ファイル、決定ログ、検証記録、Git チェックポイントを使用。各セッション終了時に状態レポートを自動更新。セッション2のリビルドコストは約3分に低下。セッション5までに、12の機能ポイントすべてが完了し検証済み。
+[Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
-定量的な比較: リビルド時間が約78%削減、機能完了率は58%から100%、隠れた欠陥率は43%から8%に低下。職人はまだ記憶喪失ですが、日記のおかげで毎日の開始は昨日の停止地点からとなり、ゼロからではありません。
+LangChain は、同じ gpt-5.2-codex を使う 89 タスクの Terminal Bench 2.0 で、52.8% から 66.5% へ 13.7 ポイント改善したと報告しています。検証指示、ミドルウェア、コンテキスト管理を変更した全体の結果で、進捗ファイルだけの効果ではありません。 [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
 
 ## 重要なポイント
 
@@ -170,6 +170,8 @@ Anthropic の実際のデータ: Sonnet 4.5 では、コンテキスト不安が
 - [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)
 - [Claude Code Documentation](https://docs.anthropic.com/ja/docs/claude-code)
 - [HumanLayer: Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
+
+- [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
 
 ## 演習
 

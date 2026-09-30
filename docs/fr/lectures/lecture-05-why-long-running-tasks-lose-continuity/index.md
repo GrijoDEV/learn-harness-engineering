@@ -145,15 +145,15 @@ Les données réelles d'Anthropic : pour Sonnet 4.5, l'anxiété de contexte est
 
 > Source : [Anthropic: Harness design for long-running application development](https://www.anthropic.com/engineering/harness-design-long-running-apps)
 
-## Exemple concret
+## Anthropic : transmission entre sessions de développement
 
-Un agent a été chargé d'implémenter un système de blog avec authentification utilisateur — 12 points de fonctionnalité, estimation de 5 sessions nécessaires.
+Anthropic décrit une reproduction du site Claude dont l’agent initialisateur a défini plus de 200 fonctionnalités, initialement marquées comme non validées. Il a aussi créé init.sh, un fichier d’avancement et un premier commit Git. Les sessions suivantes lisaient l’avancement et l’historique Git, réalisaient les fonctionnalités progressivement, vérifiaient leur comportement et laissaient des mises à jour.
 
-**Baseline sans le journal** : La session 1 a implémenté le modèle utilisateur et les routes de base. La session 2 a démarré sans que l'agent se souvienne du contrat d'interface du middleware d'authentification, passant ~15 minutes à déduire l'intention de conception précédente. Dès la session 3, la dérive accumulée a poussé l'agent à réimplémenter des fonctionnalités déjà complétées. À la session 5, le repo contenait beaucoup de code redondant mais la fonctionnalité d'authentification principale n'avait toujours pas passé les tests de bout en bout. Seulement 7 des 12 points de fonctionnalité complétés, dont 3 avec des problèmes de correction cachés. Comme l'artisan qui n'écrit jamais dans son journal — au cinquième jour, le chantier est chaotique, certains murs construits deux fois, d'autres qui auraient dû l'être ne sont même pas commencés.
+Ce cas décrit un mécanisme de continuité, pas les pourcentages de réalisation, de défauts ou de reconstruction précédemment cités ici. Le code associé est une simulation pédagogique, pas une mesure des performances du modèle.
 
-**Avec le journal** : Utilisation de fichiers de progression, journaux de décisions, enregistrements de vérification et points de contrôle git. Le rapport d'état mis à jour automatiquement à la fin de chaque session. Le coût de reconstruction de la session 2 est tombé à ~3 minutes. À la session 5, les 12 points de fonctionnalité étaient complétés et vérifiés.
+[Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
-Comparaison quantitative : temps de reconstruction réduit de ~78 %, taux de complétion des fonctionnalités de 58 % à 100 %, taux de défauts cachés de 43 % à 8 %. L'artisan est toujours amnésique, mais avec le journal, chaque jour commence là où celui d'hier s'est arrêté, pas à zéro.
+LangChain rapporte un score passant de 52,8% à 66,5%, soit 13,7 points, avec le même gpt-5.2-codex sur Terminal Bench 2.0 et ses 89 tâches. Les changements portaient sur la vérification, le middleware et la gestion du contexte. Ce résultat combine plusieurs modifications du harness ; il ne mesure pas le seul effet des fichiers d’avancement. [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
 
 ## Points clés
 
@@ -170,6 +170,8 @@ Comparaison quantitative : temps de reconstruction réduit de ~78 %, taux de com
 - [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)
 - [Claude Code Documentation](https://docs.anthropic.com/fr/docs/claude-code)
 - [HumanLayer: Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
+
+- [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
 
 ## Exercices
 

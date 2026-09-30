@@ -98,19 +98,15 @@ Bu analogiya maʼlumotlar bazasi tranzaksiyalarini boshqarishdan olingan — eht
 - **Isolation (Izolyatsiya)**: Bir nechta agentlar parallel ishlaganda, poyga holatlarini (race conditions) oldini olish uchun holat fayllarini (state files) toʻgʻri loyihalang. Oddiy usul: har bir agent oʻzining alohida progress faylidan foydalanadi yoki izolyatsiya uchun git branchʼlaridan foydalaning. Ikkita oshpaz bitta qozonga bir vaqtda ziravor sola olmaydi — ovqat shoʻr boʻlib ketsa, kim javob beradi?
 - **Durability (Chidamlilik)**: Loyihaning muhim bilimlari git orqali kuzatiladigan fayllarda saqlanadi. Vaqtinchalik holat sessiya xotirasida qolishi mumkin, ammo sessiyalararo bilimlar fayllarda doimiy saqlanishi kerak. Sizning boshingizda nima borligi muhim emas — faqat qogʻozda bor narsa hisobga olinadi.
 
-## Haqiqiy oʻzgarish hikoyasi
+## OpenAI: repozitoriy bilimning asosiy manbai
 
-Bir jamoa ~30 ta mikroservisga ega e-tijorat platformasini boshqargan. Arxitektura qarorlari (servislararo aloqa protokollari, maʼlumotlar muvofiqligi strategiyalari, API versiyalash qoidalari) quyidagilarda tarqalib ketgan edi: Confluence (qisman eskirgan), Slack (qidirish qiyin), bir nechta tajribali muhandislarning boshlarida (kengaytirib boʻlmaydi) va kod izohlarida tarqoq holda (tizimli emas).
+OpenAI Codex bilan ichki mahsulot yaratishda arxitektura, dizayn qarorlari, bajarish rejalari va jarayon holatini versiyalanadigan repozitoriy fayllarida saqlaganini tushuntiradi. Chat yoki tashqi hujjatlardagi bilim agentning ish kontekstida ochiq bo‘lsagina uning qarorlariga yordam beradi. Jamoa tuzilgan docs katalogi, yangilik va havola tekshiruvlaridan foydalangan.
 
-AI agentlarini joriy etgandan soʻng, vazifalarning 70% inson aralashuvini talab qildi. Deyarli har bir muvaffaqiyatsizlik agentning “hamma biladi, lekin hech kim yozmagan” yashirin cheklovni buzishi bilan bogʻliq edi. Bu xuddi yangi xodimga hech kim “tushlik buyurtmasini guruh chatiga yozishing kerak” deb aytmaganiga oʻxshaydi — ular xato qilishadi, dakki eshitishadi, ammo gap eshitganidan keyin ham hech kim ularga qoidani tushuntirmaydi.
+Bu hujjatlashtirilgan muhandislik amaliyoti, muvaffaqiyat oshishini o‘lchagan nazoratli tajriba emas.
 
-Jamoa oʻzgarishlarni amalga oshirdi:
-1. Repo ildizida loyiha tavsifi, tech stack versiyalari va global qatʼiy cheklovlar kiritilgan `AGENTS.md` fayli yaratildi.
-2. Har bir mikroservis katalogida uning vazifalari, interfeyslari va bogʻliqliklarini taʼriflovchi `ARCHITECTURE.md` qoʻshildi.
-3. Aniq “SHART/MUMKIN EMAS” tili bilan markazlashgan qatʼiy cheklovlar (`CONSTRAINTS.md`) yaratildi.
-4. Har bir servis katalogiga joriy ish holatini kuzatuvchi `PROGRESS.md` qoʻshildi.
+[OpenAI](https://openai.com/index/harness-engineering/)
 
-Oʻzgarishlardan soʻng: xuddi shu agent sovuq ishga tushirishda barcha asosiy loyiha savollariga javob bera oldi va vazifani yakunlash sifati sezilarli darajada yaxshilandi.
+OpenAI Codex’ni boshqargan uch muhandis bilan besh oyda taxminan 1 500 PR ochilib birlashtirilganini, har muhandis kuniga o‘rtacha 3,5 PR yaratganini bildiradi. Jamoa keyin yetti kishiga yetgan. Bu butun jarayon natijasi; repozitoriy hujjatlari hissasi alohida o‘lchanmagan. [OpenAI: Harness engineering](https://openai.com/index/harness-engineering/)
 
 ## Asosiy xulosalar
 

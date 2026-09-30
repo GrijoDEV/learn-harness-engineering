@@ -73,6 +73,10 @@ Les références générales strictement limitées à 2025 sont exclues de la li
 L'article original Anthropic de 2025 sur les harnais reste car c'est une source
 fondamentale du cours.
 
+- [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): Étude des fichiers de contexte : réussite, coût d’inférence et exigences minimales. Voir le résumé et la conclusion.
+
+- [On the Impact of AGENTS.md Files on the Efficiency of AI Coding Agents](https://arxiv.org/html/2601.20404v2): gpt-5.2-codex; 10 repos / 124 PR tasks; Table 1.
+
 ## Ordre de lecture suggéré
 
 1. `method-map.md`

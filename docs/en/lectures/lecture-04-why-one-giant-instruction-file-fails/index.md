@@ -93,21 +93,13 @@ If an instruction absolutely must be in the entry file, put it at the top or bot
 
 Both OpenAI and Anthropic implicitly endorse this split approach. OpenAI says entry files should be "short and routing-oriented," while Anthropic says control information for long-running agents should be "concise and high-priority." Both are saying the same thing: don't stuff everything into a single file.
 
-## Illustrative Example
+## OpenAI: A Short Entry File and Linked Documentation
 
-> This example is a teaching illustration, not a published case study — the numbers are illustrative rather than measured from a real project.
+OpenAI reports that a single large AGENTS.md crowded out task context, blurred priorities, accumulated stale rules, and was difficult to verify. The team instead used an entry file of roughly 100 lines as a map to a structured docs directory. Dedicated linters and CI checks maintained the knowledge base. The article does not report before-and-after task success or security-compliance percentages for this change. [OpenAI: Harness engineering](https://openai.com/index/harness-engineering/)
 
-A SaaS team's `AGENTS.md` ballooned from 50 lines to 600. The contents mixed together tech stack versions, coding standards, historical bug fix notes, API usage guides, deployment procedures, and team members' personal preferences — everything was in there, but finding the part relevant to the current task was a slog.
+The benefit depends on the content and task. An ETH Zurich study found that repository context files did not generally improve task success in its evaluated settings and increased inference cost by over 20%. Its recommendation is to keep human-written requirements minimal. A shorter file is not a guarantee of improvement; test the instructions on the tasks they are meant to support. [ETH Zurich: Evaluating AGENTS.md](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd)
 
-Agent performance started declining noticeably: during simple bug fixes the agent spent significant context processing irrelevant deployment instructions; the security constraint "all database queries must use parameterized queries" was buried at line 300 and frequently ignored; three contradictory code style rules caused the agent to pick one at random.
-
-The team executed a split refactoring:
-1. `AGENTS.md` trimmed to 80 lines: only project overview, run commands, and 15 global hard constraints
-2. Created topic documents: `docs/api-patterns.md` (120 lines), `docs/database-rules.md` (60 lines), `docs/testing-standards.md` (80 lines)
-3. Added topic document links in the entry file
-4. Historical notes either converted to test cases or deleted outright
-
-After refactoring: success rate on the same task set improved from 45% to 72%. Security constraint compliance rose from 60% to 95%, because the rule moved from the middle of the file to the top of the entry file — no longer "lost in the middle."
+A paired study used gpt-5.2-codex on 124 PR-derived tasks from 10 repositories, comparing the same task and repository snapshot with and without AGENTS.md. Table 1 reports median runtime falling from 98.57 s to 70.34 s (28.64% lower), and median output tokens from 2,925 to 2,440 (16.58% lower). Tasks changed at most 100 lines across at most five files. This measures efficiency, not the effect of splitting a large file: full functional correctness was outside the study’s scope. [Lulla et al., Table 1](https://arxiv.org/html/2601.20404v2)
 
 ## Key Takeaways
 
@@ -124,6 +116,10 @@ After refactoring: success rate on the same task set improved from 45% to 72%. S
 - [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)
 - [HumanLayer: Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
 - [Nielsen Norman Group: Progressive Disclosure](https://www.nngroup.com/articles/progressive-disclosure/)
+
+- [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): Study of repository context files; task success, inference cost, and the recommendation to keep requirements minimal. See the abstract and conclusion.
+
+- [Lulla et al., Table 1](https://arxiv.org/html/2601.20404v2)
 
 ## Exercises
 

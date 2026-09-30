@@ -395,7 +395,7 @@
       "core-concepts",
       "how-to-draw-a-good-map",
       "managing-agent-state-with-acid-principles",
-      "a-real-transformation-story",
+      "openai-repository-knowledge-as-the-system-of-record",
       "key-takeaways",
       "further-reading",
       "exercises"
@@ -493,7 +493,7 @@
       "core-concepts",
       "instruction-architecture",
       "how-to-split",
-      "real-world-example",
+      "openai-a-short-entry-file-and-linked-documentation",
       "key-takeaways",
       "further-reading",
       "exercises"
@@ -594,7 +594,7 @@
       "what-happens-when-continuity-breaks",
       "practical-approaches-to-state-persistence",
       "a-deeper-look-at-context-anxiety",
-      "real-world-example",
+      "anthropic-handoff-across-coding-sessions",
       "key-takeaways",
       "further-reading",
       "exercises"

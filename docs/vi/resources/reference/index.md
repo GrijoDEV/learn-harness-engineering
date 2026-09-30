@@ -11,6 +11,10 @@ Các ghi chú này giải thích cách sử dụng các mẫu như một harness
 - [`coding-agent-startup-flow.md`](./coding-agent-startup-flow.md): luồng bắt đầu phiên cố định cho các lần chạy coding sau
 - [`prompt-calibration.md`](./prompt-calibration.md): cách giữ cho hướng dẫn gốc sắc nét mà không làm chúng phình to và dễ vỡ
 
+- [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): Nghiên cứu tệp ngữ cảnh: thành công, chi phí suy luận và yêu cầu tối thiểu. Xem tóm tắt và kết luận.
+
+- [On the Impact of AGENTS.md Files on the Efficiency of AI Coding Agents](https://arxiv.org/html/2601.20404v2): gpt-5.2-codex; 10 repos / 124 PR tasks; Table 1.
+
 ## Thứ tự Đọc Đề nghị
 
 1. `method-map.md`

@@ -93,19 +93,13 @@ Python 3.11 FastAPI 백엔드, PostgreSQL 15 데이터베이스.
 
 OpenAI와 Anthropic 모두 분산 접근 방식을 암묵적으로 지지합니다. OpenAI는 진입 파일이 "짧고 라우팅 중심"이어야 한다고 말하고, Anthropic은 장기 실행 에이전트 제어 정보가 "간결하고 높은 우선순위"여야 한다고 말합니다. 둘 다 같은 말을 하고 있습니다. 모든 것을 하나의 파일에 구겨 넣지 말라는 것입니다. 여행 가방도 정리가 필요합니다. 무작정 욱여넣는 것이 아니라.
 
-## 실제 사례
+## OpenAI: 짧은 진입 파일과 문서 링크
 
-한 SaaS 팀의 `AGENTS.md`가 50줄에서 600줄로 불었습니다. 내용은 기술 스택 버전, 코딩 표준, 역사적 버그 수정 메모, API 사용 가이드, 배포 절차, 팀원들의 개인 선호도가 뒤섞여 있었습니다. 여행 가방이 터질 지경이었습니다.
+OpenAI는 거대한 AGENTS.md가 작업 컨텍스트를 차지하고 우선순위를 흐리며 낡은 규칙을 쌓고 검증을 어렵게 했다고 보고했습니다. 대신 약 100줄의 진입 파일을 안내도로 사용하고, 상세 지식은 구조화된 docs 디렉터리에 두어 lint와 CI로 관리했습니다. 원문에는 변경 전후의 작업 성공률이나 보안 규칙 준수율이 없습니다. [OpenAI: Harness engineering](https://openai.com/index/harness-engineering/)
 
-에이전트 성능이 눈에 띄게 저하되기 시작했습니다. 간단한 버그 수정 중에도 에이전트가 관련 없는 배포 명령을 처리하느라 많은 컨텍스트를 낭비했고, "모든 데이터베이스 쿼리는 매개변수화된 쿼리를 사용해야 한다"는 보안 제약이 300번째 줄에 묻혀 자주 무시됐으며, 서로 모순된 코드 스타일 규칙 세 개가 에이전트의 임의적인 행동을 유발했습니다.
+효과는 내용과 작업에 따라 달라집니다. ETH Zurich 연구는 평가한 환경에서 저장소 컨텍스트 파일이 성공률을 일반적으로 높이지 않았지만 추론 비용은 20% 이상 늘었다고 보고하며, 사람이 작성하는 요구사항을 최소화하도록 권합니다. 짧은 파일이 개선을 보장하지 않으므로 실제 대상 작업으로 검증해야 합니다. [ETH Zurich: Evaluating AGENTS.md](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd)
 
-팀은 "여행 가방 재정리"를 실행했습니다.
-1. `AGENTS.md`를 80줄로 줄임: 프로젝트 개요, 실행 명령, 전역 하드 제약 15개만 남김
-2. 주제 문서 생성: `docs/api-patterns.md`(120줄), `docs/database-rules.md`(60줄), `docs/testing-standards.md`(80줄)
-3. 라우팅 파일에 주제 문서 링크 추가
-4. 역사적 메모는 테스트 케이스로 전환하거나 삭제
-
-리팩터링 후: 동일 작업 세트 성공률이 45%에서 72%로 올랐습니다. 보안 제약 준수율은 60%에서 95%로 상승했는데, 이는 파일 중간에서 라우팅 파일 상단으로 이동해 더 이상 "중간에서 길을 잃지" 않게 됐기 때문입니다.
+짝지은 비교 연구는 gpt-5.2-codex로 10개 저장소의 PR 기반 작업 124개를 동일한 상태에서 AGENTS.md 유무로 비교했습니다. 표 1: 중위 실행 시간 98.57초→70.34초(28.64% 감소), 중위 출력 token 2,925→2,440(16.58% 감소). 작업은 최대 100줄, 5개 파일을 변경했습니다. 효율을 측정했으며 거대 파일 분할 효과나 완전한 기능적 정확성을 평가하지 않았습니다. [Lulla et al., Table 1](https://arxiv.org/html/2601.20404v2)
 
 ## 핵심 정리
 
@@ -122,6 +116,10 @@ OpenAI와 Anthropic 모두 분산 접근 방식을 암묵적으로 지지합니�
 - [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)
 - [HumanLayer: Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
 - [Nielsen Norman Group: Progressive Disclosure](https://www.nngroup.com/articles/progressive-disclosure/)
+
+- [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): 컨텍스트 파일의 실증 연구: 성공률, 추론 비용, 최소 요구사항. 초록과 결론 참고.
+
+- [Lulla et al., Table 1](https://arxiv.org/html/2601.20404v2)
 
 ## 연습 문제
 

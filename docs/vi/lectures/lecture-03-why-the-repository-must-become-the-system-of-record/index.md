@@ -98,19 +98,15 @@ Phép loại suy này xuất phát từ quản lý giao dịch cơ sở dữ li�
 - **Tính cô lập (Isolation)**: Khi nhiều agent chạy đồng thời, hãy thiết kế các tệp trạng thái để tránh race condition. Cách đơn giản: mỗi agent dùng tệp tiến độ riêng, hoặc dùng git branch để cô lập. Ghi đồng thời vào cùng một tệp là nguồn cơn trục trặc thường gặp.
 - **Tính bền vững (Durability)**: Kiến thức dự án quan trọng phải nằm trong các tệp được git theo dõi. Trạng thái tạm có thể nằm trong bộ nhớ phiên, nhưng kiến thức cần sống sót qua các phiên thì bắt buộc phải ghi vào tệp. Thứ trong đầu bạn không tính, chỉ thứ viết ra mới tính.
 
-## Câu chuyện chuyển đổi thật
+## OpenAI: kho mã làm nguồn tri thức chuẩn
 
-Một nhóm vận hành một nền tảng thương mại điện tử gồm khoảng 30 microservice. Các quyết định kiến trúc (giao thức giao tiếp giữa dịch vụ, chiến lược nhất quán dữ liệu, quy tắc phiên bản API) nằm rải rác ở: Confluence (một phần đã lỗi thời), Slack (khó tìm kiếm), đầu vài kỹ sư cấp cao (không mở rộng được), và các chú thích code lác đác (không có hệ thống).
+OpenAI mô tả việc lưu kiến trúc, quyết định thiết kế, kế hoạch thực hiện và tiến độ trong các tệp có quản lý phiên bản khi phát triển sản phẩm nội bộ bằng Codex. Tri thức trong hội thoại hoặc tài liệu ngoài chỉ hướng dẫn được agent khi có thể truy cập từ ngữ cảnh làm việc. Nhóm dùng thư mục docs có cấu trúc và kiểm tra độ cập nhật cùng liên kết.
 
-Sau khi đưa AI agent vào, 70% tác vụ phải cần con người can thiệp. Gần như mọi thất bại đều xoay quanh việc agent vi phạm một ràng buộc ngầm nào đó mà "ai cũng biết nhưng chẳng ai viết ra". Agent không có cách nào biết được thứ mà nó không biết là mình chưa biết, nó chỉ có thể hành động theo hiểu biết của nó, rồi rơi thẳng vào bẫy.
+Đây là thực hành kỹ thuật được công bố, không phải thí nghiệm đối chứng đo mức tăng tỷ lệ thành công.
 
-Nhóm đó đã thực hiện một cuộc cải tổ:
-1. Tạo `AGENTS.md` ở thư mục gốc repo với tổng quan dự án, phiên bản tech stack và các ràng buộc cứng toàn cục
-2. Thêm `ARCHITECTURE.md` trong thư mục mỗi microservice, mô tả trách nhiệm, giao diện và phụ thuộc của dịch vụ đó
-3. Tạo một `CONSTRAINTS.md` tập trung, dùng ngôn ngữ "PHẢI / KHÔNG ĐƯỢC" rõ ràng cho các ràng buộc cứng
-4. Thêm `PROGRESS.md` trong thư mục mỗi dịch vụ để theo dõi trạng thái công việc hiện tại
+[OpenAI](https://openai.com/index/harness-engineering/)
 
-Sau cải tổ: cùng một agent có thể trả lời tất cả câu hỏi quan trọng của dự án ngay trong một phiên mới, và chất lượng hoàn thành tác vụ cải thiện rõ rệt.
+OpenAI báo cáo khoảng 1.500 PR được mở và hợp nhất trong năm tháng, do ba kỹ sư điều phối Codex, trung bình 3,5 PR mỗi người mỗi ngày. Nhóm sau đó tăng lên bảy người. Đây là kết quả của toàn bộ quy trình; đóng góp riêng của tài liệu không được đo. [OpenAI: Harness engineering](https://openai.com/index/harness-engineering/)
 
 ## Những điểm chính cần nhớ
 

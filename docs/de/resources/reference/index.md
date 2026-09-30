@@ -43,6 +43,10 @@ Harness-Module.
 - [LangChain: Tuning Deep Agents to Work Well with Different Models](https://www.langchain.com/blog/tuning-deep-agents-different-models) (2026-04-29)
 - [Microsoft: Agent Harness in Agent Framework](https://devblogs.microsoft.com/agent-framework/agent-harness-in-agent-framework/) (2026-03-12)
 
+- [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): Empirische Studie zu Kontextdateien: Aufgabenerfolg, Inferenzkosten und minimale Anforderungen. Siehe Zusammenfassung und Fazit.
+
+- [On the Impact of AGENTS.md Files on the Efficiency of AI Coding Agents](https://arxiv.org/html/2601.20404v2): gpt-5.2-codex; 10 repos / 124 PR tasks; Table 1.
+
 ## Empfohlene Lesereihenfolge
 
 1. `method-map.md`

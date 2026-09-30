@@ -145,15 +145,15 @@ Dữ liệu thực tế từ Anthropic: với Sonnet 4.5, context anxiety nghiê
 
 > Nguồn: [Anthropic: Harness design for long-running application development](https://www.anthropic.com/engineering/harness-design-long-running-apps)
 
-## Ví dụ thật
+## Anthropic: bàn giao giữa các phiên lập trình
 
-Một agent được giao triển khai hệ thống blog có xác thực người dùng, 12 điểm tính năng, ước tính cần 5 phiên.
+Anthropic mô tả một bản sao trang Claude: agent khởi tạo xác định hơn 200 tính năng và ban đầu đánh dấu tất cả là chưa đạt. Agent cũng tạo init.sh, tệp tiến độ và commit Git đầu tiên. Các phiên sau đọc tiến độ cùng lịch sử Git, triển khai từng phần, kiểm tra hành vi và để lại cập nhật cho phiên kế tiếp.
 
-**Baseline không có tệp lưu trữ trạng thái**: Phiên 1 triển khai user model và các route cơ bản. Phiên 2 mở ra mà agent chẳng nhớ hợp đồng giao diện của auth middleware, tốn khoảng 15 phút để dò lại ý đồ thiết kế trước đó. Đến phiên 3, trôi dạt tích tụ khiến agent bắt đầu triển khai lại các tính năng đã hoàn thành. Sang phiên 5, repo chứa nhiều code thừa nhưng tính năng auth cốt lõi vẫn chưa qua được test end-to-end. Chỉ 7 trên 12 điểm tính năng hoàn thành, trong đó 3 điểm có lỗi ngầm.
+Ví dụ này mô tả cơ chế liên tục, không báo cáo các tỷ lệ hoàn thành, lỗi ẩn hoặc thời gian khôi phục ngữ cảnh từng xuất hiện ở đây. Mã đi kèm là mô phỏng giảng dạy, không phải phép đo hiệu năng mô hình.
 
-**Có tệp lưu trữ trạng thái**: Dùng tệp tiến độ, nhật ký quyết định, bản ghi xác minh và git checkpoint. Báo cáo trạng thái tự động cập nhật ở cuối mỗi phiên. Chi phí tái thiết lập của phiên 2 giảm xuống còn khoảng 3 phút. Đến phiên 5, đủ cả 12 điểm tính năng được hoàn thành và xác minh.
+[Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
-So sánh định lượng: thời gian tái thiết lập giảm khoảng 78%, tỷ lệ hoàn thành tính năng từ 58% lên 100%, tỷ lệ lỗi ngầm từ 43% giảm còn 8%.
+LangChain báo cáo điểm tăng từ 52,8% lên 66,5%, tức 13,7 điểm phần trăm, với cùng gpt-5.2-codex trên 89 nhiệm vụ Terminal Bench 2.0. Thay đổi gồm hướng dẫn kiểm tra, middleware và quản lý ngữ cảnh. Đây là kết quả tổng hợp nhiều thay đổi harness, không riêng tệp tiến độ. [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
 
 ## Những điểm chính cần nhớ
 
@@ -170,6 +170,8 @@ So sánh định lượng: thời gian tái thiết lập giảm khoảng 78%, t
 - [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)
 - [Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code)
 - [HumanLayer: Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
+
+- [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
 
 ## Bài tập
 

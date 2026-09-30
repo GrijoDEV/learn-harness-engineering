@@ -93,19 +93,13 @@ Python 3.11 FastAPI 後端，PostgreSQL 15 資料庫。
 
 OpenAI 和 Anthropic 都隱性支援拆分的做法。OpenAI 說入口檔案應「短小且以路由為導向」，Anthropic 說長執行 agent 的控制資訊應「簡潔且高優先級」。兩家都在說同一件事，別把什麼都塞進一個檔案裡。
 
-## 實際案例
+## OpenAI：簡短入口加文件導覽
 
-一個 SaaS 團隊的 `AGENTS.md` 從最初的 50 行膨脹到 600 行。內容混合了技術堆疊版本、編碼規範、歷史 bug 修復筆記、API 使用說明、部署流程、和團隊成員的個人偏好，整份文件塞得滿滿當當，完全失去可維護性。
+OpenAI 嘗試過一個巨型 AGENTS.md，發現它擠占任務脈絡、混淆優先順序、累積過時規則，也難以檢查。後來團隊用約 100 行的入口檔案作為地圖，把詳細知識放進結構化的 docs 目錄，並用專門的 lint 和 CI 檢查維護知識庫。原文沒有報告這次調整前後的任務成功率或安全約束遵循率。 [OpenAI: Harness engineering](https://openai.com/index/harness-engineering/)
 
-Agent 表現開始明顯下降：簡單 bug 修復任務中 agent 花大量脈絡處理無關的部署指令；安全約束「所有資料庫查詢必須用參數化查詢」埋在第 300 行，經常被忽略；三條矛盾的程式碼風格規則導致 agent 隨機選擇。
+效果取決於內容和任務。ETH Zurich 的研究發現，在其評估設定中，儲存庫脈絡檔案並未普遍提高任務成功率，卻使推理成本增加了 20% 以上，因此建議人工撰寫的要求保持精簡。檔案變短不代表效果必然變好，需要在實際任務上驗證。 [ETH Zurich: Evaluating AGENTS.md](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd)
 
-團隊執行了文件重組：
-1. `AGENTS.md` 裁剪到 80 行：只保留專案概覽、執行命令、15 條全域硬約束
-2. 建立主題文件：`docs/api-patterns.md`（120 行）、`docs/database-rules.md`（60 行）、`docs/testing-standards.md`（80 行）
-3. 路由檔案添加指向主題文件的連結
-4. 歷史筆記要嘛轉成測試用例，要嘛刪除
-
-重構後：同一任務集的成功率從 45% 提升到 72%。安全約束遵循率從 60% 提升到 95%，因為從檔案中間移到了路由檔案頂部，不再被「中間迷失」了。
+一項配對研究使用 gpt-5.2-codex，在 10 個儲存庫的 124 個 PR 衍生任務上，對比相同任務和快照有無 AGENTS.md。表 1 中，中位耗時從 98.57 秒降到 70.34 秒，降低 28.64%；輸出 token 中位數從 2,925 降到 2,440，降低 16.58%。任務最多改動 100 行、5 個檔案。這測量的是效率，而非拆分巨型檔案的效果；完整功能正確性驗證不在研究範圍內。 [Lulla et al., Table 1](https://arxiv.org/html/2601.20404v2)
 
 ## 關鍵要點
 
@@ -122,6 +116,10 @@ Agent 表現開始明顯下降：簡單 bug 修復任務中 agent 花大量脈�
 - [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)
 - [HumanLayer: Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
 - [Nielsen Norman Group: Progressive Disclosure](https://www.nngroup.com/articles/progressive-disclosure/)
+
+- [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): 儲存庫脈絡檔案的實證研究：任務成功率、推理成本，以及保持要求精簡的建議。見摘要和結論。
+
+- [Lulla et al., Table 1](https://arxiv.org/html/2601.20404v2)
 
 ## 練習
 

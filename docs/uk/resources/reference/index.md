@@ -69,6 +69,10 @@ harness. Цей розділ містить лише джерела, тіло я
 стаття Anthropic про harness 2025 року залишається, оскільки є базовим джерелом
 курсу.
 
+- [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): Дослідження файлів контексту: успішність, вартість інференсу та мінімальні вимоги. Див. анотацію і висновки.
+
+- [On the Impact of AGENTS.md Files on the Efficiency of AI Coding Agents](https://arxiv.org/html/2601.20404v2): gpt-5.2-codex; 10 repos / 124 PR tasks; Table 1.
+
 ## Рекомендований порядок читання
 
 1. `method-map.md`
