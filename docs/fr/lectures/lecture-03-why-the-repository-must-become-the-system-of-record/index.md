@@ -98,19 +98,13 @@ Cette analogie vient de la gestion des transactions en base de données. Vous po
 - **Isolation** : quand plusieurs agents travaillent en parallèle, concevez les fichiers d'état pour éviter les conditions de course. Approche simple : chaque agent utilise son propre fichier de progrès, ou des branches git assurent l'isolation. Deux cuisiniers ne peuvent pas assaisonner la même marmite en même temps : qui est responsable si c'est trop salé ?
 - **Durability** : le savoir critique du projet vit dans des fichiers suivis par git. L'état temporaire peut rester en mémoire de session, mais le savoir entre sessions doit être persisté dans des fichiers. Ce qui est dans votre tête ne compte pas ; seul ce qui est écrit compte.
 
-## Une vraie histoire de transformation
+## OpenAI : le dépôt comme source de référence
 
-Une équipe maintenait une plateforme e-commerce avec environ 30 microservices. Les décisions d'architecture (protocoles de communication interservices, stratégies de cohérence des données, règles de versioning API) étaient dispersées entre Confluence (partiellement obsolète), Slack (difficile à rechercher), la tête de quelques ingénieurs seniors (non scalable) et des commentaires de code sporadiques (pas systématiques).
+OpenAI décrit la conservation de l’architecture, des décisions de conception, des plans et de l’avancement dans des fichiers versionnés lors du développement d’un produit interne avec Codex. Les connaissances des discussions ou documents externes ne peuvent guider l’agent que si elles sont accessibles dans son contexte de travail. Un dossier docs structuré et des contrôles de fraîcheur et de liens soutiennent cette pratique.
 
-Après l'introduction d'agents IA, 70% des tâches nécessitaient une intervention humaine. Presque chaque échec impliquait que l'agent violait une contrainte implicite que "tout le monde connaît mais que personne n'a écrite". C'est comme un nouvel employé à qui personne n'a dit "tu dois poster ta commande de déjeuner dans le chat du groupe" : il devine mal, se fait reprendre, mais après la remarque personne n'écrit la règle.
+Il s’agit d’une pratique d’ingénierie documentée, pas d’une mesure contrôlée du gain de réussite.
 
-L'équipe a mené une transformation :
-1. Création d'un `AGENTS.md` à la racine du repo avec aperçu du projet, versions du stack technique et contraintes globales dures
-2. Ajout d'un `ARCHITECTURE.md` dans chaque répertoire de microservice décrivant responsabilités, interfaces et dépendances
-3. Création d'un `CONSTRAINTS.md` centralisé avec les contraintes dures en langage explicite "MUST/MUST NOT"
-4. Ajout d'un `PROGRESS.md` dans chaque répertoire de service pour suivre l'état de travail actuel
-
-Après transformation, le même agent pouvait répondre à toutes les questions clés du projet au démarrage à froid, et la qualité d'achèvement des tâches s'est nettement améliorée.
+[OpenAI](https://openai.com/index/harness-engineering/)
 
 ## Points clés
 

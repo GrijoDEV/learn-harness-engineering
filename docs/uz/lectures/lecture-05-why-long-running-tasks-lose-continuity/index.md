@@ -145,15 +145,13 @@ Anthropicʼning real maʼlumotlari: Sonnet 4.5 uchun kontekst xavotiri shu qadar
 
 > Manba: [Anthropic: Uzoq vaqt ishlovchi dasturlar uchun harness dizayni (Harness design for long-running application development)](https://www.anthropic.com/engineering/harness-design-long-running-apps)
 
-## Hayotiy misol
+## Anthropic: kodlash sessiyalari orasida topshirish
 
-Agentʼga foydalanuvchi autentifikatsiyasiga ega blog tizimini yaratish topshirildi — 12 ta funksionallik (feature point), bajarish uchun 5 ta sessiya hisoblangan.
+Anthropic Claude sayti nusxasida boshlang‘ich agent 200 dan ortiq funksiyani belgilab, avval barchasini tekshiruvdan o‘tmagan deb qayd etganini tushuntiradi. U init.sh, jarayon fayli va dastlabki Git commit’ini ham yaratgan. Keyingi sessiyalar jarayon va Git tarixini o‘qib, funksiyalarni bosqichma-bosqich amalga oshirgan, tekshirgan va keyingi sessiya uchun yangilik qoldirgan.
 
-**Kundaliksiz boshlangʻich holat**: 1-sessiya foydalanuvchi modeli va asosiy routeʼlarni amalga oshirdi. 2-sessiya auth middlewareʼning interfeys shartnomasi (contract) esdan chiqqan holatda boshlandi va oldingi dizayn maqsadini taxmin qilish uchun ~15 daqiqa sarfladi. 3-sessiyaga kelib, toʻplangan siljish (drift) agentʼni allaqachon tugatilgan funksiyalarni qaytadan yaratishga olib keldi. 5-sessiyaga kelib, repoda juda koʻp ortiqcha kodlar bor edi, lekin asosiy auth funksiyasi haligacha E2E testlaridan (end-to-end tests) oʻtmagan edi. 12 ta funksionallikdan faqat 7 tasi tugallandi, shundan 3 tasida yashirin toʻgʻrilik muammolari mavjud edi. Xuddi kundalik tutmaydigan ustaga oʻxshaydi — beshinchi kunga kelib, qurilish maydonchasida betartiblik, baʼzi devorlar ikki marta qurilgan, qurilishi kerak boʻlganlari esa umuman boshlanmagan.
+Bu misol uzluksizlik mexanizmini hujjatlashtiradi; bu yerda avval keltirilgan tugallanish, yashirin xato yoki kontekstni qayta tiklash foizlarini bermaydi. Qo‘shimcha kod o‘quv simulyatsiyasi, model samaradorligi o‘lchovi emas.
 
-**Kundalik bilan holat**: Jarayon fayllari, qarorlar jurnallari, tekshiruv (verification) qaydlari va git checkpointʼlaridan foydalanilgan. Holat haqidagi hisobot har bir sessiya oxirida avtomatik ravishda yangilanadi. 2-sessiyani tiklash narxi (rebuild cost) ~3 daqiqaga tushdi. 5-sessiyaga kelib, barcha 12 ta funksionallik tugallandi va tekshirildi.
-
-Miqdoriy taqqoslash: tiklash vaqti ~78% ga qisqardi, funksiyalarning tugallanish darajasi 58% dan 100% ga koʻtarildi, yashirin nuqsonlar darajasi 43% dan 8% gacha pasaydi. Usta hamon amneziyaga chalingan, ammo kundaligi tufayli har bir kun noldan emas, balki kecha toʻxtagan joyidan boshlanadi.
+[Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 ## Asosiy xulosalar
 

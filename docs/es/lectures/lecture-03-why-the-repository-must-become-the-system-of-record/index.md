@@ -98,19 +98,13 @@ Esta analogía viene de la gestión de transacciones en bases de datos. Puede pa
 - **Isolation**: Cuando varios agentes trabajan en paralelo, diseña archivos de estado que eviten condiciones de carrera. Enfoque simple: cada agente usa su propio archivo de progreso, o se usan ramas de git para aislar. Dos cocineros no pueden sazonar la misma olla al mismo tiempo: ¿quién se responsabiliza si queda demasiado salada?
 - **Durability**: El conocimiento crítico del proyecto vive en archivos versionados por git. El estado temporal puede quedarse en memoria de sesión, pero el conocimiento entre sesiones debe persistirse en archivos. Lo que está en tu cabeza no cuenta; solo cuenta lo que está escrito.
 
-## Una historia real de transformación
+## OpenAI: el repositorio como fuente de conocimiento
 
-Un equipo mantenía una plataforma de e-commerce con unos 30 microservicios. Las decisiones de arquitectura (protocolos de comunicación entre servicios, estrategias de consistencia de datos, reglas de versionado de API) estaban dispersas entre Confluence (parcialmente obsoleto), Slack (difícil de buscar), la cabeza de algunos ingenieros senior (no escalable) y comentarios de código esporádicos (no sistemáticos).
+OpenAI describe cómo guardó arquitectura, decisiones de diseño, planes de ejecución y progreso en archivos versionados al desarrollar un producto interno con Codex. El conocimiento de conversaciones o documentos externos solo puede orientar al agente si está accesible en su contexto de trabajo. Un directorio docs estructurado y comprobaciones de actualización y enlaces sostienen esta práctica.
 
-Después de introducir agentes de IA, el 70% de las tareas requería intervención humana. Casi todos los fallos implicaban que el agente violaba alguna restricción implícita de "todo el mundo lo sabe pero nadie lo escribió". Es como un empleado nuevo a quien nadie le dijo "tienes que publicar tu pedido de almuerzo en el chat del grupo": adivina mal, le regañan, pero después de regañarlo nadie escribe la regla.
+Es una práctica de ingeniería documentada, no una medición controlada de la mejora de la tasa de éxito.
 
-El equipo ejecutó una transformación:
-1. Creó `AGENTS.md` en la raíz del repo con resumen del proyecto, versiones del stack técnico y restricciones globales duras
-2. Añadió `ARCHITECTURE.md` en cada directorio de microservicio describiendo responsabilidades, interfaces y dependencias
-3. Creó un `CONSTRAINTS.md` centralizado con restricciones duras en lenguaje explícito "MUST/MUST NOT"
-4. Añadió `PROGRESS.md` en cada directorio de servicio para seguir el estado actual del trabajo
-
-Después de la transformación, el mismo agente podía responder todas las preguntas clave del proyecto en arranque en frío, y la calidad de finalización de tareas mejoró significativamente.
+[OpenAI](https://openai.com/index/harness-engineering/)
 
 ## Ideas clave
 

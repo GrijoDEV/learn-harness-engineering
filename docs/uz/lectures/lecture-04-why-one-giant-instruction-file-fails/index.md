@@ -93,19 +93,11 @@ Agar yoʻriqnoma kirish faylida boʻlishi shart boʻlsa, uni boshiga yoki oxirig
 
 OpenAI va Anthropic ham ajratish yondashuvini bilvosita qoʻllab-quvvatlaydi. OpenAI kirish fayllari “qisqa va yoʻnaltiruvchi” boʻlishi kerak deydi, Anthropic koʻp vaqt oladigan agentʼlarni boshqarish maʼlumotlari “loʻnda va yuqori ustuvorlikka ega” boʻlishi kerak deydi. Ikkalasi ham bir xil narsani aytmoqda: hamma narsani bitta faylga tiqib tashlamang. Chamadonga shunchaki kuch bilan tiqmasdan, uni tartibga solish kerak.
 
-## Hayotiy misol
+## OpenAI: qisqa kirish fayli va hujjat havolalari
 
-SaaS jamoasining `AGENTS.md` fayli 50 qatordan 600 qatorgacha shishib ketdi. Fayl tarkibiga tech stack versiyalari, kod yozish standartlari, tarixiy bugʼlarni tuzatish boʻyicha eslatmalar, API qoʻllanmalari, deploy jarayonlari va jamoa aʼzolarining shaxsiy xohish-istaklari aralashib ketgan — xuddi tikish choklaridan yorilayotgan chamadonga oʻxshardi.
+OpenAI katta AGENTS.md vazifa kontekstini siqishi, ustuvorliklarni chalkashtirishi, eskirgan qoidalarni yig‘ishi va tekshirishni qiyinlashtirishini bildiradi. Jamoa uning o‘rniga tuzilgan docs katalogiga yo‘l ko‘rsatuvchi taxminan 100 qatorli kirish faylidan, linter va CI tekshiruvlaridan foydalangan. Maqolada o‘zgarishdan oldingi va keyingi vazifa muvaffaqiyati yoki xavfsizlik qoidalariga rioya qilish foizlari yo‘q. [OpenAI: Harness engineering](https://openai.com/index/harness-engineering/)
 
-Agentʼning samaradorligi sezilarli darajada pasaya boshladi: oddiy bugʼlarni tuzatish jarayonida agent juda koʻp kontekstni aloqasi yoʻq deploy yoʻriqnomalarini oʻqishga sarfladi; “barcha maʼlumotlar bazasi soʻrovlari parametrlangan soʻrovlardan foydalanishi shart” degan xavfsizlik cheklovi 300-qatorda koʻmilib yotgani uchun tez-tez eʼtiborsiz qoldirildi; kod uslubidagi bir-biriga zid uchta qoida agentʼning tasodifiy xatti-harakatlanishiga sabab boʻldi.
-
-Jamoa “chamadonni qayta tartibga solish” ishini bajardi:
-1. `AGENTS.md` 80 qatorga qisqartirildi: faqat loyiha tavsifi, ishga tushirish buyruqlari va 15 ta global qatʼiy cheklovlar qoldirildi.
-2. Mavzu hujjatlari yaratildi: `docs/api-patterns.md` (120 qator), `docs/database-rules.md` (60 qator), `docs/testing-standards.md` (80 qator).
-3. Marshrutlash faylida mavzu hujjatlari havolalari qoʻshildi.
-4. Tarixiy eslatmalar test holatlariga oʻgirildi yoki oʻchirib tashlandi.
-
-Refaktoringdan soʻng: xuddi oʻsha vazifalar toʻplamini muvaffaqiyatli bajarish koʻrsatkichi 45% dan 72% gacha koʻtarildi. Xavfsizlik cheklovlariga rioya qilish 60% dan 95% gacha oshdi — chunki u faylning oʻrtasidan marshrutlash faylining eng tepasiga koʻchirildi, endi u “oʻrtada yoʻqolib” qolmaydi.
+Foyda mazmun va vazifaga bog‘liq. ETH Zurich tadqiqoti tekshirilgan sharoitlarda kontekst fayllari umumiy muvaffaqiyatni oshirmaganini, inferens xarajatini esa 20% dan ortiq oshirganini topdi. Inson yozgan talablarni minimal saqlash tavsiya etiladi. Qisqaroq fayl yaxshilanishni kafolatlamaydi; ko‘rsatmalarni kerakli vazifalarda sinang. [ETH Zurich: Evaluating AGENTS.md](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd)
 
 ## Asosiy xulosalar
 
@@ -122,6 +114,8 @@ Refaktoringdan soʻng: xuddi oʻsha vazifalar toʻplamini muvaffaqiyatli bajaris
 - [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)
 - [HumanLayer: Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
 - [Nielsen Norman Group: Progressive Disclosure](https://www.nngroup.com/articles/progressive-disclosure/)
+
+- [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): Kontekst fayllari tadqiqoti: muvaffaqiyat, inferens xarajati va minimal talablar. Annotatsiya va xulosaga qarang.
 
 ## Mashqlar
 

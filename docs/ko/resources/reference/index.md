@@ -9,6 +9,8 @@
 - [`coding-agent-startup-flow.md`](./coding-agent-startup-flow.md): 이후 코딩 세션을 위한 고정된 세션 시작 흐름.
 - [`prompt-calibration.md`](./prompt-calibration.md): 루트 지침을 비대하고 취약하게 만들지 않으면서 날카롭게 유지하는 방법.
 
+- [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): 컨텍스트 파일의 실증 연구: 성공률, 추론 비용, 최소 요구사항. 초록과 결론 참고.
+
 ## 권장 읽기 순서 (Suggested Reading Order)
 
 1. `method-map.md`

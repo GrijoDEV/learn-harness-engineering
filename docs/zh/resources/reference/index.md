@@ -56,6 +56,8 @@
 
 严格按时间筛选时，2025-only 的泛参考不进入主列表。原始三篇中的 Anthropic 2025 文章保留，是因为它是本课程方法的基础来源。
 
+- [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): 仓库上下文文件的实证研究：任务成功率、推理成本，以及保持要求精简的建议。见摘要和结论。
+
 ## 推荐阅读顺序
 
 1. `method-map.md`

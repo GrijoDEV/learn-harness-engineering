@@ -93,19 +93,11 @@ Bir talimat giriş dosyasında olmak zorundaysa, üste veya alta koyun — asla 
 
 Hem OpenAI hem de Anthropic örtük olarak bölme yaklaşımını destekler. OpenAI giriş dosyalarının "kısa ve yönlendirme odaklı" olması gerektiğini söyler, Anthropic uzun süre çalışan ajan kontrol bilgisinin "özlü ve yüksek öncelikli" olması gerektiğini söyler. Her ikisi de aynı şeyi söylüyor: her şeyi tek bir dosyaya tıkmayın. Bir bavulun organize edilmesi gerekir, sadece kaba kuvvetle tıkıştırılmasının değil.
 
-## Gerçek dünya örneği
+## OpenAI: kısa giriş dosyası ve belge bağlantıları
 
-Bir SaaS takımının `AGENTS.md`'si 50 satırdan 600'e şişti. İçerik teknoloji yığını sürümlerini, kod standartlarını, tarihsel hata düzeltme notlarını, API kullanım kılavuzlarını, dağıtım prosedürlerini ve takım üyelerinin kişisel tercihlerini karıştırıyordu — bavul tıkırtıya kadar dolmuştu.
+OpenAI, büyük bir AGENTS.md dosyasının görev bağlamını daralttığını, öncelikleri belirsizleştirdiğini, eski kuralları biriktirdiğini ve doğrulamayı zorlaştırdığını bildiriyor. Ekip bunun yerine yaklaşık 100 satırlık bir giriş dosyasını yapılandırılmış docs dizinine yönlendiren harita olarak kullandı; linter ve CI ile bakım yaptı. Makale değişiklik öncesi ve sonrası görev başarısı veya güvenlik uyumu yüzdelerini vermiyor. [OpenAI: Harness engineering](https://openai.com/index/harness-engineering/)
 
-Ajan performansı dikkat çekici şekilde düşmeye başladı: basit hata düzeltmeleri sırasında ajan ilgisiz dağıtım talimatlarını işlemek için bolca bağlam harcadı; "tüm veritabanı sorguları parametreli sorgular kullanmalı" güvenlik kısıtlaması 300. satıra gömülmüştü ve sık sık göz ardı ediliyordu; üç çelişkili kod stili kuralı ajanın rastgele davranmasına neden oluyordu.
-
-Takım bir "bavul yeniden düzenleme" gerçekleştirdi:
-1. `AGENTS.md` 80 satıra indirildi: yalnızca proje genel bakışı, çalıştırma komutları ve 15 küresel sert kısıtlama
-2. Konu dokümanları oluşturuldu: `docs/api-patterns.md` (120 satır), `docs/database-rules.md` (60 satır), `docs/testing-standards.md` (80 satır)
-3. Yönlendirme dosyasına konu dokümanı bağlantıları eklendi
-4. Tarihsel notlar ya test senaryolarına dönüştürüldü ya da silindi
-
-Yeniden yapılandırmadan sonra: aynı görev setinin başarı oranı %45'ten %72'ye çıktı. Güvenlik kısıtlaması uyumu %60'tan %95'e çıktı — çünkü dosyanın ortasından yönlendirme dosyasının üstüne taşındı, artık "ortada kaybolmuyor."
+Fayda içeriğe ve göreve bağlıdır. ETH Zurich araştırması, değerlendirdiği koşullarda bağlam dosyalarının genel bir başarı artışı sağlamadığını, çıkarım maliyetini ise %20’den fazla artırdığını buldu ve insan tarafından yazılan gereksinimleri asgari tutmayı önerdi. Kısa dosya iyileşmeyi garanti etmez; talimatları hedef görevlerde sınayın. [ETH Zurich: Evaluating AGENTS.md](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd)
 
 ## Önemli çıkarımlar
 
@@ -122,6 +114,8 @@ Yeniden yapılandırmadan sonra: aynı görev setinin başarı oranı %45'ten %7
 - [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)
 - [HumanLayer: Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
 - [Nielsen Norman Group: Progressive Disclosure](https://www.nngroup.com/articles/progressive-disclosure/)
+
+- [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): Bağlam dosyaları araştırması: görev başarısı, çıkarım maliyeti ve asgari gereksinimler. Özet ve sonuca bakın.
 
 ## Alıştırmalar
 

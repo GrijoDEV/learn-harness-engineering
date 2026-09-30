@@ -143,15 +143,13 @@ Anthropic's actual data: for Sonnet 4.5, context anxiety is severe enough that c
 
 > Source: [Anthropic: Harness design for long-running application development](https://www.anthropic.com/engineering/harness-design-long-running-apps)
 
-## Real-World Example
+## Anthropic: Handoff Across Coding Sessions
 
-An agent was tasked with implementing a blog system with user authentication — 12 feature points, estimated 5 sessions needed.
+Anthropic describes a Claude website clone whose initializer expanded the specification into more than 200 features, initially marked as failing. The initializer also created init.sh, a progress file, and an initial git commit. Subsequent coding sessions read progress and git history, worked incrementally on features, verified behavior, and left updates for the next session.
 
-**Baseline without state persistence files**: Session 1 implemented the user model and basic routes. Session 2 started without the agent remembering the auth middleware's interface contract, spending ~15 minutes inferring the previous design intent. By session 3, accumulated drift caused the agent to start reimplementing already-completed features. By session 5, the repo contained lots of redundant code but the core auth feature still hadn't passed end-to-end tests. Only 7 of 12 feature points completed, 3 with hidden correctness issues.
+This case documents a continuity mechanism; it does not report the feature-completion, hidden-defect, or context-rebuild percentages previously shown here. The companion code is a teaching simulation, not a measurement of model performance.
 
-**With state persistence files**: Using progress files, decision logs, verification records, and git checkpoints. State report updated automatically at each session end. Session 2's rebuild cost dropped to ~3 minutes. By session 5, all 12 feature points completed and verified.
-
-Quantitative comparison: rebuild time reduced ~78%, feature completion rate from 58% to 100%, hidden defect rate from 43% down to 8%.
+[Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 ## Key Takeaways
 

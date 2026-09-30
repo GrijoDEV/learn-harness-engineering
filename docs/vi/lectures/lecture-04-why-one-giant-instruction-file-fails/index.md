@@ -93,19 +93,11 @@ Nếu một hướng dẫn bắt buộc phải nằm trong tệp đầu vào, h�
 
 Cả OpenAI và Anthropic đều ngầm ủng hộ cách tiếp cận chia nhỏ. OpenAI nói tệp đầu vào nên "ngắn và thiên về định tuyến", còn Anthropic nói thông tin điều khiển cho long-running agent nên "súc tích và ưu tiên cao". Hai bên đang nói cùng một điều: đừng nhồi hết vào một tệp.
 
-## Ví dụ thật
+## OpenAI: tệp đầu vào ngắn và liên kết tài liệu
 
-Một nhóm SaaS có `AGENTS.md` phình từ 50 dòng lên 600. Nội dung trộn lẫn phiên bản tech stack, tiêu chuẩn code, ghi chú sửa lỗi lịch sử, hướng dẫn sử dụng API, quy trình triển khai và cả sở thích cá nhân của thành viên trong nhóm, mọi thứ đều ở trong đó, nhưng tìm phần liên quan tới tác vụ hiện tại là một cuộc hành xác.
+OpenAI cho biết một AGENTS.md lớn chiếm ngữ cảnh của nhiệm vụ, làm mờ ưu tiên, tích lũy quy tắc lỗi thời và khó kiểm tra. Nhóm thay bằng tệp đầu vào khoảng 100 dòng để dẫn tới thư mục docs có cấu trúc, được duy trì bằng lint và CI. Bài viết không báo cáo tỷ lệ thành công hoặc tuân thủ bảo mật trước và sau thay đổi. [OpenAI: Harness engineering](https://openai.com/index/harness-engineering/)
 
-Hiệu suất agent bắt đầu tụt rõ rệt: với những sửa lỗi đơn giản, agent tốn nhiều ngữ cảnh để xử lý hướng dẫn triển khai chẳng liên quan; ràng buộc bảo mật "mọi truy vấn cơ sở dữ liệu phải dùng truy vấn có tham số hóa" bị chôn ở dòng 300 và thường xuyên bị bỏ qua; ba quy tắc phong cách code mâu thuẫn khiến agent mỗi lần chọn đại một cái.
-
-Nhóm đã thực hiện một cuộc tái cấu trúc kiểu "sắp lại vali":
-1. `AGENTS.md` cắt xuống còn 80 dòng: chỉ tổng quan dự án, lệnh chạy và 15 ràng buộc cứng toàn cục
-2. Tạo các tài liệu chủ đề: `docs/api-patterns.md` (120 dòng), `docs/database-rules.md` (60 dòng), `docs/testing-standards.md` (80 dòng)
-3. Thêm liên kết tới các tài liệu chủ đề ngay trong tệp đầu vào
-4. Ghi chú lịch sử thì chuyển thành test case hoặc xoá luôn
-
-Sau tái cấu trúc: tỷ lệ thành công trên cùng bộ tác vụ tăng từ 45% lên 72%. Mức tuân thủ ràng buộc bảo mật tăng từ 60% lên 95%, vì quy tắc chuyển từ giữa tệp lên đầu tệp đầu vào, không còn bị "lạc giữa chừng" nữa.
+Lợi ích phụ thuộc nội dung và nhiệm vụ. Nghiên cứu của ETH Zurich không thấy cải thiện thành công nói chung từ tệp ngữ cảnh trong các thiết lập đã đánh giá, nhưng chi phí suy luận tăng hơn 20%. Nghiên cứu khuyên giữ yêu cầu do con người viết ở mức tối thiểu. Tệp ngắn hơn không bảo đảm hiệu quả tốt hơn; cần thử trên nhiệm vụ thực tế. [ETH Zurich: Evaluating AGENTS.md](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd)
 
 ## Những điểm chính cần nhớ
 
@@ -122,6 +114,8 @@ Sau tái cấu trúc: tỷ lệ thành công trên cùng bộ tác vụ tăng t�
 - [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)
 - [HumanLayer: Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
 - [Nielsen Norman Group: Progressive Disclosure](https://www.nngroup.com/articles/progressive-disclosure/)
+
+- [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): Nghiên cứu tệp ngữ cảnh: thành công, chi phí suy luận và yêu cầu tối thiểu. Xem tóm tắt và kết luận.
 
 ## Bài tập
 

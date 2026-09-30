@@ -98,19 +98,13 @@ Diese Analogie stammt aus dem Datenbank-Transaktionsmanagement. Du könntest den
 - **Isolation**: Wenn mehrere Agenten gleichzeitig arbeiten, entwirf Zustandsdateien so, dass Race Conditions vermieden werden. Einfacher Ansatz: Jeder Agent nutzt seine eigene Progress-Datei, oder git branches sorgen für Isolation. Zwei Köche können nicht gleichzeitig denselben Topf würzen - wer ist verantwortlich, wenn er versalzen ist?
 - **Durability**: Kritisches Projektwissen lebt in git-getrackten Dateien. Temporärer Zustand kann im Sitzungspeicher bleiben, aber sitzungsübergreifendes Wissen muss in Dateien persistiert werden. Was in deinem Kopf ist, zählt nicht - nur was auf Papier steht, zählt.
 
-## Eine echte Transformationsgeschichte
+## OpenAI: Das Repository als maßgebliche Wissensquelle
 
-Ein Team betreute eine E-Commerce-Plattform mit etwa 30 Microservices. Architekturentscheidungen (Inter-Service-Kommunikationsprotokolle, Datenkonsistenzstrategien, API-Versionierungsregeln) waren verstreut über Confluence (teilweise veraltet), Slack (schwer zu durchsuchen), die Köpfe einiger Senior Engineers (nicht skalierbar) und sporadische Codekommentare (nicht systematisch).
+OpenAI beschreibt, wie Architektur, Designentscheidungen, Ausführungspläne und Fortschritt bei der Entwicklung eines internen Produkts mit Codex in versionierten Repository-Dateien gespeichert wurden. Wissen aus Chats oder externen Dokumenten kann den Agenten nur leiten, wenn es in seinem Arbeitskontext zugänglich ist. Ein strukturiertes docs-Verzeichnis und Prüfungen auf Aktualität und Querverweise unterstützen diese Praxis.
 
-Nach der Einführung von KI-Agenten erforderten 70% der Aufgaben menschliche Intervention. Fast jeder Fehler hing damit zusammen, dass der Agent gegen eine implizite Constraint verstieß, die "alle kennen, aber niemand aufgeschrieben hat". Wie bei einem neuen Mitarbeitenden, dem niemand gesagt hat: "Du musst deine Essensbestellung in den Gruppenchat posten." Er rät falsch, wird zurechtgewiesen, aber danach schreibt immer noch niemand die Regel auf.
+Der Bericht beschreibt eine technische Praxis, keine kontrollierte Messung der Verbesserung der Erfolgsquote.
 
-Das Team führte eine Transformation durch:
-1. `AGENTS.md` im Repo-Root erstellt, mit Projektüberblick, Tech-Stack-Versionen und globalen harten Constraints
-2. `ARCHITECTURE.md` in jedem Microservice-Verzeichnis hinzugefügt, mit Verantwortlichkeiten, Schnittstellen und Abhängigkeiten
-3. Zentrales `CONSTRAINTS.md` mit harten Constraints in expliziter "MUST/MUST NOT"-Sprache erstellt
-4. `PROGRESS.md` in jedem Service-Verzeichnis hinzugefügt, um aktuellen Arbeitsstatus zu verfolgen
-
-Nach der Transformation konnte derselbe Agent beim Cold Start alle zentralen Projektfragen beantworten, und die Qualität der Aufgabenabschlüsse verbesserte sich deutlich.
+[OpenAI](https://openai.com/index/harness-engineering/)
 
 ## Wichtigste Erkenntnisse
 

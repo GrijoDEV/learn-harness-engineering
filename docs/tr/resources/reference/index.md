@@ -69,6 +69,8 @@ Yalnızca 2025'e ait genel referanslar birincil listeden çıkarılmıştır.
 Orijinal 2025 Anthropic harness makalesi, kursun temel kaynağı olduğu için
 kalmıştır.
 
+- [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): Bağlam dosyaları araştırması: görev başarısı, çıkarım maliyeti ve asgari gereksinimler. Özet ve sonuca bakın.
+
 ## Önerilen Okuma Sırası
 
 1. `method-map.md`

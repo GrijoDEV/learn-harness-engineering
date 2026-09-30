@@ -98,19 +98,13 @@ Bu benzetme veritabanı işlem yönetiminden gelir — fazla karmaşıklaştırm
 - **Isolation (İzolasyon)**: Birden fazla ajan eşzamanlı çalıştığında, durum dosyalarını yarış koşullarından kaçınmak için tasarlayın. Basit yaklaşım: her ajan kendi ilerleme dosyasını kullanır veya izolasyon için git dallarını kullanır. İki aşçı aynı tencereye eşzamanlı baharat ekleyemez — aşırı tuzlanırsa kim sorumluluk alır?
 - **Durability (Kalıcılık)**: Kritik proje bilgisi git tarafından izlenen dosyalarda yaşar. Geçici durum oturum belleğinde kalabilir, ancak oturumlar arası bilgi dosyalara kalıcılaştırılmalıdır. Kafanızdaki şey sayılmaz — yalnızca kağıttaki sayılır.
 
-## Gerçek bir dönüşüm hikâyesi
+## OpenAI: bilgi kaynağı olarak depo
 
-Bir takım ~30 mikroservise sahip bir e-ticaret platformunu sürdürüyordu. Mimari kararlar (servisler arası iletişim protokolleri, veri tutarlılığı stratejileri, API versiyonlama kuralları) şu yerlere dağılmıştı: Confluence (kısmen güncelliğini yitirmiş), Slack (aranması zor), birkaç kıdemli mühendisin kafası (ölçeklenemez) ve düzensiz kod yorumları (sistematik değil).
+OpenAI, Codex ile bir iç ürün geliştirirken mimariyi, tasarım kararlarını, yürütme planlarını ve ilerlemeyi sürümlenen depo dosyalarında tuttuğunu anlatıyor. Sohbetlerdeki veya dış belgelerdeki bilgi, ancak ajanın çalışma bağlamında erişilebilirse kararlarını yönlendirebilir. Ekip yapılandırılmış bir docs dizini ile güncellik ve bağlantı kontrolleri kullandı.
 
-AI ajanlarını tanıttıktan sonra görevlerin %70'i insan müdahalesi gerektirdi. Hemen her başarısızlık ajanın "herkesin bildiği ama kimsenin yazmadığı" örtük bir kısıtlamayı ihlal etmesini içeriyordu. Kimsenin "öğle yemeği siparişini grup sohbetine yazmalısın" demediği yeni bir çalışan gibi — yanlış tahmin ederler, azarlanırlar ama azarlandıktan sonra hâlâ kimse kuralı söylemez.
+Bu, belgelenmiş bir mühendislik uygulamasıdır; başarı oranındaki artışı ölçen kontrollü bir deney değildir.
 
-Takım bir dönüşüm gerçekleştirdi:
-1. Depo kökünde proje genel bakışı, teknoloji yığını sürümleri ve küresel sert kısıtlamalar içeren `AGENTS.md` oluşturuldu
-2. Her mikroservis dizinine sorumlulukları, arayüzleri ve bağımlılıkları açıklayan `ARCHITECTURE.md` eklendi
-3. Açık "OLMALI/OLMAMALI" dilinde sert kısıtlamalar içeren merkezi bir `CONSTRAINTS.md` oluşturuldu
-4. Mevcut iş durumunu takip eden `PROGRESS.md` her servis dizinine eklendi
-
-Dönüşümden sonra: aynı ajan soğuk başlatmada tüm temel proje sorularına cevap verebildi ve görev tamamlanma kalitesi önemli ölçüde iyileşti.
+[OpenAI](https://openai.com/index/harness-engineering/)
 
 ## Önemli çıkarımlar
 

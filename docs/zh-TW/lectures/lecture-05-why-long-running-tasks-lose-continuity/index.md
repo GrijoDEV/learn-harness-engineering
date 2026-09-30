@@ -143,15 +143,13 @@ Anthropic 的實際資料：對於 Sonnet 4.5，脈絡焦慮足夠嚴重，以�
 
 > 來源：[Anthropic: Harness design for long-running application development](https://www.anthropic.com/engineering/harness-design-long-running-apps)
 
-## 實際案例
+## Anthropic：跨編碼工作階段的交接
 
-一個 agent 被要求實作一個帶使用者認證的部落格系統，12 個功能點，預計需要 5 個工作階段。
+Anthropic 介紹了一個 Claude 網站複製案例：初始化 agent 將需求展開為 200 多項功能，初始狀態都標為未通過，同時建立 init.sh、進度檔案和初始 Git 提交。後續編碼工作階段讀取進度和 Git 歷史，逐步實作功能、驗證行為，再為下一次工作階段留下更新。
 
-**沒有日記本的基線**：工作階段 1 實作了使用者模型和基礎路由。工作階段 2 開始時，agent 不記得認證中間件的介面約定，花了約 15 分鐘推斷上次的設計意圖。到工作階段 3，累積漂移導致 agent 開始重複已實作的功能。到工作階段 5，儲存庫有大量冗餘程式碼，但核心認證功能仍未通過端對端測試。12 個功能點只完成了 7 個，其中 3 個有隱含的正確性問題。
+這個案例記錄的是連續性機制，沒有報告先前這段文字中的功能完成率、隱藏缺陷率和脈絡重建耗時比例。配套程式碼用於教學模擬，不是模型效能實測。
 
-**有日記本的對照**：使用進度檔案、決策日誌、驗證記錄和 git 檢查點。每個工作階段結束時自動更新狀態報告。工作階段 2 的重建成本降到約 3 分鐘。到工作階段 5，所有 12 個功能點完成且通過驗證。
-
-定量對比，重建時間減少約 78%，功能完成率從 58% 提升到 100%，隱含缺陷率從 43% 降到 8%。
+[Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 ## 關鍵要點
 

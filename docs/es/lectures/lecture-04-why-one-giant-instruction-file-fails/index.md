@@ -93,19 +93,11 @@ Si una instrucción debe estar en el archivo de entrada, ponla arriba o abajo, n
 
 OpenAI y Anthropic apoyan implícitamente el enfoque de división. OpenAI dice que los archivos de entrada deben ser "cortos y orientados al enrutamiento"; Anthropic dice que la información de control para agentes de larga duración debe ser "concisa y de alta prioridad". Ambos dicen lo mismo: no metas todo en un solo archivo. Una maleta necesita organización, no fuerza bruta.
 
-## Ejemplo real
+## OpenAI: una entrada breve con enlaces a documentación
 
-El `AGENTS.md` de un equipo SaaS creció de 50 a 600 líneas. Mezclaba versiones del stack técnico, estándares de código, notas históricas de bugs, guías de uso de API, procedimientos de despliegue y preferencias personales de miembros del equipo: la maleta entera estaba a punto de reventar.
+OpenAI observó que un AGENTS.md grande desplazaba el contexto de la tarea, confundía prioridades, acumulaba reglas obsoletas y era difícil de verificar. Lo sustituyó por una entrada de unas 100 líneas que guía hacia un directorio docs estructurado, mantenido mediante linters y CI. El artículo no publica porcentajes de éxito o cumplimiento de seguridad antes y después del cambio. [OpenAI: Harness engineering](https://openai.com/index/harness-engineering/)
 
-El rendimiento del agente empezó a caer de forma visible: durante arreglos de bugs simples gastaba mucho contexto procesando instrucciones de despliegue irrelevantes; la restricción de seguridad "todas las consultas de base de datos deben usar consultas parametrizadas" estaba enterrada en la línea 300 y se ignoraba con frecuencia; tres reglas contradictorias de estilo producían comportamiento aleatorio.
-
-El equipo ejecutó una "reorganización de maleta":
-1. `AGENTS.md` se redujo a 80 líneas: solo resumen del proyecto, comandos de ejecución y 15 restricciones globales duras
-2. Se crearon documentos temáticos: `docs/api-patterns.md` (120 líneas), `docs/database-rules.md` (60 líneas), `docs/testing-standards.md` (80 líneas)
-3. Se añadieron enlaces a esos documentos en el archivo de enrutamiento
-4. Las notas históricas se convirtieron en tests o se eliminaron
-
-Después de refactorizar, la tasa de éxito del mismo conjunto de tareas pasó de 45% a 72%. El cumplimiento de la restricción de seguridad pasó de 60% a 95%, porque se movió del medio del archivo a la parte superior del archivo de enrutamiento y dejó de perderse en el medio.
+El beneficio depende del contenido y la tarea. Un estudio de ETH Zurich no encontró una mejora general del éxito con archivos de contexto en sus escenarios evaluados, pero sí un aumento del coste de inferencia superior al 20%. Recomienda requisitos humanos mínimos. Un archivo más corto no garantiza mejoras: hay que evaluar las instrucciones en las tareas previstas. [ETH Zurich: Evaluating AGENTS.md](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd)
 
 ## Ideas clave
 
@@ -122,6 +114,8 @@ Después de refactorizar, la tasa de éxito del mismo conjunto de tareas pasó d
 - [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)
 - [HumanLayer: Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
 - [Nielsen Norman Group: Progressive Disclosure](https://www.nngroup.com/articles/progressive-disclosure/)
+
+- [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): Estudio de archivos de contexto: éxito, coste de inferencia y requisitos mínimos. Véanse el resumen y las conclusiones.
 
 ## Ejercicios
 

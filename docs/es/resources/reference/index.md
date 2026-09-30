@@ -69,6 +69,8 @@ Las referencias generales exclusivamente de 2025 están excluidas de la lista pr
 artículo original de 2025 de Anthropic sobre harnesses permanece porque es una fuente
 fundacional del curso.
 
+- [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): Estudio de archivos de contexto: éxito, coste de inferencia y requisitos mínimos. Véanse el resumen y las conclusiones.
+
 ## Orden de Lectura Sugerido
 
 1. `method-map.md`

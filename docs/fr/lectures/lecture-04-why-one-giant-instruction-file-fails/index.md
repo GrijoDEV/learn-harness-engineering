@@ -93,19 +93,11 @@ Si une instruction doit absolument rester dans le fichier d'entrée, mettez-la e
 
 OpenAI et Anthropic soutiennent implicitement cette approche de découpage. OpenAI dit que les fichiers d'entrée doivent être "courts et orientés routage", Anthropic dit que les informations de contrôle des agents de longue durée doivent être "concises et prioritaires". Ils disent la même chose : ne mettez pas tout dans un seul fichier. Une valise a besoin d'organisation, pas d'un bourrage en force.
 
-## Exemple réel
+## OpenAI : un fichier d’entrée court et des liens
 
-Le `AGENTS.md` d'une équipe SaaS est passé de 50 à 600 lignes. Il mélangeait versions du stack technique, standards de code, notes historiques de correction de bugs, guides d'usage d'API, procédures de déploiement et préférences personnelles des membres de l'équipe : toute la valise était prête à éclater.
+OpenAI rapporte qu’un grand AGENTS.md occupait le contexte de la tâche, brouillait les priorités, accumulait des règles obsolètes et était difficile à vérifier. L’équipe l’a remplacé par une entrée d’environ 100 lignes orientant vers un dossier docs structuré, entretenu par des linters et la CI. L’article ne donne aucun pourcentage de réussite ou de conformité de sécurité avant et après cette modification. [OpenAI: Harness engineering](https://openai.com/index/harness-engineering/)
 
-Les performances de l'agent ont commencé à décliner nettement : pendant de simples corrections de bugs, il dépensait beaucoup de contexte sur des instructions de déploiement sans rapport ; la contrainte de sécurité "toutes les requêtes de base de données doivent utiliser des requêtes paramétrées" était enfouie à la ligne 300 et souvent ignorée ; trois règles de style contradictoires provoquaient un comportement aléatoire.
-
-L'équipe a effectué une "réorganisation de valise" :
-1. `AGENTS.md` réduit à 80 lignes : seulement aperçu du projet, commandes d'exécution et 15 contraintes globales dures
-2. Création de documents thématiques : `docs/api-patterns.md` (120 lignes), `docs/database-rules.md` (60 lignes), `docs/testing-standards.md` (80 lignes)
-3. Ajout de liens vers ces documents dans le fichier de routage
-4. Notes historiques converties en tests ou supprimées
-
-Après refactorisation, le taux de réussite du même ensemble de tâches est passé de 45% à 72%. Le respect de la contrainte de sécurité est passé de 60% à 95%, parce qu'elle a été déplacée du milieu du fichier vers le haut du fichier de routage, et n'était plus "perdue au milieu".
+Le bénéfice dépend du contenu et de la tâche. Une étude de l’ETH Zurich n’a pas trouvé d’amélioration générale de la réussite avec les fichiers de contexte dans les situations évaluées, mais un coût d’inférence supérieur de plus de 20%. Elle recommande des exigences humaines minimales. Un fichier plus court ne garantit pas une amélioration : il faut tester les instructions sur les tâches visées. [ETH Zurich: Evaluating AGENTS.md](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd)
 
 ## Points clés
 
@@ -122,6 +114,8 @@ Après refactorisation, le taux de réussite du même ensemble de tâches est pa
 - [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)
 - [HumanLayer: Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
 - [Nielsen Norman Group: Progressive Disclosure](https://www.nngroup.com/articles/progressive-disclosure/)
+
+- [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): Étude des fichiers de contexte : réussite, coût d’inférence et exigences minimales. Voir le résumé et la conclusion.
 
 ## Exercices
 

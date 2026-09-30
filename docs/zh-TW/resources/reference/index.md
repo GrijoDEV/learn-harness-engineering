@@ -55,6 +55,8 @@
 
 嚴格來說，只屬於 2025 的一般參考資料不會進入核心清單。原始的 Anthropic 2025 文章仍保留，因為它是本課程的方法基礎。
 
+- [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): 儲存庫脈絡檔案的實證研究：任務成功率、推理成本，以及保持要求精簡的建議。見摘要和結論。
+
 ## 建議閱讀順序
 
 1. `method-map.md`

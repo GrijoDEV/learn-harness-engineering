@@ -93,19 +93,11 @@ Python 3.11 FastAPI backend, PostgreSQL 15 database.
 
 OpenAI と Anthropic はどちらも、暗黙に分割アプローチを支持している。OpenAI は入口ファイルを「短く、ルーティング中心」にすべきだと言い、Anthropic は長時間実行エージェントの制御情報を「簡潔で高優先度」にすべきだと言う。どちらも同じことを言っている。すべてを 1 ファイルに詰め込むな。スーツケースに必要なのは整理であって、力任せに押し込むことではない。
 
-## 実例
+## OpenAI：短い入口ファイルと文書へのリンク
 
-ある SaaS チームの `AGENTS.md` は 50 行から 600 行に膨れ上がった。中身は、技術スタックのバージョン、コーディング規約、過去のバグ修正メモ、API 利用ガイド、デプロイ手順、チームメンバー個人の好みまで混在していた。スーツケース全体がはち切れそうな状態だ。
+OpenAI は巨大な AGENTS.md がタスクのコンテキストを圧迫し、優先順位を曖昧にし、古い規則を蓄積して検証しにくくなったと報告しています。そこで約 100 行の入口を地図として使い、詳細は構造化された docs ディレクトリに置き、lint と CI で管理しました。記事には変更前後の成功率や安全制約遵守率はありません。 [OpenAI: Harness engineering](https://openai.com/index/harness-engineering/)
 
-エージェントの性能は目に見えて低下し始めた。単純なバグ修正の間に、関係のないデプロイ指示の処理で大量のコンテキストを使う。セキュリティ制約「すべてのデータベースクエリはパラメータ化クエリを使う」は 300 行目に埋もれ、頻繁に無視される。矛盾する 3 つのコードスタイル規則が、エージェントの行動をランダムにする。
-
-チームは「スーツケースの再整理」を実行した。
-1. `AGENTS.md` を 80 行に削減。プロジェクト概要、実行コマンド、15 個のグローバル強制制約だけにした
-2. トピック文書を作成: `docs/api-patterns.md`（120 行）、`docs/database-rules.md`（60 行）、`docs/testing-standards.md`（80 行）
-3. ルーティングファイルにトピック文書リンクを追加
-4. 過去メモはテストケースに変換するか削除
-
-リファクタ後、同じタスク群の成功率は 45% から 72% に上がった。セキュリティ制約の遵守率は 60% から 95% になった。理由は、その制約がファイル中央からルーティングファイル冒頭へ移り、もはや「真ん中で失われ」なくなったからだ。
+効果は内容とタスク次第です。ETH Zurich の研究では、評価対象の設定でリポジトリのコンテキストファイルによる成功率の一般的な改善は見られず、推論コストは 20% 以上増えました。人が書く要件を最小限にすることを勧めています。短くすれば必ず良くなるわけではなく、対象タスクで検証が必要です。 [ETH Zurich: Evaluating AGENTS.md](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd)
 
 ## 重要なポイント
 
@@ -122,6 +114,8 @@ OpenAI と Anthropic はどちらも、暗黙に分割アプローチを支持�
 - [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)
 - [HumanLayer: Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
 - [Nielsen Norman Group: Progressive Disclosure](https://www.nngroup.com/articles/progressive-disclosure/)
+
+- [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): コンテキストファイルの実証研究。成功率、推論コスト、最小限の要件を扱う。要旨と結論を参照。
 
 ## 演習
 

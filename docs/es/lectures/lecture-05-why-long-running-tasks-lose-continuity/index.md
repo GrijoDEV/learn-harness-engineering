@@ -145,15 +145,13 @@ Datos reales de Anthropic: para Sonnet 4.5, la ansiedad de contexto es lo sufici
 
 > Fuente: [Anthropic: Harness design for long-running application development](https://www.anthropic.com/engineering/harness-design-long-running-apps)
 
-## Ejemplo del mundo real
+## Anthropic: relevo entre sesiones de programación
 
-Un agente fue encargado de implementar un sistema de blog con autenticación de usuarios — 12 puntos de funcionalidad, estimadas 5 sesiones necesarias.
+Anthropic describe una réplica del sitio de Claude cuyo agente inicializador definió más de 200 funciones, marcadas inicialmente como no superadas. También creó init.sh, un archivo de progreso y un commit inicial. Las sesiones posteriores leían el progreso y el historial de Git, implementaban funciones de forma incremental, verificaban el comportamiento y dejaban actualizaciones para la siguiente sesión.
 
-**Línea base sin el diario**: La sesión 1 implementó el modelo de usuario y las rutas básicas. La sesión 2 comenzó sin que el agente recordara el contrato de interfaz del middleware de autenticación, dedicando ~15 minutos a inferir la intención de diseño anterior. Para la sesión 3, la deriva acumulada hizo que el agente comenzara a reimplementar funcionalidades ya completadas. Para la sesión 5, el repositorio contenía mucho código redundante pero la funcionalidad central de autenticación todavía no había pasado las pruebas end-to-end. Solo 7 de 12 puntos de funcionalidad completados, 3 con problemas ocultos de corrección. Como el artesano que nunca escribe en su diario — para el día cinco, el sitio de construcción es un caos, algunas paredes construidas dos veces, algunas que debieron construirse nunca se empezaron.
+El caso documenta un mecanismo de continuidad, no los porcentajes de finalización, defectos o reconstrucción citados anteriormente aquí. El código complementario es una simulación didáctica, no una medición del modelo.
 
-**Con el diario**: Usando archivos de progreso, registros de decisiones, registros de verificación y puntos de control de git. El informe de estado se actualizó automáticamente al final de cada sesión. El costo de reconstrucción de la sesión 2 bajó a ~3 minutos. Para la sesión 5, los 12 puntos de funcionalidad fueron completados y verificados.
-
-Comparación cuantitativa: tiempo de reconstrucción reducido ~78%, tasa de completitud de funcionalidades del 58% al 100%, tasa de defectos ocultos del 43% al 8%. El artesano sigue siendo amnésico, pero con el diario, cada día comienza donde el anterior se detuvo, no desde cero.
+[Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 ## Ideas clave
 

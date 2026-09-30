@@ -145,15 +145,13 @@ Anthropic'in gerçek verileri: Sonnet 4.5 için bağlam kaygısı tek başına s
 
 > Kaynak: [Anthropic: Harness design for long-running application development](https://www.anthropic.com/engineering/harness-design-long-running-apps)
 
-## Gerçek dünya örneği
+## Anthropic: kodlama oturumları arasında devir
 
-Bir ajana kullanıcı kimlik doğrulamasıyla birlikte bir blog sistemi uygulama görevi verildi — 12 özellik noktası, tahmini 5 oturum gerekiyor.
+Anthropic, Claude sitesinin bir kopyasında başlatıcı ajanın 200’den fazla özellik tanımladığını ve başlangıçta hepsini başarısız olarak işaretlediğini anlatıyor. Ayrıca init.sh, ilerleme dosyası ve ilk Git commit’i oluşturuldu. Sonraki oturumlar ilerlemeyi ve Git geçmişini okuyup özellikleri adım adım gerçekleştirdi, davranışı doğruladı ve sonraki oturum için güncelleme bıraktı.
 
-**Günlük olmadan başlangıç**: Oturum 1 kullanıcı modelini ve temel rotaları uyguladı. Oturum 2, ajan kimlik doğrulama middleware'inin arayüz sözleşmesini hatırlamadan başladı, önceki tasarım niyetini çıkarmak için ~15 dakika harcadı. Oturum 3'e gelindiğinde, birikmiş sürüklenme ajanın zaten tamamlanmış özellikleri yeniden uygulamaya başlamasına neden oldu. Oturum 5'e gelindiğinde depo birçok gereksiz kod içeriyordu ama temel kimlik doğrulama özelliği hâlâ uçtan uca testleri geçmemişti. 12 özellik noktasından sadece 7'si tamamlandı, 3'ü gizli doğruluk sorunlarına sahipti. Günlüğüne hiç yazmayan zanaatkâr gibi — beşinci güne gelindiğinde inşaat sahası kaos hâlinde, bazı duvarlar iki kez yapılmış, yapılması gereken bazıları hiç başlamamış.
+Bu örnek süreklilik mekanizmasını belgeler; daha önce burada verilen tamamlama, gizli hata veya bağlamı yeniden kurma yüzdelerini raporlamaz. Eşlik eden kod bir öğretim simülasyonudur, model performansı ölçümü değildir.
 
-**Günlükle**: İlerleme dosyaları, karar günlükleri, doğrulama kayıtları ve git kontrol noktaları kullanılarak. Her oturum sonunda durum raporu otomatik olarak güncellendi. Oturum 2'nin yeniden inşa maliyeti ~3 dakikaya düştü. Oturum 5'e gelindiğinde, 12 özellik noktasının tümü tamamlandı ve doğrulandı.
-
-Nicel karşılaştırma: yeniden inşa süresi ~%78 azaldı, özellik tamamlanma oranı %58'den %100'e çıktı, gizli kusur oranı %43'ten %8'e düştü. Zanaatkâr hâlâ unutkan, ancak günlükle her gün dünden kaldığı yerden başlar, sıfırdan değil.
+[Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 ## Önemli çıkarımlar
 

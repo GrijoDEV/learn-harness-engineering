@@ -55,6 +55,8 @@ Bular kursning asosiy manbalari emas, biroq maxsus harness modullarini loyihalas
 
 Faqatgina 2025-yilga oid umumiy manbalar asosiy roʻyxatdan chiqarildi. Dastlabki 2025 Anthropic harness maqolasi kursning asosiy manbasi boʻlgani uchungina qoldirildi.
 
+- [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): Kontekst fayllari tadqiqoti: muvaffaqiyat, inferens xarajati va minimal talablar. Annotatsiya va xulosaga qarang.
+
 ## Oʻqish boʻyicha tavsiya etilgan ketma-ketlik
 
 1. `method-map.md`

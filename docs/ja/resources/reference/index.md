@@ -20,6 +20,8 @@
 - [Anthropic: Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) (2025-11-26)
 - [Anthropic: Harness design for long-running application development](https://www.anthropic.com/engineering/harness-design-long-running-apps) (2026-03-24)
 
+- [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): コンテキストファイルの実証研究。成功率、推論コスト、最小限の要件を扱う。要旨と結論を参照。
+
 ## 推奨読書順
 
 1. `method-map.md`

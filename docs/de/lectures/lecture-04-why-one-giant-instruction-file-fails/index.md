@@ -93,19 +93,11 @@ Wenn eine Anweisung unbedingt in die Einstiegsdatei muss, platziere sie oben ode
 
 OpenAI und Anthropic unterstützen implizit den Aufteilungsansatz. OpenAI sagt, Einstiegsdateien sollten "kurz und routing-orientiert" sein; Anthropic sagt, Kontrollinformationen für lang laufende Agenten sollten "prägnant und hoch priorisiert" sein. Beide sagen dasselbe: Stopf nicht alles in eine Datei. Ein Koffer braucht Organisation, nicht brutales Hineinpressen.
 
-## Beispiel aus der Praxis
+## OpenAI: Kurze Einstiegsdatei mit Dokumentationsverweisen
 
-Die `AGENTS.md` eines SaaS-Teams wuchs von 50 auf 600 Zeilen. Der Inhalt mischte Tech-Stack-Versionen, Coding-Standards, historische Bugfix-Notizen, API-Nutzungsleitfäden, Deployment-Prozeduren und persönliche Präferenzen von Teammitgliedern - der ganze Koffer stand kurz vorm Platzen.
+OpenAI berichtet, dass eine große AGENTS.md den Aufgabenkontext verdrängte, Prioritäten verwischte, veraltete Regeln ansammelte und schwer zu prüfen war. Stattdessen verwendete das Team eine Einstiegsdatei von ungefähr 100 Zeilen als Wegweiser zu einem strukturierten docs-Verzeichnis. Linter und CI-Prüfungen pflegten die Wissensbasis. Der Artikel nennt keine Vorher-Nachher-Prozentsätze für Aufgabenerfolg oder Sicherheitskonformität. [OpenAI: Harness engineering](https://openai.com/index/harness-engineering/)
 
-Die Agentenleistung sank spürbar: Bei einfachen Bugfixes verbrachte der Agent viel Kontext mit irrelevanten Deployment-Anweisungen; die Sicherheitsregel "alle Datenbankabfragen müssen parametrisierte Queries verwenden" war in Zeile 300 vergraben und wurde häufig ignoriert; drei widersprüchliche Code-Style-Regeln führten zu zufälligem Verhalten.
-
-Das Team führte eine "Koffer-Neuorganisation" durch:
-1. `AGENTS.md` auf 80 Zeilen gekürzt: nur Projektüberblick, Ausführungsbefehle und 15 globale harte Constraints
-2. Themendokumente erstellt: `docs/api-patterns.md` (120 Zeilen), `docs/database-rules.md` (60 Zeilen), `docs/testing-standards.md` (80 Zeilen)
-3. Links zu Themendokumenten in der Routing-Datei ergänzt
-4. Historische Notizen entweder in Testfälle umgewandelt oder gelöscht
-
-Nach dem Refactoring stieg die Erfolgsrate desselben Aufgabensatzes von 45% auf 72%. Die Einhaltung der Sicherheitsregel stieg von 60% auf 95%, weil sie aus der Dateimitte an den Anfang der Routing-Datei verschoben wurde und nicht mehr "in der Mitte verloren" ging.
+Der Nutzen hängt von Inhalt und Aufgabe ab. Eine ETH-Zürich-Studie fand in ihren untersuchten Szenarien keine allgemeine Verbesserung der Erfolgsquote durch Repository-Kontextdateien, aber über 20% höhere Inferenzkosten. Sie empfiehlt minimale, von Menschen geschriebene Anforderungen. Kürzere Dateien garantieren keine Verbesserung; die Anweisungen müssen an den vorgesehenen Aufgaben geprüft werden. [ETH Zurich: Evaluating AGENTS.md](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd)
 
 ## Wichtigste Erkenntnisse
 
@@ -122,6 +114,8 @@ Nach dem Refactoring stieg die Erfolgsrate desselben Aufgabensatzes von 45% auf 
 - [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)
 - [HumanLayer: Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
 - [Nielsen Norman Group: Progressive Disclosure](https://www.nngroup.com/articles/progressive-disclosure/)
+
+- [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): Empirische Studie zu Kontextdateien: Aufgabenerfolg, Inferenzkosten und minimale Anforderungen. Siehe Zusammenfassung und Fazit.
 
 ## Übungen
 
