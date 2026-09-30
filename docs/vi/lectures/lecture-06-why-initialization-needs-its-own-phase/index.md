@@ -5,6 +5,8 @@
 
 # Bài 06. Khởi tạo trước mỗi phiên agent
 
+> Hướng dẫn kỹ thuật: ngưỡng số là mặc định giảng dạy có thể chỉnh, không phải ranh giới thực nghiệm. Token phụ thuộc tokenizer và nội dung, không chỉ số dòng.
+
 Bạn mở một phiên agent mới và nói "thêm tính năng tìm kiếm". Nó lao thẳng vào code, nhiệt tình đáng khen. 20 phút sau nó phát hiện khung test chưa cấu hình xong, mất thêm 10 phút sửa, rồi lại thấy script migration cơ sở dữ liệu sai định dạng, lại loay hoay tiếp. Tính năng tìm kiếm cuối cùng cũng xong, nhưng cả phiên rất kém hiệu quả. Phần lớn thời gian đổ vào chuyện "tìm hiểu dự án này vận hành ra sao" thay vì viết tính năng tìm kiếm.
 
 Cách làm tốt hơn: trước khi cho agent bắt tay vào việc, hãy dành một giai đoạn riêng để chuẩn bị môi trường nền, chạy thông suốt các lệnh xác minh, và nắm được cấu trúc dự án. Việc khởi tạo không nên bị nhồi chung với việc triển khai tính năng, vì chúng là hai loại công việc về bản chất khác nhau.
@@ -37,6 +39,8 @@ flowchart TB
 
 ## Chuyện gì xảy ra khi bạn trộn chúng
 
+> Minh họa giảng dạy: tình huống và số liệu là giả định để giải thích, không phải đo lường của thí nghiệm công bố.
+
 Vấn đề trực tiếp nhất: hạ tầng không được xây cho ra hồn. Agent dành 80% sức cho code tính năng, 20% còn lại tiện tay dựng đại vài thứ cho hạ tầng. Khung test cấu hình xong nhưng chưa bao giờ được xác minh, quy tắc lint đặt ra nhưng quá lỏng, không có tệp tiến độ nào được tạo. Những khiếm khuyết ấy không lộ ra ở phiên đầu (vì agent vẫn còn nhớ mình đã làm gì), nhưng bùng lên ở phiên thứ hai: agent mới không biết cách chạy dự án, không biết test ở đâu, không biết mọi thứ đang tới đâu.
 
 Một chi phí ẩn hơn là "tích tụ chưa xác minh". Code tính năng viết trước khi khung test được cấu hình chuẩn, bản thân nó là code không có xác minh. Khi bạn quay lại thêm test, có khi phát hiện ra ngay từ đầu thiết kế đã sai, nếu biết trước, bạn đã triển khai khác đi. Code viết trước càng nhiều, phần phải đập đi làm lại càng lớn.
@@ -45,7 +49,7 @@ Ngân sách ngữ cảnh cũng đang bị lãng phí. Phần việc khởi tạo
 
 Vấn đề dễ bị bỏ qua nhất là bãi mìn giả định ngầm. Những quyết định agent đưa ra trong lúc khởi tạo (dùng khung test nào, tổ chức thư mục ra sao, quản lý dependency thế nào) nếu không ghi lại tường minh, các phiên sau có thể đưa ra lựa chọn mâu thuẫn. Phiên đầu chọn Vitest làm khung test, phiên sau agent không biết, lại đưa Jest vào. Hai khung test cùng tồn tại, chi phí bảo trì nhân đôi.
 
-Nghiên cứu về phát triển ứng dụng chạy lâu của Anthropic đặc biệt khuyến nghị tách khởi tạo khỏi triển khai. Dữ liệu thực nghiệm của họ: các dự án có giai đoạn khởi tạo riêng biệt đạt tỷ lệ hoàn thành tính năng cao hơn 31% trong kịch bản đa phiên, so với cách trộn lẫn. Thời gian đầu tư cho khởi tạo được thu hồi hoàn toàn trong 3-4 phiên kế tiếp.
+[Anthropic: initializer / coding agent](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 Hướng dẫn harness engineering cho Codex của OpenAI cũng nhấn mạnh nguyên tắc "kho lưu trữ là bản ghi hoạt động": thiết lập cấu trúc vận hành rõ ràng ngay từ lần chạy đầu tiên, nếu không mỗi phiên mới sẽ phải tự suy ra quy ước dự án.
 
@@ -122,7 +126,9 @@ Hướng dẫn harness engineering cho Codex của OpenAI cũng nhấn mạnh ng
 - [ ] Tất cả đã được commit vào git
 ```
 
-## Ví dụ thật
+## Ví dụ giảng dạy
+
+> Minh họa giảng dạy: tình huống và số liệu là giả định để giải thích, không phải đo lường của thí nghiệm công bố.
 
 Hai cách khởi tạo cho một dự án frontend React, đặt cạnh nhau để so sánh:
 

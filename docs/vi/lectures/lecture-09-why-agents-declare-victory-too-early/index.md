@@ -5,11 +5,15 @@
 
 # Bài 9. Ngăn chặn agent tuyên bố thành công quá sớm
 
+> Hướng dẫn kỹ thuật: ngưỡng số là mặc định giảng dạy có thể chỉnh, không phải ranh giới thực nghiệm. Token phụ thuộc tokenizer và nội dung, không chỉ số dòng.
+
 Bạn yêu cầu agent triển khai tính năng "đặt lại mật khẩu". Nó sửa schema cơ sở dữ liệu, viết API endpoint, thêm mẫu email, chạy unit test (tất cả pass) rồi đầy tự tin thông báo "xong rồi". Nhưng đến khi bạn thử chạy thật, liên kết đặt lại mật khẩu gửi không đi vì thiếu cấu hình dịch vụ email; migration cơ sở dữ liệu lỗi giữa chừng, để lại schema không nhất quán; toàn bộ luồng end-to-end chưa hề được chạy dù chỉ một lần.
 
 Đây không phải sự cố cá biệt. Bài báo ICML kinh điển năm 2017 của Guo và cộng sự đã chứng minh: **các mạng nơ-ron hiện đại tự tin thái quá một cách có hệ thống**, độ tự tin mà mô hình báo cáo cao hơn nhiều so với độ chính xác thực tế. AI coding agent cũng không ngoại lệ. Chúng "cảm thấy" xong, nhưng thực tế còn xa mới xong. Harness của bạn phải thay "cảm giác" của agent bằng sự xác minh dựa trên thực thi từ bên ngoài.
 
 ## Con dốc trơn trượt
+
+> Cùng mô hình và prompt nhưng khác ngân sách thời gian và chi phí. Không phải thí nghiệm cùng ngân sách tách riêng một thành phần. Chức năng chơi cơ bản hoạt động nhưng vẫn còn lỗi. [Anthropic](https://www.anthropic.com/engineering/harness-design-long-running-apps)
 
 Tuyên bố hoàn thành sớm hầu như luôn đi theo đúng một kịch bản: code trông có vẻ ổn, cú pháp đúng, logic có vẻ hợp lý, phân tích tĩnh không thấy lỗi rõ ràng. Nhưng harness không ép buộc xác minh thực thi toàn diện, nên agent bỏ qua bước thực sự chạy thử, hoặc chỉ chạy một phần test. Nó chạy unit test nhưng bỏ qua integration test; nó chạy test nhưng không kiểm tra coverage. Cuối cùng, "code trông có vẻ ổn" được coi là bằng chứng cho "tính năng đã hoàn thành".
 
@@ -109,7 +113,9 @@ Các tín hiệu runtime hiệu quả gồm:
 - Thao tác ghi cơ sở dữ liệu, thao tác tệp và các side effect khác có đúng không?
 - Tài nguyên tạm có được dọn dẹp không?
 
-## Câu chuyện thật
+## Ví dụ giảng dạy
+
+> Minh họa giảng dạy: tình huống và số liệu là giả định để giải thích, không phải đo lường của thí nghiệm công bố.
 
 **Tác vụ**: Triển khai chức năng đặt lại mật khẩu người dùng. Liên quan đến thao tác cơ sở dữ liệu, gửi email và sửa API endpoint.
 

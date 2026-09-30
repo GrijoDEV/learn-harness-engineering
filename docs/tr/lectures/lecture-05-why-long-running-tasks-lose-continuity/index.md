@@ -5,6 +5,8 @@
 
 # Ders 05. Uzun süren görevler neden sürekliliği kaybeder
 
+> Mühendislik önerisi: sayısal eşikler ayarlanabilir öğretim değerleridir, deneysel sınırlar değildir. Token sayısı yalnız satıra değil tokenizer ve içeriğe bağlıdır.
+
 Claude Code'dan eksiksiz bir özellik uygulamasını istiyorsunuz. 30 dakika çalışıyor, işin çoğunu yapıyor ama bağlam tükenmek üzere. Devam etmek için yeni bir oturum başlatıyorsunuz — ve geçen sefer hangi kararların alındığını, A seçeneği yerine neden B'nin seçildiğini, hangi dosyaların değiştirildiğini veya testlerin ne durumda olduğunu hatırlamadığını fark ediyorsunuz. Projeyi yeniden keşfetmek için 15 dakika harcıyor ve önceki yaklaşımla tutarsız olabiliyor.
 
 Her sabah uyandığında her şeyi unutan bir zanaatkâr olduğunuzu hayal edin. Tüm inşaat sahasıyla yeniden tanışmak zorunda kalırdınız — hangi duvar yarı yapılmış, kırmızı tuğla neden mavi yerine seçilmiş, su tesisatı nereye ulaşmış. Daha kötüsü, dün takılmış bir pencereyi sadece yapıldığını hatırlamadığınız için söküp atabilirsiniz.

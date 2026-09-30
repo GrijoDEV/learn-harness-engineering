@@ -5,6 +5,8 @@
 
 # 4-maʼruza. Yoʻriqnomalarni fayllar boʻylab ajrating
 
+> Muhandislik tavsiyasi: raqamli chegaralar sozlanadigan o‘quv qiymatlari, tajribada tasdiqlangan chegaralar emas. Token soni faqat qatorga emas, tokenizer va mazmunga bog‘liq.
+
 Siz harness muhandisligiga jiddiy yondashdingiz — tabriklaymiz. Siz `AGENTS.md` faylini yaratdingiz va oʻzingiz oʻylay olgan barcha qoidalar, cheklovlar va olingan saboqlarni uning ichiga joyladingiz. Bir oydan soʻng fayl 300 qatorga, ikki oydan soʻng 450 qatorga, uch oydan soʻng esa 600 qatorga yetdi. Keyin siz agentʼning samaradorligi aslida yomonlashayotganini seza boshlaysiz — oddiy bugʼni tuzatish uchun agent juda koʻp kontekstni hech qanday aloqasi boʻlmagan deploy yoʻriqnomalarini oʻqishga sarflaydi; 300-qatorda koʻmilgan muhim xavfsizlik cheklovi mutlaqo eʼtiborsiz qoldiriladi; kod yozish uslubi boʻyicha bir-biriga zid uchta qoida mavjudligi sababli, agent har safar oʻzboshimchalik bilan ulardan birini tanlaydi.
 
 Bu “ulkan yoʻriqnoma fayli” tuzogʻidir. Bu xuddi chamadonni haddan tashqari toʻldirishga oʻxshaydi — hamma narsa foydali koʻrinadi, shuning uchun zanjirsimon yopqich yorilib ketgudek boʻlguncha tiqib tashlaysiz. Ichki kiyimingizni almashtirish uchun butun sumkani boʻshatishingiz kerak boʻladi. Siz toʻla chamadonni koʻtarib yurasiz, lekin aslida uning ichidagilarning faqat uchdan bir qismini ishlatasiz, xolos.

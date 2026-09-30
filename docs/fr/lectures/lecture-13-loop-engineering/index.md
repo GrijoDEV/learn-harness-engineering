@@ -5,6 +5,8 @@
 
 # Cours 13. Du prompting manuel aux boucles autonomes
 
+> Conseil d’ingénierie : ces seuils sont des valeurs pédagogiques ajustables, pas des limites démontrées. Les tokens dépendent du tokenizer et du contenu, pas seulement des lignes.
+
 Tout ce que vous avez appris dans les douze premiers cours repose sur une hypothèse : **vous êtes assis devant le clavier, en tapant des instructions une par une.**
 
 Vous avez écrit `AGENTS.md` (Cours 1–4), construit la gestion d'état (Cours 5–6), contraint le périmètre avec des listes de fonctionnalités (Cours 7–8), laissé des transferts propres à la fin de chaque session (Cours 9, 12), et rendu l'exécution observable (Cours 10–11). Mais le déclencheur de tout cela, c'était toujours vous. L'agent ne décidait jamais seul de commencer à travailler — car personne n'avait appuyé sur « démarrer ».
@@ -96,7 +98,13 @@ La première semaine de juin 2026, trois praticiens construisant une infrastruct
 
 > **L'ingénierie des boucles, c'est vous remplacer vous-même comme la personne qui fait du prompting à l'agent. Vous concevez le système qui le fait à votre place.**
 
-Cherny a divulgué des chiffres : pendant plus de 30 jours consécutifs, toutes les contributions de code à Claude Code ont été faites de manière autonome par l'IA — 259 PR fusionnées, plus de 80 % du code de production écrit par Claude, et un taux de réussite de 76 % sur les tâches logicielles ouvertes.
+Boris Cherny · 2025-12-27
+
+| PR | Git commits | + LoC | − LoC | Model |
+| --- | --- | --- | --- | --- |
+| 259 / 30 days | 497 | 40,000 | 38,000 | Claude Code + Opus 4.5 |
+
+Activité personnelle déclarée par l’auteur, pas un taux de réussite de benchmark ni une preuve d’absence de supervision humaine. [Boris Cherny](https://twitter.com/bcherny/status/2004887829252317325) · [quoted original post](https://simonwillison.net/tags/boris-cherny/)
 
 Trois personnes. Une semaine. La même conclusion. Pas parce qu'ils se sont coordonnés — mais parce que l'infrastructure avait discrètement franchi un seuil. Les agents étaient devenus suffisamment fiables pour terminer des tâches non triviales sans surveillance. Les primitives de planification (`/loop`, `/goal`, cron) étaient désormais intégrées aux outils. Le coût d'une seule exécution d'agent avait suffisamment baissé pour que l'exécuter répétitivement sur une minuterie ne paraisse plus gaspillé. Quand toutes les pièces sont présentes, le mouvement qui les combine devient évident pour tout le monde en même temps.
 
@@ -267,7 +275,7 @@ flowchart TD
 
 Ce n'est plus une simple exécution d'agent. C'est un système en fonctionnement continu qui se réveille chaque matin, balaye le sol de lui-même, et met les choses qui nécessitent votre attention devant vous. Votre rôle devient : **revoir le contenu de la boîte de réception, prendre des décisions, et quand vous repérez un schéma que le système ne peut pas gérer, affiner les skills et les règles.**
 
-Cherny a utilisé ce schéma pour fusionner 259 PR en 30 jours sans ouvrir un IDE une seule fois. Les ingénieurs d'OpenAI ont utilisé le même schéma pour construire un produit bêta d'environ un million de lignes à la main — sans écrire une seule ligne de code eux-mêmes.
+Activité personnelle déclarée par l’auteur, pas un taux de réussite de benchmark ni une preuve d’absence de supervision humaine.
 
 ## Séparation générateur/évaluateur : Pourquoi vous ne pouvez pas laisser le modèle noter son propre travail
 
@@ -293,7 +301,7 @@ Une phrase à retenir : **quelqu'un dans votre équipe ne doit pas vous croire.*
 
 Si vous voulez voir à quoi ressemble une boucle bien conçue et qui tourne réellement, [l'autoresearch de Karpathy](https://github.com/karpathy/autoresearch) est l'exemple de manuel.
 
-En mars 2026, Karpathy a publié un projet Python de 630 lignes. Donnez-lui un GPU et une direction de recherche, et il tourne toute la nuit — complétant des centaines d'expériences d'entraînement ML, ne gardant que celles qui s'améliorent réellement. Le projet a atteint 66 000+ étoiles en quelques jours après sa sortie.
+[Karpathy: autoresearch](https://github.com/karpathy/autoresearch) · [announcement](https://x.com/karpathy/status/2030371219518931079)
 
 ### Trois fichiers, trois rôles
 
@@ -343,8 +351,6 @@ flowchart TD
     8b --> 9
 ```
 
-Il exécute environ 12 expériences par heure. Une exécution de nuit (8 heures) représente environ 100 expériences. Karpathy lui-même l'a fait tourner pendant 2 jours — ~700 expériences.
-
 Le budget de temps réel fixe de 5 minutes est un choix de conception clé — peu importe ce que l'agent modifie, chaque expérience prend exactement le même temps. Cela signifie que tous les résultats sont directement comparables sous le même budget temps — pas de débat sur « celui-ci a tourné plus longtemps donc c'est mieux ».
 
 ### Sortie : Ce que vous voyez quand vous vous réveillez
@@ -358,6 +364,8 @@ Seuls les commits qui se sont réellement améliorés restent sur la branche pri
 **2. results.tsv (l'enregistrement complet des expériences)**
 
 Chaque expérience — succès ou échec — est journalisée :
+
+> Illustration pédagogique : le scénario et ses chiffres sont des hypothèses explicatives, pas des mesures d’une expérience publiée.
 
 ```
 timestamp    commit_hash    val_bpb    vram_mb    description
@@ -375,11 +383,8 @@ L'agent écrit des messages de commit clairs sur ce qu'il a essayé, ce qui a fo
 
 ### Ce qu'il a réellement trouvé
 
-Résultats de la course initiale de 2 jours, ~700 expériences de Karpathy :
-
-- Sur ~700 tentatives, environ **20 améliorations réelles empilables** ont été trouvées
-- Réduit le temps d'entraînement de niveau GPT-2 de nanochat sur 8×H100 de **2,02 heures → 1,80 heure**, environ **11 % plus rapide**
-- Les découvertes incluaient : ajustements du taux d'apprentissage, réglage de l'optimiseur, échanges d'activation, optimisations de schéma d'attention, etc.
+- Réduit le temps d'entraînement de niveau GPT-2 de nanochat sur 8×H100 de **2,02 heures → 1,80 heure**, environ **10.89% plus rapide**
+- Les découvertes incluaient : ajustements du taux d'apprentissage, réglage de l'optimiseur, échanges d'activation, optimisations de schéma d'attention, etc. [Karpathy: leaderboard commit](https://github.com/karpathy/nanochat/commit/f06860494848db080c9a80a0ffa83203b042056b) · [tuning commit](https://github.com/karpathy/nanochat/commit/6ed7d1d82cee16c2e26f45d559ad3338447a6c1b)
 
 Toutes les améliorations étaient-elles des découvertes bouleversantes ? Non. La plupart étaient de petites optimisations qui se sont empilées. Mais ces 20 améliorations valides auraient pris à un chercheur humain des semaines de travail manuel — l'agent l'a fait en 48 heures.
 
@@ -399,7 +404,7 @@ Les boucles rapides vous tentent de sauter la vérification. « Ça a l'air bien
 
 ### 2. Pourriture de compréhension
 
-Plus une boucle livre du code vite, plus votre compréhension de votre propre base de code s'éloigne de la réalité. L'équipe de Cherny avait 80 % du code écrit par des agents — ce qui signifie que la plupart du code d'une équipe n'a pas été écrit par une personne. Si vous ne lisez pas et n'utilisez pas ce que la boucle produit, votre compréhension décline continuellement. **Les boucles rapides nécessitent une lecture rapide.**
+Les résultats de production n’isolent pas une cause. Les scores s’appliquent au modèle, scaffold, jeu de données et protocole indiqués, pas à toutes les tâches réelles.
 
 ### 3. Abandon cognitif
 

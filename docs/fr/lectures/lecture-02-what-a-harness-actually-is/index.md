@@ -70,7 +70,9 @@ L'absence d'un sous-système est comme l'absence d'une zone fonctionnelle dans l
 
 **Quantifier la valeur des composants du harness** : Utilisez une ablation à modèle fixe. Gardez le modèle fixe, retirez les sous-systèmes un par un et mesurez quel retrait provoque la plus forte baisse de performance. La plus forte baisse indique le composant à plus forte contribution marginale dans cette tâche ; elle n’identifie pas automatiquement le goulot d’étranglement. Une baisse quasi nulle doit aussi être interprétée : le composant peut être redondant, mal conçu ou simplement non sollicité par cette tâche. Pour diagnostiquer les goulots, utilisez d’abord les journaux d’échec et l’attribution, puis l’ablation comme preuve d’appui : l’échec vient-il d’une intention floue, d’un contexte insuffisant, d’un environnement non reproductible, d’un feedback de vérification manquant ou d’une gestion d’état rompue ?
 
-## L'histoire vraie d'une équipe
+## Exemple pédagogique
+
+> Illustration pédagogique : le scénario et ses chiffres sont des hypothèses explicatives, pas des mesures d’une expérience publiée.
 
 Une équipe a utilisé GPT-4o sur une application frontend TypeScript + React (~20 000 lignes de code). Ils ont traversé quatre étapes — essentiellement ajouter des équipements de cuisine un par un :
 

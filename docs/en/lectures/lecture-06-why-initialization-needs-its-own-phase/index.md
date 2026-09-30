@@ -5,6 +5,8 @@
 
 # Lecture 06. Make the Agent Initialize Before Every Work Session
 
+> Engineering guideline: numerical cutoffs here are adjustable teaching defaults, not experimentally established thresholds. Token counts depend on the tokenizer and content, not line count alone.
+
 You start a new agent session and tell it "add a search feature." It jumps straight into coding — admirable enthusiasm. After 20 minutes it discovers the test framework isn't configured properly, spends another 10 minutes fixing that, then finds the database migration script format is wrong, more fiddling. The search feature does get added in the end, but the whole session was inefficient. Most of the time went to "figuring out how this project works" rather than writing the search feature itself.
 
 The better approach: before letting the agent start working, use a separate phase to get the base environment ready, run verification commands through, and understand the project structure. Initialization work should not be crammed together with feature implementation — they are two fundamentally different kinds of tasks.
@@ -37,6 +39,8 @@ flowchart TB
 
 ## What Happens When You Mix Them
 
+> Teaching illustration: this scenario and its numerical values are assumed for explanation, not observations from a published experiment.
+
 The most direct problem: infrastructure doesn't get built solidly. The agent spends 80% of its effort on feature code and the remaining 20% casually setting up some infrastructure. The test framework is configured but never verified, lint rules are set but too loose, no progress file created. These defects aren't obvious in the first session (because the agent still remembers what it did), but they surface in the second session: the new agent doesn't know how to run the project, how to test, or where things stand.
 
 A more hidden cost is "unverified accumulation." Feature code written before the test framework is properly configured — when you finally go back to add tests, you might discover the design itself was flawed. Had you known earlier, you would have implemented it differently. The more code written up front, the more has to be torn down and redone later.
@@ -45,7 +49,7 @@ Context budget is being wasted too. Initialization work (configuring environment
 
 The most easily overlooked problem is implicit assumption landmines. Decisions the agent makes during initialization (which test framework, how to organize directories, dependency management) — if not explicitly recorded, subsequent sessions may make contradictory choices. The first session chose Vitest as the test framework, but the second session's agent doesn't know and introduces Jest. Two test frameworks coexist, and maintenance costs double.
 
-Anthropic's long-running application development research explicitly recommends separating initialization from implementation. Their experimental data: projects using a dedicated initialization phase showed 31% higher feature completion rates in multi-session scenarios compared to mixed approaches. And the time invested in the initialization phase is fully recovered within the next 3-4 sessions.
+[Anthropic: initializer / coding agent](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 OpenAI's Codex harness engineering guide also emphasizes the "repository as operational record" principle: establish clear operational structure from the very first run, or every new session has to re-infer project conventions.
 
@@ -122,7 +126,9 @@ OpenAI's Codex harness engineering guide also emphasizes the "repository as oper
 - [ ] Everything committed to git
 ```
 
-## Real-World Example
+## Illustrative Example
+
+> Teaching illustration: this scenario and its numerical values are assumed for explanation, not observations from a published experiment.
 
 Two initialization approaches for a React frontend project, compared:
 

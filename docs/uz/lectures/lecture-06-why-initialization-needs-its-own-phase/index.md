@@ -5,6 +5,8 @@
 
 # 6-maʼruza. Har bir agent sessiyasidan oldin inisializatsiya qiling
 
+> Muhandislik tavsiyasi: raqamli chegaralar sozlanadigan o‘quv qiymatlari, tajribada tasdiqlangan chegaralar emas. Token soni faqat qatorga emas, tokenizer va mazmunga bog‘liq.
+
 Siz yangi agent sessiyasini boshlaysiz va “qidiruv funksiyasini qoʻsh” deysiz. U darhol kod yozishga oʻtadi — tahsinga loyiq ishtiyoq. 20 daqiqadan soʻng, test freymvorki toʻgʻri sozlanmaganini bilib qoladi va uni toʻgʻrilash uchun yana 10 daqiqa sarflaydi. Keyin maʼlumotlar bazasi migratsiya skripti formati notoʻgʻri ekani aniqlanadi, yana ovoragarchilik. Oxir-oqibat qidiruv funksiyasi qoʻshiladi, lekin butun sessiya samarasiz boʻldi — chunki vaqtning katta qismi qidiruv funksiyasini yozishga emas, balki “bu loyiha oʻzi qanday ishlashini tushunish”ga sarflandi.
 
 Yaxshiroq yondashuv: agentni ishlashga qoʻyib berishdan oldin, bazaviy muhitni tayyorlash, tekshiruv buyruqlarini (verification commands) muvaffaqiyatli oʻtkazish va loyiha strukturasini tushunish uchun alohida bosqich ajrating. Bu xuddi uy qurishga oʻxshaydi — siz poydevor quyib, devorlarni bir vaqtning oʻzida qurmaysiz. Agar shunday qilsangiz, devorlar poydevor qotmasidan oldin koʻtariladi va butun binoni buzib, qaytadan boshlashga toʻgʻri keladi. Avval poydevor quying, uning qotishini kuting, soʻngra devorlarni quring — toza va samarali.
@@ -45,7 +47,7 @@ Sessiya byudjeti ham bekorga sarflanadi. Inisializatsiya ishlari (muhitlarni soz
 
 Eng osongina koʻzdan qochadigan muammo — bu oshkor qilinmagan taxminlar, minalar kabi yashirin tahdidlar (implicit assumption landmines). Agentning inisializatsiya davomida qabul qilgan qarorlari (qaysi test freymvorki ishlatilgan, kataloglar qanday tartiblangan, bogʻliqliklar qanday boshqarilgan) — agar ochiq-oydin yozib qoldirilmasa, keyingi sessiyalar bu tanlovlarni tushunolmaydi. Eng yomoni shundaki, keyingi sessiyalar unga zid qarorlar qabul qilishi mumkin. Birinchi qurilish jamoasi beton poydevordan foydalandi, ikkinchi jamoa buni bilmasdan turib uning ustiga yogʻoch qoqdi — poydevor yorilib ketdi.
 
-Anthropicʼning uzoq muddatli dasturlarni yaratish boʻyicha tadqiqoti inisializatsiyani implementatsiyadan ajratishni ochiq-oydin tavsiya qiladi. Ularning tajriba maʼlumotlari: maxsus inisializatsiya bosqichidan foydalangan loyihalar, aralash usulga nisbatan, koʻp sessiyali (multi-session) ssenariylarda funksiyalarning 31% koʻproq tugallanish koʻrsatkichini namoyish etgan. Asosiy tushuncha — inisializatsiya bosqichiga sarflangan vaqt, keyingi 3-4 sessiyada toʻliq oqlanadi. Poydevor qanchalik mustahkam boʻlsa, devorlar shuncha tez koʻtariladi.
+[Anthropic: initializer / coding agent](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 OpenAIʼning Codex harness muhandislik qoʻllanmasi ham “repo operatsion yozuv sifatida” (repository as operational record) tamoyilini taʼkidlaydi — birinchi ishga tushishdanoq aniq operatsion strukturani oʻrnating, aks holda har bir yangi sessiya loyiha qoidalarini (conventions) qaytadan aniqlashiga toʻgʻri keladi.
 
@@ -122,7 +124,9 @@ OpenAIʼning Codex harness muhandislik qoʻllanmasi ham “repo operatsion yozuv
 - [ ] Hamma narsa gitʼga commit qilingan
 ```
 
-## Hayotiy misol
+## O‘quv misoli
+
+> O‘quv misoli: vaziyat va raqamlar tushuntirish uchun faraz qilingan, chop etilgan tajriba o‘lchovlari emas.
 
 React frontend loyihasi uchun ikkita inisializatsiya yondashuvi:
 

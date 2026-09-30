@@ -5,6 +5,8 @@
 
 # Ders 04. Tek bir dev talimat dosyası neden yetmez
 
+> Mühendislik önerisi: sayısal eşikler ayarlanabilir öğretim değerleridir, deneysel sınırlar değildir. Token sayısı yalnız satıra değil tokenizer ve içeriğe bağlıdır.
+
 Harness mühendisliğini ciddiye aldınız — aferin size. Bir `AGENTS.md` oluşturdunuz ve aklınıza gelen her kural, kısıtlama ve öğrenilen dersi içine tıktınız. Bir ay sonra dosya 300 satıra, iki ay sonra 450 satıra, üç ay sonra 600 satıra şişti. Sonra ajan performansının aslında kötüleştiğini fark ettiniz — basit bir hata düzeltmesinde ajan ilgisiz dağıtım talimatlarını işlemek için bolca bağlam yakıyor; 300. satıra gömülü kritik bir güvenlik kısıtlaması doğrudan göz ardı ediliyor; üç çelişkili kod stili kuralı ajanın her seferinde rastgele birini seçmesi anlamına geliyor.
 
 Bu "dev talimat dosyası" tuzağıdır. Bir bavulu fazla doldurmak gibidir — her şey faydalı görünür, hepsini sıkıştırırsınız fermuar patlamak üzeredir. İç çamaşırı bulmak tüm çantayı boşaltmak anlamına gelir. Dolu bir bavul taşıdınız ama aslında içindekilerin belki üçte birini kullandınız.

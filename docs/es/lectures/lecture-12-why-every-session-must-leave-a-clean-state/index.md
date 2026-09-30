@@ -5,6 +5,8 @@
 
 # Lección 12. Deja un handoff limpio al final de cada sesión
 
+> Guía de ingeniería: los umbrales son valores didácticos ajustables, no límites demostrados. Los tokens dependen del tokenizador y del contenido, no solo de las líneas.
+
 Tu agent ejecuta toda la tarde, modifica 20 archivos, hace commit del código, la sesión termina. La siguiente sesión del agent comienza y descubre inmediatamente: el build está roto, las pruebas están en rojo, los archivos temporales de debug están por todas partes, la feature list no se actualizó, y el progreso es completamente incierto. La nueva sesión dedica sus primeros 30 minutos solo a averiguar "qué hizo realmente la última sesión."
 
 Tanto OpenAI como Anthropic afirman claramente: **la confiabilidad a largo plazo depende de la disciplina operacional, no solo del éxito en una única ejecución.** La calidad del estado al final de la sesión determina directamente la eficiencia de la siguiente sesión. Piensa en ello como las buenas prácticas de Git—cada commit debería ser un cambio atómico y compilable, no un montón de código a medio terminar.
@@ -52,6 +54,8 @@ flowchart LR
 
 Las leyes de Lehman sobre la evolución del software nos dicen: los sistemas sometidos a cambios continuos aumentarán inevitablemente en complejidad a menos que se gestionen activamente. Esto es especialmente cierto para los agentes de codificación con IA—cada sesión introduce cambios, y sin limpieza al salir, la deuda técnica se acumula exponencialmente.
 
+> Ejemplo didáctico: el escenario y sus cifras son supuestos para explicar el mecanismo, no mediciones de un experimento publicado.
+
 Los datos reales son reveladores. Un proyecto desarrollado con agentes durante 12 semanas, sin estrategia de limpieza:
 
 - Semana 1: Tasa de build exitoso 100%, tasa de pruebas exitosas 100%, inicio de nueva sesión 5 min
@@ -64,8 +68,6 @@ Mismo proyecto con una estrategia de limpieza:
 - Semana 1: 100%, 100%, 5 min
 - Semana 12: 97%, 95%, 9 min
 
-Después de 12 semanas: la tasa de build exitoso difiere en 29 puntos porcentuales, el tiempo de inicio de nueva sesión difiere en un 85%. Esto no es teórico—es una diferencia observada.
-
 ### Cinco dimensiones del clean state
 
 El clean state no es solo "el código compila." Son cinco dimensiones evaluadas juntas:
@@ -74,7 +76,7 @@ El clean state no es solo "el código compila." Son cinco dimensiones evaluadas 
 
 **Dimensión de pruebas**: ¿Pasán todas las pruebas? Incluyendo las pruebas que existían antes de la sesión—la sesión es responsable de no romper la funcionalidad existente. Y debería verificarse en CI, no solo "funciona en mi máquina."
 
-**Dimensión de progreso**: ¿Está el progreso actual registrado en un artefacto legible por máquina? Subtareas completadas con sus criterios de aprobación, subtareas en progreso pero incompletas con su estado actual, subtareas aún no iniciadas. Los buenos registros de progreso reducen un 60-80% del tiempo de diagnóstico al inicio de la sesión.
+Registra progreso y verificación en archivos versionados para que la siguiente sesión inspeccione el estado. La fuente explica el mecanismo sin cuantificar el ahorro de arranque. [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 **Dimensión de artefactos**: ¿Hay artefactos temporales obsoletos o ambiguos? Logs de debug, archivos temporales, código comentado, marcadores TODO—todos estos aumentan la carga cognitiva para la siguiente sesión.
 
@@ -150,15 +152,15 @@ git checkout -- .env.local  # Restore to known state
 npm run test  # Verify cleanup didn't break anything
 ```
 
-## Caso del mundo real
+## Ejemplo didáctico
+
+> Ejemplo didáctico: el escenario y sus cifras son supuestos para explicar el mecanismo, no mediciones de un experimento publicado.
 
 Una aplicación Electron desarrollada con agentes durante 12 semanas, comparando dos enfoques:
 
 **Sin estrategia de limpieza** (grupo de control): Semana 12, tasa de build exitoso 68%, tasa de pruebas exitosas 61%, inicio de nueva sesión 60+ min, artefactos obsoletos 103.
 
 **Con estrategia de limpieza** (grupo experimental): Verificación completa de clean state al final de cada sesión + bucle de limpieza semanal. Semana 12, tasa de build exitoso 97%, tasa de pruebas exitosas 95%, inicio de nueva sesión 9 min, artefactos obsoletos 11.
-
-En la semana 12, la tasa de build exitoso del grupo experimental es 29 puntos porcentuales más alta, la tasa de pruebas exitosas 34 puntos más alta, y el tiempo de inicio de nueva sesión un 85% menor.
 
 ## Ideas clave
 

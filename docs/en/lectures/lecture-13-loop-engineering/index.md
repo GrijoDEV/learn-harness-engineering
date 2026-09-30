@@ -5,6 +5,8 @@
 
 # Lecture 13. From Manual Prompting to Autonomous Loops
 
+> Engineering guideline: numerical cutoffs here are adjustable teaching defaults, not experimentally established thresholds. Token counts depend on the tokenizer and content, not line count alone.
+
 Everything you learned in the first twelve lectures rests on one assumption: **you are sitting at the keyboard, typing instructions one at a time.**
 
 You wrote `AGENTS.md` (Lectures 1–4), built state management (Lectures 5–6), constrained scope with feature lists (Lectures 7–8), left clean handoffs at session end (Lectures 9, 12), and made the runtime observable (Lectures 10–11). But the trigger for all of it was always you. The agent never decided on its own when to start working — because no one pressed "start."
@@ -86,6 +88,8 @@ You don't have to type `/goal` every time. But understanding where it came from 
 
 ## June 2026: Three People Lit the Same Fuse in One Week
 
+> Teaching illustration: this scenario and its numerical values are assumed for explanation, not observations from a published experiment.
+
 In the first week of June 2026, three practitioners building coding agent infrastructure — without comparing notes — said the same thing in different words.
 
 **Peter Steinberger** (creator of OpenClaw, [his post reached 8 million views](https://x.com/steipete/status/2063697162748260627)): "You shouldn't be prompting coding agents anymore. You should be designing loops that prompt your agents."
@@ -96,7 +100,13 @@ In the first week of June 2026, three practitioners building coding agent infras
 
 > **Loop engineering is replacing yourself as the person who prompts the agent. You design the system that does it instead.**
 
-Cherny disclosed numbers: over 30 consecutive days, all code contributions to Claude Code were made autonomously by AI — 259 merged PRs, over 80% of production code authored by Claude, and a 76% success rate on open-ended software tasks.
+Boris Cherny · 2025-12-27
+
+| PR | Git commits | + LoC | − LoC | Model |
+| --- | --- | --- | --- | --- |
+| 259 / 30 days | 497 | 40,000 | 38,000 | Claude Code + Opus 4.5 |
+
+Author-reported personal production activity; this is not a benchmark success rate or evidence that the whole team worked without human oversight. [Boris Cherny](https://twitter.com/bcherny/status/2004887829252317325) · [quoted original post](https://simonwillison.net/tags/boris-cherny/)
 
 Three people. One week. The same conclusion. Not because they coordinated — because the infrastructure had quietly crossed a threshold. Agents had become reliable enough to finish non-trivial tasks unattended. Scheduling primitives (`/loop`, `/goal`, cron) were now built into the tools. The cost of a single agent run had dropped low enough that running one repeatedly on a timer stopped looking wasteful. When all the parts are present, the move that combines them becomes obvious to everyone at once.
 
@@ -267,7 +277,7 @@ flowchart TD
 
 This is no longer a single agent run. It is a continuously operating system that wakes up every morning, sweeps the floor on its own, and puts the things that need your attention in front of you. Your role becomes: **review the inbox contents, make decisions, and when you spot a pattern the system can't handle, refine the skills and rules.**
 
-Cherny used this pattern to merge 259 PRs in 30 days without opening an IDE once. OpenAI engineers used the same pattern to build a roughly one-million-line beta product by hand — without writing a single line of code themselves.
+Author-reported personal production activity; this is not a benchmark success rate or evidence that the whole team worked without human oversight.
 
 ## Generator/Evaluator Separation: Why You Can't Let the Model Grade Its Own Work
 
@@ -293,7 +303,7 @@ One sentence to remember: **someone in your crew must not believe you.**
 
 If you want to see what a well-designed, actually-running loop looks like, [Karpathy's autoresearch](https://github.com/karpathy/autoresearch) is the textbook example.
 
-In March 2026, Karpathy released a 630-line Python project. Give it one GPU and a research direction, and it runs all night — completing hundreds of ML training experiments, keeping only the ones that truly improve. The project hit 66,000+ stars within days of release.
+[Karpathy: autoresearch](https://github.com/karpathy/autoresearch) · [announcement](https://x.com/karpathy/status/2030371219518931079)
 
 ### Three Files, Three Roles
 
@@ -343,8 +353,6 @@ flowchart TD
     8b --> 9
 ```
 
-It runs roughly 12 experiments per hour. An overnight run (8 hours) is about 100 experiments. Karpathy himself ran it for 2 days — ~700 experiments.
-
 The fixed 5-minute wall-clock budget is a key design choice — no matter what the agent changes, every experiment takes exactly the same time. This means all results are directly comparable under the same time budget — no argument about "this one ran longer so it's better."
 
 ### Output: What You See When You Wake Up
@@ -358,6 +366,8 @@ Only commits that actually improved stay on the main branch. Everything that fai
 **2. results.tsv (the full experiment record)**
 
 Every single experiment — success or failure — is logged:
+
+> Teaching illustration: this scenario and its numerical values are assumed for explanation, not observations from a published experiment.
 
 ```
 timestamp    commit_hash    val_bpb    vram_mb    description
@@ -375,11 +385,10 @@ The agent writes clear commit messages about what it tried, what worked, what di
 
 ### What It Actually Found
 
-Results from Karpathy's initial 2-day, ~700-experiment run:
+- Reduced nanochat's GPT-2-level training time on 8×H100 from **2.02 hours → 1.80 hours**, about **10.89% faster**
+- Findings included: learning rate adjustments, optimizer tuning, activation swaps, attention pattern optimizations, etc. [Karpathy: leaderboard commit](https://github.com/karpathy/nanochat/commit/f06860494848db080c9a80a0ffa83203b042056b) · [tuning commit](https://github.com/karpathy/nanochat/commit/6ed7d1d82cee16c2e26f45d559ad3338447a6c1b)
 
-- Out of ~700 attempts, about **20 stackable real improvements** were found
-- Reduced nanochat's GPT-2-level training time on 8×H100 from **2.02 hours → 1.80 hours**, about **11% faster**
-- Findings included: learning rate adjustments, optimizer tuning, activation swaps, attention pattern optimizations, etc.
+> Teaching illustration: this scenario and its numerical values are assumed for explanation, not observations from a published experiment.
 
 Were all improvements earth-shattering discoveries? No. Most were small optimizations that stacked. But those 20 valid improvements would have taken a human researcher weeks of manual work — the agent did it in 48 hours.
 
@@ -399,7 +408,7 @@ Fast loops tempt you to skip verification. "Looks fine" is not the same as "conf
 
 ### 2. Comprehension Rot
 
-The faster a loop ships code, the further your understanding of your own codebase drifts from reality. Cherny's team had 80% of code authored by agents — meaning most of a team's code wasn't written by a person. If you don't read and use what the loop produces, your comprehension decays continuously. **Fast loops require fast reading.**
+Reported engineering outcomes do not isolate the causal contribution of one component. Benchmark scores apply to the stated model, scaffold, dataset and evaluation settings, not every production task.
 
 ### 3. Cognitive Surrender
 

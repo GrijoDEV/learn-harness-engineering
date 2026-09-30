@@ -5,6 +5,8 @@
 
 # Aula 04. Divida as Instruções em Múltiplos Arquivos
 
+> Orientação de engenharia: os limites numéricos são valores didáticos ajustáveis, não fronteiras demonstradas. Tokens dependem do tokenizador e do conteúdo, não apenas das linhas.
+
 Você começou a levar harness engineering a sério — ótimo. Criou um `AGENTS.md` e colocou nele toda regra, restrição e lição aprendida que conseguiu imaginar. Um mês depois o arquivo tinha crescido para 300 linhas, dois meses depois 450, três meses depois 600. Então você percebe que a performance do agente está piorando: em uma simples correção de bug, o agente consome enormes quantidades de contexto processando instruções irrelevantes de deploy; uma restrição crítica de segurança escondida na linha 300 é completamente ignorada; três regras contraditórias de estilo de código fazem o agente escolher uma aleatoriamente a cada execução.
 
 Essa é a armadilha do “arquivo gigante de instruções”. Tudo parece importante, então você coloca tudo no mesmo lugar, e encontrar uma regra específica passa a exigir percorrer o arquivo inteiro. Você escreveu 600 linhas, mas apenas um terço delas realmente é relevante para a tarefa atual.

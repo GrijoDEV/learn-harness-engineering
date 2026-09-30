@@ -5,6 +5,8 @@
 
 # Leçon 09. Empêcher les agents de déclarer victoire trop tôt
 
+> Conseil d’ingénierie : ces seuils sont des valeurs pédagogiques ajustables, pas des limites démontrées. Les tokens dépendent du tokenizer et du contenu, pas seulement des lignes.
+
 Vous demandez à un agent d'implémenter une fonctionnalité de « réinitialisation de mot de passe ». Il modifie le schéma de la base de données, écrit l'endpoint API, ajoute le template d'email, lance les tests unitaires (tous réussis), puis vous annonce avec assurance « c'est fait ». Quand vous essayez réellement de l'exécuter — le lien de réinitialisation ne peut pas être envoyé (configuration du service email manquante), la migration de la base de données échoue à mi-chemin (incohérence du schéma), et le flux de bout en bout n'a jamais été exécuté une seule fois.
 
 Ce sentiment ne devrait pas vous être étranger — c'est comme remplir entièrement sa copie d'examen, être le premier à la remettre en toute confiance, pour finalement échouer quand les notes arrivent. Ce n'est pas parce que la copie est pleine que les réponses sont justes.
@@ -12,6 +14,8 @@ Ce sentiment ne devrait pas vous être étranger — c'est comme remplir entièr
 Ce n'est pas un incident isolé. L'article classique de 2017 à l'ICML de Guo et al. a prouvé : **les réseaux de neurones modernes sont systématiquement trop confiants** — la confiance rapportée par les modèles est significativement plus élevée que leur précision réelle. Il en va de même pour les agents de codage IA : ils « sentent » qu'ils ont terminé, mais en réalité, ils en sont loin. Votre harness doit remplacer les « sentiments » de l'agent par une vérification externalisée, basée sur l'exécution.
 
 ## La pente glissante
+
+> Même modèle et même prompt, mais budgets de temps et de coût différents. Ce n’est pas une expérience à budget égal isolant un composant. Le jeu fonctionnait au niveau essentiel, avec des défauts persistants. [Anthropic](https://www.anthropic.com/engineering/harness-design-long-running-apps)
 
 Les déclarations prématurées de complétion suivent presque toujours le même schéma : le code semble correct — la syntaxe est bonne, la logique paraît raisonnable, et l'analyse statique ne montre aucune erreur évidente. Mais le harness n'impose pas de vérification d'exécution complète, donc l'agent skip l'exécution réelle ou ne lance que des tests partiels. Il exécute les tests unitaires mais ignore les tests d'intégration ; il lance les tests mais ne vérifie pas la couverture. Finalement, « le code semble bon » est pris comme preuve que « la fonctionnalité est complète ». Et la copie d'examen est remise.
 
@@ -111,7 +115,9 @@ Les signaux à l'exécution efficaces incluent :
 - Les écritures en base de données, opérations sur fichiers et autres effets de bord étaient-ils corrects ?
 - Les ressources temporaires ont-elles été nettoyées ?
 
-## Cas concret
+## Exemple pédagogique
+
+> Illustration pédagogique : le scénario et ses chiffres sont des hypothèses explicatives, pas des mesures d’une expérience publiée.
 
 **Tâche** : Implémenter une fonctionnalité de réinitialisation de mot de passe utilisateur. Implique des opérations en base de données, l'envoi d'emails et des modifications d'endpoints API.
 

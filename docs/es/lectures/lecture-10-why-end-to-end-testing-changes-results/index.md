@@ -5,6 +5,8 @@
 
 # Lección 10. Solo las pruebas end-to-end son verificación real
 
+> Guía de ingeniería: los umbrales son valores didácticos ajustables, no límites demostrados. Los tokens dependen del tokenizador y del contenido, no solo de las líneas.
+
 Le pides al agent que añada una funcionalidad de exportación de archivos a una aplicación Electron. Escribe el componente del proceso de render, el preload script y la lógica de la capa de servicio. Las pruebas unitarias de cada componente pasan perfectamente. El agent dice: "Ya está." Cuando realmente haces clic en el botón de exportación—el formato de la ruta del archivo es incorrecto, la barra de progreso no se actualiza, y exportar archivos grandes causa una fuga de memoria. Cinco defectos en los límites de componentes, y las pruebas unitarias no detectaron ni uno solo.
 
 Es como un ensayo de coro—cada parte vocal suena perfecta cuando se canta individualmente, pero cuando cantan juntos, las sopranos van medio tiempo más rápido que los bajos, y el acompañamiento está un semitono desfasado de la melodía principal. Cada parte es "correcta" por sí sola, pero el conjunto está desafinado.
@@ -116,7 +118,9 @@ FIX: Move file operations to src/preload/file-ops.ts and call via window.api.rea
 
 Cada vez que se encuentre un nuevo tipo de error del agent durante una revisión de código, conviértelo en una verificación automatizada. Un mes después, tu harness será significativamente más fuerte que al inicio del mes. Es como las notas de ensayo de un coro—registrar los problemas encontrados en cada ensayo para poder verificarlos antes del siguiente. Con el tiempo, los errores comunes disminuyen, y la música se vuelve más armoniosa.
 
-## Caso del mundo real
+## Ejemplo didáctico
+
+> Ejemplo didáctico: el escenario y sus cifras son supuestos para explicar el mecanismo, no mediciones de un experimento publicado.
 
 **Tarea**: Implementar una funcionalidad de exportación de archivos en una aplicación Electron. Involucra la UI del proceso de render, el proxy del sistema de archivos del preload script y la transformación de datos de la capa de servicio.
 

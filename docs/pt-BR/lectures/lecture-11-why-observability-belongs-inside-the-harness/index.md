@@ -23,13 +23,15 @@ Quando um harness não possui observabilidade, quatro categorias de problemas ap
 
 **Abismo de informação na troca de sessão.** Quando um trabalho incompleto é transferido para uma nova sessão, a falta de observabilidade faz com que a nova sessão precise diagnosticar o estado do sistema do zero. Observações da Anthropic sobre agentes de longa duração mostram que esse diagnóstico redundante pode consumir entre 30% e 50% do tempo total da sessão.
 
-## Um Cenário Real com Claude Code
+## Exemplo didático
+
+> Ilustração didática: o cenário e seus números são hipóteses explicativas, não medições de um experimento publicado.
 
 Considere um harness utilizando um fluxo de trabalho com três papéis: planejador (*planner*), gerador (*generator*) e avaliador (*evaluator*), executando a tarefa "adicionar modo escuro ao aplicativo".
 
 **Sem observabilidade:** O planejador produz uma descrição vaga. O gerador implementa o modo escuro com base nessa descrição imprecisa, mas o resultado não corresponde às expectativas implícitas do planejador. O avaliador rejeita a implementação com base em seus próprios critérios implícitos, mas não consegue explicar especificamente o problema — apenas afirma que "não parece correto". O gerador tenta corrigir o problema usando justificativas vagas. O ciclo se repete de três a quatro vezes, consumindo cerca de 45 minutos e produzindo apenas um resultado aceitável.
 
-**Com observabilidade completa:** O planejador produz um contrato de sprint listando quais componentes devem ser modificados, os critérios de verificação de cada um e as exclusões (por exemplo, não alterar estilos de impressão). O gerador implementa a funcionalidade seguindo esse contrato, e a observabilidade de runtime registra o processo de carregamento e aplicação de estilos em cada componente. O avaliador utiliza uma rubrica de pontuação para avaliar cada dimensão separadamente, apresentando evidências específicas: "O contraste de cores do botão é insuficiente (padrão WCAG AA 4,5:1, valor medido 2,1:1)." Uma única iteração produz um resultado de alta qualidade em aproximadamente 15 minutos.
+**Com observabilidade completa:** O planejador produz um contrato de sprint listando quais componentes devem ser modificados, os critérios de verificação de cada um e as exclusões (por exemplo, não alterar estilos de impressão). O gerador implementa a funcionalidade seguindo esse contrato, e a observabilidade de runtime registra o processo de carregamento e aplicação de estilos em cada componente. O avaliador utiliza uma rubrica de pontuação para avaliar cada dimensão separadamente, apresentando evidências específicas: "O contraste de cores do botão é insuficiente (padrão WCAG AA 4,5:1, valor medido 2,1:1)." Uma única iteração produz um resultado de alta qualidade em aproximadamente 15 minutos. [W3C: contrast minimum](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html)
 
 Uma diferença de eficiência de 3x. A única variável alterada é a observabilidade.
 
@@ -120,7 +122,9 @@ Transforme a pergunta "está bom ou não?" em uma pontuação quantificável:
 
 Crie um *trace* para cada sessão do harness, um *span* para cada tarefa e *sub-spans* para cada etapa de verificação. Utilize atributos padronizados para anotar informações importantes. Dessa forma, os dados de observabilidade podem ser integrados a ferramentas padrão do mercado (Jaeger, Zipkin).
 
-## Experimento da Anthropic com Arquitetura de Três Agentes
+## Exemplo didático
+
+> Ilustração didática: o cenário e seus números são hipóteses explicativas, não medições de um experimento publicado.
 
 Em março de 2026, a Anthropic publicou um experimento sistemático de harness. Eles executaram a mesma tarefa ("construir uma DAW baseada em navegador utilizando a Web Audio API") com três arquiteturas diferentes e registraram dados detalhados de cada fase:
 

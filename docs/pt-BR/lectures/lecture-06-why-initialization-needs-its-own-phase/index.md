@@ -5,6 +5,8 @@
 
 # Aula 06. Faça o Agente Inicializar Antes de Cada Sessão de Trabalho
 
+> Orientação de engenharia: os limites numéricos são valores didáticos ajustáveis, não fronteiras demonstradas. Tokens dependem do tokenizador e do conteúdo, não apenas das linhas.
+
 Você inicia uma nova sessão do agente e pede: "adicione uma funcionalidade de busca". Ele parte imediatamente para a implementação — um entusiasmo admirável. Após 20 minutos, descobre que o framework de testes não está configurado corretamente, passa mais 10 minutos corrigindo isso e, em seguida, percebe que o formato do script de migração do banco de dados está incorreto, exigindo mais ajustes. No final, a funcionalidade de busca é implementada, mas toda a sessão foi ineficiente. A maior parte do tempo foi gasta "descobrindo como este projeto funciona" em vez de implementar a funcionalidade de busca em si.
 
 Uma abordagem melhor é utilizar uma fase separada antes de permitir que o agente comece a trabalhar: preparar o ambiente base, executar os comandos de verificação e compreender a estrutura do projeto. O trabalho de inicialização não deve ser agrupado com a implementação de funcionalidades — são dois tipos de tarefas fundamentalmente diferentes.
@@ -37,6 +39,8 @@ flowchart TB
 
 ## O Que Acontece Quando Você Mistura as Duas Coisas
 
+> Ilustração didática: o cenário e seus números são hipóteses explicativas, não medições de um experimento publicado.
+
 O problema mais direto é que a infraestrutura não é construída de forma sólida. O agente gasta 80% do esforço escrevendo código de funcionalidades e os 20% restantes configurando alguma infraestrutura de maneira superficial. O framework de testes é configurado, mas nunca validado; as regras de lint são definidas, mas permissivas demais; nenhum arquivo de progresso é criado. Esses problemas não são evidentes na primeira sessão (porque o agente ainda se lembra do que fez), mas aparecem na segunda sessão: o novo agente não sabe como executar o projeto, como testá-lo ou em que estado ele se encontra.
 
 Um custo mais oculto é o "acúmulo de código não verificado". Código de funcionalidades é escrito antes que o framework de testes esteja corretamente configurado — quando você finalmente volta para adicionar testes, pode descobrir que o próprio design estava incorreto. Se isso tivesse sido percebido antes, a implementação teria seguido outro caminho. Quanto mais código é escrito antecipadamente, mais código precisará ser descartado e refeito posteriormente.
@@ -45,7 +49,7 @@ O orçamento de contexto também é desperdiçado. O trabalho de inicialização
 
 O problema mais fácil de ignorar são as armadilhas das suposições implícitas. Decisões tomadas pelo agente durante a inicialização (qual framework de testes usar, como organizar diretórios, como gerenciar dependências) — se não forem registradas explicitamente, sessões posteriores podem tomar decisões contraditórias. A primeira sessão escolheu o Vitest como framework de testes, mas o agente da segunda sessão não sabe disso e introduz o Jest. Dois frameworks de testes passam a coexistir, e o custo de manutenção dobra.
 
-A pesquisa da Anthropic sobre desenvolvimento de aplicações de longa duração recomenda explicitamente separar inicialização de implementação. Os dados experimentais mostraram que projetos que utilizam uma fase dedicada de inicialização apresentaram taxas de conclusão de funcionalidades 31% maiores em cenários com múltiplas sessões quando comparados a abordagens mistas. Além disso, o tempo investido na fase de inicialização é totalmente recuperado ao longo das 3 ou 4 sessões seguintes.
+[Anthropic: initializer / coding agent](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 O guia de *harness engineering* do Codex da OpenAI também enfatiza o princípio de que o "repositório é o registro operacional": é necessário estabelecer uma estrutura operacional clara desde a primeira execução; caso contrário, cada nova sessão precisará inferir novamente as convenções do projeto.
 
@@ -128,7 +132,9 @@ O guia de *harness engineering* do Codex da OpenAI também enfatiza o princípio
 - [ ] Tudo está registrado em commits no Git
 ```
 
-## Exemplo do Mundo Real
+## Exemplo didático
+
+> Ilustração didática: o cenário e seus números são hipóteses explicativas, não medições de um experimento publicado.
 
 Comparação entre duas abordagens de inicialização para um projeto frontend em React:
 

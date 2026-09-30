@@ -5,6 +5,8 @@
 
 # Lektion 08. Feature-Listen nutzen, um Agentenarbeit zu begrenzen
 
+> Technische Richtwerte: Die Zahlen sind anpassbare Lehrannahmen, keine experimentell bestätigten Grenzen. Tokenzahlen hängen von Tokenizer und Inhalt ab, nicht allein von Zeilen.
+
 Du bittest einen Agenten, eine E-Commerce-Seite zu bauen. Nachdem er fertig ist, sagt er "done". Du schaust in den Code: Die Benutzeranmeldung funktioniert, aber der Checkout-Button im Warenkorb macht nichts, und der Zahlungsfluss ist gar nicht verbunden. Das Problem: Du hast nie gesagt, was "done" bedeutet. Also verwendet der Agent seinen eigenen Standard: "Ich habe viel Code geschrieben, und es sieht ziemlich vollständig aus."
 
 In den Augen vieler Menschen sind Feature-Listen nur Notizzettel: Dinge aufschreiben, damit man sie nicht vergisst, und dann beiseitelegen. In der Harness-Welt aber ist eine Feature-Liste kein Memo für Menschen, sondern das Rückgrat des gesamten Harness. Der Scheduler nutzt sie, um Aufgaben auszuwählen; der Verifier nutzt sie, um Abschluss zu beurteilen; der Handoff Reporter nutzt sie, um Zusammenfassungen zu erzeugen. Bricht das Rückgrat, ist der ganze Körper gelähmt.
@@ -23,7 +25,7 @@ Did user auth, shopping cart mostly done, still need payments
 
 Kann eine neue Agentensitzung daraus diese Fragen beantworten? Was bedeutet "mostly done"? Welche Tests hat der Warenkorb bestanden? Was blockiert Payments? Die Antwort auf alles lautet: "Niemand weiß es." Wie wenn du deinem Arzt sagst: "Mein Bauch tut weh, war in letzter Zeit schon okay" - welches Medikament soll er verschreiben?
 
-Das Ergebnis: Die neue Sitzung verbringt 20 Minuten damit, den Projektzustand zu erschließen, und implementiert möglicherweise bereits fertige Features erneut. Anthropics Engineering-Daten zeigen, dass gute Fortschrittsaufzeichnungen die Diagnosezeit beim Sitzungsstart um 60-80% reduzieren.
+Fortschritt und Prüfergebnisse gehören in versionierte Dateien, damit die nächste Sitzung den Zustand prüfen kann. Die Quelle beschreibt den Mechanismus ohne prozentuale Zeitersparnis. [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 ## Feature-Zustandsmaschine
 
@@ -104,15 +106,15 @@ Der Agent kann den Zustand eines Features nicht direkt auf `passing` setzen. Er 
 
 Jedes Feature-Element sollte auf "in einer Sitzung abschließbar" zugeschnitten sein. Zu breit, und es wird nicht fertig; zu eng, und der Verwaltungsaufwand steigt. "Nutzer kann Artikel in den Warenkorb legen" ist gute Granularität. "Den Warenkorb implementieren" ist zu breit. "Das name-Feld im Cart-Modell erstellen" ist zu eng. Wie ein Steak schneiden: nicht das ganze Stück und nicht Hackfleisch.
 
-## Praxisfall
+## Lehrbeispiel
+
+> Lehrbeispiel: Dieses Szenario und seine Zahlen dienen der Erklärung und sind keine Messwerte eines veröffentlichten Experiments.
 
 Eine E-Commerce-Plattform mit 10 Features. Zwei Tracking-Ansätze wurden verglichen:
 
 **Memo-Modus**: Der Agent nutzt unstrukturierte Notizen. Nach 3 Sitzungen lauten sie: "user auth und product list erledigt, shopping cart mostly done, aber Bugs, payments nicht begonnen." Eine neue Sitzung braucht 20 Minuten, um den Zustand zu erschließen, und implementiert am Ende abgeschlossene Features erneut. Wie eine Einkaufsliste mit "Milch, Brot und dieses Ding" - im Laden weißt du immer noch nicht, was du kaufen sollst.
 
 **Rückgrat-Modus**: Jedes Feature hat einen klaren Zustand und einen Verifikationsbefehl. Eine neue Sitzung liest die Feature-Liste und weiß in 3 Minuten: F01-F05 sind `passing`, F06 ist `active`, F07-F10 sind `not_started`. Sie macht direkt bei F06 weiter, ohne Nacharbeit.
-
-Quantifiziertes Ergebnis: Projekte mit strukturierten Feature-Listen zeigen eine 45% höhere Feature-Abschlussrate als Freiform-Tracking, bei null doppelten Implementierungen.
 
 ## Wichtigste Erkenntnisse
 

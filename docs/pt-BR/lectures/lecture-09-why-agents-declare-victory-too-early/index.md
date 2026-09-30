@@ -5,11 +5,15 @@
 
 # Aula 09. Como Impedir que Agentes Declarem Vitória Cedo Demais
 
+> Orientação de engenharia: os limites numéricos são valores didáticos ajustáveis, não fronteiras demonstradas. Tokens dependem do tokenizador e do conteúdo, não apenas das linhas.
+
 Você pede a um agente para implementar uma funcionalidade de "redefinição de senha". Ele modifica o esquema do banco de dados, cria o endpoint da API, adiciona o template de e-mail, executa os testes unitários (todos passam) e então afirma com confiança: "está pronto". Mas quando você realmente tenta usar a funcionalidade, descobre que o link de redefinição de senha não pode ser enviado porque a configuração do serviço de e-mail está ausente; a migração do banco de dados falha no meio da execução, deixando o esquema em um estado inconsistente; e o fluxo completo de ponta a ponta nunca foi executado sequer uma vez.
 
 Isso não é um incidente isolado. O clássico artigo da ICML de 2017, de Guo et al., demonstrou que **redes neurais modernas são sistematicamente excessivamente confiantes** — a confiança relatada pelos modelos é significativamente maior do que sua precisão real. Agentes de programação com IA não são diferentes. Eles "sentem" que terminaram, mas, na prática, estão longe disso. Seu harness deve substituir os "sentimentos" do agente por verificações externalizadas e baseadas em execução.
 
 ## A Ladeira Escorregadia
+
+> Mesmo modelo e prompt, mas diferentes orçamentos de tempo e custo. Não é um experimento de orçamento igual isolando um componente. A jogabilidade essencial funcionou, mas havia defeitos. [Anthropic](https://www.anthropic.com/engineering/harness-design-long-running-apps)
 
 Declarações prematuras de conclusão quase sempre seguem o mesmo roteiro: o código parece correto — a sintaxe está certa, a lógica parece razoável e a análise estática não aponta erros evidentes. Porém, o harness não exige uma verificação completa por execução, então o agente deixa de executar o sistema de fato ou executa apenas testes parciais. Ele roda os testes unitários, mas ignora os testes de integração; executa testes, mas não verifica cobertura. No final, "o código parece bom" é tratado como evidência de que "a funcionalidade está concluída".
 
@@ -110,7 +114,9 @@ Sinais eficazes de tempo de execução incluem:
 * As gravações no banco de dados, operações de arquivo e outros efeitos colaterais ocorreram corretamente?
 * Os recursos temporários foram limpos adequadamente?
 
-## Caso Real
+## Exemplo didático
+
+> Ilustração didática: o cenário e seus números são hipóteses explicativas, não medições de um experimento publicado.
 
 **Tarefa**: Implementar a funcionalidade de redefinição de senha de usuários. Envolve operações de banco de dados, envio de e-mails e modificações em endpoints da API.
 

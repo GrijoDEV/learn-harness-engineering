@@ -5,6 +5,8 @@
 
 # Lektion 03. Das Repository zur einzigen Quelle der Wahrheit machen
 
+> Technische Richtwerte: Die Zahlen sind anpassbare Lehrannahmen, keine experimentell bestätigten Grenzen. Tokenzahlen hängen von Tokenizer und Inhalt ab, nicht allein von Zeilen.
+
 Die Architekturentscheidungen deines Teams sind über Confluence, Slack, Jira und die Köpfe einiger Senior Engineers verstreut. Für Menschen funktioniert das gerade so: Man kann Kolleginnen fragen, Chatverläufe durchsuchen, Dokumente ausgraben. Wenn alles scheitert, kann man jemanden im Pausenraum abfangen. Für einen KI-Agenten aber existiert Information, die nicht im Repository steht, schlicht nicht.
 
 Das ist keine Übertreibung. Denk darüber nach, was die Eingaben eines Agenten tatsächlich sind: Systemprompts und Aufgabenbeschreibungen, Dateiinhalte aus dem Repository und Tool-Ausgaben. Das war's. Deine Slack-Historie, Jira-Tickets, Confluence-Seiten und die Architekturentscheidung, die du am Freitagnachmittag bei Kaffee mit einem Kollegen besprochen hast - der Agent sieht nichts davon. Er kann nicht "jemanden fragen" oder "den Chatverlauf durchsuchen". Er ist ein Engineer, der im Repository eingeschlossen ist. Alles außerhalb kennt er nicht.

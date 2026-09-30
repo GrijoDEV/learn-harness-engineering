@@ -5,6 +5,8 @@
 
 # Aula 08. Use Listas de Funcionalidades para Restringir o que o Agente Faz
 
+> Orientação de engenharia: os limites numéricos são valores didáticos ajustáveis, não fronteiras demonstradas. Tokens dependem do tokenizador e do conteúdo, não apenas das linhas.
+
 Você pede a um agente para construir um site de e-commerce. Depois que ele termina, ele diz: "concluído". Você olha o código — a autenticação de usuários funciona, mas o botão de checkout no carrinho não faz nada, e o fluxo de pagamento nem sequer está conectado. Onde as coisas deram errado? Você nunca disse ao agente o que significa "concluído", então ele usou o próprio padrão: "escrevi bastante código e parece razoavelmente completo".
 
 Na visão de muitas pessoas, listas de funcionalidades são apenas um lembrete — anote as coisas para não esquecer e depois descarte. Mas no mundo dos harnesses, uma lista de funcionalidades não é um lembrete para humanos. Ela é a estrutura fundamental sobre a qual todo o harness é construído. O escalonador depende dela para selecionar tarefas, o verificador depende dela para julgar a conclusão, e o gerador de relatórios de handoff depende dela para criar resumos. Sem ela, esses componentes não têm um consenso compartilhado em que possam se apoiar.
@@ -25,7 +27,7 @@ Autenticação do usuário concluída, carrinho de compras quase pronto, faltam 
 
 Uma nova sessão de agente consegue responder às seguintes perguntas com base nessa anotação? O que significa "quase concluído"? Quais testes o carrinho passou? O que está bloqueando os pagamentos? A resposta para todas elas é: "ninguém sabe".
 
-O resultado: a nova sessão passa 20 minutos tentando inferir o estado do projeto e pode acabar reimplementando funcionalidades já concluídas. Dados de engenharia da Anthropic mostram que bons registros de progresso reduzem o tempo de diagnóstico no início de uma sessão em 60–80%.
+Registre progresso e verificações em arquivos versionados para a próxima sessão inspecionar o estado. A fonte explica o mecanismo sem quantificar redução no tempo de início. [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 ## Máquina de Estados das Funcionalidades
 
@@ -108,15 +110,15 @@ O agente não pode alterar diretamente o estado de uma funcionalidade para `pass
 
 Cada item de funcionalidade deve ter um escopo que possa ser **concluído em uma única sessão**. Se for amplo demais, não será finalizado; se for detalhado demais, o custo de gerenciamento aumenta. "O usuário pode adicionar itens ao carrinho" é uma boa granularidade. "Implementar o carrinho de compras" é amplo demais. "Criar o campo `name` no modelo Cart" é detalhado demais.
 
-## Caso Real
+## Exemplo didático
+
+> Ilustração didática: o cenário e seus números são hipóteses explicativas, não medições de um experimento publicado.
 
 Uma plataforma de e-commerce com 10 funcionalidades. Duas abordagens de acompanhamento foram comparadas:
 
 **Modo memorando**: O agente utiliza anotações não estruturadas para acompanhar o progresso. Após 3 sessões, as anotações se tornam algo como: "autenticação de usuários e lista de produtos concluídas, carrinho de compras quase pronto mas com bugs, pagamentos não iniciados". Uma nova sessão precisa de 20 minutos para inferir o estado do projeto e, no fim, reimplementa funcionalidades já concluídas.
 
 **Modo estruturado**: Cada funcionalidade possui um estado claro e um comando de verificação. Uma nova sessão lê a lista de funcionalidades e, em 3 minutos, sabe que: F01–F05 estão em `passing`, F06 está em `active` (em andamento) e F07–F10 estão em `not_started`. Ela continua diretamente a partir da F06, sem retrabalho.
-
-Resultado quantificado: projetos que utilizam listas de funcionalidades estruturadas apresentam uma taxa de conclusão de funcionalidades 45% maior do que aqueles que utilizam acompanhamento livre, com zero implementações duplicadas.
 
 ## Principais Aprendizados
 

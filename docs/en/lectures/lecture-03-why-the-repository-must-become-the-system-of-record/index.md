@@ -5,6 +5,8 @@
 
 # Lecture 03. Making the Repository the Single Source of Truth
 
+> Engineering guideline: numerical cutoffs here are adjustable teaching defaults, not experimentally established thresholds. Token counts depend on the tokenizer and content, not line count alone.
+
 Your team's architecture decisions are scattered across Confluence, Slack, Jira, and a few senior engineers' heads. For humans this barely works — you can ask a colleague, search chat logs, dig through documentation, and if all else fails, you can corner someone in the break room. But for an AI agent, information that's not in the repository simply does not exist.
 
 This isn't an exaggeration. An agent has only three sources of input: system prompts and task descriptions, file contents from the repository, and tool execution output. Your Slack history, Jira tickets, Confluence pages, and that architecture decision you hashed out with a colleague on Friday afternoon — the agent can't see any of it. It can't "go ask someone" or "search the chat logs." Its entire working world is the repository itself. Everything outside, it knows nothing about.

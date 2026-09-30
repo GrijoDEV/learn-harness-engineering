@@ -5,6 +5,8 @@
 
 # Ders 03. Depo neden kayıt sistemi olmalı
 
+> Mühendislik önerisi: sayısal eşikler ayarlanabilir öğretim değerleridir, deneysel sınırlar değildir. Token sayısı yalnız satıra değil tokenizer ve içeriğe bağlıdır.
+
 Takımınızın mimari kararları Confluence, Slack, Jira ve birkaç kıdemli mühendisin kafasına dağılmış durumda. İnsanlar için bu zar zor işe yarar — bir meslektaşa sorabilirsiniz, sohbet geçmişini arayabilirsiniz, dokümanları kazıyabilirsiniz. Tüm bunlar başarısız olursa, birini mola odasında köşeye sıkıştırabilirsiniz. Ancak bir AI ajanı için, depoda olmayan bilgi basitçe yoktur.
 
 Bu abartı değil. Bir ajanın girdilerinin gerçekten ne olduğunu düşünün: sistem promptları ve görev açıklamaları, depodaki dosya içerikleri ve araç yürütme çıktısı. Hepsi bu. Slack geçmişiniz, Jira biletleriniz, Confluence sayfalarınız ve Cuma öğleden sonra bir meslektaşınızla kahve eşliğinde tartıştığınız o mimari karar — ajan bunların hiçbirini göremez. "Birine gidip soramaz" ya da "sohbet geçmişini arayamaz." Depoya kilitlenmiş bir mühendistir — dışarıdaki her şey hakkında hiçbir şey bilmez.

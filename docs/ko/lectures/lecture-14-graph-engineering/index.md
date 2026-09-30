@@ -261,7 +261,7 @@ run(graph, entry={"requirements": "로그인 페이지 버그 수정"}, thread="
 
 **개념 출시 후에 생긴 것**
 
-- [GraphArc](https://github.com/CodeGraphContext/grapharc)(2026-08-02): 스스로 "Graph Engineering의 첫 번째 실시간 구현"이라고 부릅니다. 에이전트 실행을 로그에 묻혀 있던 trace에서 **상호작용 가능한 실시간 오케스트레이션 그래프**로 바꿉니다 — 각 엔진, 각 의존성, 각 결정 지점을 그려서, 실행 전에 전체 그래프를 시각화하고, 당신이 확인한(심지어 휴대폰으로 볼 수도 있는) 뒤에야 통과시킵니다. 저자는 4,000+ 개발자용 그래프 도구를 만든 배경이며, 방향은 "관측 가능, 디버그 가능, 공학화 가능"입니다. 아주 새롭고, 기능은 아직 초기 단계입니다.
+- [GraphArc](https://github.com/CodeGraphContext/grapharc)
 
 **개념 출시 전에 있던 것 (Graph Engineering이라고 부르지 않지만, 당신이 구축할 때 쓸 것은 바로 이것들)**
 

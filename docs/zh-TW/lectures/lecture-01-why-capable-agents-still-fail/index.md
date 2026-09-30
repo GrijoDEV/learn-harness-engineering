@@ -5,17 +5,30 @@
 
 # 第一講. 模型能力強，不等於執行可靠
 
-截至 2025 年底，最強的 coding agent 在 SWE-bench Verified 上的通過率大約在 50-60%。這個數字乍看還行，但別急著慶祝。那都是精心挑選過的、有明確 issue 描述和現成測試用例的任務。換到你日常開發的場景，需求模糊、沒有現成測試、隱含的業務規則散落在各處，這個數字只會更低。你信心滿滿地交代任務，agent 跑了 20 分鐘告訴你「完成了」，你一看程式碼，加了功能但測試掛了，改了 bug 但引入了新 bug，根本不是你要的東西。
+Claude Sonnet 4.5 · 2025-09-29 · SWE-bench Verified
+
+| Score | Tasks | Trials | Scaffold |
+| --- | --- | --- | --- |
+| 77.2% | 500 | 10 | bash + string replacement |
+
+公開工程產出不能單獨證明某一元件的因果貢獻。基準分數只對應所述模型、框架、資料集和評估條件，不能直接當作所有實際任務的成功率。 [Anthropic: methodology](https://www.anthropic.com/news/claude-sonnet-4-5)
 
 遇到這種情況，大部分人的第一反應是「這模型不行，得換一個更貴的。」先別急著掏錢包。問題可能根本不在模型身上。
 
 ## 同一匹馬，兩種命運
 
-Anthropic 做過一個對照實驗。同一個 prompt（「做一個 2D 復古遊戲編輯器」），同一個模型（Opus 4.5）。第一次讓它裸跑，20 分鐘，花了 $9，遊戲核心功能根本跑不起來。第二次給它配上完整的 harness（planner + generator + evaluator 三 agent 架構），6 小時，花了 $200，遊戲可以正常遊玩。
+> 模型和提示相同，但執行時間與費用預算不同。這是公開的應用建置對比，不是等預算、單獨隔離某個 harness 元件的實驗。核心遊戲功能可用，仍有缺陷和局限。 [Anthropic](https://www.anthropic.com/engineering/harness-design-long-running-apps)
+
+模型和提示相同，但執行時間與費用預算不同。這是公開的應用建置對比，不是等預算、單獨隔離某個 harness 元件的實驗。核心遊戲功能可用，仍有缺陷和局限。 [Anthropic](https://www.anthropic.com/engineering/harness-design-long-running-apps)
+
+| Opus 4.5 | Duration | USD |
+| --- | --- | --- |
+| Solo | 20 min | 9 |
+| Full harness | 6 h | 200 |
 
 模型沒換。Opus 4.5 還是那個 Opus 4.5。換的是馬具。
 
-OpenAI 在 2025 年發佈的 harness engineering 文章裡說得更直接，Codex 在一個 harness 搭得好的儲存庫裡，表現能從「不可靠」變成「可靠」。注意他們的用詞，那不是「好了一點」，是質變。harness 就是**模型權重之外的一切工程基礎設施**。
+公開工程產出不能單獨證明某一元件的因果貢獻。基準分數只對應所述模型、框架、資料集和評估條件，不能直接當作所有實際任務的成功率。 [OpenAI: 2026-02-11](https://openai.com/index/harness-engineering/)
 
 ## agent 到底卡在哪
 
@@ -35,9 +48,9 @@ OpenAI 在 2025 年發佈的 harness engineering 文章裡說得更直接，Code
 
 理解了上面的場景，這些概念就不再是一堆術語了：
 
-- **能力鴻溝（Capability Gap）**：模型在基準測試上的表現和真實任務上的表現之間的巨大落差。SWE-bench Verified 上 50-60% 的通過率意味著近一半的真實 issue 解不了。
+- 公開工程產出不能單獨證明某一元件的因果貢獻。基準分數只對應所述模型、框架、資料集和評估條件，不能直接當作所有實際任務的成功率。
 - **Harness**：模型之外的一切，包括指令、工具與環境，以及狀態管理和驗證機制。不是模型權重的部分，全是 harness。
-- **Harness 誘導失敗**：模型本身能力足夠，但因為執行環境有結構性缺陷而失敗。Anthropic 的對照實驗已經證明了這一點。
+- **Harness 誘導失敗**：模型本身能力足夠，但因為執行環境有結構性缺陷而失敗。
 - **驗證缺口**：agent 對自己輸出的信心評估和實際正確性之間的偏差。agent 說「我做完了」但實際沒做完，這是最常見的失敗模式。
 - **診斷循環**：執行 → 觀察失敗 → 定位到 harness 的哪一層出了問題 → 修補那一層 → 重新執行。這是 harness 工程的核心方法論。
 - **完成定義（Definition of Done）**：一組可以用命令驗證的條件，測試通過、lint 沒報錯、類型檢查通過。沒有顯式的完成定義，agent 就會自己編一個。
@@ -68,17 +81,19 @@ OpenAI 在 2025 年發佈的 harness engineering 文章裡說得更直接，Code
 
 ## 一百萬行程式碼的實驗
 
-OpenAI 在 2025 年做了一個激進的實驗，用 Codex 從一個空的 git 儲存庫起步，建構一個完整的內部產品。五個月後，這個儲存庫有大約 100 萬行程式碼，應用邏輯、基礎設施、工具、文件、內部開發工具，全部由 agent 生成。三個工程師驅動 Codex，開了大約 1,500 個 PR 並完成合併。平均每人每天 3.5 個 PR。
+OpenAI 在 2025 年做了一個激進的實驗，用 Codex 從一個空的 git 儲存庫起步，建構一個完整的內部產品。五個月後，這個儲存庫有大約 100 萬行程式碼，應用邏輯、基礎設施、工具、文件、內部開發工具，全部由 agent 生成。三個工程師驅動 Codex，開了大約 1,500 個 PR 並完成合併。平均每人每天 3.5 個 PR。 [OpenAI](https://openai.com/index/harness-engineering/)
 
-這個實驗的關鍵約束，是**人類永遠不直接寫程式碼。** 這個設定是為了逼團隊搞清楚，當工程師的主要工作不再是寫程式碼，而是設計環境、表達意圖、建構回饋迴路時，到底什麼變了？
+公開工程產出不能單獨證明某一元件的因果貢獻。基準分數只對應所述模型、框架、資料集和評估條件，不能直接當作所有實際任務的成功率。
 
 早期進展比預期慢。原因在於環境不夠完整，agent 缺少必要的工具、抽象和內部結構來推進高層次目標。工程師的工作變成了，把大目標拆成小積木（設計、編碼、審查、測試），讓 agent 去搭建，然後用這些積木解鎖更復雜的任務。當某件事失敗了，修復方向幾乎從來都不靠「更努力」，真正的問題是找清楚 agent 缺什麼能力、怎麼讓它既可理解又可執行。
 
-這個實驗直接證明了本講的核心論點，**同一個模型，在空白環境裡和在有完整 harness 的環境裡，產出有本質差異。** 模型沒變，變的是環境。
+公開工程產出不能單獨證明某一元件的因果貢獻。基準分數只對應所述模型、框架、資料集和評估條件，不能直接當作所有實際任務的成功率。
 
 > 來源：[OpenAI: Harness engineering: leveraging Codex in an agent-first world](https://openai.com/index/harness-engineering/)
 
-## 一個更親民的例子
+## 教學示意
+
+> 教學示意：這個場景及其中的數字是為解釋機制設定的，不是已發表實驗的實測結果。
 
 一個團隊用 Claude Sonnet 給一個中等規模的 Python Web 應用（FastAPI + PostgreSQL + Redis，約 15,000 行程式碼）添加新的 API 端點。
 
@@ -103,6 +118,8 @@ OpenAI 在 2025 年做了一個激進的實驗，用 Codex 從一個空的 git �
 - [HumanLayer: Skill Issue — Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
 - [SWE-bench Leaderboard](https://www.swebench.com/)
 - [Thoughtworks Technology Radar: Harness Engineering](https://www.thoughtworks.com/radar)
+
+- [Anthropic: Sonnet 4.5 SWE-bench methodology, 2025-09-29](https://www.anthropic.com/news/claude-sonnet-4-5)
 
 ## 練習
 

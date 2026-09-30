@@ -5,6 +5,8 @@
 
 # Leçon 10. Seul le test end-to-end est une vraie vérification
 
+> Conseil d’ingénierie : ces seuils sont des valeurs pédagogiques ajustables, pas des limites démontrées. Les tokens dépendent du tokenizer et du contenu, pas seulement des lignes.
+
 Vous demandez à l'agent d'ajouter une fonctionnalité d'export de fichier à une application Electron. Il écrit le composant du processus de rendu, le script preload et la logique de la couche service. Les tests unitaires de chaque composant passent parfaitement. L'agent dit : « C'est fait. » Quand vous cliquez réellement sur le bouton d'export — le format du chemin de fichier est incorrect, la barre de progression ne se met pas à jour, et l'export de gros fichiers provoque une fuite de mémoire. Cinq défauts aux frontières des composants, et les tests unitaires n'en ont attrapé aucun.
 
 C'est comme une répétition de chœur — chaque pupitre sonne parfaitement chanté individuellement, mais quand ils chantent ensemble, les sopranes sont un demi-temps plus rapides que les basses, et l'accompagnement est un demi-ton décalé par rapport à la mélodie principale. Chaque partie est « correcte » individuellement, mais l'ensemble est faux.
@@ -116,7 +118,9 @@ FIX: Move file operations to src/preload/file-ops.ts and call via window.api.rea
 
 Chaque fois qu'un nouveau type d'erreur d'agent est découvert lors d'une revue de code, transformez-le en vérification automatisée. Un mois plus tard, votre harness sera significativement plus fort qu'au début du mois. C'est comme les notes de répétition d'un chœur — enregistrer les problèmes trouvés à chaque répétition pour pouvoir les vérifier avant la suivante. Avec le temps, les erreurs courantes diminuent, et la musique devient plus harmonieuse.
 
-## Cas concret
+## Exemple pédagogique
+
+> Illustration pédagogique : le scénario et ses chiffres sont des hypothèses explicatives, pas des mesures d’une expérience publiée.
 
 **Tâche** : Implémenter une fonctionnalité d'export de fichier dans une application Electron. Implique l'UI du processus de rendu, le proxy de système de fichiers du script preload et la transformation de données de la couche service.
 

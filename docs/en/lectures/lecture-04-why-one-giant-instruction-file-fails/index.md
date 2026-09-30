@@ -5,6 +5,8 @@
 
 # Lecture 04. Split Instructions Across Files
 
+> Engineering guideline: numerical cutoffs here are adjustable teaching defaults, not experimentally established thresholds. Token counts depend on the tokenizer and content, not line count alone.
+
 You started taking harness engineering seriously — good. You created an `AGENTS.md` and packed in every rule, constraint, and lesson learned you could think of. One month later the file had ballooned to 300 lines, two months 450, three months 600. Then you notice the agent's performance is actually getting worse: on a simple bug fix, the agent burns through huge amounts of context processing irrelevant deployment instructions; a critical security constraint buried at line 300 gets ignored outright; three contradictory code style rules mean the agent picks one at random each time.
 
 This is the "giant instruction file" trap. Everything seems useful, so you cram it all in, and finding one specific rule means rifling through the entire file. You wrote 600 lines, but only a third of it is relevant to the task at hand.

@@ -261,7 +261,7 @@ Bittiğinde bunu yukarıdaki diyagramla karşılaştırın: el yazınız `graph.
 
 **İsimden sonra gelen projeler**
 
-- [GraphArc](https://github.com/CodeGraphContext/grapharc) (2026-08-02): kendisini "Graph Engineering'in ilk gerçek zamanlı uygulaması" olarak adlandırıyor. Ajan yürütmeyi, loglara gömülü trace'lerden **etkileşimli gerçek zamanlı bir orkestrasyon graf'ına** dönüştürüyor — her ajan, her bağımlılık, her karar noktası çizilir, yürütmeden önce tüm graf görselleştirilir ve siz onayladıktan sonra (telefonunuzdan bile bakabilirsiniz) serbest bırakılır. Yazarın geçmişi 4.000+ geliştirici için graf araçları oluşturmaya dayanıyor; yönü "gözlemlenebilir, hata ayıklanabilir, mühendislik yapılabilir". Çok yeni, hâlâ erken aşamada.
+- [GraphArc](https://github.com/CodeGraphContext/grapharc)
 
 **İsimden önce gelen projeler (onu Graph Engineering olarak adlandırmıyorlar — ama gerçekten inşa ederken kullanacağınız şeyler) bunlar**
 

@@ -5,6 +5,8 @@
 
 # Lecture 12. Leave a Clean Handoff at the End of Every Session
 
+> Engineering guideline: numerical cutoffs here are adjustable teaching defaults, not experimentally established thresholds. Token counts depend on the tokenizer and content, not line count alone.
+
 Your agent runs all afternoon, modifies 20 files, commits the code, and the session ends. The next agent session starts up and immediately discovers: build is broken, tests are red, temporary debug files are scattered everywhere, the feature list hasn't been updated, and progress is completely opaque. The first 30 minutes of the new session are spent entirely on "figuring out what the last session actually did."
 
 Both OpenAI and Anthropic state clearly: **long-term reliability depends on operational discipline, not just single-run success.** The quality of state at the end of each session directly determines the next session's efficiency.
@@ -15,7 +17,7 @@ Lehman's laws of software evolution tell us that systems undergoing continuous c
 
 During five months of Codex experiments, OpenAI observed something striking: **agents copy patterns already present in the repository, even when those patterns are inconsistent or suboptimal.** Over time, this copying inevitably leads to drift. The first person leaves a coffee cup in the common area; the second person figures "it's already messy" and leaves another; a week later the table is buried under cups. A codebase works the same way.
 
-The OpenAI team initially spent 20% of every Friday manually cleaning up "AI slop," but this approach clearly doesn't scale. They eventually arrived at a systematic solution:
+OpenAI reports spending Fridays on cleanup: one workday, or 20% of the week. This is not 20% of Friday. [OpenAI](https://openai.com/index/harness-engineering/)
 
 1. **Encode "golden rules" into the repository**: Rules like "prefer the shared utility package over hand-rolled ad-hoc helpers" (keep invariants centralized) and "don't YOLO-guess data structures" (validate boundaries or depend on typed SDKs). These rules are concrete, mechanical, and automatically checkable.
 2. **Establish periodic cleanup workflows**: A fleet of background Codex tasks that regularly scan for deviations, update quality scores, and open targeted refactoring PRs. Most can be reviewed and auto-merged within a minute.
@@ -43,7 +45,7 @@ flowchart LR
     Fix --> Build
 ```
 
-But that's still not enough. Current progress must be recorded in machine-readable artifacts: completed subtasks with their passing criteria, in-progress but incomplete subtasks with current state, and not-yet-started subtasks. Good progress records can reduce session startup diagnostic time by 60–80%. Temporary artifacts — debug logs, temporary files, commented-out code, TODO markers — must also be cleaned up, because they increase cognitive load for the next session. The standard startup path must remain functional too. Can the next session start working without manual intervention? Environment initialization, codebase loading, context acquisition, task selection — none of these paths can be broken.
+Record progress and verification results in versioned files so the next session can inspect project state. The cited source describes the mechanism without reporting a percentage reduction in startup time. [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 ```mermaid
 flowchart LR
@@ -72,6 +74,8 @@ The most common mental trap is "no time to clean up this session, I'll do it nex
 
 Worse, every session has its own task objectives. The new session is there to do new work, not clean up the previous session's mess. It'll ignore the chaos and start new work on top of it, introducing even more chaos. This is entropy's positive feedback loop.
 
+> Teaching illustration: this scenario and its numerical values are assumed for explanation, not observations from a published experiment.
+
 The numbers tell the story. A project developed with agents for 12 weeks, without a cleanup strategy:
 
 - Week 1: Build pass rate 100%, test pass rate 100%, new session startup 5 min
@@ -83,8 +87,6 @@ Same project with a cleanup strategy:
 
 - Week 1: 100%, 100%, 5 min
 - Week 12: 97%, 95%, 9 min
-
-After 12 weeks: build pass rate differs by 29 percentage points, new session startup time differs by 85%. This is not theoretical — it's an observed difference.
 
 ## How to Do It
 
@@ -137,7 +139,7 @@ New sessions read this document and immediately know where to prioritize. Fix th
 
 Every harness component exists because the model couldn't reliably do something on its own. But as models improve, these assumptions become outdated.
 
-Anthropic's experiments demonstrated this directly. Their initial harness included a sprint-splitting mechanism — breaking work into small chunks for Sonnet 4.5 to complete one at a time. When Opus 4.6 shipped, the model's native capabilities could handle work decomposition autonomously, making sprint construction unnecessary overhead. After removing it, the builder agent could work continuously for over two hours without drifting — and was actually smoother.
+This table describes the updated Opus 4.6 harness: one architecture with three agents, not three architectures. Sprint decomposition was removed. The planner creates the specification; the builder implements it; the evaluator tests the running application and sends feedback for another build round. [Anthropic](https://www.anthropic.com/engineering/harness-design-long-running-apps)
 
 But the evaluator told a different story. Even with Opus 4.6's stronger capabilities, when tasks approached the model's capability boundary, the evaluator still provided real value — catching the generator's missing functionality and stub implementations. This means the evaluator isn't a fixed yes/no decision; it depends on where task difficulty sits relative to model capability.
 
@@ -162,15 +164,15 @@ When agent output far exceeds human review capacity, the traditional merge philo
 
 **Caveat**: This is irresponsible in a low-throughput environment. But when agent output far exceeds human attention, it's often the correct tradeoff. The key criterion: **average cost of fixing a bug vs. average cost of waiting for a human to review a PR.** When the former is lower than the latter, fast merging is the right call.
 
-## Real-World Case
+## Illustrative Example
+
+> Teaching illustration: this scenario and its numerical values are assumed for explanation, not observations from a published experiment.
 
 An Electron app developed with agents over 12 weeks, comparing two approaches:
 
 **Without cleanup strategy** (control group): Week 12, build pass rate 68%, test pass rate 61%, new session startup 60+ min, 103 stale artifacts.
 
 **With cleanup strategy** (experimental group): Full clean-state check at every session end, plus a weekly cleanup loop. Week 12, build pass rate 97%, test pass rate 95%, new session startup 9 min, 11 stale artifacts.
-
-By week 12, the experimental group's build pass rate was 29 percentage points higher, test pass rate 34 points higher, and new session startup time 85% lower. Each session spent an extra 5 minutes on cleanup, but over 12 weeks that saved dozens of hours of chaos.
 
 ## Key Takeaways
 

@@ -32,7 +32,9 @@ flowchart LR
     Verdict --> Generator
 ```
 
-## Nega bunday boʻladi
+## O‘quv misoli
+
+> O‘quv misoli: vaziyat va raqamlar tushuntirish uchun faraz qilingan, chop etilgan tajriba o‘lchovlari emas.
 
 ### Kuzatuvchanlikning yoʻqligining haqiqiy badali
 
@@ -44,7 +46,7 @@ Harnessʼda kuzatuvchanlik boʻlmasa, tizimli ravishda toʻrt turdagi muammo yuz
 
 **Qayta urinishlar (Retries) koʻr-koʻrona taxminga aylanadi**: Qachonki agent biror narsa nega yiqilganini bilmasa, qayta urinish yoʻnalishi mutlaqo tasodifiy boʻladi. U notoʻgʻri yoʻnalishda qayta-qayta urinishi mumkin — xatoning asl sababini eʼtiborsiz qoldirib, unga umuman aloqasi boʻlmagan joylarni tuzatib yotadi. Har bir koʻr-koʻrona urinish token va vaqt sarflaydi.
 
-**Sessiyalararo maʼlumot jarligi (Session handoff information cliff)**: Chala bajarilgan ish keyingi sessiyaga uzatilsa, kuzatuvchanlikning yoʻqligi yangi sessiya tizim holatini boshidan oʻrganishga majbur boʻlishini anglatadi. Anthropicʼning uzoq davom etadigan agentlar boʻyicha kuzatuvlari shuni koʻrsatadiki, bu takroriy oʻrganish (redundant diagnosis) jami sessiya vaqtining 30-50% ini yeb qoʻyishi mumkin.
+Jarayon va tekshiruvlarni versiyalanadigan fayllarga yozing, keyingi sessiya holatni tekshira olsin. Manba mexanizmni tushuntiradi, boshlash vaqtining foiz kamayishini bermaydi. [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 ### Claude Code ishtirokidagi hayotiy vaziyat
 
@@ -116,7 +118,9 @@ Har bir vazifa boshlanishidan oldin, yaratuvchi (generator) va baholovchi (evalu
 
 Har bir harness sessiyasi uchun bitta treys (trace), har bir vazifa uchun bitta span va har bir tekshirish bosqichi uchun ichki spanʼlar (sub-spans) yarating. Muhim maʼlumotlarni izohlash (annotate) uchun standart atributlardan foydalaning. Shu orqali kuzatuv maʼlumotlari odatiy vositalar (Jaeger, Zipkin) bilan birlashadi.
 
-## Hayotiy misol
+## O‘quv misoli
+
+> O‘quv misoli: vaziyat va raqamlar tushuntirish uchun faraz qilingan, chop etilgan tajriba o‘lchovlari emas.
 
 Rejalashtiruvchi-yaratuvchi-baholovchi (planner-generator-evaluator) jarayonidan foydalanib “qorongʻu rejim qoʻshish” vazifasini bajaruvchi harness:
 
@@ -136,7 +140,7 @@ Samaradorlik 3 barobar yaxshilanadi, sifat barqarorlashadi va baholashlar takror
 - **Ikkala kuzatuv qatlami ham zarur** — runtime signallar “nima boʻlganini” tushuntirsa, jarayon artefaktlari “nima uchun aynan shunday qilinganini” tushuntiradi.
 - **Sprint shartnomalari tushunmovchilikni boshidanoq yoʻqotadi** — “yaratuvchi baholovchi koʻriboq rad etadigan narsani yasashini” oldini oladi.
 - **Baholash rubrikalari bahoni takrorlanuvchan (reproducible) qiladi** — turli xil baholovchilar ayni bitta natija uchun bir xil baho berishini taʼminlaydi.
-- **Kuzatuvchanliksiz sessiya vaqtining 30-50% qismi ortiqcha narsalarni takror oʻrganishga sarflanadi.**
+- Jarayon va tekshiruvlarni versiyalanadigan fayllarga yozing, keyingi sessiya holatni tekshira olsin. Manba mexanizmni tushuntiradi, boshlash vaqtining foiz kamayishini bermaydi.
 
 ## Qoʻshimcha oʻqish uchun
 

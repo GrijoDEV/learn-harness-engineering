@@ -21,15 +21,17 @@ Khi harness thiếu khả năng quan sát, bốn nhóm vấn đề sẽ xuất h
 
 **Thử lại trở thành đoán mù.** Khi agent không biết vì sao một việc fail, hướng thử lại hoàn toàn ngẫu nhiên. Nó có khi sửa mãi những đường đi không liên quan, bỏ qua tận gốc nguyên nhân thật. Mỗi lần thử lại mù quáng đốt cả token lẫn thời gian.
 
-**Vực thông tin lúc bàn giao phiên.** Khi phần việc chưa xong được chuyển cho phiên sau, thiếu khả năng quan sát đồng nghĩa với việc phiên mới phải chẩn đoán lại trạng thái hệ thống từ đầu. Quan sát của Anthropic về các long-running agent cho thấy khâu chẩn đoán trùng lặp này có thể nuốt tới 30-50% tổng thời gian phiên.
+Ghi tiến độ và kết quả kiểm tra vào tệp quản lý phiên bản để phiên sau kiểm tra trạng thái. Nguồn mô tả cơ chế, không báo cáo phần trăm giảm thời gian khởi động. [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
-## Một kịch bản Claude Code thật
+## Ví dụ giảng dạy
+
+> Minh họa giảng dạy: tình huống và số liệu là giả định để giải thích, không phải đo lường của thí nghiệm công bố.
 
 Hãy hình dung một harness dùng quy trình ba vai "planner-generator-evaluator", thực thi tác vụ "thêm dark mode cho ứng dụng".
 
 **Không có khả năng quan sát:** Planner đưa ra mô tả mơ hồ. Generator triển khai dark mode dựa trên sự mơ hồ đó, nhưng kết quả không khớp với kỳ vọng ngầm của planner. Evaluator từ chối theo chuẩn ngầm của riêng mình mà không diễn đạt cụ thể được chỗ nào sai, chỉ biết "cảm giác không ổn". Generator thử lại mù quáng dựa trên lý do mơ hồ. Chu kỳ lặp 3-4 lần, mất khoảng 45 phút, và sản phẩm cuối cùng cũng chỉ tạm chấp nhận được.
 
-**Có đầy đủ khả năng quan sát:** Planner đưa ra sprint contract, liệt kê component nào cần sửa, tiêu chuẩn xác minh cho từng cái, và các ngoại lệ (ví dụ không xử lý print styles). Generator triển khai theo contract, và khả năng quan sát runtime ghi lại quá trình tải style của từng component. Evaluator dùng rubric chấm điểm để đánh giá từng chiều, kèm bằng chứng cụ thể: "Độ tương phản màu nút chưa đạt (chuẩn WCAG AA 4.5:1, đo được 2.1:1)". Một vòng lặp cho ra kết quả chất lượng cao, trong khoảng 15 phút.
+**Có đầy đủ khả năng quan sát:** Planner đưa ra sprint contract, liệt kê component nào cần sửa, tiêu chuẩn xác minh cho từng cái, và các ngoại lệ (ví dụ không xử lý print styles). Generator triển khai theo contract, và khả năng quan sát runtime ghi lại quá trình tải style của từng component. Evaluator dùng rubric chấm điểm để đánh giá từng chiều, kèm bằng chứng cụ thể: "Độ tương phản màu nút chưa đạt (chuẩn WCAG AA 4.5:1, đo được 2.1:1)". Một vòng lặp cho ra kết quả chất lượng cao, trong khoảng 15 phút. [W3C: contrast minimum](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html)
 
 Hiệu quả chênh nhau 3 lần. Biến duy nhất là khả năng quan sát.
 
@@ -122,7 +124,7 @@ Tạo một trace cho mỗi phiên harness, một span cho mỗi tác vụ, và 
 
 ## Thí nghiệm kiến trúc ba agent của Anthropic
 
-Tháng 3 năm 2026, Anthropic công bố một thí nghiệm harness có hệ thống. Họ chạy cùng một tác vụ ("xây dựng một DAW trên trình duyệt dùng Web Audio API") với ba kiến trúc khác nhau và ghi lại dữ liệu chi tiết theo từng pha:
+Bảng thuộc harness cập nhật dùng Opus 4.6: một kiến trúc ba agent, không phải ba kiến trúc. Đã bỏ chia sprint. Planner viết đặc tả, builder triển khai, evaluator kiểm tra ứng dụng và gửi phản hồi cho vòng xây dựng sau. [Anthropic: updated harness results](https://www.anthropic.com/engineering/harness-design-long-running-apps)
 
 | Agent và pha | Thời lượng | Chi phí |
 |---------------|----------|------|
@@ -137,12 +139,6 @@ Tháng 3 năm 2026, Anthropic công bố một thí nghiệm harness có hệ th
 
 Mỗi agent trong ba đó giữ vai trò riêng, và mỗi vai đều đóng góp rõ ràng vào khả năng quan sát:
 
-**Planner:** Nhận yêu cầu người dùng từ 1-4 câu rồi mở rộng thành product spec đầy đủ. Nó được nhắc "mạnh dạn về phạm vi" và "tập trung vào ngữ cảnh sản phẩm và thiết kế kỹ thuật cấp cao thay vì chi tiết triển khai". Lý do: nếu planner sớm chốt chi tiết kỹ thuật nhỏ mà sai, lỗi ấy sẽ lan xuống các bước sau. Cách tốt hơn là ràng buộc sản phẩm đầu ra, để agent tự tìm đường đi trong lúc thực thi.
-
-**Generator:** Triển khai từng tính năng, từng sprint. Trước mỗi sprint, nó thương lượng với evaluator một sprint contract định nghĩa "xong" nghĩa là gì cho khối tính năng đó. Rồi nó triển khai theo contract, tự đánh giá, và chuyển giao cho QA.
-
-**Evaluator:** Dùng Playwright MCP để tương tác với ứng dụng đang chạy như một người dùng thật, kiểm thử chức năng UI, API endpoint, và trạng thái cơ sở dữ liệu. Nó chấm mỗi sprint trên bốn chiều: độ sâu sản phẩm, chức năng, thiết kế trực quan, chất lượng code. Mỗi chiều có ngưỡng cứng, nếu chiều nào chưa đạt, sprint fail và generator nhận phản hồi chi tiết để sửa.
-
 Phản hồi mẫu từ QA vòng 1: "Đây là ứng dụng ấn tượng về mặt thị giác với tích hợp AI tốt, nhưng một số tính năng cốt lõi của DAW chỉ mang tính trình diễn, chưa có chiều sâu tương tác: clip không thể kéo/di chuyển, chưa có UI panel cho nhạc cụ (nút synth, pad trống), và chưa có trình chỉnh hiệu ứng trực quan (đường cong EQ, đồng hồ compressor)." Đây không phải edge case, mà là những tương tác cốt lõi làm nên một DAW dùng được. Phản hồi cụ thể, có bằng chứng, không phải "cảm giác không ổn".
 
 Evaluator không phải lúc nào cũng bén nhạy như vậy. Phiên bản đầu có thể phát hiện vấn đề hợp lý, rồi tự thuyết phục mình rằng vấn đề ấy không nghiêm trọng, cuối cùng duyệt. Cách sửa: đọc log của evaluator, tìm chỗ phán đoán của nó lệch khỏi phán đoán của người, rồi cập nhật prompt QA để xử lý đúng những điểm cụ thể đó. Sau vài vòng lặp phát triển thế này, điểm của evaluator trở nên đáng tin.
@@ -155,7 +151,7 @@ Evaluator không phải lúc nào cũng bén nhạy như vậy. Phiên bản đ�
 - **Cả hai lớp quan sát đều cần thiết.** Tín hiệu runtime giải thích "chuyện gì đã xảy ra", artifact quá trình giải thích "vì sao lại làm thế này".
 - **Sprint contract đẩy việc căn chỉnh lên đầu.** Chúng ngăn generator xây thứ mà evaluator sẽ lập tức từ chối vì lý do có thể dự đoán trước.
 - **Rubric chấm điểm làm đánh giá có thể tái lập.** Evaluator khác nhau cho điểm tương tự với cùng một đầu ra.
-- **Thiếu khả năng quan sát phí phạm 30-50% thời gian phiên cho khâu chẩn đoán trùng lặp.**
+- Ghi tiến độ và kết quả kiểm tra vào tệp quản lý phiên bản để phiên sau kiểm tra trạng thái. Nguồn mô tả cơ chế, không báo cáo phần trăm giảm thời gian khởi động.
 
 ## Đọc thêm
 

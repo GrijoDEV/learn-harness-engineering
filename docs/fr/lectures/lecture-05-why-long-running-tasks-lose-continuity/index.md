@@ -5,6 +5,8 @@
 
 # Leçon 05. Garder le contexte vivant entre les sessions
 
+> Conseil d’ingénierie : ces seuils sont des valeurs pédagogiques ajustables, pas des limites démontrées. Les tokens dépendent du tokenizer et du contenu, pas seulement des lignes.
+
 Vous demandez à Claude Code d'implémenter une fonctionnalité complète. Il tourne pendant 30 minutes, fait la majeure partie du travail, mais le contexte commence à manquer. Vous lancez une nouvelle session pour continuer — et découvrez qu'il ne se souvient pas des décisions prises la dernière fois, pourquoi l'option A a été choisie plutôt que l'option B, quels fichiers ont déjà été modifiés, ou dans quel état se trouvent les tests. Il passe 15 minutes à réexplorer le projet, et risque d'être en contradiction avec l'approche précédente.
 
 Imaginez que vous êtes un artisan qui oublie tout chaque matin en vous réveillant. Vous devriez vous refamiliariser avec l'ensemble du chantier — quel mur est à moitié construit, pourquoi des briques rouges ont été choisies plutôt que des bleues, où en sont les passages de plomberie. Pire, vous pourriez arracher une fenêtre qui a déjà été installée hier, simplement parce que vous ne vous souveniez pas que c'était fait.

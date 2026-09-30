@@ -70,7 +70,9 @@ Wenn ein Subsystem fehlt, ist das wie ein fehlender Funktionsbereich in der Küc
 
 **Wert von harness-Komponenten quantifizieren**: Verwenden Sie eine Ablation mit fester Modellkontrolle. Halten Sie das Modell fest, entfernen Sie Subsysteme einzeln und messen Sie, welche Entfernung den größten Leistungsabfall verursacht. Der größte Abfall zeigt die Komponente mit dem höchsten Grenzbeitrag in dieser Aufgabe; er identifiziert nicht automatisch den Engpass. Auch ein nahezu ausbleibender Abfall braucht Interpretation: Die Komponente kann redundant, schlecht entworfen oder durch diese Aufgabe schlicht nicht ausgelöst worden sein. Um Engpässe zu diagnostizieren, nutzen Sie zuerst Fehlerprotokolle und Attribution und verwenden Ablation nur als unterstützende Evidenz: War die Ursache eine unklare Aufgabe, zu wenig Kontext, eine nicht reproduzierbare Umgebung, fehlendes Verifikationsfeedback oder gebrochene Zustandsverwaltung?
 
-## Die wahre Geschichte eines Teams
+## Lehrbeispiel
+
+> Lehrbeispiel: Dieses Szenario und seine Zahlen dienen der Erklärung und sind keine Messwerte eines veröffentlichten Experiments.
 
 Ein Team verwendete GPT-4o für eine TypeScript + React Frontend-App (~20.000 Zeilen Code). Sie durchliefen vier Stufen — im Grunde rüsteten sie die Küche Stück für Stück aus:
 

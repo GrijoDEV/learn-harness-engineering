@@ -5,17 +5,30 @@
 
 # Aula 01. Modelos Fortes Não Significam Execução Confiável
 
-No final de 2025, os agentes de programação mais fortes no SWE-bench Verified alcançam aproximadamente uma taxa de sucesso entre 50% e 60%. À primeira vista, esse número parece razoável — mas ainda não comemore. Essas são tarefas cuidadosamente selecionadas, com descrições claras de problemas e testes prontos. Agora entregue ao agente os requisitos do dia a dia — especificações vagas, ausência de testes existentes, regras de negócio implícitas espalhadas pela base de código — e essa taxa cai ainda mais. Você delega uma tarefa cheio de confiança, o agente trabalha por 20 minutos e responde “tudo pronto”, mas ao olhar o código: ele adicionou a funcionalidade e quebrou os testes, corrigiu um bug e introduziu outros, e ainda nem era exatamente o que você pediu.
+Claude Sonnet 4.5 · 2025-09-29 · SWE-bench Verified
+
+| Score | Tasks | Trials | Scaffold |
+| --- | --- | --- | --- |
+| 77.2% | 500 | 10 | bash + string replacement |
+
+Resultados de produção não isolam uma causa. Pontuações valem para o modelo, scaffold, dados e condições de avaliação indicados, não toda tarefa real. [Anthropic: methodology](https://www.anthropic.com/news/claude-sonnet-4-5)
 
 Quando isso acontece, a primeira reação da maioria das pessoas é: “o modelo não é bom o suficiente — vou tentar um mais caro”. Antes de abrir a carteira, considere que talvez o problema não seja o modelo.
 
 ## Mesmo Cavalo, Destinos Diferentes
 
-A Anthropic realizou um experimento controlado que ilustra perfeitamente esse ponto. Mesmo prompt (“crie um editor de jogos retrô 2D”), mesmo modelo (Opus 4.5), duas execuções. Primeira execução: ambiente cru, sem suporte — 20 minutos, US$9, e as funcionalidades principais do jogo não funcionavam. Segunda execução: harness completo — arquitetura de três agentes com planejador, gerador e avaliador — 6 horas, US$200, e o jogo ficou totalmente jogável.
+> Mesmo modelo e prompt, mas diferentes orçamentos de tempo e custo. Não é um experimento de orçamento igual isolando um componente. A jogabilidade essencial funcionou, mas havia defeitos. [Anthropic](https://www.anthropic.com/engineering/harness-design-long-running-apps)
+
+Mesmo modelo e prompt, mas diferentes orçamentos de tempo e custo. Não é um experimento de orçamento igual isolando um componente. A jogabilidade essencial funcionou, mas havia defeitos. [Anthropic](https://www.anthropic.com/engineering/harness-design-long-running-apps)
+
+| Opus 4.5 | Duration | USD |
+| --- | --- | --- |
+| Solo | 20 min | 9 |
+| Full harness | 6 h | 200 |
 
 Eles não mudaram o modelo. Opus 4.5 continuava sendo Opus 4.5. O que mudou foi o equipamento.
 
-O artigo de Harness Engineering da OpenAI em 2025 foi ainda mais direto. Eles disseram que o Codex em um repositório com um bom harness deixa de ser “não confiável” e passa a ser “confiável”. Repare na escolha das palavras — não “um pouco melhor”, mas uma mudança qualitativa. Harness aqui significa **toda a infraestrutura de engenharia além dos pesos do modelo.**
+Resultados de produção não isolam uma causa. Pontuações valem para o modelo, scaffold, dados e condições de avaliação indicados, não toda tarefa real. [OpenAI: 2026-02-11](https://openai.com/index/harness-engineering/)
 
 ## Onde os Agentes Realmente Falham
 
@@ -25,13 +38,13 @@ Os modos de falha específicos se resumem basicamente a alguns pontos:
 - **Convenções implícitas não documentadas — o agente não tem como seguir.** Todo o seu time usa a nova sintaxe do SQLAlchemy 2.0, mas o agente gera código 1.x por padrão. Todos os endpoints da API devem utilizar OAuth 2.0, mas essa regra existe apenas na sua cabeça e em uma mensagem no Slack de três meses atrás. O agente não faz ideia disso — não é que ele não queira seguir a regra, ele literalmente nunca a viu.
 - **Configuração de ambiente incompleta — o agente desperdiça energia corrigindo o ambiente.** Setup de desenvolvimento incompleto, dependências ausentes, versões erradas de ferramentas — o agente gasta contexto precioso lidando com erros de `pip install` e conflitos de versão do Node em vez de fazer o trabalho real.
 - **Ausência de métodos de verificação — o agente considera concluído quando acha que terminou.** Sem testes, sem lint ou comandos de verificação nunca comunicados ao agente. O agente escreve o código, revisa superficialmente, acha que está tudo certo e declara conclusão. A Anthropic também observou um fenômeno interessante: quando os agentes percebem que o contexto está acabando, eles aceleram para terminar, pulam etapas de verificação e escolhem soluções simples em vez das melhores soluções. Eles chamam isso de “ansiedade de contexto”.
-- **Perda de estado entre sessões — toda nova sessão começa do zero.** Todas as descobertas da sessão anterior são perdidas. Cada nova sessão precisa redescobrir a estrutura do projeto e entender novamente a organização do código. Agentes sem estado persistente apresentam aumento significativo nas falhas em tarefas que ultrapassam 30 minutos.
+- **Perda de estado entre sessões — toda nova sessão começa do zero.** — Registre progresso e verificações em arquivos versionados para a próxima sessão inspecionar o estado. A fonte explica o mecanismo sem quantificar redução no tempo de início. [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 ## Terminologia Essencial
 
 Com os cenários acima em mente, estes conceitos deixam de ser apenas jargões:
 
-- **Capability Gap**: O enorme abismo entre o desempenho do modelo em benchmarks e o desempenho em tarefas reais. Uma taxa de sucesso de 50–60% no SWE-bench Verified significa que quase metade dos problemas reais continuam sem solução.
+- Resultados de produção não isolam uma causa. Pontuações valem para o modelo, scaffold, dados e condições de avaliação indicados, não toda tarefa real.
 - **Harness**: Tudo que está fora do modelo — instruções, ferramentas, ambiente, gerenciamento de estado e feedback de verificação. Se não são os pesos do modelo, então é harness. O que chamamos anteriormente de “equipamento”.
 - **Harness-Induced Failure**: O modelo possui capacidade suficiente, mas o ambiente de execução possui defeitos estruturais. O experimento controlado da Anthropic já demonstrou isso.
 - **Verification Gap**: A diferença entre a confiança do agente em sua resposta e a correção real. O agente diz “terminei” quando ainda não terminou — esse é o modo de falha mais comum.
@@ -60,15 +73,17 @@ A partir daí, construa um loop de diagnóstico. Não trate falhas como “o mod
 
 ## O Experimento do Milhão de Linhas
 
-Em 2025, três engenheiros da OpenAI iniciaram um experimento. As regras eram simples: eles não escreveriam código manualmente — apenas o Codex escreveria. Partindo de um repositório Git vazio, cinco meses depois o projeto continha aproximadamente um milhão de linhas de código. Lógica da aplicação, infraestrutura, ferramentas, documentação — tudo gerado por agentes. Os três engenheiros abriram um total de 1.500 PRs, média de 3,5 PRs por pessoa por dia.
+Resultados de produção não isolam uma causa. Pontuações valem para o modelo, scaffold, dados e condições de avaliação indicados, não toda tarefa real. [OpenAI: 2026-02-11](https://openai.com/index/harness-engineering/)
 
 O progresso inicial foi surpreendentemente lento. O Codex não era ruim — apenas não possuía ferramentas e estruturas suficientes para avançar em direção a objetivos de alto nível. Aos poucos, os engenheiros descobriram um padrão: quebrar grandes objetivos em pequenos blocos — design, código, revisão, testes — deixar o agente montar esses blocos individualmente e depois combiná-los em tarefas mais complexas. Sempre que algo dava errado, o problema quase nunca era “não estamos tentando o suficiente”. A pergunta correta era sempre: “o que o agente ainda não possui, e essa capacidade pode ser fornecida de maneira compreensível e executável?”
 
-Esse experimento comprova diretamente a tese central desta aula: **o mesmo modelo produz resultados fundamentalmente diferentes em um ambiente cru versus um ambiente com harness completo.** O modelo não mudou. O ambiente mudou.
+Resultados de produção não isolam uma causa. Pontuações valem para o modelo, scaffold, dados e condições de avaliação indicados, não toda tarefa real.
 
 > Fonte: [OpenAI: Engenharia de aproveitamento: alavancando o Codex em um mundo centrado em agentes.](https://openai.com/index/harness-engineering/)
 
-## Um Exemplo Mais Próximo da Realidade
+## Exemplo didático
+
+> Ilustração didática: o cenário e seus números são hipóteses explicativas, não medições de um experimento publicado.
 
 Um time utilizou Claude Sonnet para adicionar novos endpoints de API em uma aplicação web Python de médio porte (FastAPI + PostgreSQL + Redis, ~15 mil linhas de código).
 
@@ -93,6 +108,8 @@ Eles não mudaram o modelo. Mudaram o harness.
 - [HumanLayer: Skill Issue — Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
 - [SWE-bench Leaderboard](https://www.swebench.com/)
 - [Thoughtworks Technology Radar: Harness Engineering](https://www.thoughtworks.com/radar)
+
+- [Anthropic: Sonnet 4.5 SWE-bench methodology, 2025-09-29](https://www.anthropic.com/news/claude-sonnet-4-5)
 
 ## Exercícios
 

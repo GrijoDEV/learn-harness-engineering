@@ -247,7 +247,7 @@
       "key-terminology",
       "when-things-fail-fix-the-harness-first",
       "the-million-line-experiment",
-      "a-more-down-to-earth-example",
+      "illustrative-example",
       "key-takeaways",
       "further-reading",
       "exercises"
@@ -320,7 +320,7 @@
       "start-with-an-analogy",
       "core-concepts",
       "the-five-subsystem-harness-model",
-      "a-team-s-real-story",
+      "illustrative-example",
       "key-takeaways",
       "further-reading",
       "exercises"
@@ -669,7 +669,7 @@
       "what-happens-when-you-mix-them",
       "core-concepts",
       "how-to-do-initialization-right",
-      "real-world-example",
+      "illustrative-example",
       "key-takeaways",
       "further-reading",
       "exercises"
@@ -770,7 +770,7 @@
       "_2-define-explicit-completion-evidence-for-every-task",
       "_3-externalize-the-scope-surface",
       "_4-monitor-verified-completion-rate",
-      "real-world-case",
+      "illustrative-example",
       "key-takeaways",
       "further-reading",
       "exercises"
@@ -849,7 +849,7 @@
       "_2-let-the-harness-control-state-transitions",
       "_3-write-the-rules-in-claude-md",
       "_4-calibrate-granularity",
-      "real-world-case",
+      "illustrative-example",
       "key-takeaways",
       "further-reading",
       "exercises"
@@ -930,7 +930,7 @@
       "_2-build-a-three-layer-termination-validation",
       "_3-provide-actionable-error-feedback-to-the-agent",
       "_4-capture-runtime-signals",
-      "real-world-case",
+      "illustrative-example",
       "key-takeaways",
       "further-reading",
       "exercises"
@@ -1032,7 +1032,7 @@
       "_2-turn-architectural-rules-into-executable-checks",
       "_3-design-agent-oriented-error-messages",
       "_4-establish-a-review-feedback-promotion-process",
-      "real-world-case",
+      "illustrative-example",
       "key-takeaways",
       "further-reading",
       "exercises"
@@ -1125,7 +1125,7 @@
     "ids": [
       "lecture-11-making-the-agent-s-runtime-observable",
       "the-real-cost-of-missing-observability",
-      "a-real-claude-code-scenario",
+      "illustrative-example",
       "layered-observability",
       "core-concepts",
       "why-agents-can-t-solve-this-themselves",
@@ -1237,7 +1237,7 @@
       "_4-periodically-simplify-the-harness",
       "_5-cleanup-operations-must-be-idempotent",
       "_6-high-throughput-changes-the-merge-philosophy",
-      "real-world-case",
+      "illustrative-example",
       "key-takeaways",
       "further-reading",
       "exercises"

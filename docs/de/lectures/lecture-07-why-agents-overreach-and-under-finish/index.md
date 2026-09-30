@@ -5,6 +5,8 @@
 
 # Lektion 07. Klare Aufgabengrenzen für Agenten ziehen
 
+> Technische Richtwerte: Die Zahlen sind anpassbare Lehrannahmen, keine experimentell bestätigten Grenzen. Tokenzahlen hängen von Tokenizer und Inhalt ab, nicht allein von Zeilen.
+
 Sie sagen Claude Code, es soll „Benutzerauthentifizierung zu diesem Projekt hinzufügen", und es beginnt, das Datenbankschema zu ändern, Routen zu schreiben, Frontend-Komponenten zu bearbeiten und — während es gerade dabei ist — die Fehlerbehandlungs-Middleware zu refactoren. Zwei Stunden später überprüfen Sie: 12 Dateien geändert, 800 Zeilen neuer Code, und kein einziges Feature funktioniert End-to-End.
 
 Sich mehr auf den Teller laden, als man bewältigen kann — dieses Sprichwort gilt für KI-Agenten ganz besonders. Agenten werden mit einem Impuls geboren, „noch etwas Extra zu erledigen" — sie sehen verwandte Dinge und erledigen sie einfach nebenbei, wie jemand, der für eine Flasche Sojasauce in den Supermarkt geht und mit einem vollen Einkaufswagen herauskommt. Das Problem ist: Menschen, die zu viel kaufen, verschwenden nur Geld; Agenten, die zu viele Dinge gleichzeitig tun, bedeuten, dass keines davon richtig erledigt wird.
@@ -26,7 +28,7 @@ Claude Codes tatsächliches Verhalten ist aufschlussreich. Bitten Sie es, „Ben
 
 Sechs Schritte später ist jeder halb fertig. Keine End-to-End-Verifizierung, komplexe Kopplung zwischen dem halbfertigen Code, und die nächste Session, die alles aufarbeiten muss, wird völlig verloren sein. Wie jemand, der sechs Gerichte gleichzeitig kocht — jedes Gericht ist in der Pfanne, aber keines ist angerichtet. Sie alle verbrennen.
 
-Anthropics experimentelle Daten unterstützen dies direkt: Agenten mit einer „kleiner nächster Schritt"-Strategie (entspricht WIP=1) zeigen eine um 37% höhere Aufgaben-Abschlussrate als Agenten mit breiten Prompts. Noch interessanter: Die Anzahl der vom Agenten generierten Codezeilen ist schwach negativ korreliert mit dem tatsächlichen Feature-Abschluss — mehr Code geschrieben, weniger Features abgeschlossen. Sich mehr auf den Teller laden, als man bewältigen kann, datenbewiesen.
+[Anthropic: incremental feature work](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 ## WIP=1-Workflow
 
@@ -100,7 +102,9 @@ Verwenden Sie eine maschinenlesbare Datei (JSON oder Markdown), um alle Aufgaben
 
 Das harness sollte kontinuierlich VCR (Verified Completion Rate) = verifizierte Aufgaben / aktivierte Aufgaben verfolgen. Blockieren Sie neue Aufgabenaktivierungen, wenn VCR < 1.0.
 
-## Praxisbeispiel
+## Lehrbeispiel
+
+> Lehrbeispiel: Dieses Szenario und seine Zahlen dienen der Erklärung und sind keine Messwerte eines veröffentlichten Experiments.
 
 Ein REST-API-Projekt mit 8 Features, zwei Strategien im Vergleich:
 

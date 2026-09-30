@@ -5,6 +5,8 @@
 
 # Aula 10. Apenas uma Execução Completa do Pipeline Conta como Verificação Real
 
+> Orientação de engenharia: os limites numéricos são valores didáticos ajustáveis, não fronteiras demonstradas. Tokens dependem do tokenizador e do conteúdo, não apenas das linhas.
+
 Você pede ao agente para adicionar uma funcionalidade de exportação de arquivos a uma aplicação Electron. Ele escreve o componente do renderer, o script de preload e a lógica da camada de serviço. Os testes unitários de todos os componentes passam. O agente diz "concluído". Você realmente clica no botão de exportação — o formato do caminho do arquivo está incorreto, a barra de progresso não responde e a exportação de arquivos grandes causa vazamento de memória. Cinco defeitos nas fronteiras entre componentes, e os testes unitários não detectaram nenhum deles.
 
 Cada parte parece "correta" por si só, mas os problemas surgem no momento em que tudo é conectado. A Pirâmide de Testes do Google nos diz que uma ampla base de testes unitários é essencial, mas parar por aí significa que você deixará de identificar sistematicamente problemas de interação entre componentes. Para agentes de programação com IA, esse problema é ainda pior, porque eles tendem a executar apenas os testes mais rápidos e então declarar a tarefa concluída. **Somente testes end-to-end podem comprovar a ausência de defeitos em nível de sistema.**
@@ -114,7 +116,9 @@ CORREÇÃO: Mova as operações de arquivo para src/preload/file-ops.ts e faça 
 
 Sempre que você descobrir uma nova categoria de erro cometido por agentes durante a revisão de código, transforme-a em uma verificação automatizada. Um mês depois, seu harness estará muito mais robusto do que estava no início do mês.
 
-## Caso Real
+## Exemplo didático
+
+> Ilustração didática: o cenário e seus números são hipóteses explicativas, não medições de um experimento publicado.
 
 **Tarefa**: Implementar uma funcionalidade de exportação de arquivos em uma aplicação Electron. Envolve a interface do processo renderer, um proxy de sistema de arquivos no script de preload e a camada de serviço responsável pela transformação dos dados.
 

@@ -5,6 +5,8 @@
 
 # Ders 10. Uçtan uca test sonuçları neden değiştirir
 
+> Mühendislik önerisi: sayısal eşikler ayarlanabilir öğretim değerleridir, deneysel sınırlar değildir. Token sayısı yalnız satıra değil tokenizer ve içeriğe bağlıdır.
+
 Bir Electron uygulamasına dosya dışa aktarma özelliği eklemesini ajandan istiyorsunuz. Render süreci bileşenini, preload betiğini ve servis katmanı mantığını yazıyor. Her bileşenin birim testleri mükemmel şekilde geçiyor. Ajan "tamam" diyor. Aslında dışa aktarma düğmesine tıkladığınızda — dosya yolu formatı yanlış, ilerleme çubuğu güncellenmiyor ve büyük dosyaları dışa aktarmak bellek sızıntısına neden oluyor. Beş bileşen sınır kusuru ve birim testleri bir tane bile yakalamadı.
 
 Bu bir koro provası gibi — her ses parçası tek başına söylendiğinde mükemmel duyulur ama birlikte söylediklerinde, sopranolar baslardan yarım vuruş daha hızlı ve eşlik ana melodiyle yarım ton uzakta. Her parça kendi başına "doğru" ama bütün akortsuz.
@@ -116,7 +118,9 @@ FIX: Dosya işlemlerini src/preload/file-ops.ts'e taşıyın ve window.api.readF
 
 Kod incelemesi sırasında yeni bir ajan hatası türü bulunduğunda, onu otomatik bir kontrole dönüştürün. Bir ay sonra harness'ınız ayın başındakinden önemli ölçüde daha güçlü olacaktır. Bir koro için prova notları gibi — her provada bulunan sorunları kaydederek bir sonrakinden önce kontrol edilebilirler. Zamanla yaygın hatalar azalır ve müzik daha uyumlu hâle gelir.
 
-## Gerçek dünya örneği
+## Öğretim örneği
+
+> Öğretim örneği: senaryo ve sayılar açıklama için varsayılmıştır, yayımlanmış deney ölçümleri değildir.
 
 **Görev**: Bir Electron uygulamasında dosya dışa aktarma özelliği uygulayın. Render süreci UI'sini, preload betiği dosya sistemi proxy'sini ve servis katmanı veri dönüşümünü içerir.
 

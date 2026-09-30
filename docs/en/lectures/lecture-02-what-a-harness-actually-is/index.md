@@ -70,7 +70,9 @@ Missing any one of the five subsystems means an incomplete harness, and the agen
 
 **Quantifying harness component value**: Use a "controlled variable exclusion test." Keep the model fixed, remove the five subsystems one at a time, and see which subsystem's removal causes the biggest performance drop. The component with the largest drop has the highest marginal contribution for the current task and is worth prioritizing. Whether to strengthen it depends on failure attribution, not just the size of the drop. Components with near-zero impact should not be dismissed outright: they may be redundant, poorly designed, or simply not exercised by the current task. This experiment answers "which component is most valuable right now" — it cannot, by itself, prove "where the bottleneck is." To truly locate a bottleneck, you must first examine failure records and attributions: was the task unclear, was context insufficient, was the environment unreproducible, was verification feedback missing, or was state management broken? Component ablation results can only serve as supporting evidence.
 
-## A Team's Real Story
+## Illustrative Example
+
+> Teaching illustration: this scenario and its numerical values are assumed for explanation, not observations from a published experiment.
 
 A team used GPT-4o to develop a TypeScript + React frontend application (~20,000 lines of code). They went through four stages, which were essentially adding harness components one at a time:
 

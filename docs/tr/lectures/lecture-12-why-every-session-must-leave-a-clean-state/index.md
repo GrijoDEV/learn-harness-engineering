@@ -5,6 +5,8 @@
 
 # Ders 12. Her oturum neden temiz bir durumla bitmeli
 
+> Mühendislik önerisi: sayısal eşikler ayarlanabilir öğretim değerleridir, deneysel sınırlar değildir. Token sayısı yalnız satıra değil tokenizer ve içeriğe bağlıdır.
+
 ## Bu ders hangi sorunu çözer?
 
 Ajanınız tüm öğleden sonra çalışıyor, 20 dosyayı değiştiriyor, kodu commit ediyor, oturum sona eriyor. Sonraki ajan oturumu başlıyor ve hemen şunları keşfediyor: yapı bozuk, testler kırmızı, geçici hata ayıklama dosyaları her yerde, özellik listesi güncellenmemiş ve ilerleme tamamen belirsiz. Yeni oturum ilk 30 dakikasını sadece "geçen oturum aslında ne yaptı" çözmek için harcıyor.
@@ -54,6 +56,8 @@ flowchart LR
 
 Lehman'ın yazılım evrim yasaları bize şunu söylüyor: sürekli değişime uğrayan sistemler, aktif olarak yönetilmedikçe kaçınılmaz olarak karmaşıklıkta artar. Bu özellikle AI kod yazma ajanları için doğrudur — her oturum değişiklikler getirir ve çıkışta temizlik olmadan teknik borç katlanarak birikir.
 
+> Öğretim örneği: senaryo ve sayılar açıklama için varsayılmıştır, yayımlanmış deney ölçümleri değildir.
+
 Gerçek veriler söyleyicidir. Temizleme stratejisi olmadan ajanlarla 12 hafta geliştirilen bir proje:
 
 - Hafta 1: Yapı geçme oranı %100, test geçme oranı %100, yeni oturum başlatma 5 dk
@@ -66,8 +70,6 @@ Aynı proje bir temizleme stratejisiyle:
 - Hafta 1: %100, %100, 5 dk
 - Hafta 12: %97, %95, 9 dk
 
-12 hafta sonra: yapı geçme oranı 29 puan, yeni oturum başlatma süresi %85 farklı. Bu teorik değil — gözlemlenen bir farktır.
-
 ### Temiz durumun beş boyutu
 
 Temiz durum yalnızca "kod derler" değildir. Birlikte değerlendirilen beş boyuttur:
@@ -76,7 +78,7 @@ Temiz durum yalnızca "kod derler" değildir. Birlikte değerlendirilen beş boy
 
 **Test boyutu**: Tüm testler geçer mi? Oturum öncesi var olan testler dahil — oturum mevcut işlevselliği bozmamaktan sorumludur. Ve "benim makinemde çalışıyor" yerine CI'de doğrulanmalıdır.
 
-**İlerleme boyutu**: Mevcut ilerleme makine tarafından okunabilir bir artefakta kaydedilmiş mi? Tamamlanan alt görevler geçme kriterleriyle, devam eden ancak tamamlanmayan alt görevler mevcut durumla, henüz başlamamış alt görevler. İyi ilerleme kayıtları oturum başlatma tanı süresini %60-80 azaltır.
+İlerleme ve doğrulama sonuçlarını sürümlenen dosyalara kaydedin; sonraki oturum durumu inceleyebilsin. Kaynak mekanizmayı anlatır, başlangıç süresinde yüzde azalma vermez. [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 **Artefakt boyutu**: Bayatlamış veya belirsiz geçici artefaktlar var mı? Hata ayıklama günlükleri, geçici dosyalar, yorum satırı yapılmış kod, TODO işaretleri — bunların hepsi bir sonraki oturum için bilişsel yükü artırır.
 
@@ -152,15 +154,15 @@ git checkout -- .env.local  # Bilinen duruma geri yükle
 npm run test  # Temizliğin bir şey bozmadığını doğrula
 ```
 
-## Gerçek dünya örneği
+## Öğretim örneği
+
+> Öğretim örneği: senaryo ve sayılar açıklama için varsayılmıştır, yayımlanmış deney ölçümleri değildir.
 
 12 hafta boyunca ajanlarla geliştirilen bir Electron uygulaması, iki yaklaşımın karşılaştırması:
 
 **Temizleme stratejisi olmadan** (kontrol grubu): Hafta 12, yapı geçme oranı %68, test geçme oranı %61, yeni oturum başlatma 60+ dk, bayatlamış artefaktlar 103.
 
 **Temizleme stratejisiyle** (deneysel grup): Her oturum sonunda tam temiz durum kontrolü + haftalık temizleme döngüsü. Hafta 12, yapı geçme oranı %97, test geçme oranı %95, yeni oturum başlatma 9 dk, bayatlamış artefaktlar 11.
-
-12 haftaya kadar, deneysel grubun yapı geçme oranı 29 puan, test geçme oranı 34 puan daha yüksek ve yeni oturum başlatma süresi %85 daha düşüktür.
 
 ## Önemli çıkarımlar
 

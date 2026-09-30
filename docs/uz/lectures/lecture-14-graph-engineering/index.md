@@ -261,7 +261,7 @@ Avval chegarani aniq belgilaylik: **Graph Engineering — 2026-yil 18-iyuldan ke
 
 **Kontsepsiya eʼlonidan keyin paydo boʻlganlar**
 
-- [GraphArc](https://github.com/CodeGraphContext/grapharc) (2026-08-02): oʻzini "Graph Engineeringʼning birinchi real vaqt implementatsiyasi" deb ataydi. U agent bajarilishini logʼlarga koʻmilgan traceʼdan **interaktiv real vaqt orkestratsiya grafigiga** aylantiradi — har bir agent, har bir bogʻliqlik, har bir qaror nuqtasi chiziladi, bajarilishdan oldin butun grafik vizualizatsiya qilinadi, siz tasdiqlaganingizdan (hatto telefonda koʻrib) keyin ruxsat beriladi. Muallifning tajribasi — 4000+ ishlab chiquvchi uchun grafik vositalari yaratish, yoʻnalish — "kuzatiladigan, tuzatiladigan, muhandislashtiriladigan". Juda yangi, funksiyalari hali erta bosqichda.
+- [GraphArc](https://github.com/CodeGraphContext/grapharc)
 
 **Kontsepsiya eʼlonidan oldin mavjud boʻlganlar (ular Graph Engineering deb atalmaydi, lekin siz qurishda aynan ularni ishlatasiz)**
 

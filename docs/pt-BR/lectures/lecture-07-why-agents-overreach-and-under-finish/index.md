@@ -5,6 +5,8 @@
 
 # Aula 07. Defina Limites Claros de Tarefa para os Agentes
 
+> Orientação de engenharia: os limites numéricos são valores didáticos ajustáveis, não fronteiras demonstradas. Tokens dependem do tokenizador e do conteúdo, não apenas das linhas.
+
 Você pede ao Claude Code para "adicionar autenticação de usuários a este projeto", e ele começa a modificar o esquema do banco de dados, criar rotas, alterar componentes do frontend e — já que está mexendo nisso — refatorar também o middleware de tratamento de erros. Duas horas depois você verifica o resultado: 12 arquivos modificados, 800 linhas de código novas e nem uma única funcionalidade funcionando de ponta a ponta.
 
 Os agentes nascem com um impulso de "fazer só mais um pouquinho" — eles identificam elementos relacionados e simplesmente resolvem tudo no mesmo fluxo. O problema é que tentar fazer muitas coisas ao mesmo tempo praticamente garante que nenhuma delas será bem concluída.
@@ -26,7 +28,7 @@ O comportamento real do Claude Code é bastante revelador. Peça para ele "adici
 
 Seis etapas depois, todas estão pela metade. Não existe verificação end-to-end, há um acoplamento complexo entre partes incompletas do código e a próxima sessão que tentar continuar o trabalho ficará completamente perdida.
 
-Os dados experimentais da Anthropic corroboram diretamente esse comportamento: agentes que utilizam uma estratégia de "próximo pequeno passo" (*small next step*), equivalente a WIP=1, apresentam uma taxa de conclusão de tarefas 37% maior do que agentes que recebem prompts amplos. Mais interessante ainda: o número de linhas de código geradas pelos agentes possui uma correlação fracamente negativa com a conclusão efetiva de funcionalidades — quanto mais código é escrito, menos funcionalidades são concluídas. Uma demonstração baseada em dados de que assumir mais trabalho do que se consegue concluir é contraproducente.
+[Anthropic: incremental feature work](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 ## Fluxo de Trabalho WIP=1
 
@@ -103,7 +105,9 @@ Utilize um arquivo legível por máquina (JSON ou Markdown) para registrar o est
 
 O *harness* deve acompanhar continuamente a VCR (*Verified Completion Rate*) = tarefas verificadas / tarefas ativadas. Bloqueie a ativação de novas tarefas quando VCR < 1.0.
 
-## Caso do Mundo Real
+## Exemplo didático
+
+> Ilustração didática: o cenário e seus números são hipóteses explicativas, não medições de um experimento publicado.
 
 Projeto de API REST com 8 funcionalidades, comparando duas estratégias:
 

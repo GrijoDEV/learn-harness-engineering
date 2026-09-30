@@ -9,17 +9,30 @@ Du kennst dich in der KI-Welt gut aus: Claude-Pro-Abo, GPT-4o-API-Key, SWE-bench
 
 Dein erster Impuls? "Dieses Modell ist nicht gut genug. Zeit für ein Upgrade." Warte kurz. Bevor du zur Kreditkarte greifst, solltest du in Betracht ziehen, dass das Problem vielleicht gar nicht das Modell ist.
 
-Schauen wir auf ein paar Zahlen. Ende 2025 erreichen die stärksten Coding-Agenten auf SWE-bench Verified ungefähr 50-60%. Und das bei sorgfältig ausgewählten Aufgaben mit klaren Issue-Beschreibungen und vorhandenen Tests. Übertrage das auf deine tägliche Entwicklungsumgebung - vage Anforderungen, keine vorhandenen Tests, überall verstreute implizite Geschäftsregeln - und diese Zahl sinkt weiter.
+Claude Sonnet 4.5 · 2025-09-29 · SWE-bench Verified
+
+| Score | Tasks | Trials | Scaffold |
+| --- | --- | --- | --- |
+| 77.2% | 500 | 10 | bash + string replacement |
+
+Produktionsberichte isolieren keinen einzelnen kausalen Beitrag. Benchmarkwerte gelten für Modell, Scaffold, Datensatz und Auswertung, nicht für jede Produktionsaufgabe. [Anthropic: methodology](https://www.anthropic.com/news/claude-sonnet-4-5)
 
 Hinter diesen Zahlen steckt aber eine kontraintuitive Wahrheit.
 
 ## Gleiches Pferd, anderes Ergebnis
 
-Anthropic führte ein kontrolliertes Experiment durch. Gleicher Prompt ("baue einen 2D-Retro-Game-Maker"), gleiches Modell (Opus 4.5). Erster Lauf: nackt, ohne Unterstützung - 20 Minuten, 9 Dollar, die Kernfunktionen des Spiels funktionierten überhaupt nicht. Zweiter Lauf: vollständiger Harness (Planner + Generator + Evaluator als Drei-Agenten-Architektur) - 6 Stunden, 200 Dollar, das Spiel war spielbar.
+> Gleiches Modell und gleicher Prompt, aber unterschiedliche Laufzeit- und Kostenbudgets. Kein Experiment mit gleichem Budget zur Isolation eines einzelnen Bestandteils. Das Spiel funktionierte im Kern, hatte aber weiterhin Fehler. [Anthropic](https://www.anthropic.com/engineering/harness-design-long-running-apps)
+
+Gleiches Modell und gleicher Prompt, aber unterschiedliche Laufzeit- und Kostenbudgets. Kein Experiment mit gleichem Budget zur Isolation eines einzelnen Bestandteils. Das Spiel funktionierte im Kern, hatte aber weiterhin Fehler. [Anthropic](https://www.anthropic.com/engineering/harness-design-long-running-apps)
+
+| Opus 4.5 | Duration | USD |
+| --- | --- | --- |
+| Solo | 20 min | 9 |
+| Full harness | 6 h | 200 |
 
 Sie änderten nicht das Modell. Opus 4.5 blieb Opus 4.5. Was sich änderte, war das Zaumzeug.
 
-OpenAIs Artikel zu Harness Engineering aus dem Jahr 2025 formuliert es direkt: Codex wechselt in einem gut geharnessten Repository von "unzuverlässig" zu "zuverlässig". Achte auf die Wortwahl - nicht "ein bisschen besser", sondern ein qualitativer Sprung. Wie bei einem Vollblutpferd: Du kannst ohne passendes Zaumzeug reiten, aber du kommst nicht weit, nicht schnell, und ein Sturz ist keine Überraschung. Der Harness ist dieses gesamte Zaumzeug - **alles in der Engineering-Infrastruktur außerhalb der Modellgewichte.**
+Produktionsberichte isolieren keinen einzelnen kausalen Beitrag. Benchmarkwerte gelten für Modell, Scaffold, Datensatz und Auswertung, nicht für jede Produktionsaufgabe. [OpenAI: 2026-02-11](https://openai.com/index/harness-engineering/)
 
 ## Wo Agenten tatsächlich stecken bleiben
 
@@ -39,7 +52,7 @@ Lange Aufgaben über mehrere Sitzungen sind noch schlimmer: Alle Erkenntnisse au
 
 Mit diesen Szenarien im Hinterkopf sind die folgenden Begriffe kein bloßer Jargon mehr:
 
-- **Capability Gap**: Die große Lücke zwischen Modellleistung auf Benchmarks und Leistung bei realen Aufgaben. Eine Erfolgsrate von 50-60% auf SWE-bench Verified bedeutet, dass fast die Hälfte realer Issues nicht gelöst wird.
+- Produktionsberichte isolieren keinen einzelnen kausalen Beitrag. Benchmarkwerte gelten für Modell, Scaffold, Datensatz und Auswertung, nicht für jede Produktionsaufgabe.
 - **Harness**: Alles außerhalb des Modells - Anweisungen, Tools, Umgebung, Zustandsverwaltung, Verifikationsfeedback. Wenn es keine Modellgewichte sind, gehört es zum Harness. Das ist das "Zaumzeug", von dem wir gesprochen haben.
 - **Harness-Induced Failure**: Das Modell hat grundsätzlich genug Fähigkeit, aber die Ausführungsumgebung hat strukturelle Defekte. Anthropics kontrolliertes Experiment hat genau das gezeigt.
 - **Verification Gap**: Die Lücke zwischen dem Vertrauen des Agenten in sein Ergebnis und der tatsächlichen Korrektheit. Der Agent sagt "ich bin fertig", obwohl er nicht fertig ist - der häufigste Fehlermodus.
@@ -72,17 +85,19 @@ Completion criteria:
 
 ## Das Millionen-Zeilen-Experiment
 
-OpenAI führte 2025 ein aggressives Experiment durch: Codex sollte aus einem leeren Git-Repository ein vollständiges internes Produkt bauen. Fünf Monate später hatte das Repository ungefähr eine Million Zeilen Code - Anwendungslogik, Infrastruktur, Tooling, Dokumentation, interne Entwicklerwerkzeuge - alles von Agenten erzeugt. Drei Engineers steuerten Codex und öffneten sowie mergten etwa 1.500 PRs. Im Schnitt 3,5 PRs pro Person und Tag.
+Produktionsberichte isolieren keinen einzelnen kausalen Beitrag. Benchmarkwerte gelten für Modell, Scaffold, Datensatz und Auswertung, nicht für jede Produktionsaufgabe. [OpenAI: 2026-02-11](https://openai.com/index/harness-engineering/)
 
-Die zentrale Einschränkung: **Menschen schreiben nie direkt Code.** Das war kein Trick, sondern sollte das Team zwingen herauszufinden, was sich ändert, wenn die Hauptaufgabe des Engineers nicht mehr Code schreiben ist, sondern Umgebungen zu entwerfen, Absichten präzise auszudrücken und Feedbackschleifen zu bauen.
+Produktionsberichte isolieren keinen einzelnen kausalen Beitrag. Benchmarkwerte gelten für Modell, Scaffold, Datensatz und Auswertung, nicht für jede Produktionsaufgabe.
 
 Der frühe Fortschritt war langsamer als erwartet. Nicht weil Codex unfähig war, sondern weil die Umgebung nicht vollständig genug war - dem Agenten fehlten notwendige Werkzeuge, Abstraktionen und interne Strukturen, um übergeordnete Ziele voranzubringen. Die Arbeit der Engineers wurde: große Ziele in kleine Bausteine zerlegen (Design, Code, Review, Test), den Agenten diese zusammensetzen lassen und diese Bausteine dann nutzen, um komplexere Aufgaben freizuschalten. Wenn etwas scheiterte, lautete die Lösung fast nie "streng dich mehr an", sondern "welche Fähigkeit fehlt dem Agenten, und wie machen wir sie verständlich und ausführbar?"
 
-Dieses Experiment belegt direkt die Kernaussage dieser Lektion: **Dasselbe Modell erzeugt in einer nackten Umgebung grundlegend andere Ergebnisse als in einer Umgebung mit vollständigem Harness.** Das Modell änderte sich nicht. Die Umgebung änderte sich.
+Produktionsberichte isolieren keinen einzelnen kausalen Beitrag. Benchmarkwerte gelten für Modell, Scaffold, Datensatz und Auswertung, nicht für jede Produktionsaufgabe.
 
 > Quelle: [OpenAI: Harness engineering: leveraging Codex in an agent-first world](https://openai.com/index/harness-engineering/)
 
-## Ein bodenständigeres Beispiel
+## Lehrbeispiel
+
+> Lehrbeispiel: Dieses Szenario und seine Zahlen dienen der Erklärung und sind keine Messwerte eines veröffentlichten Experiments.
 
 Ein Team nutzte Claude Sonnet, um einer mittelgroßen Python-Web-App (FastAPI + PostgreSQL + Redis, ca. 15.000 Codezeilen) einen neuen API-Endpunkt hinzuzufügen.
 
@@ -107,6 +122,8 @@ Sie änderten nicht das Modell. Sie änderten den Harness.
 - [HumanLayer: Skill Issue — Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
 - [SWE-bench Leaderboard](https://www.swebench.com/)
 - [Thoughtworks Technology Radar: Harness Engineering](https://www.thoughtworks.com/radar)
+
+- [Anthropic: Sonnet 4.5 SWE-bench methodology, 2025-09-29](https://www.anthropic.com/news/claude-sonnet-4-5)
 
 ## Übungen
 

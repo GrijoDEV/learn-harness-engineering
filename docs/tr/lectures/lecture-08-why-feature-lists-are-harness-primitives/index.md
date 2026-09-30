@@ -5,6 +5,8 @@
 
 # Ders 08. Özellik listeleri neden harness'ın temel yapı taşı
 
+> Mühendislik önerisi: sayısal eşikler ayarlanabilir öğretim değerleridir, deneysel sınırlar değildir. Token sayısı yalnız satıra değil tokenizer ve içeriğe bağlıdır.
+
 Bir ajandan bir e-ticaret sitesi inşa etmesini istiyorsunuz. Bitirdikten sonra size "tamam" diyor. Koda bakıyorsunuz — kullanıcı kimlik doğrulaması çalışıyor ama alışveriş sepetindeki ödeme düğmesi hiçbir şey yapmıyor ve ödeme akışı hiç bağlanmamış. Sorun: ona "tamam"ın ne anlama geldiğini söylemediniz, bu yüzden kendi standardını kullandı — "çok kod yazdım ve oldukça eksiksiz görünüyor."
 
 Özellik listeleri, birçok insanın gözünde sadece bir not — unutmamak için bir şeyleri yazıp sonra bir kenara atın. Ancak harness dünyasında bir özellik listesi insanlar için bir not değildir — tüm harness'ın omurgasıdır. Zamanlayıcı görevleri seçmek için ona güvenir, doğrulayıcı tamamlanmaya karar vermek için ona güvenir, devir raportörü özetleri oluşturmak için ona güvenir. Omurgayı kırın, tüm beden felç olur.
@@ -22,7 +24,7 @@ Kullanıcı kimlik doğrulamasını yaptım, alışveriş sepeti çoğunlukla ta
 ```
 Yeni bir ajan oturumu bu nottan şu sorulara cevap verebilir mi? "Çoğunlukla tamam" ne demek? Sepet hangi testleri geçti? Ödemeleri ne engelliyor? Hepsinin cevabı "kimse bilmiyor." Doktorunuza "midem ağrıyor, son zamanlarda iyiydi" demek gibi — hangi ilacı yazabilirler?
 
-Sonuç: yeni oturum proje durumunu çıkarmak için 20 dakika harcar ve tamamlanmış özellikleri yeniden uygulayabilir. Anthropic'in mühendislik verileri iyi ilerleme kayıtlarının oturum başlatma tanı süresini %60-80 azalttığını gösteriyor.
+İlerleme ve doğrulama sonuçlarını sürümlenen dosyalara kaydedin; sonraki oturum durumu inceleyebilsin. Kaynak mekanizmayı anlatır, başlangıç süresinde yüzde azalma vermez. [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 ## Özellik durum makinesi
 
@@ -103,15 +105,15 @@ Ajan bir özelliğin durumunu doğrudan `passing` olarak değiştiremez. Yalnız
 
 Her özellik öğesi "bir oturumda tamamlanabilir" olacak şekilde kapsamlandırılmalıdır. Çok geniş olursa bitmez; çok dar olursa yönetim yükü büyür. "Kullanıcı sepete öğe ekleyebilir" iyi bir ayrıntı düzeyidir. "Alışveriş sepetini uygula" çok geniştir. "Cart modelinde isim alanını oluştur" çok dardır. Bir bifteği kesmek gibi — bütün parça değil, kıyma da değil.
 
-## Gerçek dünya örneği
+## Öğretim örneği
+
+> Öğretim örneği: senaryo ve sayılar açıklama için varsayılmıştır, yayımlanmış deney ölçümleri değildir.
 
 10 özellikli bir e-ticaret platformu. İki takip yaklaşımı karşılaştırıldı:
 
 **Not modu**: Ajan yapılandırılmamış notlar kullanır. 3 oturumdan sonra notlar "kullanıcı kimlik doğrulaması ve ürün listesini yaptım, alışveriş sepeti çoğunlukla tamam ama hataları var, ödemeler başlamadı" hâline gelir. Yeni oturumun durumu çıkarması için 20 dakika gerekir, sonunda tamamlanmış özellikleri yeniden uygular. Alışveriş listenizin "süt, ekmek ve o şey" demesi gibi — markette ne alacağınızı hâlâ bilmezsiniz.
 
 **Omurga modu**: Her özelliğin net bir durumu ve doğrulama komutu vardır. Yeni oturum özellik listesini okur ve 3 dakika içinde bilir: F01-F05 `passing`, F06 `active`, F07-F10 `not_started`. Doğrudan F06'dan devam eder, sıfır yeniden çalışma.
-
-Nicel sonuç: yapılandırılmış özellik listeleri kullanan projeler serbest formatlı takipten %45 daha yüksek özellik tamamlanma oranı gösterir, sıfır mükerrer uygulama ile.
 
 ## Önemli çıkarımlar
 

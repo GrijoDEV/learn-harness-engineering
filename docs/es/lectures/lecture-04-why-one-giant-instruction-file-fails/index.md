@@ -5,6 +5,8 @@
 
 # Lección 04. Divide las instrucciones entre archivos
 
+> Guía de ingeniería: los umbrales son valores didácticos ajustables, no límites demostrados. Los tokens dependen del tokenizador y del contenido, no solo de las líneas.
+
 Te tomaste en serio la ingeniería de harness. Creaste un `AGENTS.md` y metiste en él todas las reglas, restricciones y lecciones aprendidas que se te ocurrieron. Un mes después el archivo tenía 300 líneas; dos meses después, 450; tres meses después, 600. Entonces notas que el rendimiento del agente está empeorando: para corregir un bug simple, consume mucho contexto procesando instrucciones de despliegue irrelevantes; una restricción de seguridad crítica enterrada en la línea 300 se ignora por completo; tres reglas contradictorias de estilo hacen que el agente elija una al azar cada vez.
 
 Esta es la trampa del "archivo gigante de instrucciones". Es como sobrecargar una maleta: todo parece útil, así que lo metes hasta que la cremallera está a punto de reventar. Para encontrar ropa interior de cambio tienes que vaciar toda la bolsa. Cargas una maleta llena, pero en realidad usas quizá un tercio de lo que hay dentro.

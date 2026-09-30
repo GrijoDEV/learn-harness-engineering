@@ -5,6 +5,8 @@
 
 # Leçon 03. Faire du dépôt la source unique de vérité
 
+> Conseil d’ingénierie : ces seuils sont des valeurs pédagogiques ajustables, pas des limites démontrées. Les tokens dépendent du tokenizer et du contenu, pas seulement des lignes.
+
 Les décisions d'architecture de votre équipe sont dispersées entre Confluence, Slack, Jira et la tête de quelques ingénieurs seniors. Pour les humains, cela fonctionne tout juste : vous pouvez demander à un collègue, chercher dans l'historique du chat, fouiller la documentation. En dernier recours, vous pouvez coincer quelqu'un en salle de pause. Mais pour un agent IA, l'information qui n'est pas dans le dépôt n'existe tout simplement pas.
 
 Ce n'est pas une exagération. Pensez à ce que sont réellement les entrées d'un agent : prompts système et descriptions de tâche, contenu des fichiers du dépôt, sorties d'outils. C'est tout. Votre historique Slack, vos tickets Jira, vos pages Confluence, et cette décision d'architecture discutée autour d'un café un vendredi après-midi : l'agent ne voit rien de tout cela. Il ne peut pas "aller demander à quelqu'un" ni "chercher dans l'historique du chat". C'est un ingénieur enfermé dans le dépôt ; de tout ce qui est dehors, il ne sait rien.

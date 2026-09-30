@@ -69,7 +69,9 @@ A ausência de qualquer um dos cinco subsistemas significa um harness incompleto
 
 **Quantificando o valor dos componentes do harness**: Utilize um “teste de exclusão com variável controlada”. Mantenha o modelo fixo, remova os cinco subsistemas um de cada vez e observe qual remoção causa a maior queda de desempenho. O componente cuja remoção gera a maior queda possui a maior contribuição marginal para a tarefa atual e vale priorizar. Decidir se ele deve ser fortalecido depende da atribuição das falhas, não apenas do tamanho da queda. Componentes com impacto próximo de zero não devem ser descartados imediatamente: eles podem ser redundantes, mal projetados ou simplesmente não exercitados pela tarefa atual. Esse experimento responde “qual componente é mais valioso agora” — mas, sozinho, não consegue provar “onde está o gargalo”. Para realmente localizar um gargalo, primeiro é necessário examinar registros e atribuições de falha: a tarefa estava mal definida? O contexto era insuficiente? O ambiente não era reproduzível? Faltava feedback de verificação? O gerenciamento de estado estava quebrado? Resultados de ablação de componentes servem apenas como evidência complementar.
 
-## A História Real de um Time
+## Exemplo didático
+
+> Ilustração didática: o cenário e seus números são hipóteses explicativas, não medições de um experimento publicado.
 
 Um time utilizou o GPT-4o para desenvolver uma aplicação frontend em TypeScript + React (~20.000 linhas de código). Eles passaram por quatro etapas, que basicamente consistiram em adicionar componentes de harness um de cada vez:
 

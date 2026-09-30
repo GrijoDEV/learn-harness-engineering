@@ -9,17 +9,30 @@ Kendinizi yapay zeka dünyasında tecrübeli sayıyorsunuz — Claude Pro abonel
 
 İlk içgüdünüz nedir? "Bu model yeterli değil. Yükseltme zamanı." Bir dakika durun. Cüzdanınıza uzanmadan önce, sorunun model olmama ihtimalini de düşünün.
 
-Birkaç sayıya bakalım. 2025'in sonlarında SWE-bench Verified üzerindeki en güçlü kod yazma ajanları yaklaşık %50-60'a ulaşıyor. Üstelik bu, net açıklamaları ve mevcut test senaryoları olan, özenle seçilmiş görevlerde. Günlük geliştirme ortamınıza geçin — belirsiz gereksinimler, mevcut testin olmaması, her yere dağılmış örtük iş kuralları — ve bu sayı yalnızca düşer.
+Claude Sonnet 4.5 · 2025-09-29 · SWE-bench Verified
+
+| Score | Tasks | Trials | Scaffold |
+| --- | --- | --- | --- |
+| 77.2% | 500 | 10 | bash + string replacement |
+
+Üretim sonuçları tek nedeni ayırmaz. Benchmark skorları belirtilen model, scaffold, veri ve değerlendirme koşulları içindir. [Anthropic: methodology](https://www.anthropic.com/news/claude-sonnet-4-5)
 
 Ama bu sayıların ardında sezgilere ters bir gerçek yatıyor.
 
 ## Aynı at, farklı kaderler
 
-Anthropic kontrollü bir deney yaptı. Aynı prompt ("2B retro oyun yapımcısı geliştir"), aynı model (Opus 4.5). İlk koşu: çıplak, hiçbir destek yok — 20 dakika, 9 dolar, oyunun temel özellikleri hiç çalışmadı. İkinci koşu: tam harness (planlayıcı + üretici + değerlendirici üç-ajan mimarisi) — 6 saat, 200 dolar, oyun oynanabilir hâle geldi.
+> Model ve prompt aynı, zaman ve maliyet bütçeleri farklıdır. Tek bileşeni ayıran eşit bütçeli deney değildir. Temel oyun çalıştı, fakat hatalar kaldı. [Anthropic](https://www.anthropic.com/engineering/harness-design-long-running-apps)
+
+Model ve prompt aynı, zaman ve maliyet bütçeleri farklıdır. Tek bileşeni ayıran eşit bütçeli deney değildir. Temel oyun çalıştı, fakat hatalar kaldı. [Anthropic](https://www.anthropic.com/engineering/harness-design-long-running-apps)
+
+| Opus 4.5 | Duration | USD |
+| --- | --- | --- |
+| Solo | 20 min | 9 |
+| Full harness | 6 h | 200 |
 
 Modeli değiştirmediler. Opus 4.5 yine Opus 4.5'ti. Değişen şey koşum takımıydı.
 
-OpenAI'nin 2025 harness mühendisliği makalesi bunu açıkça söylüyor: iyi bir harness'a sahip bir depoda Codex "güvenilmez"den "güvenilir"e geçiyor. İfadeye dikkat edin — "biraz daha iyi" değil, niteliksel bir sıçrama. Tıpkı safkan bir at gibi: doğru koşum takımı olmadan binebilirsiniz ama uzağa gidemezsiniz, hızlı gidemezsiniz, düşmek de sürpriz olmaz. Harness işte o tam koşum takımıdır — **model ağırlıkları dışındaki tüm mühendislik altyapısı.**
+Üretim sonuçları tek nedeni ayırmaz. Benchmark skorları belirtilen model, scaffold, veri ve değerlendirme koşulları içindir. [OpenAI: 2026-02-11](https://openai.com/index/harness-engineering/)
 
 ## Ajanlar gerçekte nerede takılıyor
 
@@ -39,9 +52,9 @@ Birden fazla oturuma yayılan uzun görevler daha da kötüdür — önceki otur
 
 Bu senaryolar göz önünde bulundurulduğunda bu kavramlar artık sadece jargon değil:
 
-- **Yetenek farkı (Capability Gap)**: Modelin benchmark performansı ile gerçek görev performansı arasındaki büyük uçurum. SWE-bench Verified üzerindeki %50-60 başarı oranı, gerçek sorunların neredeyse yarısının çözülemediği anlamına gelir.
+- Üretim sonuçları tek nedeni ayırmaz. Benchmark skorları belirtilen model, scaffold, veri ve değerlendirme koşulları içindir.
 - **Harness**: Modelin dışındaki her şey — talimatlar, araçlar, ortam, durum yönetimi, doğrulama geri bildirimi. Eğer model ağırlığı değilse, harness'tır. "Koşum takımı" diye andığımız şey.
-- **Harness kaynaklı başarısızlık (Harness-Induced Failure)**: Modelin yeterli yeteneği vardır ama yürütme ortamı yapısal kusurlara sahiptir. Anthropic'in kontrollü deneyi bunu zaten kanıtladı.
+- **Harness kaynaklı başarısızlık (Harness-Induced Failure)**: Modelin yeterli yeteneği vardır ama yürütme ortamı yapısal kusurlara sahiptir.
 - **Doğrulama farkı (Verification Gap)**: Ajanın çıktısına olan güveni ile gerçek doğruluk arasındaki fark. Ajan iş bitmemişken "bitirdim" diyor — bu en yaygın başarısızlık modu.
 - **Tanılayıcı döngü (Diagnostic Loop)**: Yürüt, başarısızlığı gözlemle, belirli bir harness katmanına ata, o katmanı düzelt, yeniden yürüt. Bu, harness mühendisliğinin temel metodolojisidir.
 - **Bitirme tanımı (Definition of Done)**: Makine tarafından doğrulanabilir bir dizi koşul — testler geçer, lint temizdir, tip kontrolleri geçer. Açık bir bitirme tanımı olmadan ajan kendi tanımını uyduracaktır.
@@ -72,17 +85,19 @@ Tamamlanma kriterleri:
 
 ## Milyon satırlık deney
 
-OpenAI 2025'te iddialı bir deney yaptı: boş bir git deposundan tam bir iç ürün geliştirmek için Codex kullanın. Beş ay sonra depo yaklaşık bir milyon satır kod içeriyordu — uygulama mantığı, altyapı, araçlar, dokümantasyon, dahili geliştirici araçları — hepsi ajan tarafından üretilmişti. Üç mühendis Codex'i yönetti, yaklaşık 1.500 PR açıp birleştirdi. Kişi başına günde ortalama 3,5 PR.
+Üretim sonuçları tek nedeni ayırmaz. Benchmark skorları belirtilen model, scaffold, veri ve değerlendirme koşulları içindir. [OpenAI: 2026-02-11](https://openai.com/index/harness-engineering/)
 
-Temel kısıt: **insanlar asla doğrudan kod yazmadı.** Bu bir gösteri değildi — mühendisin birincil işi artık kod yazmak değil, ortamları tasarlamak, niyeti ifade etmek ve geri bildirim döngüleri kurmak olduğunda neyin değiştiğini takımın anlamasını zorlamak için tasarlanmıştı.
+Üretim sonuçları tek nedeni ayırmaz. Benchmark skorları belirtilen model, scaffold, veri ve değerlendirme koşulları içindir.
 
 Erken ilerleme beklenenden daha yavaştı. Codex yetersiz olduğu için değil, ortam yeterince eksiksiz olmadığı için — ajanın üst düzey hedefleri ilerletmek için gerekli araçlardan, soyutlamalardan ve dahili yapılardan yoksun olmasıydı. Mühendislerin işi şuna dönüştü: büyük hedefleri küçük yapı taşlarına bölmek (tasarım, kod, inceleme, test), ajanın bunları birleştirmesine izin vermek, ardından bu blokları daha karmaşık görevleri açmak için kullanmak. Bir şey başarısız olduğunda, düzeltme neredeyse hiçbir zaman "daha fazla dene" değildi — "ajanın hangi yetenekten yoksun olduğu ve bunu hem anlaşılır hem de yürütülebilir kılmak için ne yapabiliriz?" idi.
 
-Bu deney bu dersin temel tezini doğrudan kanıtlıyor: **aynı model çıplak bir ortamda ve eksiksiz bir harness ile temelden farklı çıktı üretir.** Model değişmedi. Ortam değişti.
+Üretim sonuçları tek nedeni ayırmaz. Benchmark skorları belirtilen model, scaffold, veri ve değerlendirme koşulları içindir.
 
 > Kaynak: [OpenAI: Harness engineering: leveraging Codex in an agent-first world](https://openai.com/index/harness-engineering/)
 
-## Daha somut bir örnek
+## Öğretim örneği
+
+> Öğretim örneği: senaryo ve sayılar açıklama için varsayılmıştır, yayımlanmış deney ölçümleri değildir.
 
 Bir takım orta ölçekli bir Python web uygulamasına (FastAPI + PostgreSQL + Redis, ~15.000 satır kod) yeni bir API uç noktası eklemek için Claude Sonnet kullandı.
 
@@ -107,6 +122,8 @@ Modeli değiştirmediler. Harness'ı değiştirdiler.
 - [HumanLayer: Skill Issue — Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
 - [SWE-bench Liderlik Tablosu](https://www.swebench.com/)
 - [Thoughtworks Technology Radar: Harness Engineering](https://www.thoughtworks.com/radar)
+
+- [Anthropic: Sonnet 4.5 SWE-bench methodology, 2025-09-29](https://www.anthropic.com/news/claude-sonnet-4-5)
 
 ## Alıştırmalar
 

@@ -32,7 +32,9 @@ flowchart LR
     Verdict --> Generator
 ```
 
-## Pourquoi cela arrive
+## Exemple pédagogique
+
+> Illustration pédagogique : le scénario et ses chiffres sont des hypothèses explicatives, pas des mesures d’une expérience publiée.
 
 ### Le vrai coût du manque d'observabilité
 
@@ -44,7 +46,7 @@ Quand un harness manque d'observabilité, quatre problèmes apparaissent systém
 
 **Les retries deviennent des paris aveugles** : quand l'agent ne sait pas pourquoi quelque chose a échoué, la direction du retry est aléatoire. Il peut corriger des chemins de code sans rapport en ignorant la vraie cause racine. Chaque retry aveugle coûte des tokens et du temps.
 
-**Falaise d'information au handoff** : quand un travail incomplet passe à la session suivante, l'absence d'observabilité oblige la nouvelle session à diagnostiquer l'état du système depuis zéro. Les observations d'Anthropic sur les agents longue durée montrent que ce diagnostic redondant peut consommer 30-50 % du temps total de session.
+Conserver l’avancement et les vérifications dans des fichiers versionnés permet à la session suivante d’inspecter l’état. La source décrit le mécanisme sans chiffrer le gain de démarrage. [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 ### Un scénario réaliste avec Claude Code
 
@@ -116,7 +118,9 @@ Transformez « est-ce bon ou non » en score quantifiable :
 
 Créez une trace pour chaque session de harness, un span pour chaque tâche et des sous-spans pour chaque étape de vérification. Utilisez des attributs standards pour annoter les informations clés. Les données d'observabilité peuvent ainsi s'intégrer à des outils comme Jaeger ou Zipkin.
 
-## Cas réel
+## Exemple pédagogique
+
+> Illustration pédagogique : le scénario et ses chiffres sont des hypothèses explicatives, pas des mesures d’une expérience publiée.
 
 Un harness avec workflow planner-generator-evaluator exécute « ajouter le support dark mode » :
 
@@ -136,7 +140,7 @@ Amélioration d'efficacité de 3x, qualité plus stable, évaluations reproducti
 - **Les deux couches d'observabilité sont essentielles** : les signaux runtime expliquent « ce qui s'est passé », les artefacts de processus expliquent « pourquoi cela a été fait ainsi ».
 - **Les sprint contracts alignent en amont**, évitant qu'un generator construise quelque chose que l'evaluator rejette immédiatement pour des raisons prévisibles.
 - **Les grilles rendent l'évaluation reproductible**, différents évaluateurs produisant des scores proches pour le même résultat.
-- **Le manque d'observabilité gaspille 30-50 % du temps de session en diagnostic redondant.**
+- Conserver l’avancement et les vérifications dans des fichiers versionnés permet à la session suivante d’inspecter l’état. La source décrit le mécanisme sans chiffrer le gain de démarrage.
 
 ## Pour aller plus loin
 

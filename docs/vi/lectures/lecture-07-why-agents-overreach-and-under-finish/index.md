@@ -5,6 +5,8 @@
 
 # Bài 07. Vạch ranh giới tác vụ rõ ràng cho agent
 
+> Hướng dẫn kỹ thuật: ngưỡng số là mặc định giảng dạy có thể chỉnh, không phải ranh giới thực nghiệm. Token phụ thuộc tokenizer và nội dung, không chỉ số dòng.
+
 Bạn nói với Claude Code "thêm xác thực người dùng vào dự án này", và nó bắt đầu sửa schema cơ sở dữ liệu, viết route, thay đổi component frontend, và tiện thể tái cấu trúc luôn error-handling middleware. Hai tiếng sau bạn kiểm tra: 12 tệp bị sửa, 800 dòng code mới, mà chẳng có tính năng nào chạy được end-to-end.
 
 Agent vốn có xung lực "làm thêm một chút", thấy thứ gì liên quan là xử lý luôn. Vấn đề là làm quá nhiều thứ cùng lúc gần như chắc chắn dẫn đến chẳng cái nào ra hồn.
@@ -26,7 +28,7 @@ Hành vi thật của Claude Code rất minh họa. Bảo nó "thêm đăng ký 
 
 Sáu bước sau, mỗi cái đều làm dở. Không có xác minh end-to-end, code nửa vời cộng lẫn vào nhau rất phức tạp, phiên sau muốn dọn cũng chẳng biết bắt đầu từ đâu.
 
-Dữ liệu thực nghiệm của Anthropic hỗ trợ trực tiếp điều này: agent sử dụng chiến lược "bước tiếp theo nhỏ" (tương đương WIP=1) đạt tỷ lệ hoàn thành tác vụ cao hơn 37% so với agent nhận prompt rộng. Thú vị hơn, số dòng code agent tạo ra có tương quan âm yếu với tỷ lệ hoàn thành tính năng thực tế, viết nhiều code hơn, hoàn thành ít tính năng hơn. Câu "ăn vội nuốt tươi" được dữ liệu xác nhận.
+[Anthropic: incremental feature work](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 ## Quy trình WIP=1
 
@@ -98,7 +100,9 @@ Dùng một tệp máy đọc được (JSON hoặc Markdown) để ghi lại tr
 
 Harness nên liên tục theo dõi VCR (Verified Completion Rate) = số tác vụ đã xác minh / số tác vụ đã kích hoạt. Chặn kích hoạt tác vụ mới khi VCR < 1.0.
 
-## Câu chuyện thật
+## Ví dụ giảng dạy
+
+> Minh họa giảng dạy: tình huống và số liệu là giả định để giải thích, không phải đo lường của thí nghiệm công bố.
 
 Một dự án REST API với 8 tính năng, hai chiến lược đặt cạnh nhau:
 

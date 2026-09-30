@@ -5,6 +5,8 @@
 
 # Ders 06. Başlatma neden kendine ait bir aşama olmalı
 
+> Mühendislik önerisi: sayısal eşikler ayarlanabilir öğretim değerleridir, deneysel sınırlar değildir. Token sayısı yalnız satıra değil tokenizer ve içeriğe bağlıdır.
+
 Yeni bir ajan oturumu başlatıyor ve "arama özelliği ekle" diyorsunuz. Doğrudan kodlamaya atlıyor — takdire şayan bir hevesle. 20 dakika sonra test çerçevesinin düzgün yapılandırılmadığını keşfediyor, bunu düzeltmek için 10 dakika daha harcıyor, ardından veritabanı geçiş betiği formatı yanlış, daha fazla uğraşma. Arama özelliği sonunda ekleniyor ama tüm oturum verimsizdi — zamanın çoğu arama özelliğini yazmak yerine "bu projenin nasıl çalıştığını çözmeye" gitti.
 
 Daha iyi yaklaşım: ajanın çalışmaya başlamasına izin vermeden önce, temel ortamı hazır hâle getirmek, doğrulama komutlarını çalıştırmak ve proje yapısını anlamak için ayrı bir aşama kullanın. Bu bir ev inşa etmek gibidir — temeli dökerken aynı anda duvarları kaldırmazsınız. Yaparsanız, temel kürlenmeden duvarlar yükselir ve tüm binayı yıkıp baştan başlamak zorunda kalırsınız. Önce temeli dökün, kürlenmesine izin verin, sonra duvarları kaldırın — temiz ve verimli.
@@ -37,6 +39,8 @@ flowchart TB
 
 ## Karıştırdığınızda ne olur
 
+> Öğretim örneği: senaryo ve sayılar açıklama için varsayılmıştır, yayımlanmış deney ölçümleri değildir.
+
 En doğrudan sorun: temel düzgün oturmaz. Ajan çabasının %80'ini özellik koduna ve %20'sini gelişigüzel bazı altyapı kurmaya harcar. Test çerçevesi yapılandırılır ama hiç doğrulanmaz, lint kuralları ayarlanır ama çok gevşektir, ilerleme dosyası oluşturulmaz. Bu kusurlar ilk oturumda belirgin değildir (çünkü ajan hâlâ ne yaptığını hatırlar), ancak ikinci oturumda yüzeye çıkar — yeni ajan nasıl çalıştırılacağını, test edileceğini veya nerede durduğunu bilmiyor. Özensiz temel, sallantılı bina.
 
 Daha gizli bir maliyet "doğrulanmamış birikme"dir — test çerçevesi yapılandırılmadan önce yazılan özellik kodu doğrulanmamış koddur. Sonunda o kod için test eklemeye geri döndüğünüzde, tasarımın en başından yanlış olduğunu keşfedebilirsiniz — bilseydiniz farklı şekilde uygulayacaktınız. Islak betona fayans döşemek gibi — zeminin düz olmadığını keşfettiğinizde tüm fayansları kaldırıp yeniden döşemek zorundasınız.
@@ -45,7 +49,7 @@ Oturum bütçesi de boşa harcanır. Başlatma işi (ortamları yapılandırma, 
 
 En kolay gözden kaçırılan sorun örtük varsayım mayınlarıdır. Ajanın başlatma sırasında verdiği kararlar (hangi test çerçevesi, dizinleri nasıl organize etmek, bağımlılık yönetimi) — açıkça kaydedilmezse, sonraki oturumlar bu seçimleri anlayamaz. Daha kötüsü, sonraki oturumlar çelişen seçimler yapabilir. İlk inşaat ekibi beton temel kullandı, ikinci ekip bilmediği için içine ahşap kazıklar çaktı — temel çatlar.
 
-Anthropic'in uzun süre çalışan uygulama geliştirme araştırması başlatmayı uygulamadan ayırmayı açıkça önerir. Deneysel verileri: adanmış bir başlatma aşaması kullanan projeler, karışık yaklaşımlara kıyasla çok oturumlu senaryolarda %31 daha yüksek özellik tamamlanma oranı gösterdi. Temel içgörü — başlatma aşamasında yatırılan zaman sonraki 3-4 oturumda tamamen geri kazanılır. Temel ne kadar sağlamsa duvarlar o kadar hızlı yükselir.
+[Anthropic: initializer / coding agent](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 OpenAI'nin Codex harness mühendisliği kılavuzu da "operasyonel kayıt olarak depo" ilkesini vurgular — ilk koşudan itibaren net operasyonel yapı kurun, aksi takdirde her yeni oturum proje kurallarını yeniden çıkarmak zorunda kalır.
 
@@ -122,7 +126,9 @@ OpenAI'nin Codex harness mühendisliği kılavuzu da "operasyonel kayıt olarak 
 - [ ] Her şey git'e commit edildi
 ```
 
-## Gerçek dünya örneği
+## Öğretim örneği
+
+> Öğretim örneği: senaryo ve sayılar açıklama için varsayılmıştır, yayımlanmış deney ölçümleri değildir.
 
 Bir React frontend projesi için iki başlatma yaklaşımı:
 

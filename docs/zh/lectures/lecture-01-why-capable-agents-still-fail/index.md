@@ -5,17 +5,30 @@
 
 # 第一讲. 模型能力强，不等于执行可靠
 
-截至 2025 年底，最强的 coding agent 在 SWE-bench Verified 上的通过率大约在 50-60%。这个数字听起来还不错，但别急着高兴——那些都是精心挑选过的任务，有明确的 issue 描述，有现成的测试用例。等你把自己日常的需求丢过去，需求模糊、没有现成测试、隐含的业务规则散落在各处，通过率只会更低。你信心满满地交代一个任务，agent 跑了 20 分钟后告诉你"做完了"，你一看代码，加了功能但测试挂了，改了 bug 但引入了新 bug，根本不是你要的东西。
+Claude Sonnet 4.5 · 2025-09-29 · SWE-bench Verified
+
+| Score | Tasks | Trials | Scaffold |
+| --- | --- | --- | --- |
+| 77.2% | 500 | 10 | bash + string replacement |
+
+公开工程产出不能单独证明某一组件的因果贡献。基准分数只对应所述模型、框架、数据集和评估条件，不能直接当作所有实际任务的成功率。 [Anthropic: methodology](https://www.anthropic.com/news/claude-sonnet-4-5)
 
 遇到这种情况，大多数人的第一反应是"这模型不行，换一个更贵的"。先别急着掏钱包。问题可能不在模型身上。
 
 ## 同一匹马，两种命运
 
-Anthropic 做过一个对照实验，很能说明问题。同一个 prompt，"做一个 2D 复古游戏编辑器"，同一个模型 Opus 4.5，跑了两次。第一次裸跑，20 分钟花了 $9，游戏核心功能跑不起来。第二次配上了完整的 harness——planner、generator、evaluator 三 agent 架构——6 小时花了 $200，游戏可以正常游玩。
+> 模型和提示相同，但运行时间与费用预算不同。这是公开的应用构建对比，不是等预算、单独隔离某个 harness 组件的实验。核心游戏功能可用，仍有缺陷和局限。 [Anthropic](https://www.anthropic.com/engineering/harness-design-long-running-apps)
+
+模型和提示相同，但运行时间与费用预算不同。这是公开的应用构建对比，不是等预算、单独隔离某个 harness 组件的实验。核心游戏功能可用，仍有缺陷和局限。 [Anthropic](https://www.anthropic.com/engineering/harness-design-long-running-apps)
+
+| Opus 4.5 | Duration | USD |
+| --- | --- | --- |
+| Solo | 20 min | 9 |
+| Full harness | 6 h | 200 |
 
 Opus 4.5 还是那个 Opus 4.5，模型没有换。换的是马具。
 
-OpenAI 在 2025 年的 harness engineering 文章里把这件事说得更直白。他们说 Codex 在一个 harness 搭得好的仓库里，表现能从"不可靠"直接跳到"可靠"。注意这个用词——不是"好了一点"，是质变。harness 这个词在这里的意思就是**模型权重之外的一切工程基础设施**。
+公开工程产出不能单独证明某一组件的因果贡献。基准分数只对应所述模型、框架、数据集和评估条件，不能直接当作所有实际任务的成功率。 [OpenAI: 2026-02-11](https://openai.com/index/harness-engineering/)
 
 ## agent 到底卡在哪
 
@@ -25,15 +38,15 @@ OpenAI 在 2025 年的 harness engineering 文章里把这件事说得更直白�
 - **隐性约定没写下来，agent 无从遵守。** 你们全组都用 SQLAlchemy 2.0 的新语法，但 agent 默认写了 1.x 的代码；所有 API 端点必须走 OAuth 2.0 认证，可这条规矩只存在于你脑子里和三个月前一条 Slack 消息里。Agent 压根不知道有这么回事，不是不想遵守，是真没见过。
 - **环境配置有缺口，agent 把精力花在修环境上。** 开发环境配置不完整、依赖缺了、工具版本不对，agent 把宝贵的上下文窗口花在了 `pip install` 报错、Node 版本冲突这些事上，真正该干的活反而没精力做。
 - **缺少验证手段，agent 自己觉得做完了就算完成。** 没有测试、没有 lint、或者验证命令根本没告诉 agent。Agent 写完代码，自己看了看觉得没问题，就说完成了。Anthropic 还观察到一个有意思的现象：当 agent 感觉上下文快满了，它们会匆忙结束当前工作，跳过验证步骤，选一个简单的方案而不是最优方案。他们把这叫"上下文焦虑"。
-- **跨会话状态丢失，每个新会话都要重新探索。** 上次会话的发现全丢了，每个新会话都得重新探索项目结构、理解代码组织。缺乏持久化状态的 agent 在超过 30 分钟的任务中失败率急剧上升。
+- **跨会话状态丢失，每个新会话都要重新探索。** — 把进度和验证结果记录在版本化文件中，让下一次会话能检查项目状态。引用原文介绍了这个机制，没有报告启动耗时减少的百分比。 [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 ## 关键名词解释
 
 理解了上面的场景，这些概念就不再是一堆术语了：
 
-- **能力鸿沟（Capability Gap）**：模型在基准测试上的表现和真实任务上的表现之间的巨大落差。SWE-bench Verified 上 50-60% 的通过率意味着近一半的真实 issue 解不了。
+- 公开工程产出不能单独证明某一组件的因果贡献。基准分数只对应所述模型、框架、数据集和评估条件，不能直接当作所有实际任务的成功率。
 - **Harness**：模型之外的一切——指令、工具、环境、状态管理、验证反馈。不是模型权重的部分，全是 harness。也就是我们说的"马具"。
-- **Harness 诱导失败**：模型本身能力足够，但因为执行环境有结构性缺陷而失败。Anthropic 的对照实验已经证明了这一点。
+- **Harness 诱导失败**：模型本身能力足够，但因为执行环境有结构性缺陷而失败。
 - **验证缺口**：agent 对自己输出的信心评估和实际正确性之间的偏差。agent 说"我做完了"但实际没做完——这是最常见的失败模式。
 - **诊断循环**：执行 → 观察失败 → 定位到 harness 的哪一层出了问题 → 修补那一层 → 重新执行。这是 harness 工程的核心方法论。
 - **完成定义（Definition of Done）**：一组可以用命令验证的条件——测试通过、lint 没报错、类型检查通过。没有显式的完成定义，agent 就会自己编一个。
@@ -60,15 +73,17 @@ OpenAI 在 2025 年的 harness engineering 文章里把这件事说得更直白�
 
 ## 一百万行代码的实验
 
-2025 年，OpenAI 的三个工程师开始了一项实验。规则很简单：他们不写代码，只让 Codex 写。从一个空的 git 仓库起步，五个月下来，仓库里有了大约 100 万行代码。应用逻辑、基础设施、工具、文档——全是 agent 生成的。三个工程师一共开了 1,500 个 PR，平均每人每天 3.5 个。
+2025 年，OpenAI 的三个工程师开始了一项实验。规则很简单：他们不写代码，只让 Codex 写。从一个空的 git 仓库起步，五个月下来，仓库里有了大约 100 万行代码。应用逻辑、基础设施、工具、文档——全是 agent 生成的。三个工程师一共开了 1,500 个 PR，平均每人每天 3.5 个。 [OpenAI](https://openai.com/index/harness-engineering/)
 
 起初的进展出乎意料地慢。Codex 并不差，但它缺少足够完整的工具和结构去推进那些高层次的目标。三个工程师慢慢摸到了门道：把大的目标拆成小的积木块——设计、编码、审查、测试——让 agent 逐个搭建，再用这些积木去组合更复杂的任务。每当某件事做砸了，问题几乎从来不是"不够努力"，而是 agent 还缺什么——缺的能力能不能用一种既可理解又可执行的方式补上去。
 
-这个实验直接印证了本讲的核心论点：**同一个模型，在空白环境里和在有完整 harness 的环境里，产出有本质差异。** 模型没变，变的是环境。
+公开工程产出不能单独证明某一组件的因果贡献。基准分数只对应所述模型、框架、数据集和评估条件，不能直接当作所有实际任务的成功率。
 
 > 来源：[OpenAI: Harness engineering: leveraging Codex in an agent-first world](https://openai.com/index/harness-engineering/)
 
-## 一个更接地气的例子
+## 教学示意
+
+> 教学示意：这个场景及其中的数字是为解释机制设定的，不是已发表实验的实测结果。
 
 一个团队用 Claude Sonnet 给一个中等规模的 Python Web 应用（FastAPI + PostgreSQL + Redis，约 15,000 行代码）添加新的 API 端点。
 
@@ -93,6 +108,8 @@ OpenAI 在 2025 年的 harness engineering 文章里把这件事说得更直白�
 - [HumanLayer: Skill Issue — Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
 - [SWE-bench Leaderboard](https://www.swebench.com/)
 - [Thoughtworks Technology Radar: Harness Engineering](https://www.thoughtworks.com/radar)
+
+- [Anthropic: Sonnet 4.5 SWE-bench methodology, 2025-09-29](https://www.anthropic.com/news/claude-sonnet-4-5)
 
 ## 练习
 

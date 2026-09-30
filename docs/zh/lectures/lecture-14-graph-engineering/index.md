@@ -261,7 +261,7 @@ run(graph, entry={"requirements": "修复登录页 bug"}, thread="session-1")
 
 **概念发布后才有的**
 
-- [GraphArc](https://github.com/CodeGraphContext/grapharc)（2026-08-02）：自称"Graph Engineering 的第一个实时实现"。它把 agent 执行从埋在日志里的 trace 变成一张**可交互的实时编排图**——每个 agent、每条依赖、每个决策点都画出来，在执行前可视化整张图，你确认（甚至可以拿手机看）之后再放行。作者背景是给 4000+ 开发者做图工具，方向是"可观测、可调试、可工程化"。非常新，功能还在早期。
+- [GraphArc](https://github.com/CodeGraphContext/grapharc)
 
 **概念发布前就有的（它们不叫 Graph Engineering，但它们才是你构建时要用的）**
 

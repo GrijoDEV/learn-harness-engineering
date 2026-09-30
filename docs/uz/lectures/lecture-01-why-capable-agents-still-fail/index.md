@@ -9,17 +9,30 @@ Oʻzingizni AI olamida tajribali deb hisoblaysiz — Claude Pro obunangiz bor, G
 
 Birinchi reaksiyangiz? “Bu model yetarli emas. Yaxshiroq modelga oʻtish vaqti keldi.” Toʻxtang. Yangi obunaga pul sarflashga shoshilmang — ehtimol, muammo umuman modelda emasdir.
 
-Raqamlarga qaraylik. 2025-yil oxiriga kelib, SWE-bench Verifiedʼdagi eng kuchli kodlash agentlari taxminan 50–60% natija koʻrsatmoqda. Bu — sinchiklab tanlangan, aniq tavsifli va testlari mavjud vazifalarda. Kundalik dasturlash muhitiga oʻtsangiz — talablar noaniq, testlar yoʻq, biznes qoidalari hamma joyga sochilib yotgan — bu raqam yana ham pasayadi.
+Claude Sonnet 4.5 · 2025-09-29 · SWE-bench Verified
+
+| Score | Tasks | Trials | Scaffold |
+| --- | --- | --- | --- |
+| 77.2% | 500 | 10 | bash + string replacement |
+
+Ishlab chiqarish natijalari bitta sababni ajratmaydi. Benchmark natijalari ko‘rsatilgan model, scaffold, ma’lumot va baholash sharoitlariga tegishli. [Anthropic: methodology](https://www.anthropic.com/news/claude-sonnet-4-5)
 
 Ammo bu raqamlar ortida intuitsiyaga zid bir haqiqat yashiringan.
 
 ## Bir xil ot, turlicha taqdir
 
-Anthropic nazorat ostida tajriba oʻtkazdi. Bir xil prompt (“2D retro oʻyinlar yaratish dasturini qur”), bir xil model (Opus 4.5). Birinchi sinov — hech qanday qoʻshimcha vositasiz: 20 daqiqa, 9 dollar; oʻyinning asosiy funksiyalari umuman ishlamadi. Ikkinchi sinov — toʻliq harness bilan (planner + generator + evaluator — uch agentli arxitektura): 6 soat, 200 dollar; oʻyin oʻynaladigan holatda chiqdi.
+> Model va prompt bir xil, vaqt va xarajat budjetlari boshqa. Bitta komponentni ajratgan teng budjetli tajriba emas. Asosiy o‘yin ishlagan, ammo xatolar qolgan. [Anthropic](https://www.anthropic.com/engineering/harness-design-long-running-apps)
+
+Model va prompt bir xil, vaqt va xarajat budjetlari boshqa. Bitta komponentni ajratgan teng budjetli tajriba emas. Asosiy o‘yin ishlagan, ammo xatolar qolgan. [Anthropic](https://www.anthropic.com/engineering/harness-design-long-running-apps)
+
+| Opus 4.5 | Duration | USD |
+| --- | --- | --- |
+| Solo | 20 min | 9 |
+| Full harness | 6 h | 200 |
 
 Ular modelni oʻzgartirmadi. Opus 4.5 hamon Opus 4.5 edi. Oʻzgargan narsa — ot anjomlari.
 
-OpenAIʼning 2025-yilgi harness engineering maqolasi buni ochiq aytadi: yaxshi tuzilgan harnessʼga ega repozitoriyadagi Codex “ishonchsiz”dan “ishonchli”ga oʻtadi. Eʼtibor bering — “biroz yaxshi” emas, sifat jihatidan tubdan boshqacha. Bu xuddi zotli otga oʻxshaydi: mos ot anjomlarisiz minib boʻladi, lekin uzoqqa bormaysiz, tez ham yura olmaysiz, yiqilishingiz esa hech kimni ajablantirmaydi. Harness — aynan oʻsha toʻliq ot anjomlari; **model ogʻirliklaridan tashqaridagi barcha muhandislik infratuzilmasi.**
+Ishlab chiqarish natijalari bitta sababni ajratmaydi. Benchmark natijalari ko‘rsatilgan model, scaffold, ma’lumot va baholash sharoitlariga tegishli. [OpenAI: 2026-02-11](https://openai.com/index/harness-engineering/)
 
 ## Agentlar aslida qayerda tiqilib qoladi
 
@@ -39,9 +52,9 @@ Bir necha sessiyaga choʻzilgan uzun vazifalar yana ham yomonroq — oldingi ses
 
 Bu ssenariylarni nazarda tutsak, quyidagi atamalar endi shunchaki jargon emas — har biri aniq muvaffaqiyatsizlik turini nomlaydi:
 
-- **Capability Gap (Imkoniyatlar tafovuti)**: Modelning benchmark natijalari va haqiqiy vazifalarda koʻrsatadigan natijalari oʻrtasidagi katta tafovut. SWE-bench Verifiedʼda 50–60% muvaffaqiyat darajasi haqiqiy muammolarning deyarli yarmi hal qilinmasligini bildiradi.
+- Ishlab chiqarish natijalari bitta sababni ajratmaydi. Benchmark natijalari ko‘rsatilgan model, scaffold, ma’lumot va baholash sharoitlariga tegishli.
 - **Harness**: Modeldan tashqaridagi hamma narsa — yoʻriqnomalar, vositalar, muhit, holat boshqaruvi, tekshiruv qayta aloqasi. Agar bu model ogʻirliklari boʻlmasa — bu harness. Biz “ot anjomlari” deb atayotgan narsamiz.
-- **Harness-Induced Failure (Harness keltirib chiqargan muvaffaqiyatsizlik)**: Modelda yetarli imkoniyat mavjud, ammo bajarilish muhitida strukturaviy nuqsonlar bor. Anthropicʼning nazoratli tajribasi buni allaqachon isbotladi.
+- **Harness-Induced Failure (Harness keltirib chiqargan muvaffaqiyatsizlik)**: Modelda yetarli imkoniyat mavjud, ammo bajarilish muhitida strukturaviy nuqsonlar bor.
 - **Verification Gap (Tekshiruv tafovuti)**: Agentning oʻz natijasiga ishonchi va haqiqiy toʻgʻrilik oʻrtasidagi farq. Agent “men tugatdim” deydi, aslida tugatmagan — bu eng keng tarqalgan muvaffaqiyatsizlik turi.
 - **Diagnostic Loop (Diagnostik sikl)**: Bajarish, muvaffaqiyatsizlikni kuzatish, uni maʼlum bir harness qatlamiga bogʻlash, oʻsha qatlamni tuzatish, qaytadan bajarish. Bu — harness muhandisligining asosiy metodikasi.
 - **Definition of Done (Bajarilganlik mezonlari)**: Mashina tomonidan tekshirilishi mumkin boʻlgan shartlar toʻplami — testlar oʻtadi, lint toza, type check muvaffaqiyatli. Aniq DoD boʻlmasa, agent oʻzicha ixtiro qiladi.
@@ -73,17 +86,19 @@ Bajarilganlik mezonlari:
 
 ## Million qatorlik tajriba
 
-OpenAI 2025-yilda jasoratli tajriba oʻtkazdi: boʻsh git repozitoriyasidan boshlab, Codex yordamida butun ichki mahsulotni qurish. Besh oydan soʻng repoda taxminan bir million qator kod paydo boʻldi — ilova mantiqi, infratuzilma, asboblar, hujjatlar, ichki dev vositalar — barchasi agent tomonidan yaratilgan. Uchta muhandis Codexʼni boshqarib, taxminan 1 500 ta PR ochib va birlashtirib bordi. Kuniga har bir kishiga oʻrtacha 3,5 ta PR.
+Ishlab chiqarish natijalari bitta sababni ajratmaydi. Benchmark natijalari ko‘rsatilgan model, scaffold, ma’lumot va baholash sharoitlariga tegishli. [OpenAI: 2026-02-11](https://openai.com/index/harness-engineering/)
 
-Asosiy cheklov: **odamlar hech qachon kodni toʻgʻridan-toʻgʻri yozmagan.** Bu hiyla emas edi — bu jamoani muhandisning asosiy ishi endi kod yozish emas, balki muhitlarni loyihalash, niyatni ifodalash va qayta aloqa sikllarini qurishga aylanganda nima oʻzgarishini aniqlashga majbur qilish uchun moʻljallangan edi.
+Ishlab chiqarish natijalari bitta sababni ajratmaydi. Benchmark natijalari ko‘rsatilgan model, scaffold, ma’lumot va baholash sharoitlariga tegishli.
 
 Boshlanishdagi rivoj kutilganidan sekinroq boʻldi. Codexning imkoniyati yetmagani uchun emas, balki muhit yetarlicha toʻliq emas edi — agent yuqori darajadagi maqsadlarni oldinga siljitish uchun zarur vositalar, abstraksiyalar va ichki strukturalarni topa olmas edi. Muhandislarning ishi quyidagicha oʻzgardi: katta maqsadlarni kichik qurilish bloklariga (dizayn, kod, koʻrib chiqish, test) boʻlib chiqish, agentga ularni yigʻishga ruxsat berish, soʻng oʻsha bloklardan foydalanib murakkabroq vazifalarni ochish. Biror narsa yiqilganda yechim deyarli hech qachon “yana qattiqroq harakat qil” emas edi — “agentda qaysi imkoniyat yetishmayapti va biz uni qanday qilib tushunarli va bajariladigan qilamiz?” edi.
 
-Bu tajriba mazkur maʼruzaning asosiy tezisini bevosita isbotlaydi: **bir xil model qoʻshimcha tuzilmasiz muhitda va toʻliq harnessʼga ega muhitda tubdan farq qiluvchi natija beradi.** Model oʻzgarmadi. Muhit oʻzgardi.
+Ishlab chiqarish natijalari bitta sababni ajratmaydi. Benchmark natijalari ko‘rsatilgan model, scaffold, ma’lumot va baholash sharoitlariga tegishli.
 
 > Manba: [OpenAI: Harness engineering — agent ustuvor dunyoda Codexdan foydalanish](https://openai.com/index/harness-engineering/)
 
-## Yanada amaliy misol
+## O‘quv misoli
+
+> O‘quv misoli: vaziyat va raqamlar tushuntirish uchun faraz qilingan, chop etilgan tajriba o‘lchovlari emas.
 
 Bir jamoa Claude Sonnetʼdan foydalanib oʻrta hajmdagi Python web ilovasiga (FastAPI + PostgreSQL + Redis, ~15 000 qator kod) yangi API endpoint qoʻshdi.
 
@@ -108,6 +123,8 @@ Ular modelni oʻzgartirmadi. Ular harnessʼni oʻzgartirdi.
 - [HumanLayer: Skill Issue — Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
 - [SWE-bench Leaderboard](https://www.swebench.com/)
 - [Thoughtworks Technology Radar: Harness Engineering](https://www.thoughtworks.com/radar)
+
+- [Anthropic: Sonnet 4.5 SWE-bench methodology, 2025-09-29](https://www.anthropic.com/news/claude-sonnet-4-5)
 
 ## Mashqlar
 

@@ -5,6 +5,8 @@
 
 # Lección 07. Define límites claros para las tareas del agente
 
+> Guía de ingeniería: los umbrales son valores didácticos ajustables, no límites demostrados. Los tokens dependen del tokenizador y del contenido, no solo de las líneas.
+
 Le dices a Claude Code que "añada autenticación de usuarios a este proyecto," y comienza a modificar el esquema de la base de datos, escribir rutas, cambiar componentes del frontend y — de paso — refactorizar el middleware de manejo de errores. Dos horas después verificas: 12 archivos modificados, 800 líneas de código nuevo, y ni una sola funcionalidad funciona end-to-end.
 
 Morder más de lo que puedes masticar — este dicho se aplica a los agentes de IA especialmente bien. Los agentes nacen con un impulso de "hacer un poco más" — ven cosas relacionadas y simplemente las manejan de paso, como alguien que va al supermercado por una botella de salsa de soya y sale empujando un carrito lleno. El problema es, los humanos que compran demasiado solo desperdician dinero; los agentes haciendo demasiadas cosas simultáneamente significa que ninguna se hace bien.
@@ -26,7 +28,7 @@ El comportamiento real de Claude Code es revelador. Pídele que "añada registro
 
 Seis pasos después, cada uno está a medio hacer. Sin verificación end-to-end, acoplamiento complejo entre el código a medio cocinar, y la siguiente sesión que tenga que recoger los pedazos estará completamente perdida. Como alguien cocinando seis platos simultáneamente — cada plato está en la sartén pero ninguno ha sido emplatado. Todos se queman.
 
-Los datos experimentales de Anthropic apoyan esto directamente: los agentes que usan una estrategia de "pequeño siguiente paso" (equivalente a WIP=1) muestran un 37% más de tasa de completitud de tareas que los agentes que usan prompts amplios. Más interesante aún, el número de líneas de código generadas por los agentes está débilmente correlacionado negativamente con la completitud real de funcionalidades — más código escrito, menos funcionalidades completadas. Morder más de lo que puedes masticar, comprobado con datos.
+[Anthropic: incremental feature work](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 ## Flujo de trabajo WIP=1
 
@@ -100,7 +102,9 @@ Usa un archivo legible por máquina (JSON o Markdown) para registrar todos los e
 
 El harness debería rastrear continuamente el VCR (Verified Completion Rate) = tareas verificadas / tareas activadas. Bloquea nuevas activaciones de tareas cuando VCR < 1.0.
 
-## Caso del mundo real
+## Ejemplo didáctico
+
+> Ejemplo didáctico: el escenario y sus cifras son supuestos para explicar el mecanismo, no mediciones de un experimento publicado.
 
 Un proyecto de API REST con 8 funcionalidades, se compararon dos estrategias:
 

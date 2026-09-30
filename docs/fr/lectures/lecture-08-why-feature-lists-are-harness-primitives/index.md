@@ -5,6 +5,8 @@
 
 # Leçon 08. Utiliser les listes de fonctionnalités pour contraindre l'agent
 
+> Conseil d’ingénierie : ces seuils sont des valeurs pédagogiques ajustables, pas des limites démontrées. Les tokens dépendent du tokenizer et du contenu, pas seulement des lignes.
+
 Vous demandez à un agent de construire un site e-commerce. Une fois terminé, il vous dit "done". Vous regardez le code : l'authentification utilisateur fonctionne, mais le bouton de checkout du panier ne fait rien, et le flux de paiement n'est pas connecté. Le problème : vous ne lui avez jamais dit ce que "done" signifie, donc il a utilisé son propre standard : "j'ai écrit beaucoup de code et ça a l'air assez complet".
 
 Aux yeux de beaucoup de gens, les listes de fonctionnalités ne sont qu'un mémo : on note les choses pour ne pas oublier, puis on les met de côté. Mais dans le monde du harness, une liste de fonctionnalités n'est pas un mémo pour humains : c'est la colonne vertébrale de tout le harness. Le scheduler s'en sert pour choisir les tâches, le verifier pour juger l'achèvement, le handoff reporter pour générer les résumés. Si la colonne vertébrale casse, tout le corps est paralysé.
@@ -23,7 +25,7 @@ Did user auth, shopping cart mostly done, still need payments
 
 Une nouvelle session d'agent peut-elle répondre à ces questions à partir de cette note ? Que signifie "mostly done" ? Quels tests le panier a-t-il réussis ? Qu'est-ce qui bloque les paiements ? La réponse à tout cela est "personne ne sait". Comme dire à votre médecin "j'ai mal au ventre, ça va à peu près ces derniers temps" : quel médicament peut-il prescrire ?
 
-Résultat : la nouvelle session passe 20 minutes à inférer l'état du projet et peut réimplémenter des fonctionnalités déjà terminées. Les données d'ingénierie d'Anthropic montrent que de bons enregistrements de progression réduisent le temps de diagnostic au démarrage d'une session de 60 à 80%.
+Conserver l’avancement et les vérifications dans des fichiers versionnés permet à la session suivante d’inspecter l’état. La source décrit le mécanisme sans chiffrer le gain de démarrage. [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 ## Machine d'état des fonctionnalités
 
@@ -104,15 +106,15 @@ L'agent ne peut pas modifier directement l'état d'une fonctionnalité en `passi
 
 Chaque item de fonctionnalité doit être dimensionné pour être "terminable en une session". Trop large, il ne se terminera pas ; trop étroit, le coût de gestion augmente. "L'utilisateur peut ajouter des articles au panier" est une bonne granularité. "Implémenter le panier" est trop large. "Créer le champ name sur le modèle Cart" est trop étroit. Comme découper un steak : ni la pièce entière, ni de la viande hachée.
 
-## Cas réel
+## Exemple pédagogique
+
+> Illustration pédagogique : le scénario et ses chiffres sont des hypothèses explicatives, pas des mesures d’une expérience publiée.
 
 Une plateforme e-commerce avec 10 fonctionnalités. Deux approches de suivi ont été comparées :
 
 **Mode mémo** : l'agent utilise des notes non structurées. Après 3 sessions, les notes deviennent "user auth et product list faits, shopping cart presque terminé mais avec bugs, payments pas commencé". La nouvelle session a besoin de 20 minutes pour inférer l'état et finit par réimplémenter des fonctionnalités déjà terminées. Comme une liste de courses qui dit "lait, pain, et ce truc" : au magasin, vous ne savez toujours pas quoi acheter.
 
 **Mode colonne vertébrale** : chaque fonctionnalité a un état clair et une commande de vérification. La nouvelle session lit la liste et sait en 3 minutes : F01-F05 sont `passing`, F06 est `active`, F07-F10 sont `not_started`. Elle reprend directement à F06, sans retravail.
-
-Résultat quantifié : les projets utilisant des listes de fonctionnalités structurées affichent un taux d'achèvement 45% supérieur au suivi libre, avec zéro implémentation dupliquée.
 
 ## Points clés
 

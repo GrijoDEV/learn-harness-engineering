@@ -59,6 +59,11 @@ Referências gerais estritamente de 2025 foram excluídas da lista principal. O 
 
 - [On the Impact of AGENTS.md Files on the Efficiency of AI Coding Agents](https://arxiv.org/html/2601.20404v2): gpt-5.2-codex; 10 repos / 124 PR tasks; Table 1.
 
+- [Anthropic: Sonnet 4.5 — SWE-bench Verified methodology (2025-09-29)](https://www.anthropic.com/news/claude-sonnet-4-5)
+- [Boris Cherny: personal 30-day production report (2025-12-27)](https://twitter.com/bcherny/status/2004887829252317325) · [quoted original post](https://simonwillison.net/tags/boris-cherny/)
+- [Karpathy: measured autoresearch leaderboard improvement](https://github.com/karpathy/nanochat/commit/f06860494848db080c9a80a0ffa83203b042056b)
+- [Karpathy: two-day autonomous tuning commit](https://github.com/karpathy/nanochat/commit/6ed7d1d82cee16c2e26f45d559ad3338447a6c1b)
+
 ## Ordem de Leitura Sugerida
 
 1. `method-map.md`

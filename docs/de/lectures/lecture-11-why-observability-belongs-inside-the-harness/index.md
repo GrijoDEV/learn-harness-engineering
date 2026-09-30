@@ -32,7 +32,9 @@ flowchart LR
     Verdict --> Generator
 ```
 
-## Warum das passiert
+## Lehrbeispiel
+
+> Lehrbeispiel: Dieses Szenario und seine Zahlen dienen der Erklärung und sind keine Messwerte eines veröffentlichten Experiments.
 
 ### Die echten Kosten fehlender Beobachtbarkeit
 
@@ -44,7 +46,7 @@ Wenn einem harness Beobachtbarkeit fehlt, treten vier Problemtypen systematisch 
 
 **Retries werden blinde Vermutungen**: Wenn der Agent nicht weiß, warum etwas fehlschlägt, ist die Retry-Richtung zufällig. Er kann irrelevante Codepfade reparieren, während die eigentliche Ursache unberührt bleibt. Jeder blinde retry kostet Tokens und Zeit.
 
-**Informationsklippe beim Handoff**: Wenn unvollständige Arbeit an die nächste Session übergeben wird, muss die neue Session ohne Beobachtbarkeit den Systemzustand von Grund auf diagnostizieren. Anthropic beobachtet, dass diese redundante Diagnose 30-50 % der Sessionzeit verbrauchen kann.
+Fortschritt und Prüfergebnisse gehören in versionierte Dateien, damit die nächste Sitzung den Zustand prüfen kann. Die Quelle beschreibt den Mechanismus ohne prozentuale Zeitersparnis. [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 ### Ein realistisches Claude-Code-Szenario
 
@@ -116,7 +118,9 @@ Mache aus "ist es gut oder nicht" eine quantifizierbare Bewertung:
 
 Erzeuge einen trace für jede harness-Session, einen span für jede Aufgabe und sub-spans für jeden Verifikationsschritt. Standardattribute annotieren wichtige Informationen. So integrieren sich Beobachtbarkeitsdaten in Tools wie Jaeger oder Zipkin.
 
-## Praxisfall
+## Lehrbeispiel
+
+> Lehrbeispiel: Dieses Szenario und seine Zahlen dienen der Erklärung und sind keine Messwerte eines veröffentlichten Experiments.
 
 Ein harness mit planner-generator-evaluator-Workflow führt "Dark Mode Support hinzufügen" aus:
 
@@ -136,7 +140,7 @@ Ein harness mit planner-generator-evaluator-Workflow führt "Dark Mode Support h
 - **Beide Beobachtbarkeitsschichten sind wesentlich**: Runtime-Signale erklären "was passiert ist", Prozessartefakte erklären "warum es so gemacht wurde".
 - **Sprint contracts richten früh aus** und verhindern vorhersehbare Ablehnungen durch evaluator.
 - **Rubriken machen Bewertung reproduzierbar**, sodass verschiedene Evaluatoren ähnliche Scores liefern.
-- **Fehlende Beobachtbarkeit verschwendet 30-50 % der Sessionzeit für redundante Diagnose.**
+- Fortschritt und Prüfergebnisse gehören in versionierte Dateien, damit die nächste Sitzung den Zustand prüfen kann. Die Quelle beschreibt den Mechanismus ohne prozentuale Zeitersparnis.
 
 ## Weiterführende Literatur
 

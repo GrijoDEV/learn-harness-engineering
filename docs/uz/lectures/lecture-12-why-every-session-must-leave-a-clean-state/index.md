@@ -5,6 +5,8 @@
 
 # 12-maʼruza. Har bir sessiya oxirida toza holat topshiring
 
+> Muhandislik tavsiyasi: raqamli chegaralar sozlanadigan o‘quv qiymatlari, tajribada tasdiqlangan chegaralar emas. Token soni faqat qatorga emas, tokenizer va mazmunga bog‘liq.
+
 ## Ushbu maʼruza qanday muammoni hal qiladi?
 
 Sizning agentingiz tushdan keyin ishlaydi, 20 ta faylni oʻzgartiradi, kodni commit qiladi va sessiya tugaydi. Keyingi agent sessiyasi ish boshlaydi va birdan shularni aniqlaydi: build yiqilyapti (broken), testlar qizil (yiqilgan), vaqtinchalik debug fayllar sochilib yotibdi, funksiyalar roʻyxati yangilanmagan va ishlarning qay holatdaligi butunlay noaniq. Yangi sessiya birinchi 30 daqiqasini faqatgina “oʻtgan sessiya oʻzi nima qilgandi” degan narsani tushunishga sarflaydi.
@@ -54,6 +56,8 @@ flowchart LR
 
 Dasturiy taʼminot evolyutsiyasining Leman qonunlariga (Lehmanʼs laws) koʻra: doimiy oʻzgarishdagi tizimlarning murakkabligi faol boshqarilmas ekan, u muqarrar ravishda oshib boraveradi. Bu ayniqsa AI kod yozish agentlari uchun toʻgʻri — har bir sessiya oʻzgarishlar olib kiradi va chiqishda tozalab ketilmasa, texnik qarz (technical debt) eksponensial tarzda koʻpayib boradi.
 
+> O‘quv misoli: vaziyat va raqamlar tushuntirish uchun faraz qilingan, chop etilgan tajriba o‘lchovlari emas.
+
 Haqiqiy maʼlumotlar soʻzlaydi. Hech qanday tozalash strategiyasisiz agentlar bilan 12 hafta davomida ishlab chiqilgan loyiha:
 
 - 1-hafta: Build oʻtish darajasi 100%, testlar oʻtish darajasi 100%, yangi sessiyani boshlash 5 daq
@@ -66,8 +70,6 @@ Xuddi shu loyiha tozalash strategiyasi bilan:
 - 1-hafta: 100%, 100%, 5 daq
 - 12-hafta: 97%, 95%, 9 daq
 
-12 haftadan soʻng: build oʻtish darajasi oʻrtasida 29 foiz punkti farq, yangi sessiyani boshlash vaqti oʻrtasida esa 85% farq bor. Bu faqat nazariya emas — bu kuzatilgan aniq farqdir.
-
 ### Toza holatning besh oʻlchami
 
 Toza holat bu shunchaki “kod kompilyatsiya boʻladi” degani emas. U beshta oʻlchamni birgalikda baholaydi:
@@ -76,7 +78,7 @@ Toza holat bu shunchaki “kod kompilyatsiya boʻladi” degani emas. U beshta o
 
 **Test oʻlchami**: Barcha testlar oʻtmoqdami? Sessiyadan oldin mavjud boʻlgan testlar ham — bu sessiya mavjud funksiyani (functionality) buzmaslikka masʼuldir. Va u faqat “mening kompyuterimda ishlayapti” boʻlib qolmay, CIʼda ham tekshirilishi shart.
 
-**Jarayon (Progress) oʻlchami**: Joriy ishning jarayoni mashina oʻqiy oladigan artefaktga yozilganmi? Oʻzining qabul qilish shartlariga (passing criteria) ega tugatilgan sub-vazifalar, jarayonda boʻlgan lekin tugallanmaganlarining joriy holati va hali boshlanmaganlari kiritilishi kerak. Yaxshi jarayon qaydlari yangi sessiya ishga tushgandagi diagnostika vaqtini 60-80% gacha kamaytiradi.
+Jarayon va tekshiruvlarni versiyalanadigan fayllarga yozing, keyingi sessiya holatni tekshira olsin. Manba mexanizmni tushuntiradi, boshlash vaqtining foiz kamayishini bermaydi. [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 **Artefakt oʻlchami**: Eskirgan yoki noaniq vaqtinchalik artefaktlar qolmadimi? Debug loglari, vaqtinchalik fayllar, izoh qilib qoldirilgan kodlar (commented-out code), TODO eslatmalari — bularning barchasi keyingi sessiya uchun bilish kerak boʻlgan kognitiv yukni (cognitive load) oshiradi.
 
@@ -152,15 +154,15 @@ git checkout -- .env.local  # Maʼlum boʻlgan barqaror holatga (known state) qa
 npm run test  # Tozalash hech narsani buzmaganini tasdiqlash
 ```
 
-## Hayotiy misol
+## O‘quv misoli
+
+> O‘quv misoli: vaziyat va raqamlar tushuntirish uchun faraz qilingan, chop etilgan tajriba o‘lchovlari emas.
 
 Ikkita yondashuv bilan 12 hafta davomida agentlar yordamida ishlab chiqilgan Electron ilovasi (app):
 
 **Tozalash strategiyasisiz** (nazorat guruhi - control group): 12-haftada, build oʻtish darajasi 68%, test oʻtish darajasi 61%, yangi sessiyani boshlash vaqti 60+ daq, eskirgan artefaktlar 103 ta.
 
 **Tozalash strategiyasi bilan** (tajriba guruhi - experimental group): Har bir sessiya yakunida toʻliq toza-holat tekshiruvi (clean-state check) + haftalik tozalash sikli (weekly cleanup loop). 12-haftada, build oʻtish darajasi 97%, test oʻtish darajasi 95%, yangi sessiyani boshlash vaqti 9 daq, eskirgan artefaktlar 11 ta.
-
-12-haftaga kelib, tajriba guruhining build oʻtish darajasi 29 foiz punkti yuqori, test oʻtish darajasi 34 foiz punkti yuqori va yangi sessiyani boshlash vaqti 85% ga qisqa.
 
 ## Asosiy xulosalar
 

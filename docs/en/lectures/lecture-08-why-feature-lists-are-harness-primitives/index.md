@@ -5,6 +5,8 @@
 
 # Lecture 08. Use Feature Lists to Constrain What the Agent Does
 
+> Engineering guideline: numerical cutoffs here are adjustable teaching defaults, not experimentally established thresholds. Token counts depend on the tokenizer and content, not line count alone.
+
 You ask an agent to build an e-commerce site. After it finishes, it tells you "done." You look at the code — user authentication works, but the checkout button in the shopping cart does nothing, and the payment flow isn't connected at all. Where did things go wrong? You never told it what "done" means, so it used its own standard: "I wrote a lot of code and it looks fairly complete."
 
 Feature lists, in many people's eyes, are just a memo — write things down so you don't forget, then toss them aside. But in the harness world, a feature list isn't a memo for humans. It's the foundational structure the entire harness is built on. The scheduler relies on it to pick tasks, the verifier relies on it to judge completion, and the handoff reporter relies on it to generate summaries. Without it, these components have no shared consensus to depend on.
@@ -25,7 +27,7 @@ Did user auth, shopping cart mostly done, still need payments
 
 Can a new agent session answer these questions from this note? What does "mostly done" mean? Which tests did the cart pass? What's blocking payments? The answer to all is "nobody knows."
 
-The result: the new session spends 20 minutes inferring project state, and may end up re-implementing completed features. Anthropic's engineering data shows that good progress records reduce session startup diagnostic time by 60-80%.
+Record progress and verification results in versioned files so the next session can inspect project state. The cited source describes the mechanism without reporting a percentage reduction in startup time. [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 ## Feature State Machine
 
@@ -108,15 +110,15 @@ The agent can't directly change a feature's state to `passing`. It can only subm
 
 Each feature item should be scoped to "completable in one session." Too broad and it won't finish; too narrow and the management overhead grows. "User can add items to cart" is good granularity. "Implement the shopping cart" is too broad. "Create the name field on the Cart model" is too narrow.
 
-## Real-World Case
+## Illustrative Example
+
+> Teaching illustration: this scenario and its numerical values are assumed for explanation, not observations from a published experiment.
 
 An e-commerce platform with 10 features. Two tracking approaches compared:
 
 **Memo mode**: The agent uses unstructured notes to track progress. After 3 sessions, the notes become "did user auth and product list, shopping cart mostly done but has bugs, payments not started." A new session needs 20 minutes to infer state, and ultimately re-implements completed features.
 
 **Structured mode**: Every feature has a clear state and verification command. A new session reads the feature list and in 3 minutes knows: F01-F05 are `passing`, F06 is `active` (in progress), F07-F10 are `not_started`. It picks up directly from F06, with zero rework.
-
-Quantified result: projects using structured feature lists show 45% higher feature completion rate than free-form tracking, with zero duplicate implementations.
 
 ## Key Takeaways
 

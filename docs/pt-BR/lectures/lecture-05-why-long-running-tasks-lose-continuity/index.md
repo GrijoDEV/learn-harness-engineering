@@ -5,6 +5,8 @@
 
 # Aula 05. Mantendo o Contexto Vivo Entre Sessões
 
+> Orientação de engenharia: os limites numéricos são valores didáticos ajustáveis, não fronteiras demonstradas. Tokens dependem do tokenizador e do conteúdo, não apenas das linhas.
+
 Você pede ao Claude Code para implementar uma funcionalidade completa. Ele trabalha por 30 minutos, realiza a maior parte da tarefa, mas o contexto está se esgotando. Você inicia uma nova sessão para continuar — e descobre que ele não se lembra das decisões tomadas anteriormente, por que a opção A foi escolhida em vez da opção B, quais arquivos já foram modificados ou em que estado os testes se encontram. Ele gasta mais 15 minutos explorando novamente o projeto e pode até seguir uma abordagem diferente da utilizada anteriormente.
 
 Esse é o dilema real que agentes de IA enfrentam em tarefas que se estendem por múltiplas sessões. Nesta aula, veremos por que os agentes "perdem o fio da meada" durante tarefas longas e como a persistência estruturada de estado permite que uma nova sessão retome rapidamente o trabalho de onde a anterior parou.

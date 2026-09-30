@@ -5,6 +5,8 @@
 
 # Lektion 05. Kontext über Sessions hinweg erhalten
 
+> Technische Richtwerte: Die Zahlen sind anpassbare Lehrannahmen, keine experimentell bestätigten Grenzen. Tokenzahlen hängen von Tokenizer und Inhalt ab, nicht allein von Zeilen.
+
 Sie bitten Claude Code, ein vollständiges Feature zu implementieren. Es läuft 30 Minuten, erledigt den Großteil der Arbeit, aber der Kontext wird knapp. Sie starten eine neue Session, um fortzufahren — und stellen fest, dass es sich nicht an die Entscheidungen der letzten Session erinnert, warum Option A gegenüber Option B gewählt wurde, welche Dateien bereits geändert wurden oder in welchem Zustand sich die Tests befinden. Es verbringt 15 Minuten damit, das Projekt neu zu erkunden, und könnte inkonsistent zum vorherigen Ansatz sein.
 
 Stellen Sie sich vor, Sie wären ein Handwerker, der jeden Morgen beim Aufwachen alles vergisst. Sie müssten sich die gesamte Baustelle neu vertraut machen — welche Mauer halb fertig ist, warum rote statt blaue Ziegel gewählt wurden, wo die Rohrleitungen verlaufen. Schlimmer noch, Sie könnten ein Fenster herausreißen, das gestern bereits eingebaut wurde, einfach weil Sie sich nicht erinnern, dass es erledigt war.

@@ -5,6 +5,8 @@
 
 # Leçon 06. Initialiser avant chaque session d'agent
 
+> Conseil d’ingénierie : ces seuils sont des valeurs pédagogiques ajustables, pas des limites démontrées. Les tokens dépendent du tokenizer et du contenu, pas seulement des lignes.
+
 Vous démarrez une nouvelle session d'agent et dites « ajoute une fonctionnalité de recherche ». Il se lance directement dans le code — un bel enthousiasme. Après 20 minutes, il découvre que le framework de test n'est pas correctement configuré, passe encore 10 minutes à le corriger, puis le format du script de migration de base de données est incorrect, encore des ajustements. La fonctionnalité de recherche finit par être ajoutée, mais toute la session a été inefficace — la majeure partie du temps a été consacrée à « comprendre comment fonctionne ce projet » plutôt qu'à écrire la fonctionnalité de recherche.
 
 La meilleure approche : avant de laisser l'agent commencer à travailler, utiliser une phase séparée pour préparer l'environnement de base, faire passer les commandes de vérification, et faire comprendre la structure du projet. C'est comme construire une maison — vous ne coulez pas les fondations et n'érigez pas les murs simultanément. Si vous le faites, les murs montent avant que les fondations n'aient séché, et tout le bâtiment doit être démoli et recommencé. Coulez d'abord les fondations, laissez-les sécher, puis construisez les murs — propre et efficace.
@@ -37,6 +39,8 @@ flowchart TB
 
 ## Ce qui se passe quand on les mélange
 
+> Illustration pédagogique : le scénario et ses chiffres sont des hypothèses explicatives, pas des mesures d’une expérience publiée.
+
 Le problème le plus direct : les fondations ne sèchent pas correctement. L'agent passe 80 % de ses efforts sur le code de fonctionnalité et 20 % à configurer vaguement de l'infrastructure. Le framework de test est configuré mais jamais vérifié, les règles lint sont définies mais trop laxistes, aucun fichier de progression créé. Ces défauts ne sont pas évidents lors de la première session (parce que l'agent se souvient encore de ce qu'il a fait), mais ils surgissent lors de la deuxième session — le nouvel agent ne sait pas comment lancer, tester, ou où en sont les choses. Fondations bâclées, bâtiment instable.
 
 Un coût plus caché est l'« accumulation non vérifiée » — le code de fonctionnalité écrit avant que le framework de test ne soit configuré est du code sans vérification. Quand vous revenez enfin pour ajouter des tests à ce code, vous pourriez découvrir que la conception était fausse dès le départ — si vous l'aviez su, vous l'auriez implémenté différemment. Comme carreler sur du béton encore humide — quand vous découvrez que le sol n'est pas de niveau, toutes les tuiles doivent être arrachées et refaites.
@@ -45,7 +49,7 @@ Le budget de session est également gaspillé. Le travail d'initialisation (conf
 
 Le problème le plus facilement négligé est celui des mines d'hypothèses implicites. Les décisions que l'agent prend pendant l'initialisation (quel framework de test, comment organiser les répertoires, gestion des dépendances) — si elles ne sont pas explicitement enregistrées, les sessions suivantes ne peuvent pas comprendre ces choix. Pire, les sessions suivantes pourraient prendre des décisions contradictoires. La première équipe de construction a utilisé des fondations en béton, la deuxième ne le sait pas et y a enfoncé des pilotis en bois — les fondations se fissurent.
 
-La recherche d'Anthropic sur le développement d'applications longue durée recommande explicitement de séparer l'initialisation de l'implémentation. Leurs données expérimentales : les projets utilisant une phase d'initialisation dédiée ont montré des taux de complétion de fonctionnalités 31 % plus élevés dans les scénarios multi-sessions par rapport aux approches mixtes. L'insight clé — le temps investi dans la phase d'initialisation est entièrement récupéré dans les 3-4 sessions suivantes. Plus les fondations sont solides, plus vite les murs montent.
+[Anthropic: initializer / coding agent](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 Le guide de harness engineering d'OpenAI Codex souligne également le principe du « dépôt comme registre opérationnel » — établir une structure opérationnelle claire dès la première exécution, ou chaque nouvelle session doit ré-inférer les conventions du projet.
 
@@ -122,7 +126,9 @@ Le guide de harness engineering d'OpenAI Codex souligne également le principe d
 - [ ] Everything committed to git
 ```
 
-## Exemple concret
+## Exemple pédagogique
+
+> Illustration pédagogique : le scénario et ses chiffres sont des hypothèses explicatives, pas des mesures d’une expérience publiée.
 
 Deux approches d'initialisation pour un projet frontend React :
 

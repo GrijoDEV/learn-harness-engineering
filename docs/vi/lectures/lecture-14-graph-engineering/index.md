@@ -261,7 +261,7 @@ Trước tiên vạch rõ ranh giới: **Graph Engineering là cái tên chỉ t
 
 **Thứ chỉ có sau khi khái niệm phát hành**
 
-- [GraphArc](https://github.com/CodeGraphContext/grapharc) (2026-08-02): tự xưng là "triển khai thời gian thực đầu tiên của Graph Engineering". Nó biến quá trình thực thi agent từ trace chôn trong log thành một **đồ thị điều phối thời gian thực tương tác** — mỗi agent, mỗi quan hệ phụ thuộc, mỗi điểm quyết định đều được vẽ ra, trực quan hóa toàn bộ đồ thị trước khi thực thi, bạn xác nhận (thậm chí có thể xem bằng điện thoại) rồi mới cho chạy. Tác giả có nền tảng làm công cụ đồ thị cho hơn 4000 nhà phát triển, định hướng là "quan sát được, gỡ lỗi được, kỹ thuật hóa được". Rất mới, tính năng còn ở giai đoạn đầu.
+- [GraphArc](https://github.com/CodeGraphContext/grapharc)
 
 **Thứ đã có trước khi khái niệm phát hành (chúng không gọi là Graph Engineering, nhưng chúng mới là thứ bạn dùng khi xây dựng)**
 

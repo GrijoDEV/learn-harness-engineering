@@ -9,13 +9,26 @@ Vous pensez connaître le monde de l'IA : abonnement Claude Pro, clé API GPT-4o
 
 Votre premier réflexe pourrait être : « ce modèle n'est pas assez bon, il faut passer au niveau supérieur ». Attendez. Avant de sortir la carte bancaire, envisagez que le problème ne soit peut-être pas le modèle.
 
-Regardons quelques chiffres. Fin 2025, les meilleurs agents de codage atteignent environ 50-60 % sur SWE-bench Verified. Et cela sur des tâches soigneusement choisies, avec descriptions claires et tests existants. Dans votre environnement quotidien — exigences floues, peu ou pas de tests, règles métier implicites partout — ce chiffre baisse encore.
+Claude Sonnet 4.5 · 2025-09-29 · SWE-bench Verified
+
+| Score | Tasks | Trials | Scaffold |
+| --- | --- | --- | --- |
+| 77.2% | 500 | 10 | bash + string replacement |
+
+Les résultats de production n’isolent pas une cause. Les scores s’appliquent au modèle, scaffold, jeu de données et protocole indiqués, pas à toutes les tâches réelles. [Anthropic: methodology](https://www.anthropic.com/news/claude-sonnet-4-5)
 
 Derrière ces chiffres se cache pourtant une vérité contre-intuitive.
 
 ## Même cheval, destins différents
 
-Anthropic a mené une expérience contrôlée. Même prompt (« construire un éditeur de jeux rétro 2D »), même modèle (Opus 4.5). Premier essai : nu, sans support — 20 minutes, 9 dollars, les fonctionnalités centrales ne fonctionnent pas. Deuxième essai : harness complet (architecture planner + generator + evaluator) — 6 heures, 200 dollars, le jeu est jouable.
+> Même modèle et même prompt, mais budgets de temps et de coût différents. Ce n’est pas une expérience à budget égal isolant un composant. Le jeu fonctionnait au niveau essentiel, avec des défauts persistants. [Anthropic](https://www.anthropic.com/engineering/harness-design-long-running-apps)
+
+Même modèle et même prompt, mais budgets de temps et de coût différents. Ce n’est pas une expérience à budget égal isolant un composant. Le jeu fonctionnait au niveau essentiel, avec des défauts persistants. [Anthropic](https://www.anthropic.com/engineering/harness-design-long-running-apps)
+
+| Opus 4.5 | Duration | USD |
+| --- | --- | --- |
+| Solo | 20 min | 9 |
+| Full harness | 6 h | 200 |
 
 Ils n'ont pas changé de modèle. Opus 4.5 restait Opus 4.5. Ce qui a changé, c'est le harnachement.
 
@@ -37,7 +50,7 @@ Les tâches longues sur plusieurs sessions sont encore pires : les découvertes 
 
 ## Concepts clés
 
-- **Écart de capacité** : l'écart entre performance sur benchmark et performance réelle. 50-60 % sur SWE-bench Verified signifie que près de la moitié des vrais problèmes restent non résolus.
+- Les résultats de production n’isolent pas une cause. Les scores s’appliquent au modèle, scaffold, jeu de données et protocole indiqués, pas à toutes les tâches réelles.
 - **Harness** : tout ce qui est hors du modèle — instructions, outils, environnement, gestion d'état, feedback de vérification. Si ce ne sont pas des poids de modèle, c'est du harness.
 - **Échec induit par le harness** : le modèle a la capacité, mais l'environnement d'exécution a des défauts structurels.
 - **Écart de vérification** : différence entre la confiance de l'agent et la correction réelle. L'agent dit « terminé » alors que ce n'est pas terminé.
@@ -68,17 +81,19 @@ Completion criteria:
 
 ## L'expérience du million de lignes
 
-OpenAI a mené en 2025 une expérience ambitieuse : utiliser Codex pour construire un produit interne complet depuis un dépôt git vide. Cinq mois plus tard, le dépôt comptait environ un million de lignes — logique applicative, infrastructure, tooling, documentation, outils internes — toutes générées par agents. Trois ingénieurs pilotaient Codex, ouvrant et fusionnant environ 1 500 PRs, soit 3,5 PRs par personne et par jour.
+Les résultats de production n’isolent pas une cause. Les scores s’appliquent au modèle, scaffold, jeu de données et protocole indiqués, pas à toutes les tâches réelles. [OpenAI: 2026-02-11](https://openai.com/index/harness-engineering/)
 
-Contrainte clé : **les humains n'écrivent jamais directement le code.** Ce n'était pas un gadget, mais un moyen de forcer l'équipe à comprendre ce qui change quand le travail principal de l'ingénieur n'est plus d'écrire du code, mais de concevoir des environnements, exprimer l'intention et construire des boucles de feedback.
+Les résultats de production n’isolent pas une cause. Les scores s’appliquent au modèle, scaffold, jeu de données et protocole indiqués, pas à toutes les tâches réelles.
 
 Au début, la progression était plus lente que prévu. Non pas parce que Codex était incapable, mais parce que l'environnement était incomplet : il manquait outils, abstractions et structures internes. Le travail des ingénieurs est devenu : découper de grands objectifs en petits blocs (design, code, review, test), laisser l'agent les assembler, puis utiliser ces blocs pour débloquer des tâches plus complexes. Quand quelque chose échouait, la correction était rarement « essaie plus fort », mais plutôt « quelle capacité manque à l'agent, et comment la rendre compréhensible et exécutable ? ».
 
-Cette expérience prouve directement la thèse de cette leçon : **le même modèle produit des résultats radicalement différents dans un environnement nu et dans un environnement avec harness complet.** Le modèle n'a pas changé. L'environnement, oui.
+Les résultats de production n’isolent pas une cause. Les scores s’appliquent au modèle, scaffold, jeu de données et protocole indiqués, pas à toutes les tâches réelles.
 
 > Source : [OpenAI: Harness engineering: leveraging Codex in an agent-first world](https://openai.com/index/harness-engineering/)
 
-## Un exemple plus terre à terre
+## Exemple pédagogique
+
+> Illustration pédagogique : le scénario et ses chiffres sont des hypothèses explicatives, pas des mesures d’une expérience publiée.
 
 Une équipe a utilisé Claude Sonnet pour ajouter un endpoint API à une application Python moyenne (FastAPI + PostgreSQL + Redis, environ 15 000 lignes).
 
@@ -103,6 +118,8 @@ Ils n'ont pas changé le modèle. Ils ont changé le harness.
 - [HumanLayer: Skill Issue — Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
 - [SWE-bench Leaderboard](https://www.swebench.com/)
 - [Thoughtworks Technology Radar: Harness Engineering](https://www.thoughtworks.com/radar)
+
+- [Anthropic: Sonnet 4.5 SWE-bench methodology, 2025-09-29](https://www.anthropic.com/news/claude-sonnet-4-5)
 
 ## Exercices
 

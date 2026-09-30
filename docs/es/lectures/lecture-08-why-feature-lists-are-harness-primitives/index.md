@@ -5,6 +5,8 @@
 
 # Lección 08. Usa listas de funciones para limitar al agente
 
+> Guía de ingeniería: los umbrales son valores didácticos ajustables, no límites demostrados. Los tokens dependen del tokenizador y del contenido, no solo de las líneas.
+
 Pides a un agente que construya un sitio de e-commerce. Cuando termina, te dice "done". Miras el código: la autenticación de usuario funciona, pero el botón de checkout del carrito no hace nada y el flujo de pago no está conectado. El problema: nunca le dijiste qué significa "done", así que usó su propio estándar: "escribí mucho código y parece bastante completo".
 
 Para muchas personas, las listas de funciones son solo una nota: escribes cosas para no olvidarlas y luego las dejas de lado. Pero en el mundo del harness, una lista de funciones no es una nota para humanos: es la columna vertebral de todo el harness. El scheduler depende de ella para elegir tareas, el verifier para juzgar la finalización y el handoff reporter para generar resúmenes. Si rompes la columna, todo el cuerpo queda paralizado.
@@ -23,7 +25,7 @@ Did user auth, shopping cart mostly done, still need payments
 
 ¿Puede una nueva sesión de agente responder preguntas a partir de esta nota? ¿Qué significa "mostly done"? ¿Qué tests pasó el carrito? ¿Qué bloquea los pagos? La respuesta a todo es "nadie lo sabe". Es como decirle al médico "me duele el estómago, últimamente más o menos bien": ¿qué medicina puede recetar?
 
-Resultado: la nueva sesión gasta 20 minutos infiriendo el estado del proyecto y quizá reimplementa funciones ya terminadas. Los datos de ingeniería de Anthropic muestran que buenos registros de progreso reducen el tiempo de diagnóstico al iniciar sesión entre 60% y 80%.
+Registra progreso y verificación en archivos versionados para que la siguiente sesión inspeccione el estado. La fuente explica el mecanismo sin cuantificar el ahorro de arranque. [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 ## Máquina de estados de funciones
 
@@ -104,15 +106,15 @@ El agente no puede cambiar directamente el estado de una función a `passing`. S
 
 Cada función debe tener alcance "completable en una sesión". Si es demasiado amplia no terminará; si es demasiado pequeña, crece el coste de gestión. "El usuario puede añadir items al carrito" tiene buena granularidad. "Implementar el carrito" es demasiado amplio. "Crear el campo name en el modelo Cart" es demasiado estrecho. Como cortar un filete: ni la pieza entera ni carne molida.
 
-## Caso real
+## Ejemplo didáctico
+
+> Ejemplo didáctico: el escenario y sus cifras son supuestos para explicar el mecanismo, no mediciones de un experimento publicado.
 
 Una plataforma e-commerce con 10 funciones. Se compararon dos enfoques de seguimiento:
 
 **Modo memo**: El agente usa notas sin estructura. Después de 3 sesiones, las notas quedan como "hice user auth y product list, shopping cart casi listo pero con bugs, payments sin empezar". La nueva sesión necesita 20 minutos para inferir estado y acaba reimplementando funciones ya completadas. Como una lista de compras que dice "leche, pan y esa cosa": en la tienda sigues sin saber qué comprar.
 
 **Modo columna vertebral**: Cada función tiene estado claro y comando de verificación. La nueva sesión lee la lista y en 3 minutos sabe: F01-F05 están `passing`, F06 está `active`, F07-F10 están `not_started`. Continúa directamente desde F06, sin retrabajo.
-
-Resultado cuantificado: los proyectos que usan listas de funciones estructuradas muestran una tasa de finalización de funciones 45% mayor que el seguimiento libre, con cero implementaciones duplicadas.
 
 ## Ideas clave
 

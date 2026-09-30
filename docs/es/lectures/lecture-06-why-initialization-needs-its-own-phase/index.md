@@ -5,6 +5,8 @@
 
 # Lección 06. Inicializa antes de cada sesión del agente
 
+> Guía de ingeniería: los umbrales son valores didácticos ajustables, no límites demostrados. Los tokens dependen del tokenizador y del contenido, no solo de las líneas.
+
 Inicias una nueva sesión de agente y dices "añade una funcionalidad de búsqueda." Salta directamente a codificar — un entusiasmo admirable. Después de 20 minutos descubre que el framework de pruebas no está configurado correctamente, dedica otros 10 a arreglar eso, luego el formato del script de migración de base de datos está mal, más ajustes. La funcionalidad de búsqueda eventualmente se añade, pero toda la sesión fue ineficiente — la mayor parte del tiempo se fue en "averiguar cómo funciona este proyecto" en lugar de escribir la funcionalidad de búsqueda.
 
 El mejor enfoque: antes de dejar que el agente comience a trabajar, usa una fase separada para preparar el entorno base, hacer pasar los comandos de verificación y entender la estructura del proyecto. Es como construir una casa — no viertes los cimientos y levantas paredes simultáneamente. Si lo haces, las paredes se levantan antes de que los cimientos hayan curado, y todo el edificio tiene que ser demolido y empezado de nuevo. Vierte los cimientos primero, deja que curen, luego construye las paredes — limpio y eficiente.
@@ -37,6 +39,8 @@ flowchart TB
 
 ## Qué sucede cuando los mezclas
 
+> Ejemplo didáctico: el escenario y sus cifras son supuestos para explicar el mecanismo, no mediciones de un experimento publicado.
+
 El problema más directo: los cimientos no se asientan correctamente. El agente gasta el 80% de su esfuerzo en código de funcionalidades y el 20% configurando casualmente algo de infraestructura. El framework de pruebas está configurado pero nunca verificado, las reglas de lint están establecidas pero demasiado laxas, no se creó ningún archivo de progreso. Estos defectos no son obvios en la primera sesión (porque el agente todavía recuerda lo que hizo), pero salen a la luz en la segunda sesión — el nuevo agente no sabe cómo ejecutar, probar o en qué punto están las cosas. Cimientos chapuceros, edificio inestable.
 
 Un costo más oculto es la "acumulación no verificada" — el código de funcionalidades escrito antes de que el framework de pruebas esté configurado es código sin verificación. Cuando finalmente vuelves para añadir pruebas a ese código, podrías descubrir que el diseño estaba mal desde el principio — si lo hubieras sabido, lo habrías implementado de manera diferente. Como colocar baldosas sobre hormigón húmedo — cuando descubres que el suelo no está nivelado, todas las baldosas tienen que ser levantadas y rehechas.
@@ -45,7 +49,7 @@ El presupuesto de sesión también se está desperdiciando. El trabajo de inicia
 
 El problema más fácilmente pasado por alto son las minas de suposiciones implícitas. Las decisiones que el agente toma durante la inicialización (qué framework de pruebas, cómo organizar directorios, gestión de dependencias) — si no se registran explícitamente, las sesiones posteriores no pueden entender estas decisiones. Peor aún, las sesiones posteriores podrían tomar decisiones contradictorias. El primer equipo de construcción usó cimientos de hormigón, el segundo equipo no lo sabe y clavó pilotes de madera en ellos — los cimientos se agrietan.
 
-La investigación de Anthropic sobre desarrollo de aplicaciones de larga duración recomienda explícitamente separar la inicialización de la implementación. Sus datos experimentales: los proyectos que usan una fase de inicialización dedicada mostraron un 31% más de tasa de completitud de funcionalidades en escenarios de múltiples sesiones comparado con enfoques mixtos. La perspectiva clave — el tiempo invertido en la fase de inicialización se recupera completamente en las siguientes 3-4 sesiones. Cuanto más sólidos los cimientos, más rápido se levantan las paredes.
+[Anthropic: initializer / coding agent](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 La guía de ingeniería de harness de Codex de OpenAI también enfatiza el principio del "repositorio como registro operativo" — establece una estructura operativa clara desde la primera ejecución, o cada nueva sesión tendrá que re-inferir las convenciones del proyecto.
 
@@ -122,7 +126,9 @@ La guía de ingeniería de harness de Codex de OpenAI también enfatiza el princ
 - [ ] Everything committed to git
 ```
 
-## Ejemplo del mundo real
+## Ejemplo didáctico
+
+> Ejemplo didáctico: el escenario y sus cifras son supuestos para explicar el mecanismo, no mediciones de un experimento publicado.
 
 Dos enfoques de inicialización para un proyecto frontend de React:
 

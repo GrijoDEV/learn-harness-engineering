@@ -5,6 +5,8 @@
 
 # 13-maʼruza. Qoʻlda prompt yozishdan avtonom loop'largacha
 
+> Muhandislik tavsiyasi: raqamli chegaralar sozlanadigan o‘quv qiymatlari, tajribada tasdiqlangan chegaralar emas. Token soni faqat qatorga emas, tokenizer va mazmunga bog‘liq.
+
 Birinchi oʻn ikki maʼruzada oʻrgangan hamma narsa bir taxminga tayanadi: **siz klaviatura oldida oʻtirib, birma-bir koʻrsatmalar terasiz.**
 
 Siz `AGENTS.md` ni yozdingiz (1–4-maʼruzalar), holat boshqaruvini qurdingiz (5–6-maʼruzalar), funksiyalar roʻyxati bilan skopni chekladingiz (7–8-maʼruzalar), sessiya oxirida toza topshirish qoldirdingiz (9, 12-maʼruzalar) va runtime ni kuzatuvchan qildingiz (10–11-maʼruzalar). Lekin bularning barchasi uchun har doim siz trigger edingiz. Agent hech qachon oʻzi ish boshlashga qaror qilmagan — chunki hech kim "boshlash" tugmasini bosmagan.
@@ -84,7 +86,11 @@ Ushbu maʼruza mavzusi boʻlgan Loop Engineering (Loop muhandisligi) hech qanday
 
 Siz har safar `/goal` terishingiz shart emas. Lekin u qayerdan kelganini va nima uchun shunday koʻrinishini tushunish — bu loop muhandisligining yadrosini tushunishdir. Murakkabroq loopʼlar shunchaki rejalashtirish, parallelizm, izolyatsiya va xotira kabi qismlarni shu uchta asos: maqsad, tekshirish, toʻxtash sharti ustiga qoʻshadi.
 
+> O‘quv misoli: vaziyat va raqamlar tushuntirish uchun faraz qilingan, chop etilgan tajriba o‘lchovlari emas.
+
 ## 2026-yil iyun: Bir haftada uchta odam bir xil gʻoyani oldi
+
+> O‘quv misoli: vaziyat va raqamlar tushuntirish uchun faraz qilingan, chop etilgan tajriba o‘lchovlari emas.
 
 2026-yil iyun oyining birinchi haftasida kodlash agentlari infratuzilmasini qurgan uchta amaliyotchilar — bir-birlari bilan maslahatlashmasdan — turli soʻzlar bilan bir xil narsani aytdilar.
 
@@ -96,7 +102,13 @@ Siz har safar `/goal` terishingiz shart emas. Lekin u qayerdan kelganini va nima
 
 > **Loop muhandisligi — agentga prompt yozuvchi odam oʻrnini egallashdir. Buning oʻrniga qiluvchi tizimni siz loyihalasiz.**
 
-Cherny raqamlarni oshkor qildi: 30 dan ortiq ketma-ket kun davomida Claude Codeʼga barcha kod hissalari AI tomonidan mustaqil ravishda kiritildi — 259 ta merge qilingan PR, production kodining 80% dan ortigʻi Cloude tomonidan yozildi va ochiq dasturiy vazifalarda 76% muvaffaqiyat darajasi.
+Boris Cherny · 2025-12-27
+
+| PR | Git commits | + LoC | − LoC | Model |
+| --- | --- | --- | --- | --- |
+| 259 / 30 days | 497 | 40,000 | 38,000 | Claude Code + Opus 4.5 |
+
+Muallif bildirgan shaxsiy ishlab chiqarish, benchmark muvaffaqiyat darajasi yoki inson nazorati yo‘qligining dalili emas. [Boris Cherny](https://twitter.com/bcherny/status/2004887829252317325) · [quoted original post](https://simonwillison.net/tags/boris-cherny/)
 
 Uchta odam. Bir hafta. Bir xil xulosa. Bu ular kelishganligi uchun emas — infratuzilma jim qorindi oʻtdi. Agentlar no trivial vazifalarni kuzatuvsiz tugatish uchun etarlicha ishonchli holga keldi. Rejalashtirish primitivlari (`/loop`, `/goal`, cron) endi vositalarga oʻrnatilgan edi. Bitta agent ishlashining narxi shunchalik pastlashganki, taymerda qayta-qayta ishlatish isrofgarchi koʻrinishdan chiqdi. Barcha qismlar mavjud boʻlganda, ularni birlashtiruvchi harakat hamma uchun bir zumda aniq boʻladi.
 
@@ -267,7 +279,7 @@ flowchart TD
 
 Bu endi bitta agent ishlash emas. Bu har ertalab uygʻonib, oʻzi yerni supurib, eʼtiboringizga chiqadigan narsalarni oldingizga qoʻyadigan doimiy ishlaydigan tizim. Sizning rolingiz quyidagicha boʻladi: **qutik tarkibini koʻrib chiqish, qarorlar qabul qilish va tizim qila olmaydigan naqshni koʻrganingizda, skill va qoidalarni takomillashtirish.**
 
-Cherny bu naqshni ishlatib, 30 kunda hech qachon IDE ochmasdan 259 PR ni merge qildi. OpenAI muhandislari xuddi shu naqshni ishlatib, qoʻlda million qatorda beta mahsulotini qurdilar — hech bir qator kodni oʻzlari yozmasdan.
+Muallif bildirgan shaxsiy ishlab chiqarish, benchmark muvaffaqiyat darajasi yoki inson nazorati yo‘qligining dalili emas.
 
 ## Generator/Evaluator boʻlinishi: Nega modelni oʻz ishlari baholashiga yoʻl qoʻymaslik kerak
 
@@ -293,7 +305,7 @@ Esda tutish uchun bir jumla: **ekipajingizda bir kishi sizga ishonmasligi kerak.
 
 Agar siz yaxshi loyihalangan, haqiqatan ishlayotgan loop nima koʻrinishini koʻrmoqchi boʻlsangiz, [Karpathy autoresearch](https://github.com/karpathy/autoresearch) oʻquv qoʻllanma misolidir.
 
-2026-yil martida Karpathy 630 qatordan iborat Python loyihasini chiqardi. Bunga bitta GPU va tadqiqot yoʻnalishini bering, u tun boʻyi ishlaydi — yuzlab ML trening eksperimentlarini bajaradi, faqat haqiqatan yaxshilaydiganlarini saqlab turadi. Loyiha chiqqandan keyin bir necha kun ichida 66,000+ yulduzga erishdi.
+[Karpathy: autoresearch](https://github.com/karpathy/autoresearch) · [announcement](https://x.com/karpathy/status/2030371219518931079)
 
 ### Uchta fayl, uchta rol
 
@@ -343,8 +355,6 @@ flowchart TD
     8b --> 9
 ```
 
-U soatiga taxminan 12 ta eksperiment ishlatadi. Tunda ishlash (8 soat) taxminan 100 ta eksperiment. Karpathy oʻzi 2 kun davom ettirdi — ~700 ta eksperiment.
-
 Sobiq 5-daqiqalik vaqt byudjeti muhim dizayn tanlovidir — agent nima oʻzgartirishi qatʼiy nazar, har bir eksperiment bir xil vaqtni oladi. Bu barcha natijalar bir xil vaqt byudjeti ostida bevosita solishtirilishi mumkinligini anglatadi — "buning ishlash vaqti uzoqroq, shuning uchun yaxshiroq" degan bahs yoʻq.
 
 ### Chiqish: Uyqudan uygʻonganda nima koʻrasiz
@@ -358,6 +368,8 @@ Faqat haqiqatan yaxshilagan commitlar main novdasida qoladi. Barcha muvaffaqiyat
 **2. results.tsv (toʻliq eksperiment yozuvi)**
 
 Har bir eksperiment — muvaffaqiyatli yoki muvaffaqiyatsiz — yozib boriladi:
+
+> O‘quv misoli: vaziyat va raqamlar tushuntirish uchun faraz qilingan, chop etilgan tajriba o‘lchovlari emas.
 
 ```
 timestamp    commit_hash    val_bpb    vram_mb    description
@@ -375,11 +387,10 @@ Agent nima sinaganini, nima ishlaganini, nima ishlamaganini va keyin nima sinash
 
 ### Haqiqatan nima topdi
 
-Karpathyʼning dastlabki 2 kunlik, ~700 eksperimentlik ishlashidan olingan natijalar:
+- nanochatʼning GPT-2 darajasidagi trening vaqtini 8×H100 da **2.02 soat → 1.80 soat** ga qisqartirdi, taxminan **10.89% tezroq**
+- Topilmalar orasida: oʻrganish darajasi sozlamalari, optimizator sozlash, aktivatsiyani almashtirish, diqqat naqshlari optimallashtirish va boshqalar [Karpathy: leaderboard commit](https://github.com/karpathy/nanochat/commit/f06860494848db080c9a80a0ffa83203b042056b) · [tuning commit](https://github.com/karpathy/nanochat/commit/6ed7d1d82cee16c2e26f45d559ad3338447a6c1b)
 
-- ~700 ta urinish ichidan, taxminan **20 ta yonma-yon ishlaydigan haqiqiy yaxshilash** topildi
-- nanochatʼning GPT-2 darajasidagi trening vaqtini 8×H100 da **2.02 soat → 1.80 soat** ga qisqartirdi, taxminan **11% tezroq**
-- Topilmalar orasida: oʻrganish darajasi sozlamalari, optimizator sozlash, aktivatsiyani almashtirish, diqqat naqshlari optimallashtirish va boshqalar
+> O‘quv misoli: vaziyat va raqamlar tushuntirish uchun faraz qilingan, chop etilgan tajriba o‘lchovlari emas.
 
 Barcha yaxshilanmalar yer sakraydigan kashfiyotlar edimi? Yoʻq. Koʻpchiligi yonma-yon ishlaydigan kichik optimallashtirishlar edi. Lekin bu 20 ta haqiqiy yaxshilash inson tadqiqotchisiga haftalar qoʻlda ish olib kelgan boʻlar edi — agent buni 48 soatda bajardi.
 
@@ -399,7 +410,7 @@ Tez loopʼlar sizni tekshirishni oʻtkazib yuborishga vasvasilaydi. "Yaxshi koʻ
 
 ### 2. Tushunish parchalanishi (Comprehension rot)
 
-Loop qancha tez code joʻnatsa, sizning oʻz kod bazangizni tushunishingiz haqiqatdan shunchalik uzoqlashadi. Chernyning jamoasida kodning 80% i agentlar tomonidan yozilgan — yaʼni jamoaning aksariyat kodi odam tomonidan yozilmagan. Agar siz loop ishlab chiqargan narsani oʻqmasangiz va ishlatmasangiz, tushunishingiz doimiy ravishda pasayadi. **Tez loopʼlar tez oʻqishni talab qiladi.**
+Ishlab chiqarish natijalari bitta sababni ajratmaydi. Benchmark natijalari ko‘rsatilgan model, scaffold, ma’lumot va baholash sharoitlariga tegishli.
 
 ### 3. Kognitiv taslim boʻlish (Cognitive surrender)
 

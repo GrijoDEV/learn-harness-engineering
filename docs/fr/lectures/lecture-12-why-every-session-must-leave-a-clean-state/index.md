@@ -5,6 +5,8 @@
 
 # Leçon 12. Laisser un handoff propre à la fin de chaque session
 
+> Conseil d’ingénierie : ces seuils sont des valeurs pédagogiques ajustables, pas des limites démontrées. Les tokens dépendent du tokenizer et du contenu, pas seulement des lignes.
+
 ## Quel problème cette leçon résout-elle ?
 
 Votre agent travaille tout l'après-midi, modifie 20 fichiers, commite le code, la session se termine. La prochaine session d'agent démarre et découvre immédiatement : le build est cassé, les tests sont rouges, des fichiers de debug temporaires sont partout, la feature list n'a pas été mise à jour, et l'avancement est totalement flou. La nouvelle session passe ses 30 premières minutes juste à comprendre « ce que la session précédente a réellement fait. »
@@ -54,6 +56,8 @@ flowchart LR
 
 Les lois de Lehman sur l'évolution logicielle nous disent : les systèmes soumis à des changements continus augmenteront inévitablement en complexité s'ils ne sont pas activement gérés. C'est particulièrement vrai pour les agents de codage IA — chaque session introduit des changements, et sans nettoyage à la sortie, la dette technique s'accumule de manière exponentielle.
 
+> Illustration pédagogique : le scénario et ses chiffres sont des hypothèses explicatives, pas des mesures d’une expérience publiée.
+
 Les données réelles sont éloquentes. Un projet développé avec des agents pendant 12 semaines, sans stratégie de nettoyage :
 
 - Semaine 1 : Taux de réussite du build 100 %, taux de réussite des tests 100 %, démarrage de nouvelle session 5 min
@@ -66,8 +70,6 @@ Le même projet avec une stratégie de nettoyage :
 - Semaine 1 : 100 %, 100 %, 5 min
 - Semaine 12 : 97 %, 95 %, 9 min
 
-Après 12 semaines : le taux de réussite du build diffère de 29 points de pourcentage, le temps de démarrage d'une nouvelle session diffère de 85 %. Ce n'est pas théorique — c'est une différence observée.
-
 ### Les cinq dimensions de l'état propre
 
 L'état propre, ce n'est pas juste « le code compile ». C'est cinq dimensions évaluées ensemble :
@@ -76,7 +78,7 @@ L'état propre, ce n'est pas juste « le code compile ». C'est cinq dimensions 
 
 **Dimension tests** : Tous les tests passent-ils ? Y compris les tests qui existaient avant la session — la session est responsable de ne pas casser les fonctionnalités existantes. Et cela devrait être vérifié dans le CI, pas juste « ça marche chez moi ».
 
-**Dimension avancement** : L'avancement actuel est-il enregistré dans un artefact lisible par machine ? Sous-tâches terminées avec leurs critères de réussite, sous-tâches en cours mais incomplètes avec leur état actuel, sous-tâches non encore commencées. De bons enregistrements d'avancement réduisent de 60 à 80 % le temps de diagnostic au démarrage d'une session.
+Conserver l’avancement et les vérifications dans des fichiers versionnés permet à la session suivante d’inspecter l’état. La source décrit le mécanisme sans chiffrer le gain de démarrage. [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 **Dimension artefacts** : Y a-t-il des artefacts temporaires périmés ou ambigus ? Logs de debug, fichiers temporaires, code commenté, marqueurs TODO — tous ces éléments augmentent la charge cognitive pour la prochaine session.
 
@@ -152,15 +154,15 @@ git checkout -- .env.local  # Restore to known state
 npm run test  # Verify cleanup didn't break anything
 ```
 
-## Cas concret
+## Exemple pédagogique
+
+> Illustration pédagogique : le scénario et ses chiffres sont des hypothèses explicatives, pas des mesures d’une expérience publiée.
 
 Une application Electron développée avec des agents sur 12 semaines, comparant deux approches :
 
 **Sans stratégie de nettoyage** (groupe de contrôle) : Semaine 12, taux de réussite du build 68 %, taux de réussite des tests 61 %, démarrage de nouvelle session 60+ min, artefacts périmés 103.
 
 **Avec stratégie de nettoyage** (groupe expérimental) : Vérification complète d'état propre à chaque fin de session + boucle de nettoyage hebdomadaire. Semaine 12, taux de réussite du build 97 %, taux de réussite des tests 95 %, démarrage de nouvelle session 9 min, artefacts périmés 11.
-
-À la semaine 12, le taux de réussite du build du groupe expérimental est de 29 points de pourcentage plus élevé, le taux de réussite des tests de 34 points plus élevé, et le temps de démarrage d'une nouvelle session réduit de 85 %.
 
 ## Points clés
 

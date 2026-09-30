@@ -5,6 +5,8 @@
 
 # Aula 12. Deixe uma Transferência Limpa ao Final de Cada Sessão
 
+> Orientação de engenharia: os limites numéricos são valores didáticos ajustáveis, não fronteiras demonstradas. Tokens dependem do tokenizador e do conteúdo, não apenas das linhas.
+
 Seu agente executa tarefas durante toda a tarde, modifica 20 arquivos, faz commit do código e a sessão termina. A próxima sessão do agente é iniciada e imediatamente descobre: o build está quebrado, os testes estão falhando, arquivos temporários de debug estão espalhados por toda parte, a lista de funcionalidades não foi atualizada e o progresso está completamente opaco. Os primeiros 30 minutos da nova sessão são gastos inteiramente tentando "descobrir o que a sessão anterior realmente fez".
 
 Tanto a OpenAI quanto a Anthropic afirmam claramente: **a confiabilidade de longo prazo depende de disciplina operacional, não apenas de sucesso em uma única execução.** A qualidade do estado ao final de cada sessão determina diretamente a eficiência da próxima sessão.
@@ -15,7 +17,7 @@ As leis da evolução de software de Lehman nos dizem que sistemas submetidos a 
 
 Durante cinco meses de experimentos com o Codex, a OpenAI observou algo marcante: **os agentes copiam padrões já presentes no repositório, mesmo quando esses padrões são inconsistentes ou subótimos.** Com o tempo, essa cópia inevitavelmente leva à deriva. A primeira pessoa deixa uma xícara de café na área comum; a segunda pensa "já está bagunçado mesmo" e deixa outra; uma semana depois a mesa está coberta de xícaras. Uma base de código funciona da mesma forma.
 
-A equipe da OpenAI inicialmente gastava 20% de todas as sextas-feiras limpando manualmente a "bagunça de IA", mas essa abordagem claramente não escala. Eles eventualmente chegaram a uma solução sistemática:
+A OpenAI dedicava as sextas à limpeza: um dia útil, 20% da semana, não 20% da sexta-feira. [OpenAI](https://openai.com/index/harness-engineering/)
 
 1. **Codifique as "regras de ouro" no repositório**: Regras como "prefira o pacote utilitário compartilhado em vez de helpers ad hoc criados manualmente" (mantenha os invariantes centralizados) e "não faça suposições aleatórias sobre estruturas de dados" (valide os limites ou dependa de SDKs tipados). Essas regras são concretas, mecânicas e verificáveis automaticamente.
 
@@ -45,7 +47,7 @@ flowchart LR
     Fix --> Build
 ```
 
-Mas isso ainda não é suficiente. O progresso atual precisa ser registrado em artefatos legíveis por máquina: subtarefas concluídas com seus critérios de aprovação atendidos, subtarefas em andamento mas ainda incompletas com seu estado atual, e subtarefas que ainda não foram iniciadas. Bons registros de progresso podem reduzir o tempo de diagnóstico no início de uma sessão em 60–80%.
+Registre progresso e verificações em arquivos versionados para a próxima sessão inspecionar o estado. A fonte explica o mecanismo sem quantificar redução no tempo de início. [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 Artefatos temporários — logs de depuração, arquivos temporários, código comentado, marcadores TODO — também devem ser removidos, pois aumentam a carga cognitiva da próxima sessão. O fluxo padrão de inicialização também deve continuar funcionando. A próxima sessão consegue começar a trabalhar sem intervenção manual? Inicialização do ambiente, carregamento da base de código, aquisição de contexto e seleção de tarefas — nenhum desses caminhos pode estar quebrado.
 
@@ -76,6 +78,8 @@ A armadilha mental mais comum é pensar: "não tenho tempo para limpar nesta ses
 
 Pior ainda, cada sessão possui seus próprios objetivos. A nova sessão está ali para realizar trabalho novo, não para limpar a bagunça da sessão anterior. Ela ignorará o caos e começará a trabalhar por cima dele, introduzindo ainda mais caos. Esse é o ciclo de retroalimentação positiva da entropia.
 
+> Ilustração didática: o cenário e seus números são hipóteses explicativas, não medições de um experimento publicado.
+
 Os números contam a história. Um projeto desenvolvido com agentes durante 12 semanas, sem estratégia de limpeza:
 
 - Semana 1: taxa de sucesso do build 100%, taxa de sucesso dos testes 100%, inicialização de nova sessão em 5 min
@@ -87,8 +91,6 @@ O mesmo projeto com uma estratégia de limpeza:
 
 - Semana 1: 100%, 100%, 5 min
 - Semana 12: 97%, 95%, 9 min
-
-Após 12 semanas: a taxa de sucesso do build difere em 29 pontos percentuais e o tempo de inicialização de uma nova sessão difere em 85%. Isso não é teórico — é uma diferença observada.
 
 ## Como Fazer
 
@@ -141,7 +143,7 @@ Novas sessões leem esse documento e sabem imediatamente onde priorizar esforço
 
 Todo componente do harness existe porque o modelo não conseguia realizar algo de forma confiável sozinho. Mas, à medida que os modelos evoluem, essas premissas ficam desatualizadas.
 
-Os experimentos da Anthropic demonstraram isso diretamente. O harness inicial incluía um mecanismo de divisão de sprints — quebrando o trabalho em pequenas partes para que o Sonnet 4.5 pudesse concluí-las uma por vez. Quando o Opus 4.6 foi lançado, as capacidades nativas do modelo passaram a lidar autonomamente com a decomposição do trabalho, tornando a construção de sprints uma sobrecarga desnecessária. Após sua remoção, o agente construtor conseguiu trabalhar continuamente por mais de duas horas sem perder o foco — e de forma mais fluida.
+A tabela corresponde ao harness atualizado com Opus 4.6: uma arquitetura com três agentes. A divisão em sprints foi removida. Planner define a especificação, builder implementa e evaluator testa a aplicação e envia feedback para a próxima rodada. [Anthropic](https://www.anthropic.com/engineering/harness-design-long-running-apps)
 
 Mas o avaliador contou uma história diferente. Mesmo com as capacidades mais fortes do Opus 4.6, quando as tarefas se aproximavam do limite de capacidade do modelo, o avaliador continuava agregando valor real — detectando funcionalidades ausentes e implementações simuladas deixadas pelo gerador. Isso significa que o avaliador não é uma decisão fixa de sim ou não; sua utilidade depende de quão próxima a dificuldade da tarefa está da capacidade do modelo.
 
@@ -166,15 +168,15 @@ Quando a produção dos agentes excede em muito a capacidade humana de revisão,
 
 **Ressalva**: Isso é irresponsável em um ambiente de baixa vazão. Mas quando a produção dos agentes excede em muito a atenção humana disponível, geralmente é a troca correta. O critério principal é: **custo médio para corrigir um bug versus custo médio de esperar um humano revisar um PR.** Quando o primeiro é menor que o segundo, realizar merges rapidamente é a decisão correta.
 
-## Caso Real
+## Exemplo didático
+
+> Ilustração didática: o cenário e seus números são hipóteses explicativas, não medições de um experimento publicado.
 
 Um aplicativo Electron desenvolvido com agentes durante 12 semanas, comparando duas abordagens:
 
 **Sem estratégia de limpeza** (grupo de controle): Semana 12, taxa de sucesso do build de 68%, taxa de sucesso dos testes de 61%, inicialização de nova sessão em mais de 60 minutos, 103 artefatos obsoletos.
 
 **Com estratégia de limpeza** (grupo experimental): Verificação completa de estado limpo ao final de cada sessão, além de um loop semanal de limpeza. Na semana 12, taxa de sucesso do build de 97%, taxa de sucesso dos testes de 95%, inicialização de nova sessão em 9 minutos, 11 artefatos obsoletos.
-
-Na semana 12, a taxa de sucesso do build do grupo experimental era 29 pontos percentuais maior, a taxa de sucesso dos testes era 34 pontos maior e o tempo de inicialização de novas sessões era 85% menor. Cada sessão gastava cerca de 5 minutos extras com limpeza, mas ao longo de 12 semanas isso economizou dezenas de horas de caos.
 
 ## Principais Conclusões
 

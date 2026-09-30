@@ -5,6 +5,8 @@
 
 # Aula 03. Tornando o Repositório a Fonte Única da Verdade
 
+> Orientação de engenharia: os limites numéricos são valores didáticos ajustáveis, não fronteiras demonstradas. Tokens dependem do tokenizador e do conteúdo, não apenas das linhas.
+
 As decisões de arquitetura da sua equipe estão espalhadas entre Confluence, Slack, Jira e a cabeça de alguns engenheiros mais experientes. Para humanos isso mal funciona — você pode perguntar para um colega, pesquisar no histórico do chat, vasculhar documentação e, se tudo falhar, encontrar alguém na copa para tirar uma dúvida. Mas, para um agente de IA, informações que não estão no repositório simplesmente não existem.
 
 Isso não é exagero. Um agente possui apenas três fontes de entrada: prompts de sistema e descrições de tarefas, conteúdos de arquivos do repositório e saídas de execução de ferramentas. Seu histórico do Slack, tickets do Jira, páginas do Confluence e aquela decisão de arquitetura discutida com um colega numa sexta-feira à tarde — o agente não consegue ver nada disso. Ele não pode “perguntar para alguém” ou “pesquisar no histórico do chat”. Todo o universo de trabalho dele é o próprio repositório. Tudo o que está fora dele é desconhecido.
@@ -132,7 +134,7 @@ A OpenAI relata cerca de 1.500 PR abertos e integrados em cinco meses por três 
    - Como eu executo isso?
    - Como eu verifico isso?
    - Qual é o progresso atual?
-   
+
    Registre quais perguntas ele não consegue responder e melhore o repositório até que consiga responder todas.
 
 2. **Quantificação da externalização de conhecimento**: Liste todas as decisões e restrições importantes para o desenvolvimento do seu projeto. Marque cada item como “dentro” ou “fora” do repositório. Calcule sua knowledge visibility gap (a proporção de itens fora do repo). Crie um plano para reduzir essa lacuna para menos de 10%.

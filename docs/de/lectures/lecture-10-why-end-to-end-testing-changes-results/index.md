@@ -5,6 +5,8 @@
 
 # Lektion 10. Nur End-to-End-Tests sind echte Verifikation
 
+> Technische Richtwerte: Die Zahlen sind anpassbare Lehrannahmen, keine experimentell bestätigten Grenzen. Tokenzahlen hängen von Tokenizer und Inhalt ab, nicht allein von Zeilen.
+
 Sie bitten den Agenten, eine Datei-Export-Funktion zu einer Electron-App hinzuzufügen. Er schreibt die Render-Prozess-Komponente, das Preload-Skript und die Service-Layer-Logik. Die Unit-Tests für jede Komponente bestehen perfekt. Der Agent sagt: „Es ist fertig." Wenn Sie tatsächlich auf den Export-Button klicken — das Dateipfad-Format ist falsch, die Fortschrittsanzeige aktualisiert sich nicht und der Export großer Dateien verursacht einen Memory-Leak. Fünf Komponenten-Grenzfläche-Defekte, und die Unit-Tests haben keinen einzigen davon erkannt.
 
 Es ist wie bei einer Chorprobe — jede Stimme klingt einzeln perfekt, aber wenn sie zusammen singen, sind die Soprane einen halben Takt schneller als die Bässe, und die Begleitung ist einen Halbton von der Hauptmelodie entfernt. Jede Stimme ist für sich „korrekt", aber das Ganze ist nicht harmonisch.
@@ -116,7 +118,9 @@ FIX: Move file operations to src/preload/file-ops.ts and call via window.api.rea
 
 Jedes Mal, wenn eine neue Art von Agentenfehler beim Code-Review gefunden wird, wandeln Sie ihn in einen automatisierten Check um. Einen Monat später wird Ihr Harness deutlich stärker sein als zu Monatsbeginn. Es ist wie Probenotizen für einen Chor — Probleme aus jeder Probe aufzeichnen, damit sie vor der nächsten überprüft werden können. Im Laufe der Zeit nehmen häufige Fehler ab, und die Musik wird harmonischer.
 
-## Fallbeispiel aus der Praxis
+## Lehrbeispiel
+
+> Lehrbeispiel: Dieses Szenario und seine Zahlen dienen der Erklärung und sind keine Messwerte eines veröffentlichten Experiments.
 
 **Aufgabe**: Implementierung einer Datei-Export-Funktion in einer Electron-App. Umfasst Render-Prozess-UI, Preload-Skript-Dateisystem-Proxy und Service-Layer-Datentransformation.
 

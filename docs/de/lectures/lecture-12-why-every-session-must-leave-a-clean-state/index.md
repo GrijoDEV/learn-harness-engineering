@@ -5,6 +5,8 @@
 
 # Lektion 12. Sauberes Handoff am Ende jeder Session
 
+> Technische Richtwerte: Die Zahlen sind anpassbare Lehrannahmen, keine experimentell bestätigten Grenzen. Tokenzahlen hängen von Tokenizer und Inhalt ab, nicht allein von Zeilen.
+
 Ihr Agent läuft den ganzen Nachmittag, ändert 20 Dateien, committet den Code, die Session endet. Die nächste Agenten-Session startet und stellt sofort fest: der Build ist kaputt, die Tests sind rot, temporäre Debug-Dateien sind überall, die Feature-Liste wurde nicht aktualisiert und der Fortschritt ist völlig unklar. Die neue Session verbringt ihre ersten 30 Minuten nur damit herauszufinden, „was die letzte Session eigentlich gemacht hat."
 
 Sowohl OpenAI als auch Anthropic stellen klar: **Langfristige Zuverlässigkeit hängt von operativer Disziplin ab, nicht nur vom Erfolg einzelner Läufe.** Die Qualität des Zustands beim Session-Exit bestimmt direkt die Effizienz der nächsten Session. Betrachten Sie es wie Git-Best-Practices — jeder Commit sollte eine atomare, kompilierbare Änderung sein, kein Haufen halbfertigen Codes.
@@ -52,6 +54,8 @@ flowchart LR
 
 Lehmans Gesetze der Software-Evolution sagen uns: Systeme, die kontinuierlichen Änderungen unterliegen, werden unausweichlich an Komplexität zunehmen, es sei denn, sie werden aktiv verwaltet. Dies gilt insbesondere für KI-Coding-Agenten — jede Session führt Änderungen ein, und ohne Cleanup beim Exit akkumuliert sich technische Schuld exponentiell.
 
+> Lehrbeispiel: Dieses Szenario und seine Zahlen dienen der Erklärung und sind keine Messwerte eines veröffentlichten Experiments.
+
 Echte Daten sind aussagekräftig. Ein Projekt, das 12 Wochen lang mit Agenten entwickelt wurde, ohne Cleanup-Strategie:
 
 - Woche 1: Build-Pass-Rate 100%, Test-Pass-Rate 100%, neue Session Startup 5 Min.
@@ -64,8 +68,6 @@ Dasselbe Projekt mit einer Cleanup-Strategie:
 - Woche 1: 100%, 100%, 5 Min.
 - Woche 12: 97%, 95%, 9 Min.
 
-Nach 12 Wochen: Die Build-Pass-Rate unterscheidet sich um 29 Prozentpunkte, die Startup-Zeit für neue Sessions um 85%. Das ist nicht theoretisch — es ist ein beobachteter Unterschied.
-
 ### Fünf Dimensionen des Clean State
 
 Clean State bedeutet nicht nur „der Code kompiliert". Es sind fünf Dimensionen, die zusammen bewertet werden:
@@ -74,7 +76,7 @@ Clean State bedeutet nicht nur „der Code kompiliert". Es sind fünf Dimensione
 
 **Test-Dimension**: Bestehen alle Tests? Einschließlich der Tests, die vor der Session existierten — die Session ist dafür verantwortlich, bestehende Funktionalität nicht zu beschädigen. Und es sollte in CI verifiziert werden, nicht nur „funktioniert auf meinem Rechner".
 
-**Fortschritts-Dimension**: Ist der aktuelle Fortschritt in einem maschinenlesbaren Artefakt dokumentiert? Abgeschlossene Teilaufgaben mit ihren Bestehenskriterien, in Bearbeitung befindliche aber unvollständige Teilaufgaben mit aktuellem Zustand, noch nicht gestartete Teilaufgaben. Gute Fortschrittsaufzeichnungen reduzieren 60-80% der Diagnosezeit beim Session-Startup.
+Fortschritt und Prüfergebnisse gehören in versionierte Dateien, damit die nächste Sitzung den Zustand prüfen kann. Die Quelle beschreibt den Mechanismus ohne prozentuale Zeitersparnis. [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 **Artefakt-Dimension**: Gibt es veraltete oder mehrdeutige temporäre Artefakte? Debug-Logs, temporäre Dateien, auskommentierter Code, TODO-Marker — all diese erhöhen die kognitive Belastung für die nächste Session.
 
@@ -150,15 +152,15 @@ git checkout -- .env.local  # Restore to known state
 npm run test  # Verify cleanup didn't break anything
 ```
 
-## Fallbeispiel aus der Praxis
+## Lehrbeispiel
+
+> Lehrbeispiel: Dieses Szenario und seine Zahlen dienen der Erklärung und sind keine Messwerte eines veröffentlichten Experiments.
 
 Eine Electron-App, die über 12 Wochen mit Agenten entwickelt wurde, im Vergleich zweier Ansätze:
 
 **Ohne Cleanup-Strategie** (Kontrollgruppe): Woche 12, Build-Pass-Rate 68%, Test-Pass-Rate 61%, neue Session Startup 60+ Min., veraltete Artefakte 103.
 
 **Mit Cleanup-Strategie** (Versuchsgruppe): Vollständiger Clean-State-Check am Ende jeder Session + wöchentliche Cleanup-Schleife. Woche 12, Build-Pass-Rate 97%, Test-Pass-Rate 95%, neue Session Startup 9 Min., veraltete Artefakte 11.
-
-In Woche 12 liegt die Build-Pass-Rate der Versuchsgruppe um 29 Prozentpunkte höher, die Test-Pass-Rate um 34 Punkte höher und die Startup-Zeit für neue Sessions um 85% niedriger.
 
 ## Wichtigste Erkenntnisse
 

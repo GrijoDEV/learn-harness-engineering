@@ -21,15 +21,17 @@ When a harness lacks observability, four categories of problems appear systemati
 
 **Retries become blind guesses.** When the agent doesn't know why something failed, its retry direction is random. It might hammer away in the wrong direction — fixing unrelated code paths while ignoring the real root cause. Every blind retry burns tokens and time.
 
-**Session handoff information cliff.** When incomplete work is handed to the next session, missing observability means the new session has to diagnose the system state from scratch. Anthropic's observations of long-running agents show that this redundant diagnosis can eat up 30-50% of total session time.
+Record progress and verification results in versioned files so the next session can inspect project state. The cited source describes the mechanism without reporting a percentage reduction in startup time. [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
-## A Real Claude Code Scenario
+## Illustrative Example
+
+> Teaching illustration: this scenario and its numerical values are assumed for explanation, not observations from a published experiment.
 
 Consider a harness using a "planner-generator-evaluator" three-role workflow, executing the task "add dark mode to the app."
 
 **Without observability:** The planner outputs a vague description. The generator implements dark mode based on that vagueness, but the result doesn't match the planner's implicit expectations. The evaluator rejects it based on their own implicit standards but can't articulate what's specifically wrong — just "it doesn't feel right." The generator retries blindly on vague rejection reasons. The cycle repeats 3-4 times, taking about 45 minutes, and barely produces an acceptable output.
 
-**With full observability:** The planner outputs a sprint contract listing which components to modify, verification standards for each, and exclusions (e.g., no print styles). The generator implements according to the contract, and runtime observability records each component's style loading and application process. The evaluator uses a scoring rubric to evaluate dimension by dimension, citing specific evidence: "Button color contrast is insufficient (WCAG AA standard 4.5:1, measured 2.1:1)." One iteration produces a high-quality result, in about 15 minutes.
+**With full observability:** The planner outputs a sprint contract listing which components to modify, verification standards for each, and exclusions (e.g., no print styles). The generator implements according to the contract, and runtime observability records each component's style loading and application process. The evaluator uses a scoring rubric to evaluate dimension by dimension, citing specific evidence: "Button color contrast is insufficient (WCAG AA standard 4.5:1, measured 2.1:1)." One iteration produces a high-quality result, in about 15 minutes. [W3C: contrast minimum](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html)
 
 3x efficiency difference. The only variable is observability.
 
@@ -122,7 +124,7 @@ Create a trace for each harness session, a span for each task, and sub-spans for
 
 ## Anthropic's Three-Agent Architecture Experiment
 
-In March 2026, Anthropic published a systematic harness experiment. They ran the same task ("build a browser-based DAW using the Web Audio API") with three different architectures and recorded detailed phase-by-phase data:
+This table describes the updated Opus 4.6 harness: one architecture with three agents, not three architectures. Sprint decomposition was removed. The planner creates the specification; the builder implements it; the evaluator tests the running application and sends feedback for another build round. [Anthropic: updated harness results](https://www.anthropic.com/engineering/harness-design-long-running-apps)
 
 | Agent & Phase | Duration | Cost |
 |---------------|----------|------|
@@ -137,12 +139,6 @@ In March 2026, Anthropic published a systematic harness experiment. They ran the
 
 Each of the three agents had a distinct role, and each played a clear part in observability:
 
-**Planner:** Receives a 1-4 sentence user requirement and expands it into a full product spec. It was instructed to "be bold in scope" and "focus on product context and high-level technical design rather than detailed technical implementation." The reasoning: if the planner prematurely specifies granular technical details and gets them wrong, those errors cascade downstream. A better approach is to constrain deliverables and let the agent find its own path during execution.
-
-**Generator:** Implements feature by feature, sprint by sprint. Before each sprint, it negotiates a sprint contract with the evaluator defining what "done" means for that feature block. It then implements according to the contract, self-evaluates, and hands off to QA.
-
-**Evaluator:** Uses Playwright MCP to interact with the running app like a real user — testing UI functionality, API endpoints, and database state. It scores each sprint across four dimensions: product depth, functionality, visual design, and code quality. Each dimension has a hard threshold — if any falls short, the sprint fails and the generator receives detailed feedback for fixes.
-
 Example feedback from QA round 1: "This is a visually impressive app with good AI integration, but several core DAW features are presentational only, lacking interaction depth: clips can't be dragged/moved, there's no instrument UI panel (synth knobs, drum pads), and no visual effects editor (EQ curves, compressor meters)." These aren't edge cases — they're the core interactions that make a DAW usable. Specific, evidence-backed feedback — not "it doesn't feel right."
 
 The evaluator wasn't always this sharp. Early versions would identify reasonable issues, then talk themselves into dismissing those issues as not severe, ultimately approving the work. The fix: read the evaluator's logs, find the points where its judgment diverged from human judgment, and update the QA prompt to address those specific problems. After several rounds of this development loop, the evaluator's scoring became reliable.
@@ -155,7 +151,7 @@ The evaluator wasn't always this sharp. Early versions would identify reasonable
 - **Both observability layers are essential.** Runtime signals explain "what happened," process artifacts explain "why it was done this way."
 - **Sprint contracts front-load alignment.** They prevent the generator from building something the evaluator immediately rejects for foreseeable reasons.
 - **Scoring rubrics make evaluation reproducible.** Different evaluators produce similar scores for the same output.
-- **Missing observability wastes 30-50% of session time on redundant diagnosis.**
+- Record progress and verification results in versioned files so the next session can inspect project state. The cited source describes the mechanism without reporting a percentage reduction in startup time.
 
 ## Further Reading
 

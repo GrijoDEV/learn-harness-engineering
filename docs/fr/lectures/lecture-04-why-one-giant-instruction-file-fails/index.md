@@ -5,6 +5,8 @@
 
 # Leçon 04. Répartir les instructions entre fichiers
 
+> Conseil d’ingénierie : ces seuils sont des valeurs pédagogiques ajustables, pas des limites démontrées. Les tokens dépendent du tokenizer et du contenu, pas seulement des lignes.
+
 Vous avez pris le harness engineering au sérieux. Vous avez créé un `AGENTS.md` et vous y avez mis toutes les règles, contraintes et leçons apprises auxquelles vous pouviez penser. Un mois plus tard, le fichier faisait 300 lignes ; deux mois plus tard, 450 ; trois mois plus tard, 600. Puis vous remarquez que les performances de l'agent se dégradent : sur une simple correction de bug, il consomme beaucoup de contexte à traiter des instructions de déploiement sans rapport ; une contrainte de sécurité critique enfouie à la ligne 300 est ignorée ; trois règles de style contradictoires font que l'agent en choisit une au hasard à chaque fois.
 
 C'est le piège du "fichier d'instructions géant". C'est comme une valise trop remplie : tout semble utile, donc on tasse jusqu'à ce que la fermeture menace de céder. Pour trouver un sous-vêtement de rechange, il faut vider tout le sac. Vous transportez une valise pleine, mais vous n'utilisez peut-être qu'un tiers de ce qu'elle contient.

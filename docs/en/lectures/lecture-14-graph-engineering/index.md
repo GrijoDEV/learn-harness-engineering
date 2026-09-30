@@ -261,7 +261,7 @@ First, draw the line: **"Graph Engineering" is a name that only exists after Jul
 
 **Post-release projects (the one actually called Graph Engineering)**
 
-- [GraphArc](https://github.com/CodeGraphContext/grapharc) (2026-08-02): calls itself "the first real-time implementation of Graph Engineering." It turns agent execution from traces buried in logs into an **interactive real-time orchestration graph** — every agent, dependency, and decision point drawn out, visualized for your approval before execution (you can even inspect it from your phone). The author's background is building graph tooling for 4,000+ developers; the direction is "observable, debuggable, engineerable." Very new, still early-stage.
+- [GraphArc](https://github.com/CodeGraphContext/grapharc)
 
 **Pre-release projects (they don't call it Graph Engineering — but they're what you actually build with)**
 
@@ -325,7 +325,7 @@ Not every task deserves a graph. Five criteria — try at least three before you
 - [goddaehee: Graph Engineering Fact-Check (KR, 2026-07-30)](https://goddaehee.tistory.com/628) — the most complete fact-check: the joke-origin timeline, the fake numbers taken apart, LangGraph data, Hacker News heat comparison
 - [Josh Simmons: We Are Entering the Graph Engineering Phase (2026-07-04)](https://www.drjoshcsimmons.com/writing/we-are-entering-the-graph-engineering-phase) — the serious piece written two weeks before the joke
 - [LangChain: 3 Years of Graph Engineering with LangGraph (2026-07-22)](https://www.langchain.com/blog/3-years-of-graph-engineering-with-langgraph) — the official reply: "not a new idea, the latest name for a well established approach"; LangGraph's 65M+ monthly downloads
-- [explainx: Graph Engineering: AI Agents as Multi-Agent Organizations (2026-07)](https://explainx.ai/blog/graph-engineering-ai-agents-multi-agent-organizations-2026) — hype-spread data (575K views on the original tweet)
+- [explainx: Graph Engineering: AI Agents as Multi-Agent Organizations (2026-07)](https://explainx.ai/blog/graph-engineering-ai-agents-multi-agent-organizations-2026) — hype-spread data
 - [LangChain: The Best AI Agent Frameworks in 2026](https://www.langchain.com/resources/ai-agent-frameworks) — a head-to-head of seven mainstream open-source frameworks: LangGraph, CrewAI, Microsoft Agent Framework, LlamaIndex, Google ADK, OpenAI Agents SDK, Mastra
 - [LangGraph official docs](https://docs.langchain.com/oss/python/langgraph/graph-api) — "Nodes do the work, edges tell what to do next"; the precise definitions of nodes and edges, the first-hand reference for building graphs
 - [Anthropic: Building Effective Agents (Dec 2024)](https://www.anthropic.com/engineering/building-effective-agents) — five patterns that are graphs when drawn; the authoritative workflow-vs-agent distinction

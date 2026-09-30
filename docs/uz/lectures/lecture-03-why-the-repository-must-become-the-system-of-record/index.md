@@ -5,6 +5,8 @@
 
 # 3-maʼruza. Repozitoriyni yagona haqiqat manbaiga aylantiring
 
+> Muhandislik tavsiyasi: raqamli chegaralar sozlanadigan o‘quv qiymatlari, tajribada tasdiqlangan chegaralar emas. Token soni faqat qatorga emas, tokenizer va mazmunga bog‘liq.
+
 Jamoangizning arxitektura qarorlari Confluence, Slack, Jira va bir nechta tajribali muhandislarning boshida tarqalib ketgan. Odamlar uchun bu amallab ishlaydi — siz hamkasbingizdan soʻrashingiz, chat tarixini qidirishingiz, hujjatlarni titkilab chiqishingiz mumkin. Agar boshqa hech narsa yordam bermasa, tanaffus xonasida kimnidir burchakka taqab soʻrab olasiz. Lekin AI agent uchun repozitoriyda mavjud boʻlmagan maʼlumot shunchaki yoʻq degani.
 
 Bu mubolagʻa emas. Agentʼning kiruvchi maʼlumotlari (inputs) aslida nima ekanligini oʻylab koʻring: system promptʼlar va vazifa tavsiflari, repozitoriydagi fayllar tarkibi va vositalardan chiqqan natijalar. Bori shu. Sizning Slack tarixingiz, Jira tiketlari, Confluence sahifalari va juma kuni tushdan keyin qahva ustida hamkasbingiz bilan muhokama qilgan arxitektura qaroringiz — bularning birortasini agent koʻra olmaydi. U “borib birovdan soʻray” yoki “chat tarixini qidiray” deya olmaydi. U repozitoriy ichiga qamab qoʻyilgan muhandisdir — undan tashqaridagi barcha narsalar haqida u hech narsani bilmaydi.

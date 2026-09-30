@@ -70,7 +70,9 @@ Qandaydir bir quyi tizimning yoʻqligi, xuddi oshxonada qaysidir funksional hudu
 
 **Harness komponentlari qiymatini oʻlchash**: modelni oʻzgarmas saqlagan holda komponentlarni olib tashlash tajribasidan foydalaning. Modelni oʻzgarmas qoldiring, quyi tizimlarni birma-bir olib tashlang va qaysi birining olib tashlanishi unumdorlikning eng katta pasayishiga olib kelishini oʻlchang. Eng katta pasayish shu vazifada chegaraviy hissasi eng yuqori komponentni koʻrsatadi; bu avtomatik ravishda haqiqiy toʻsiqni anglatmaydi. Deyarli nol pasayish ham izoh talab qiladi: komponent ortiqcha boʻlishi, yomon loyihalangan boʻlishi yoki bu vazifada yetarli darajada ishga tushmagan boʻlishi mumkin. Toʻsiqni tashxislash uchun avval muvaffaqiyatsizlik jurnallari va sababga bogʻlashdan foydalaning, olib tashlash tajribasini esa yordamchi dalil sifatida talqin qiling: muvaffaqiyatsizlik noaniq vazifa niyati, yetishmagan kontekst, qayta tiklanmaydigan muhit, tekshiruv qayta aloqasi yoʻqligi yoki uzilgan holat boshqaruvi sabablimi?
 
-## Jamoaning hayotiy misoli
+## O‘quv misoli
+
+> O‘quv misoli: vaziyat va raqamlar tushuntirish uchun faraz qilingan, chop etilgan tajriba o‘lchovlari emas.
 
 Bir jamoa TypeScript + React asosidagi frontend ilovasida (~20,000 qator kod) GPT-4oʼdan foydalandi. Ular toʻrtta bosqichdan oʻtishdi — aslini olganda oshxona jihozlarini birma-bir qoʻshib chiqishdi:
 

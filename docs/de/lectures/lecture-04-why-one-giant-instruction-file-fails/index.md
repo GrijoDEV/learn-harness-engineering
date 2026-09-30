@@ -5,6 +5,8 @@
 
 # Lektion 04. Anweisungen auf Dateien verteilen
 
+> Technische Richtwerte: Die Zahlen sind anpassbare Lehrannahmen, keine experimentell bestätigten Grenzen. Tokenzahlen hängen von Tokenizer und Inhalt ab, nicht allein von Zeilen.
+
 Du hast Harness Engineering ernst genommen. Du hast eine `AGENTS.md` erstellt und jede Regel, jede Einschränkung und jede gelernte Lektion hineingepackt, die dir eingefallen ist. Einen Monat später war die Datei auf 300 Zeilen angewachsen, nach zwei Monaten auf 450, nach drei Monaten auf 600. Dann merkst du, dass die Leistung des Agenten tatsächlich schlechter wird: Bei einem einfachen Bugfix verbrennt er massenhaft Kontext für irrelevante Deployment-Anweisungen; eine kritische Sicherheitsregel in Zeile 300 wird komplett ignoriert; drei widersprüchliche Code-Style-Regeln führen dazu, dass der Agent jedes Mal zufällig eine auswählt.
 
 Das ist die Falle der "riesigen Anweisungsdatei". Es ist wie ein überfüllter Koffer: Alles scheint nützlich, also stopfst du es hinein, bis der Reißverschluss fast platzt. Um frische Unterwäsche zu finden, musst du den ganzen Koffer ausleeren. Du trägst einen vollen Koffer, nutzt aber vielleicht nur ein Drittel des Inhalts.

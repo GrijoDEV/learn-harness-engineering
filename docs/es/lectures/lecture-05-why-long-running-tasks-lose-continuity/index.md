@@ -5,6 +5,8 @@
 
 # Lección 05. Mantén vivo el contexto entre sesiones
 
+> Guía de ingeniería: los umbrales son valores didácticos ajustables, no límites demostrados. Los tokens dependen del tokenizador y del contenido, no solo de las líneas.
+
 Le pides a Claude Code que implemente una funcionalidad completa. Se ejecuta durante 30 minutos, hace la mayor parte del trabajo, pero el contexto se está agotando. Inicias una nueva sesión para continuar — y descubres que no recuerda qué decisiones se tomaron la última vez, por qué se eligió la opción A sobre la B, qué archivos ya fueron modificados o en qué estado están las pruebas. Dedica 15 minutos a re-explorar el proyecto, y podría ser inconsistente con el enfoque anterior.
 
 Imagina si fueras un artesano que olvida todo cada mañana al despertar. Tendrías que volver a familiarizarte con todo el sitio de construcción — qué pared está a medio construir, por qué se eligieron ladrillos rojos en lugar de azules, dónde llegaron las tuberías. Peor aún, podrías arrancar una ventana que ya fue instalada ayer, simplemente porque no recordabas que ya estaba hecha.

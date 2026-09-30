@@ -70,7 +70,9 @@ Que falte cualquier subsistema es como que falte un área funcional en la cocina
 
 **Cuantificar el valor de los componentes del harness**: Usa una ablación con el mismo modelo fijo. Mantén el modelo fijo, elimina subsistemas uno a la vez y mide cuál eliminación causa la mayor caída de rendimiento. La mayor caída identifica el componente con mayor contribución marginal en esa tarea; no identifica automáticamente el cuello de botella. Una caída casi nula también necesita interpretación: el componente puede ser redundante, estar mal diseñado o simplemente no haber sido ejercitado por esa tarea. Para diagnosticar cuellos de botella, usa primero registros de fallos y atribución, y usa la ablación como evidencia de apoyo: ¿falló por intención de tarea poco clara, contexto insuficiente, entorno no reproducible, falta de feedback de verificación o gestión de estado rota?
 
-## La historia real de un equipo
+## Ejemplo didáctico
+
+> Ejemplo didáctico: el escenario y sus cifras son supuestos para explicar el mecanismo, no mediciones de un experimento publicado.
 
 Un equipo usó GPT-4o en una aplicación frontend de TypeScript + React (~20,000 líneas de código). Pasaron por cuatro etapas — esencialmente añadiendo equipamiento de cocina pieza por pieza:
 

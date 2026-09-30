@@ -5,6 +5,8 @@
 
 # Lecture 9. Preventing Agents from Declaring Victory Too Early
 
+> Engineering guideline: numerical cutoffs here are adjustable teaching defaults, not experimentally established thresholds. Token counts depend on the tokenizer and content, not line count alone.
+
 You ask an agent to implement a "password reset" feature. It modifies the database schema, writes the API endpoint, adds the email template, runs the unit tests (all pass), and then confidently tells you "it's done." But when you actually try to run it—the password reset link can't be sent because the email service config is missing; the database migration fails halfway through, leaving the schema in an inconsistent state; and the end-to-end flow hasn't been executed even once.
 
 This isn't an isolated incident. The classic 2017 ICML paper by Guo et al. proved: **modern neural networks are systematically overconfident**—the confidence reported by models is significantly higher than their actual accuracy. AI coding agents are no different. They "feel" done, but in reality they're far from it. Your harness must replace the agent's "feelings" with externalized, execution-based verification.
@@ -70,13 +72,15 @@ An independent evaluation agent, specifically tuned to be "nitpicky," is far mor
 | Single agent (bare run) | 20 mins | $9 | No (game entities unresponsive to input) |
 | Three agents (planner + generator + evaluator) | 6 hours | $200 | Yes (game is fully playable) |
 
-This is the exact same model (Opus 4.5) with the exact same prompt ("build a 2D retro game editor"). The only difference is the harness: from "running bare" to "planner expands requirements → generator implements feature by feature → evaluator performs actual click testing using Playwright."
+Reported engineering outcomes do not isolate the causal contribution of one component. Benchmark scores apply to the stated model, scaffold, dataset and evaluation settings, not every production task. [Anthropic](https://www.anthropic.com/engineering/harness-design-long-running-apps)
 
 > Source: [Anthropic: Harness design for long-running application development](https://www.anthropic.com/engineering/harness-design-long-running-apps)
 
 ## How to Prevent Premature Completion Declarations
 
 ### 1. Externalize Termination Judgment
+
+> Same model and prompt, different runtime and cost budgets. This is a reported application comparison, not an equal-budget experiment isolating one harness component. Core gameplay worked, but bugs and limitations remained. [Anthropic](https://www.anthropic.com/engineering/harness-design-long-running-apps)
 
 The completion judgment should not be made by the agent itself. The harness independently executes termination validation, using runtime signals as input rather than the agent's confidence. In CLAUDE.md, you can spell this out:
 
@@ -109,7 +113,9 @@ Effective runtime signals include:
 - Were database writes, file operations, and other side effects correct?
 - Were temporary resources cleaned up?
 
-## Real-World Case
+## Illustrative Example
+
+> Teaching illustration: this scenario and its numerical values are assumed for explanation, not observations from a published experiment.
 
 **Task**: Implement user password reset functionality. Involves database operations, email sending, and API endpoint modifications.
 

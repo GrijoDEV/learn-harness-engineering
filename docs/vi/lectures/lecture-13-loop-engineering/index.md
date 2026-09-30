@@ -5,6 +5,8 @@
 
 # Bài 13. Từ Nhắc lệnh Thủ công đến Vòng lặp Tự chủ
 
+> Hướng dẫn kỹ thuật: ngưỡng số là mặc định giảng dạy có thể chỉnh, không phải ranh giới thực nghiệm. Token phụ thuộc tokenizer và nội dung, không chỉ số dòng.
+
 Tất cả những gì bạn đã học trong mười hai bài đầu tiên đều dựa trên một giả định: **bạn đang ngồi trước bàn phím, gõ các chỉ dẫn từng cái một.**
 
 Bạn đã viết `AGENTS.md` (Bài 1–4), xây dựng quản lý trạng thái (Bài 5–6), giới hạn phạm vi với danh sách tính năng (Bài 7–8), để lại bàn giao sạch ở cuối phiên (Bài 9, 12), và làm cho runtime có thể quan sát được (Bài 10–11). Nhưng tác nhân kích hoạt tất cả mọi thứ luôn là bạn. Agent không bao giờ tự quyết định khi nào bắt đầu làm việc — vì không ai nhấn nút "bắt đầu".
@@ -96,7 +98,13 @@ Trong tuần đầu tiên của tháng 6 năm 2026, ba người thực hành xâ
 
 > **Loop engineering là thay thế bản thân bạn với tư cách là người nhắc lệnh agent. Bạn thiết kế hệ thống làm việc đó thay thế.**
 
-Cherny tiết lộ con số: trong hơn 30 ngày liên tiếp, tất cả các đóng góp code cho Claude Code đều được thực hiện tự chủ bởi AI — 259 PR đã được merge, hơn 80% code sản xuất được viết bởi Claude, và tỷ lệ thành công 76% đối với các nhiệm vụ phần mềm mở.
+Boris Cherny · 2025-12-27
+
+| PR | Git commits | + LoC | − LoC | Model |
+| --- | --- | --- | --- | --- |
+| 259 / 30 days | 497 | 40,000 | 38,000 | Claude Code + Opus 4.5 |
+
+Hoạt động cá nhân do tác giả báo cáo, không phải tỷ lệ thành công benchmark hay bằng chứng không có giám sát con người. [Boris Cherny](https://twitter.com/bcherny/status/2004887829252317325) · [quoted original post](https://simonwillison.net/tags/boris-cherny/)
 
 Ba người. Một tuần. Cùng một kết luận. Không phải vì họ phối hợp — mà vì cơ sở hạ tầng đã lặng lẽ vượt qua một ngưỡng. Các agent đã trở nên đủ tin cậy để hoàn thành các nhiệm vụ không tầm thường mà không cần giám sát. Các nguyên thủy lập lịch (`/loop`, `/goal`, cron) giờ đã được tích hợp sẵn trong các công cụ. Chi phí của một lần chạy agent đã giảm đủ thấp để việc chạy một cách lặp đi lặp lại theo bộ hẹn giờ trông không còn lãng phí. Khi tất cả các bộ phận đều có mặt, bước di chuyển kết hợp chúng trở nên hiển nhiên với mọi người cùng một lúc.
 
@@ -267,7 +275,7 @@ flowchart TD
 
 Đây không còn là một lần chạy agent đơn lẻ nữa. Đó là một hệ thống vận hành liên tục thức dậy mỗi buổi sáng, tự quét dọn sàn nhà, và đặt những thứ cần sự chú ý của bạn ra trước mặt bạn. Vai trò của bạn trở thành: **review nội dung hộp thư, đưa ra quyết định, và khi bạn phát hiện một mẫu hệ thống không thể xử lý, tinh chỉnh các kỹ năng và quy tắc.**
 
-Cherny đã sử dụng mẫu này để merge 259 PR trong 30 ngày mà không cần mở IDE một lần nào. Các kỹ sư OpenAI đã sử dụng cùng một mẫu để xây dựng một sản phẩm beta khoảng một triệu dòng mã bằng tay — mà không cần tự viết một dòng mã nào.
+Hoạt động cá nhân do tác giả báo cáo, không phải tỷ lệ thành công benchmark hay bằng chứng không có giám sát con người.
 
 ## Phân tách Generator/Evaluator: Tại sao Bạn Không thể Để Mô hình Chấm Điểm Công việc của Chính Mình
 
@@ -293,7 +301,7 @@ Một câu để nhớ: **ai đó trong đội của bạn phải không tin b�
 
 Nếu bạn muốn xem một vòng lặp được thiết kế tốt, thực sự đang chạy trông như thế nào, [autoresearch của Karpathy](https://github.com/karpathy/autoresearch) là ví dụ sách giáo khoa.
 
-Vào tháng 3 năm 2026, Karpathy phát hành một dự án Python 630 dòng. Đưa cho nó một GPU và một hướng nghiên cứu, và nó chạy cả đêm — hoàn thành hàng trăm thí nghiệm huấn luyện ML, chỉ giữ lại những cái thực sự cải thiện. Dự án đạt 66.000+ sao trong vài ngày sau khi phát hành.
+[Karpathy: autoresearch](https://github.com/karpathy/autoresearch) · [announcement](https://x.com/karpathy/status/2030371219518931079)
 
 ### Ba Tệp, Ba Vai trò
 
@@ -343,8 +351,6 @@ flowchart TD
     8b --> 9
 ```
 
-Nó chạy khoảng 12 thí nghiệm mỗi giờ. Một lần chạy qua đêm (8 giờ) là khoảng 100 thí nghiệm. Bản thân Karpathy đã chạy nó trong 2 ngày — ~700 thí nghiệm.
-
 Ngân sách thời gian thực 5 phút cố định là một lựa chọn thiết kế quan trọng — bất kể agent thay đổi gì, mọi thí nghiệm đều mất đúng cùng một thời gian. Điều này có nghĩa là tất cả các kết quả đều có thể so sánh trực tiếp dưới cùng một ngân sách thời gian — không có tranh cãi về "cái này chạy lâu hơn nên nó tốt hơn."
 
 ### Đầu ra: Bạn Nhìn Thấy Gì Khi Thức Dậy
@@ -358,6 +364,8 @@ Chỉ các commit thực sự cải thiện mới được giữ trên nhánh ch
 **2. results.tsv (bản ghi đầy đủ các thí nghiệm)**
 
 Mỗi thí nghiệm — thành công hay thất bại — đều được ghi lại:
+
+> Minh họa giảng dạy: tình huống và số liệu là giả định để giải thích, không phải đo lường của thí nghiệm công bố.
 
 ```
 timestamp    commit_hash    val_bpb    vram_mb    description
@@ -375,11 +383,8 @@ Agent viết các thông điệp commit rõ ràng về những gì nó đã th�
 
 ### Nó Thực sự Tìm Thấy Gì
 
-Kết quả từ lần chạy 2 ngày, ~700 thí nghiệm ban đầu của Karpathy:
-
-- Trong khoảng ~700 lần thử, đã tìm thấy khoảng **20 cải thiện thực sự có thể xếp chồng lên nhau**
-- Giảm thời gian huấn luyện cấp GPT-2 của nanochat trên 8×H100 từ **2,02 giờ → 1,80 giờ**, nhanh hơn khoảng **11%**
-- Các phát hiện bao gồm: điều chỉnh learning rate, tinh chỉnh optimizer, hoán đổi hàm kích hoạt, tối ưu hóa mẫu attention, v.v.
+- Giảm thời gian huấn luyện cấp GPT-2 của nanochat trên 8×H100 từ **2,02 giờ → 1,80 giờ**, nhanh hơn khoảng **10.89%**
+- Các phát hiện bao gồm: điều chỉnh learning rate, tinh chỉnh optimizer, hoán đổi hàm kích hoạt, tối ưu hóa mẫu attention, v.v. [Karpathy: leaderboard commit](https://github.com/karpathy/nanochat/commit/f06860494848db080c9a80a0ffa83203b042056b) · [tuning commit](https://github.com/karpathy/nanochat/commit/6ed7d1d82cee16c2e26f45d559ad3338447a6c1b)
 
 Tất cả các cải thiện có phải là những khám phá làm chấn động địa cầu không? Không. Hầu hết là các tối ưu nhỏ xếp chồng lên nhau. Nhưng 20 cải thiện hợp lệ đó sẽ mất một nhà nghiên cứu con người hàng tuần công việc thủ công — agent đã làm nó trong 48 giờ.
 
@@ -399,7 +404,7 @@ Các vòng lặp nhanh cám dỗ bạn bỏ qua xác minh. "Trông ổn" không 
 
 ### 2. Sự thối rữa Hiểu biết
 
-Vòng lặp giao code càng nhanh, sự hiểu biết của bạn về chính codebase của bạn càng trôi dạt xa khỏi thực tế. Đội của Cherny có 80% code được viết bởi agent — có nghĩa là hầu hết code của một đội không được viết bởi một con người. Nếu bạn không đọc và sử dụng những gì vòng lặp tạo ra, sự hiểu biết của bạn liên tục suy thoái. **Các vòng lặp nhanh đòi hỏi đọc nhanh.**
+Kết quả sản xuất không tách riêng nguyên nhân. Điểm benchmark chỉ áp dụng cho mô hình, scaffold, dữ liệu và điều kiện đánh giá đã nêu.
 
 ### 3. Sự đầu hàng Nhận thức
 

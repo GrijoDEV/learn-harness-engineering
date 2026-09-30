@@ -5,6 +5,8 @@
 
 # Lección 13. Del Prompting Manual a los Loops Autónomos
 
+> Guía de ingeniería: los umbrales son valores didácticos ajustables, no límites demostrados. Los tokens dependen del tokenizador y del contenido, no solo de las líneas.
+
 Todo lo que aprendiste en las primeras doce lecciones se basa en un supuesto: **estás sentado frente al teclado, escribiendo instrucciones una a una.**
 
 Escribiste `AGENTS.md` (Lecciones 1–4), construiste gestión del estado (Lecciones 5–6), limitaste el alcance con listas de características (Lecciones 7–8), dejaste handoffs limpios al final de la sesión (Lecciones 9, 12), e hiciste el runtime observable (Lecciones 10–11). Pero el disparador de todo siempre eras tú. El agente nunca decidía por sí mismo cuándo empezar a trabajar — porque nadie presionaba "inicio".
@@ -86,6 +88,8 @@ No tienes que escribir `/goal` cada vez. Pero entender de dónde vino y por qué
 
 ## Junio 2026: Tres Personas Encendieron la Mecha en Una Semana
 
+> Ejemplo didáctico: el escenario y sus cifras son supuestos para explicar el mecanismo, no mediciones de un experimento publicado.
+
 En la primera semana de junio de 2026, tres profesionales que construían infraestructura de agentes de codificación — sin comparar notas — dijeron lo mismo con palabras diferentes.
 
 **Peter Steinberger** (creador de OpenClaw, [su publicación alcanzó 8 millones de vistas](https://x.com/steipete/status/2063697162748260627)): "Ya no deberías estar haciendo prompting a agentes de codificación. Deberías estar diseñando loops que hacen prompting a tus agentes."
@@ -96,7 +100,13 @@ En la primera semana de junio de 2026, tres profesionales que construían infrae
 
 > **Loop engineering es reemplazarte a ti mismo como la persona que hace prompting al agente. Diseñas el sistema que lo hace en su lugar.**
 
-Cherny reveló cifras: durante más de 30 días consecutivos, todas las contribuciones de código a Claude Code fueron realizadas autónomamente por IA — 259 PRs fusionados, más del 80% del código de producción autorado por Claude, y una tasa de éxito del 76% en tareas de software de final abierto.
+Boris Cherny · 2025-12-27
+
+| PR | Git commits | + LoC | − LoC | Model |
+| --- | --- | --- | --- | --- |
+| 259 / 30 days | 497 | 40,000 | 38,000 | Claude Code + Opus 4.5 |
+
+Actividad personal declarada por el autor, no tasa de éxito de un benchmark ni prueba de ausencia de supervisión humana. [Boris Cherny](https://twitter.com/bcherny/status/2004887829252317325) · [quoted original post](https://simonwillison.net/tags/boris-cherny/)
 
 Tres personas. Una semana. La misma conclusión. No porque se coordinaran — sino porque la infraestructura había cruzado silenciosamente un umbral. Los agentes se habían vuelto lo suficientemente confiables como para terminar tareas no triviales sin supervisión. Las primitivas de planificación (`/loop`, `/goal`, cron) ahora estaban integradas en las herramientas. El costo de una sola ejecución de agente había bajado lo suficiente como para que ejecutar uno repetidamente en un temporizador dejara de parecer un desperdicio. Cuando todas las piezas están presentes, el movimiento que las combina se vuelve obvio para todos al mismo tiempo.
 
@@ -267,7 +277,7 @@ flowchart TD
 
 Esto ya no es una sola ejecución de agente. Es un sistema que opera continuamente que se despierta cada mañana, barre el piso por sí solo, y pone las cosas que necesitan tu atención frente a ti. Tu rol se convierte en: **revisar el contenido de la bandeja, tomar decisiones, y cuando detectes un patrón que el sistema no puede manejar, refinar los skills y las reglas.**
 
-Cherny usó este patrón para fusionar 259 PRs en 30 días sin abrir un IDE ni una vez. Los ingenieros de OpenAI usaron el mismo patrón para construir un producto beta de aproximadamente un millón de líneas a mano — sin escribir una sola línea de código ellos mismos.
+Actividad personal declarada por el autor, no tasa de éxito de un benchmark ni prueba de ausencia de supervisión humana.
 
 ## Separación Generador/Evaluador: Por Qué No Puedes Dejar que el Modelo Califique Su Propio Trabajo
 
@@ -293,7 +303,7 @@ Una frase para recordar: **alguien en tu equipo no debe creerte.**
 
 Si quieres ver cómo se ve un loop bien diseñado y realmente en ejecución, [el autoresearch de Karpathy](https://github.com/karpathy/autoresearch) es el ejemplo de libro de texto.
 
-En marzo de 2026, Karpathy lanzó un proyecto Python de 630 líneas. Dale una GPU y una dirección de investigación, y corre toda la noche — completando cientos de experimentos de entrenamiento de ML, quedándose solo con los que realmente mejoran. El proyecto alcanzó 66,000+ estrellas en pocos días después del lanzamiento.
+[Karpathy: autoresearch](https://github.com/karpathy/autoresearch) · [announcement](https://x.com/karpathy/status/2030371219518931079)
 
 ### Tres Archivos, Tres Roles
 
@@ -343,8 +353,6 @@ flowchart TD
     8b --> 9
 ```
 
-Ejecuta aproximadamente 12 experimentos por hora. Una ejecución nocturna (8 horas) son unos 100 experimentos. El propio Karpathy lo ejecutó durante 2 días — ~700 experimentos.
-
 El presupuesto fijo de 5 minutos de reloj es una elección de diseño clave — sin importar lo que cambie el agente, cada experimento toma exactamente el mismo tiempo. Esto significa que todos los resultados son directamente comparables bajo el mismo presupuesto de tiempo — sin discusiones sobre "este corrió más tiempo así que es mejor".
 
 ### Salida: Lo Que Ves Cuando Te Despiertas
@@ -358,6 +366,8 @@ Solo los commits que realmente mejoraron se quedan en la rama principal. Todo lo
 **2. results.tsv (el registro completo de experimentos)**
 
 Cada solo experimento — éxito o fracaso — está registrado:
+
+> Ejemplo didáctico: el escenario y sus cifras son supuestos para explicar el mecanismo, no mediciones de un experimento publicado.
 
 ```
 timestamp    commit_hash    val_bpb    vram_mb    description
@@ -375,11 +385,10 @@ El agente escribe mensajes de commit claros sobre lo que probó, lo que funcion�
 
 ### Lo Que Realmente Encontró
 
-Resultados de la ejecución inicial de 2 días y ~700 experimentos de Karpathy:
+- Redujo el tiempo de entrenamiento a nivel GPT-2 de nanochat en 8×H100 de **2.02 horas → 1.80 horas**, aproximadamente **10.89% más rápido**
+- Los hallazgos incluyeron: ajustes de tasa de aprendizaje, afinación de optimizador, cambios de activación, optimizaciones de patrón de atención, etc. [Karpathy: leaderboard commit](https://github.com/karpathy/nanochat/commit/f06860494848db080c9a80a0ffa83203b042056b) · [tuning commit](https://github.com/karpathy/nanochat/commit/6ed7d1d82cee16c2e26f45d559ad3338447a6c1b)
 
-- De ~700 intentos, se encontraron aproximadamente **20 mejoras reales acumulables**
-- Redujo el tiempo de entrenamiento a nivel GPT-2 de nanochat en 8×H100 de **2.02 horas → 1.80 horas**, aproximadamente **11% más rápido**
-- Los hallazgos incluyeron: ajustes de tasa de aprendizaje, afinación de optimizador, cambios de activación, optimizaciones de patrón de atención, etc.
+> Ejemplo didáctico: el escenario y sus cifras son supuestos para explicar el mecanismo, no mediciones de un experimento publicado.
 
 ¿Fueron todas las mejoras descubrimientos trascendentales? No. La mayoría fueron pequeñas optimizaciones que se acumularon. Pero esas 20 mejoras válidas le habrían tomado a un investigador humano semanas de trabajo manual — el agente lo hizo en 48 horas.
 
@@ -399,7 +408,7 @@ Los loops rápidos te tientan a saltarte la verificación. "Se ve bien" no es lo
 
 ### 2. Deterioro de la Comprensión
 
-Cuanto más rápido envía código un loop, más se aleja tu comprensión de tu propia base de código de la realidad. El equipo de Cherny tenía el 80% del código autorado por agentes — lo que significa que la mayor parte del código de un equipo no fue escrito por una persona. Si no lees y usas lo que produce el loop, tu comprensión decae continuamente. **Los loops rápidos requieren lectura rápida.**
+Los resultados de producción no aíslan una causa. Las puntuaciones corresponden al modelo, scaffold, conjunto de datos y evaluación indicados, no a toda tarea real.
 
 ### 3. Rendición Cognitiva
 

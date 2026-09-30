@@ -5,6 +5,8 @@
 
 # Lecture 05. Keeping Context Alive Across Sessions
 
+> Engineering guideline: numerical cutoffs here are adjustable teaching defaults, not experimentally established thresholds. Token counts depend on the tokenizer and content, not line count alone.
+
 You ask Claude Code to implement a complete feature. It runs for 30 minutes, does most of the work, but context is running low. You start a new session to continue — and discover it doesn't remember what decisions were made last time, why option A was chosen over option B, which files were already modified, or what state the tests are in. It spends 15 minutes re-exploring the project, and might take an inconsistent approach from last time.
 
 This is the real dilemma AI coding agents face in cross-session tasks. This lecture explains why agents "lose the thread" during long tasks, and how structured state persistence lets a new session quickly pick up where the last one left off.

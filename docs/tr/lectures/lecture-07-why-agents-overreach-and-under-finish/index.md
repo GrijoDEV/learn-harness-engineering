@@ -5,6 +5,8 @@
 
 # Ders 07. Ajanlar neden sınırı aşar ve bitirmez
 
+> Mühendislik önerisi: sayısal eşikler ayarlanabilir öğretim değerleridir, deneysel sınırlar değildir. Token sayısı yalnız satıra değil tokenizer ve içeriğe bağlıdır.
+
 Claude Code'a "bu projeye kullanıcı kimlik doğrulaması ekle" diyorsunuz ve veritabanı şemasını değiştirmeye, rotalar yazmaya, frontend bileşenlerini değiştirmeye başlıyor — bu arada hata işleme middleware'ini de yeniden yapılandırıyor. İki saat sonra kontrol ediyorsunuz: 12 dosya değiştirilmiş, 800 satır yeni kod yazılmış ve tek bir özellik uçtan uca çalışmıyor.
 
 Çiğneyebileceğinden fazlasını ısırmak — bu söz AI ajanları için özellikle iyi geçerlidir. Ajanlar "biraz fazla yapma" dürtüsüyle doğarlar — ilgili bir şey görürler ve onunla birlikte halledilebilir, süpermarkete bir şişe soya sosu için gidip dolu bir arabayla çıkan biri gibi. Sorun şu ki, fazla satın alan insanlar sadece para harcar; aynı anda çok fazla şey yapan ajanlar hiçbirini düzgün bitirmez.
@@ -26,7 +28,7 @@ Claude Code'un gerçek davranışı söyleyicidir. Ona "kullanıcı kaydı ekle"
 
 Altı adım sonra her biri yarı tamamlandı. Uçtan uca doğrulama yok, yarı pişmiş kodlar arasında karmaşık bağlaşım var ve parçaları toplamak için bir sonraki oturum tamamen kayıp olacak. Aynı anda altı yemek pişiren biri gibi — her yemek tencerede ama hiçbiri tabağa konmadı. Hepsi yanıyor.
 
-Anthropic'in deneysel verileri bunu doğrudan destekliyor: "küçük bir sonraki adım" stratejisi kullanan ajanlar (WIP=1'e eşdeğer) geniş promptlar kullanan ajanlardan %37 daha yüksek görev tamamlanma oranı gösteriyor. Daha ilginç olanı, ajanlar tarafından üretilen kod satırı sayısı gerçek özellik tamamlamasıyla zayıf negatif korelasyona sahiptir — daha fazla kod yazıldı, daha az özellik tamamlandı. Çiğneyebileceğinden fazlasını ısırmak, veriyle kanıtlandı.
+[Anthropic: incremental feature work](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 ## WIP=1 iş akışı
 
@@ -100,7 +102,9 @@ Tüm görev durumlarını kaydetmek için makine tarafından okunabilir bir dosy
 
 Harness sürekli olarak VCR (Verified Completion Rate) = doğrulanmış görevler / etkinleştirilen görevler izlemelidir. VCR < 1.0 olduğunda yeni görev etkinleştirmelerini engelleyin.
 
-## Gerçek dünya örneği
+## Öğretim örneği
+
+> Öğretim örneği: senaryo ve sayılar açıklama için varsayılmıştır, yayımlanmış deney ölçümleri değildir.
 
 8 özellikli bir REST API projesi, iki strateji karşılaştırıldı:
 

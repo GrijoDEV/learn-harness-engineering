@@ -5,6 +5,8 @@
 
 # 9-maʼruza. Agentlarni vaqtidan oldin gʻalabani eʼlon qilishdan saqlash
 
+> Muhandislik tavsiyasi: raqamli chegaralar sozlanadigan o‘quv qiymatlari, tajribada tasdiqlangan chegaralar emas. Token soni faqat qatorga emas, tokenizer va mazmunga bog‘liq.
+
 Siz agentdan “parolni tiklash” funksiyasini qoʻshishni soʻraysiz. U maʼlumotlar bazasi sxemasini oʻzgartiradi, API endpointʼini yozadi, elektron pochta andozasini (email template) qoʻshadi, unit testlarni ishga tushiradi (hammasi oʻtadi) va soʻngra sizga ishonch bilan “tugatdim” deydi. Haqiqatda ishlatib koʻrsangiz—parolni tiklash havolasi yuborilmaydi (elektron pochta xizmati sozlamalari yoʻq), maʼlumotlar bazasi migratsiyasi yarmida yiqiladi (sxema noaniqligi), va end-to-end oqimi (flow) biror marta ham ishga tushirib koʻrilmagan.
 
 Bu tuygʻu sizga begona boʻlmasa kerak — u imtihon qogʻozini toʻldirib chiqib, birinchi boʻlib oʻziga ishonch bilan topshiradigan, lekin baholar eʼlon qilinganda yiqiladigan talabaga oʻxshaydi. Qogʻozning toʻla boʻlishi javoblar toʻgʻri ekanligini anglatmaydi.
@@ -12,6 +14,8 @@ Bu tuygʻu sizga begona boʻlmasa kerak — u imtihon qogʻozini toʻldirib chiq
 Bu tasodifiy voqea emas. 2017-yildagi ICML konferensiyasida Guo va boshqalarning mashhur maqolasi shuni isbotladi: **zamonaviy neyron tarmoqlari tizimli ravishda oʻziga oʻta ishonadi (overconfident)** — modellar tomonidan eʼlon qilingan ishonch ularning haqiqiy aniqligidan sezilarli darajada yuqori. Xuddi shu narsa AI kod yozish agentlariga ham tegishli: ular oʻzlarini “tugatdim” deb his qilishadi, lekin aslida ular tugatishdan yiroqdirlar. Sizning harnessʼingiz agentning “hissiyotlari”ni tashqi, ishlashga asoslangan (execution-based) tekshiruv (verification) bilan almashtirishi kerak.
 
 ## Sirpanchiq qiyalik (The Slippery Slope)
+
+> Model va prompt bir xil, vaqt va xarajat budjetlari boshqa. Bitta komponentni ajratgan teng budjetli tajriba emas. Asosiy o‘yin ishlagan, ammo xatolar qolgan. [Anthropic](https://www.anthropic.com/engineering/harness-design-long-running-apps)
 
 Vaqtidan oldin “tugadim” deyish deyarli har doim bir xil andozada (pattern) kechadi: kod yuzaki qaraganda mantiqli koʻrinadi — sintaksis toʻgʻri, mantiq joyidadek, va statik tahlil (static analysis) aniq xatolarni koʻrsatmaydi. Lekin harness qamrovli runtime tekshiruvni majbur qilmaydi, shu sababli agent uni haqiqatda ishga tushirib koʻrishni oʻtkazib yuboradi yoki faqat qisman testlarni ishga tushiradi. U unit testlarni ishga tushiradi, lekin integratsiya testlarini (integration tests) oʻtkazib yuboradi; u testlarni ishga tushiradi, lekin qamrovni (coverage) tekshirmaydi. Oxir-oqibat, “kod yaxshi koʻrinyapti” degan dalil “funksiya (feature) tugatildi” degan xulosaga asos qilib olinadi. Va imtihon qogʻozi topshiriladi.
 
@@ -111,7 +115,9 @@ Samarali runtime signallarga quyidagilar kiradi:
 - Maʼlumotlar bazasiga yozishlar, fayl operatsiyalari va boshqa side effectʼlar toʻgʻrimi?
 - Vaqtinchalik resurslar tozalandimi?
 
-## Hayotiy misol
+## O‘quv misoli
+
+> O‘quv misoli: vaziyat va raqamlar tushuntirish uchun faraz qilingan, chop etilgan tajriba o‘lchovlari emas.
 
 **Vazifa**: Foydalanuvchi parolini tiklash (password reset) funksiyasini qoʻshish. Bunga maʼlumotlar bazasi amallari, elektron pochta yuborish va API endpointʼlarini oʻzgartirish kiradi.
 

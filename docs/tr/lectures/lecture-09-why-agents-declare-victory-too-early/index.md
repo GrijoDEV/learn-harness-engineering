@@ -5,6 +5,8 @@
 
 # Ders 9. Ajanların çok erken zaferi ilan etmesini önlemek
 
+> Mühendislik önerisi: sayısal eşikler ayarlanabilir öğretim değerleridir, deneysel sınırlar değildir. Token sayısı yalnız satıra değil tokenizer ve içeriğe bağlıdır.
+
 Bir ajandan "şifre sıfırlama" özelliğini uygulamasını istiyorsunuz. Veritabanı şemasını değiştiriyor, API uç noktasını yazıyor, e-posta şablonunu ekliyor, birim testleri çalıştırıyor (hepsi geçiyor) ve sonra güvenle "tamam" diyor. Aslında çalıştırmaya çalıştığınızda — şifre sıfırlama bağlantısı gönderilemez (eksik e-posta servis yapılandırması), veritabanı geçişi yarı yolda başarısız olur (şema tutarsızlığı) ve uçtan uca akış bir kez bile yürütülmemiştir.
 
 Bu his size yabancı gelmemeli — tüm sınav kâğıdını doldurmak, güvenle ilk teslim etmek, ardından notlar geldiğinde başarısız olmak gibi. Kâğıdın dolu olması cevapların doğru olduğu anlamına gelmez.
@@ -12,6 +14,8 @@ Bu his size yabancı gelmemeli — tüm sınav kâğıdını doldurmak, güvenle
 Bu izole bir vaka değildir. Guo ve diğerlerinin 2017 ICML klasik makalesi şunu kanıtladı: **modern sinir ağları sistematik olarak aşırı güvenlidir** — modellerin bildirdiği güven gerçek doğruluklarından önemli ölçüde daha yüksektir. Aynı şey AI kod yazma ajanları için de geçerlidir: "hissederler" bittiler ama gerçekte çok uzaklar. Harness'ınız ajanın "hislerini" dışsallaştırılmış, yürütmeye dayalı doğrulamayla değiştirmelidir.
 
 ## Kaygan zemin
+
+> Model ve prompt aynı, zaman ve maliyet bütçeleri farklıdır. Tek bileşeni ayıran eşit bütçeli deney değildir. Temel oyun çalıştı, fakat hatalar kaldı. [Anthropic](https://www.anthropic.com/engineering/harness-design-long-running-apps)
 
 Erken tamamlanma ilanları neredeyse her zaman aynı kalıbı izler: kod iyi görünür — sözdizimi doğrudur, mantık makul görünür ve statik analiz belirgin hata göstermez. Ancak harness kapsamlı yürütme doğrulamasını zorlamaz, bu yüzden ajan gerçekten çalıştırmayı atlar veya yalnızca kısmi testleri çalıştırır. Birim testleri çalıştırır ama entegrasyon testlerini atlar; testleri çalıştırır ama kapsamı kontrol etmez. Nihayetinde "kod iyi görünüyor" "özellik tamamlandı"nın kanıtı olarak alınır. Ve sınav kâğıdı teslim edilir.
 
@@ -111,7 +115,9 @@ Etkili runtime sinyalleri şunları içerir:
 - Veritabanı yazımları, dosya işlemleri ve diğer yan etkiler doğru muydu?
 - Geçici kaynaklar temizlendi mi?
 
-## Gerçek dünya örneği
+## Öğretim örneği
+
+> Öğretim örneği: senaryo ve sayılar açıklama için varsayılmıştır, yayımlanmış deney ölçümleri değildir.
 
 **Görev**: Kullanıcı şifre sıfırlama işlevini uygulayın. Veritabanı işlemlerini, e-posta göndermeyi ve API uç nokta değişikliklerini içerir.
 

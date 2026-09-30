@@ -5,6 +5,8 @@
 
 # 5-maʼruza. Sessiyalar oʻrtasida kontekstni saqlab qoling
 
+> Muhandislik tavsiyasi: raqamli chegaralar sozlanadigan o‘quv qiymatlari, tajribada tasdiqlangan chegaralar emas. Token soni faqat qatorga emas, tokenizer va mazmunga bog‘liq.
+
 Siz Claude Codeʼdan toʻliq bitta funksiyani (feature) yaratishni soʻraysiz. U 30 daqiqa ishlaydi, ishning koʻp qismini bajaradi, lekin kontekst tugab bormoqda. Siz davom ettirish uchun yangi sessiya boshlaysiz — va u oʻtgan safar qanday qarorlar qabul qilinganini, nima uchun B varianti A variantdan afzal koʻrilganini, qaysi fayllar allaqachon oʻzgartirilganini yoki testlar qanday holatda ekanini eslay olmasligini bilib olasiz. U loyihani qayta oʻrganish uchun 15 daqiqa sarflaydi va oldingi yondashuvga zid ishlarni qilishi mumkin.
 
 Tasavvur qiling, siz har tong uygʻonganda hamma narsani unutib qoʻyadigan usta boʻlsangiz. Siz butun qurilish maydoni bilan qaytadan tanishib chiqishingiz kerak boʻladi — qaysi devor yarim qurilgan, nima uchun koʻk gʻishtlar oʻrniga qizil gʻishtlar tanlangan, vodoprovod quvurlari qayergacha yetib kelgan. Eng yomoni, kecha oʻrnatib boʻlingan derazani — uning oʻrnatilganligini eslay olmaganingiz uchungina — buzib tashlashingiz mumkin.

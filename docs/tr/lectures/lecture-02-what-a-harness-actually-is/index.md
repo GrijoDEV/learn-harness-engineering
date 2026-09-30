@@ -70,7 +70,9 @@ Herhangi bir alt sistemin eksikliği mutfakta bir işlevsel alanın eksikliği g
 
 **Harness bileşen değerini ölçme**: Modeli sabit tutan bir bileşen çıkarma deneyi kullanın. Modeli sabit tutun, alt sistemleri tek tek kaldırın ve hangisinin kaldırılmasının en büyük performans düşüşüne neden olduğunu ölçün. En büyük düşüş, o görevde marjinal katkısı en yüksek olan bileşeni belirler; darboğazı otomatik olarak belirlemez. Neredeyse sıfır düşüş de yorum gerektirir: bileşen gereksiz olabilir, kötü tasarlanmış olabilir veya bu görev tarafından yeterince tetiklenmemiş olabilir. Darboğazları teşhis etmek için önce başarısızlık günlükleri ve atıfları kullanın, çıkarma deneyini ise destekleyici kanıt olarak ele alın: başarısızlık belirsiz görev niyetinden mi, yetersiz bağlamdan mı, yeniden üretilemeyen ortamdan mı, eksik doğrulama geri bildiriminden mi, yoksa bozuk durum yönetiminden mi kaynaklandı?
 
-## Bir takımın gerçek hikâyesi
+## Öğretim örneği
+
+> Öğretim örneği: senaryo ve sayılar açıklama için varsayılmıştır, yayımlanmış deney ölçümleri değildir.
 
 Bir takım TypeScript + React frontend uygulamasında (~20.000 satır kod) GPT-4o kullandı. Dört aşamadan geçtiler — esasen mutfak ekipmanını parça parça eklemek:
 

@@ -5,6 +5,8 @@
 
 # Leçon 07. Définir des limites de tâche claires
 
+> Conseil d’ingénierie : ces seuils sont des valeurs pédagogiques ajustables, pas des limites démontrées. Les tokens dépendent du tokenizer et du contenu, pas seulement des lignes.
+
 Vous demandez à Claude Code d'« ajouter l'authentification utilisateur à ce projet », et il commence à modifier le schéma de base de données, à écrire des routes, à changer des composants frontend, et — tant qu'à faire — à refactorer le middleware de gestion d'erreurs. Deux heures plus tard, vous vérifiez : 12 fichiers modifiés, 800 lignes de nouveau code, et pas une seule fonctionnalité qui fonctionne de bout en bout.
 
 Mordre plus qu'on ne peut mâcher — ce dicton s'applique particulièrement bien aux agents IA. Les agents ont un instinct inné pour « faire un peu plus » — ils voient des choses liées et les traitent au passage, comme quelqu'un qui va au supermarché pour une bouteille de sauce soja et ressort en poussant un caddy plein. Le problème, c'est que les humains qui achètent trop gaspillent juste de l'argent ; les agents qui font trop de choses simultanément n'en terminent aucune correctement.
@@ -26,7 +28,7 @@ Le comportement réel de Claude Code est révélateur. Demandez-lui d'« ajouter
 
 Six étapes plus tard, chacune est à moitié faite. Pas de vérification de bout en bout, couplage complexe entre le code à moitié cuit, et la session suivante qui devra ramasser les morceaux sera complètement perdue. Comme quelqu'un qui cuisine six plats simultanément — chaque plat est dans la poêle mais aucun n'est dressé. Ils brûlent tous.
 
-Les données expérimentales d'Anthropic le confirment directement : les agents utilisant une stratégie de « petit pas suivant » (équivalent à WIP=1) affichent un taux de complétion de tâches 37 % plus élevé que les agents utilisant des prompts larges. Plus intéressant encore, le nombre de lignes de code générées par les agents est faiblement corrélé négativement avec la complétion réelle des fonctionnalités — plus de code écrit, moins de fonctionnalités complétées. Prendre plus qu'on ne peut mâcher, prouvé par les données.
+[Anthropic: incremental feature work](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 ## Flux de travail WIP=1
 
@@ -100,7 +102,9 @@ Utilisez un fichier lisible par machine (JSON ou Markdown) pour enregistrer tous
 
 Le harness devrait suivre en continu le VCR (Verified Completion Rate) = tâches vérifiées / tâches activées. Bloquer les activations de nouvelles tâches quand VCR < 1.0.
 
-## Cas concret
+## Exemple pédagogique
+
+> Illustration pédagogique : le scénario et ses chiffres sont des hypothèses explicatives, pas des mesures d’une expérience publiée.
 
 Un projet d'API REST avec 8 fonctionnalités, deux stratégies comparées :
 

@@ -5,6 +5,8 @@
 
 # Lección 09. Evita que los agentes declaren victoria demasiado pronto
 
+> Guía de ingeniería: los umbrales son valores didácticos ajustables, no límites demostrados. Los tokens dependen del tokenizador y del contenido, no solo de las líneas.
+
 Le pides a un agent que implemente una funcionalidad de "restablecimiento de contraseña". Modifica el esquema de la base de datos, escribe el endpoint de la API, añade la plantilla de correo electrónico, ejecuta las pruebas unitarias (todas pasan) y luego te dice con confianza "ya está". Cuando realmente intentas ejecutarlo—el enlace de restablecimiento no se puede enviar (falta la configuración del servicio de correo electrónico), la migración de la base de datos falla a mitad de camino (inconsistencia en el esquema), y el flujo end-to-end no se ha ejecutado ni una sola vez.
 
 Esta sensación no debería resultar desconocida—es como llenar todo el examen, ser el primero en entregarlo con confianza, y luego suspender cuando salen las notas. Que el examen esté lleno no significa que las respuestas sean correctas.
@@ -12,6 +14,8 @@ Esta sensación no debería resultar desconocida—es como llenar todo el examen
 No es un incidente aislado. El clásico artículo de 2017 en ICML de Guo et al. demostró: **las redes neuronales modernas son sistemáticamente excesivamente seguras**—la confianza reportada por los modelos es significativamente mayor que su precisión real. Lo mismo se aplica a los agentes de codificación con IA: "sienten" que han terminado, pero en realidad, están lejos de hacerlo. Tu harness debe reemplazar los "sentimientos" del agent con verificación externalizada y basada en ejecución.
 
 ## La pendiente resbaladiza
+
+> Mismo modelo y prompt, pero distintos presupuestos de tiempo y coste. No es un experimento de igual presupuesto que aísle un componente. El juego funcionaba en lo esencial, pero conservaba errores. [Anthropic](https://www.anthropic.com/engineering/harness-design-long-running-apps)
 
 Las declaraciones prematuras de finalización casi siempre siguen el mismo patrón: el código parece correcto—la sintaxis es correcta, la lógica parece razonable, y el análisis estático no muestra errores obvios. Pero el harness no impone una verificación de ejecución exhaustiva, así que el agent se salta ejecutarlo realmente o solo ejecuta pruebas parciales. Ejecuta pruebas unitarias pero se salta las de integración; ejecuta pruebas pero no verifica la cobertura. En última instancia, "el código parece bien" se toma como evidencia de que "la funcionalidad está completa". Y el examen se entrega.
 
@@ -111,7 +115,9 @@ Las señales efectivas en tiempo de ejecución incluyen:
 - ¿Las escrituras en base de datos, operaciones de archivos y otros efectos secundarios fueron correctos?
 - ¿Se limpiaron los recursos temporales?
 
-## Caso del mundo real
+## Ejemplo didáctico
+
+> Ejemplo didáctico: el escenario y sus cifras son supuestos para explicar el mecanismo, no mediciones de un experimento publicado.
 
 **Tarea**: Implementar la funcionalidad de restablecimiento de contraseña de usuario. Involucra operaciones de base de datos, envío de correo electrónico y modificaciones de endpoints de API.
 

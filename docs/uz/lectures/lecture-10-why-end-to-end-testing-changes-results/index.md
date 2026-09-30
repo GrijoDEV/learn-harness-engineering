@@ -5,6 +5,8 @@
 
 # 10-maʼruza. Faqatgina End-to-End testlash chinakam tekshiruvdir
 
+> Muhandislik tavsiyasi: raqamli chegaralar sozlanadigan o‘quv qiymatlari, tajribada tasdiqlangan chegaralar emas. Token soni faqat qatorga emas, tokenizer va mazmunga bog‘liq.
+
 Siz agentdan Electron ilovasiga faylni eksport qilish funksiyasini qoʻshishni soʻraysiz. U render process komponentini, preload skriptini va xizmat qatlami mantigʻini yozadi. Har bir komponent uchun unit testlar ajoyib tarzda oʻtadi. Agent “Tugatildi” deydi. Export tugmasini bosganingizda esa — fayl yoʻli formati notoʻgʻri, progress bar ishlamayapti va katta fayllarni eksport qilish xotira sizib chiqishiga (memory leak) sabab boʻlyapti. Beshta komponent chegarasi muammolari, va unit testlar ularning bittasini ham tutib qola olmagan.
 
 Bu xuddi xor (choir) repetitsiyasiga oʻxshaydi — har bir ovoz alohida aytganda mukammal eshitiladi, lekin hammalari birgalikda kuylashganda, sopranolar baslardan yarim takt tezlashib ketadi, joʻr ovoz esa asosiy ohangdan yarim tonda farq qiladi. Har bir qism oʻz-oʻzidan “toʻgʻri”, lekin umumiy ovoz ohangsiz.
@@ -116,7 +118,9 @@ FIX: Fayl operatsiyalarini src/preload/file-ops.ts fayliga koʻchiring va ularni
 
 Har gal kod review (kodni tekshirish) paytida yangi agent xatosi topilsa, shunga bagʻishlangan yana bitta avtomatlashtirilgan qoida yozing. Oradan bir oy oʻtgach sizning harnessʼingiz bir oy oldingidan koʻra yaxshiroq natija koʻrsatadi. Xuddi repetitsiya jurnaliga oʻxshaydi — navbatdagi darsda eʼtibor qilish uchun xatoliklar jurnali qilinadi. Takroriy eslatish orqali xatolar yoʻqoladi va musiqa uygʻunlasha boradi.
 
-## Hayotiy misol
+## O‘quv misoli
+
+> O‘quv misoli: vaziyat va raqamlar tushuntirish uchun faraz qilingan, chop etilgan tajriba o‘lchovlari emas.
 
 **Vazifa**: Electron ilovasiga (app) fayl eksporti funksiyasini kiritish. Bunga render jarayoni (UI), preload fayl tizimi proksisi (filesystem proxy) va xizmat koʻrsatish (service) qatlamidagi maʼlumotlarni konversiya qilish (data transformation) kiradi.
 

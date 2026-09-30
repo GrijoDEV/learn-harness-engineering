@@ -5,6 +5,8 @@
 
 # 8-maʼruza. Agent nima qilishini cheklash uchun funksiyalar roʻyxatidan foydalaning
 
+> Muhandislik tavsiyasi: raqamli chegaralar sozlanadigan o‘quv qiymatlari, tajribada tasdiqlangan chegaralar emas. Token soni faqat qatorga emas, tokenizer va mazmunga bog‘liq.
+
 Siz agentdan e-tijorat saytini qurishni soʻraysiz. Ishini tugatgandan soʻng, u sizga “tugatdim” deydi. Kodni koʻrib chiqasiz — foydalanuvchi autentifikatsiyasi ishlayapti, lekin savatdagi (shopping cart) “sotib olish” (checkout) tugmasi hech narsa qilmaydi va toʻlov jarayoni (payment flow) umuman ulanmagan. Muammo shundaki: siz unga hech qachon “tugatish” (done) nimani anglatishini aytmagansiz, shuning uchun u oʻzining shaxsiy standartini — “Men juda koʻp kod yozdim va u ancha tugallanganga oʻxshaydi” degan standartni ishlatdi.
 
 Koʻpchilikning nazarida funksiyalar roʻyxati (feature lists) shunchaki eslatma (memo) — esdan chiqarmaslik uchun yoziladi, soʻngra bir chetga yigʻishtirib qoʻyiladi. Lekin harness olamida funksiyalar roʻyxati odamlar uchun eslatma emas — u butun harnessʼning umurtqa pogʻonasidir (backbone). Rejalashtiruvchi (scheduler) qaysi vazifani tanlashda unga suyanadi, tekshiruvchi (verifier) yakunlanganligini baholashda unga suyanadi, topshirish hisobotchisi (handoff reporter) xulosalar yaratishda unga suyanadi. Umurtqani sindirsangiz butun tana falaj boʻladi.
@@ -22,7 +24,7 @@ User auth qilindi, savat asosan tugatildi, toʻlov qismi (payments) hali kerak
 ```
 Yangi agent sessiyasi ushbu eslatmadan quyidagi savollarga javob bera oladimi? “Asosan tugatildi” deganda nima nazarda tutilgan? Savat qaysi testlardan oʻtdi? Toʻlovlar (payments) qilinishiga nima toʻsqinlik qilyapti (blocking)? Bularning barchasiga javob — “hech kim bilmaydi”. Xuddi shifokorga “oshqozonim ogʻriyapti, lekin oxirgi paytda yaxshi edim” deyishga oʻxshaydi — u sizga qanday dori yozib bera oladi?
 
-Natija: yangi sessiya loyiha holatini (project state) tushunish uchun 20 daqiqa sarflaydi va allaqachon bajarilgan funksiyalarni qaytadan yozib chiqishi mumkin. Anthropicʼning muhandislik maʼlumotlari shuni koʻrsatadiki, jarayon boʻyicha yaxshi qaydlar sessiyani ishga tushishdan keyingi tashxis vaqtini 60-80% ga qisqartiradi.
+Jarayon va tekshiruvlarni versiyalanadigan fayllarga yozing, keyingi sessiya holatni tekshira olsin. Manba mexanizmni tushuntiradi, boshlash vaqtining foiz kamayishini bermaydi. [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 ## Funksiya holati mashinasi (Feature State Machine)
 
@@ -103,15 +105,15 @@ Agent bitta funksiya holatini toʻgʻridan-toʻgʻri `passing` ga oʻzgartira ol
 
 Har bir funksiya (feature) bandi “bitta sessiyada tugatilishi mumkin” boʻlgan darajada belgilanishi kerak. Juda keng boʻlsa — tugamaydi; juda kichik boʻlsa — boshqarish qiyinlashadi. “Foydalanuvchi savatga mahsulot qoʻshishi mumkin” — bu toʻgʻri darajalash (granularity). “Savat (shopping cart)ni amalga oshirish (implement qilish)” — juda keng. “Cart modelida name maydonini (field) yaratish” — juda tor. Xuddi goʻshtni kesishga oʻxshaydi — butun boʻlak ham emas, qiyma ham emas.
 
-## Hayotiy misol
+## O‘quv misoli
+
+> O‘quv misoli: vaziyat va raqamlar tushuntirish uchun faraz qilingan, chop etilgan tajriba o‘lchovlari emas.
 
 10 ta funksiyaga ega boʻlgan e-tijorat (e-commerce) platformasi. Taqqoslangan ikkita kuzatish (tracking) yondashuvi:
 
 **Eslatma rejimi (Memo mode)**: Agent hech qanday strukturaga ega boʻlmagan eslatmalardan (unstructured notes) foydalanadi. 3 sessiyadan keyin eslatmalar quyidagi koʻrinishga keladi: “foydalanuvchi auth va mahsulotlar roʻyxati bajarildi, savat asosan tugatildi lekin bugʼlari bor, toʻlovlar (payments) boshlanmadi”. Yangi sessiya holatni tushunib olishi uchun 20 daqiqa kerak boʻladi va oxir-oqibat allaqachon yakunlangan funksiyalarni qaytadan yozib chiqadi. Bu xuddi bozordagi xaridingiz roʻyxatida “sut, non va anavi narsa” deb yozilganiga oʻxshaydi — doʻkonga borgach, baribir nimani olishingiz kerakligini bilmaysiz.
 
 **Umurtqa pogʻona rejimi (Backbone mode)**: Har bir funksiyaning (feature) aniq holati va tekshiruv buyrugʻi (verification command) bor. Yangi sessiya funksiyalar roʻyxatini oʻqiydi va 3 daqiqa ichida hamma narsani tushunib oladi: F01-F05 — `passing`, F06 — `active`, F07-F10 — `not_started`. Ishni toʻgʻridan-toʻgʻri F06 dan boshlaydi, hech qanday ishni boshidan qilmaydi (zero rework).
-
-Miqdoriy natija (Quantified result): Strukturalangan funksiyalar roʻyxatidan (structured feature lists) foydalangan loyihalar erkin kuzatish (free-form tracking) tizimidagiga qaraganda 45% ga yuqori funksiyalarni tugallash (feature completion) darajasini koʻrsatdi va hech qanday funksiya takror amalga oshirilmadi.
 
 ## Asosiy xulosalar
 

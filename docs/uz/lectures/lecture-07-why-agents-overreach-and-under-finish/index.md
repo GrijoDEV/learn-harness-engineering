@@ -5,6 +5,8 @@
 
 # 7-maʼruza. Agentlar uchun aniq vazifa chegaralarini chizing
 
+> Muhandislik tavsiyasi: raqamli chegaralar sozlanadigan o‘quv qiymatlari, tajribada tasdiqlangan chegaralar emas. Token soni faqat qatorga emas, tokenizer va mazmunga bog‘liq.
+
 Siz Claude Codeʼga “bu loyihaga foydalanuvchi autentifikatsiyasini qoʻsh” deysiz, u esa maʼlumotlar bazasi sxemasini oʻzgartirishdan, marshrutlarni (routes) yozishdan, frontend komponentlarini oʻzgartirishdan boshlaydi va — shu yoʻl-yoʻlakay — xatoliklarni qayta ishlash middlewareʼini (error-handling middleware) refaktoring qilib ketadi. Ikki soatdan keyin tekshirasiz: 12 ta fayl oʻzgartirilgan, 800 qator yangi kod yozilgan, lekin bittayam funksionallik (feature) boshidan oxirigacha (end-to-end) ishlamayapti.
 
 Qornidan kattaroq tishlash — bu ibora AI agentlariga juda mos tushadi. Agentlar “bir oz qoʻshimcha ish qilish” impulsi bilan tugʻiladi — ular bir-biriga bogʻliq narsalarni koʻrishadi va ularni shunchaki yoʻl-yoʻlakay hal qilib ketishadi, xuddi supermarketga bir shisha soya sousi uchun kirib, toʻla aravacha bilan chiqib kelgan odam kabi. Muammo shundaki, haddan tashqari koʻp narsa sotib olgan odam shunchaki pulini isrof qiladi; agentlarning bir vaqtning oʻzida juda koʻp ishlarni qilishi esa u ishlarning birortasi ham toʻgʻri oxiriga yetmaydi deganidir.
@@ -26,7 +28,7 @@ Claude Codeʼning haqiqiy xatti-harakati buni aniq koʻrsatadi. Unga “foydalan
 
 Oltita qadam oʻtgach, ularning har biri chala bajarilgan boʻladi. Hech qanday end-to-end tekshiruv (verification) yoʻq, chala pishgan kodlar oʻrtasida murakkab bogʻlanishlar mavjud boʻladi va chala ishlarni davom ettirishi kerak boʻlgan keyingi sessiya mutlaqo adashib qoladi. Xuddi bir vaqtning oʻzida oltita taom pishirayotgan odamga oʻxshaydi — hamma ovqat tovadadir, lekin birortasi ham tortilmagan (plated). Ularning hammasi kuyadi.
 
-Anthropicʼning eksperimental maʼlumotlari buni bevosita tasdiqlaydi: “kichik keyingi qadam” (small next step) strategiyasidan (WIP=1 ga teng) foydalanadigan agentlar keng promptʼlardan foydalanadigan agentlarga qaraganda 37% yuqori vazifa yakunlash darajasini koʻrsatadi. Eng qizigʻi shundaki, agentlar tomonidan yozilgan kod qatorlarining soni haqiqatda yakunlangan funksiyalar bilan zaif manfiy (teskari) korrelyatsiyaga ega — kod qanchalik koʻp yozilsa, shuncha kam funksiyalar yakunlanadi. Oʻzi chaynay oladiganidan kattaroq tishlash, maʼlumotlar bilan isbotlangan.
+[Anthropic: incremental feature work](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 ## WIP=1 Ish jarayoni (Workflow)
 
@@ -100,7 +102,9 @@ Barcha vazifa holatlarini yozib borish uchun mashina oʻqiy oladigan fayldan (JS
 
 Harness VCR (Verified Completion Rate) ni doimiy kuzatib borishi kerak = tekshirilgan vazifalar / faollashtirilgan vazifalar. Agar VCR < 1.0 boʻlsa, yangi vazifa faollashtirilishini bloklang.
 
-## Hayotiy misol
+## O‘quv misoli
+
+> O‘quv misoli: vaziyat va raqamlar tushuntirish uchun faraz qilingan, chop etilgan tajriba o‘lchovlari emas.
 
 8 ta funksiyaga ega REST API loyihasi, taqqoslangan ikkita strategiya:
 

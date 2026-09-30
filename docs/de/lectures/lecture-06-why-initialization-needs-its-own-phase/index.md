@@ -5,6 +5,8 @@
 
 # Lektion 06. Vor jeder Agenten-Session initialisieren
 
+> Technische Richtwerte: Die Zahlen sind anpassbare Lehrannahmen, keine experimentell bestätigten Grenzen. Tokenzahlen hängen von Tokenizer und Inhalt ab, nicht allein von Zeilen.
+
 Sie starten eine neue Agenten-Session und sagen „Füge eine Suchfunktion hinzu." Es stürzt sich direkt ins Programmieren — bewundernswerte Begeisterung. Nach 20 Minuten stellt es fest, dass das Test-Framework nicht richtig konfiguriert ist, verbringt weitere 10 Minuten mit der Reparatur, dann ist das Format des Datenbankmigrationsskripts falsch, weiteres Herumgefummel. Die Suchfunktion wird schließlich hinzugefügt, aber die gesamte Session war ineffizient — die meiste Zeit floss in „herausfinden, wie dieses Projekt funktioniert" anstatt die Suchfunktion zu schreiben.
 
 Der bessere Ansatz: Bevor der Agent mit der Arbeit beginnt, eine separate Phase nutzen, um die Basisumgebung vorzubereiten, Verifizierungsbefehle zum Laufen zu bringen und die Projektstruktur zu verstehen. Es ist wie beim Hausbau — man gießt nicht das Fundament und stellt gleichzeitig die Wände auf. Wenn man es doch tut, stehen die Wände, bevor das Fundament ausgehärtet ist, und das gesamte Gebäude muss abgerissen und neu begonnen werden. Erst das Fundament gießen, aushärten lassen, dann die Wände bauen — sauber und effizient.
@@ -37,6 +39,8 @@ flowchart TB
 
 ## Was passiert, wenn man beides vermischt
 
+> Lehrbeispiel: Dieses Szenario und seine Zahlen dienen der Erklärung und sind keine Messwerte eines veröffentlichten Experiments.
+
 Das direkteste Problem: Das Fundament härtet nicht richtig aus. Der Agent verbringt 80% seiner Mühe auf Feature-Code und 20% mit beiläufigem Aufbau etwas Infrastruktur. Das Test-Framework ist konfiguriert, aber nie verifiziert, Lint-Regeln sind gesetzt, aber zu lasch, keine Fortschrittsdatei erstellt. Diese Mängel sind in der ersten Session nicht offensichtlich (weil der Agent sich noch an das erinnert, was er getan hat), aber sie tauchen in der zweiten Session auf — der neue Agent weiß nicht, wie man ausführt, testet oder wo die Dinge stehen. Schlechtes Fundament, wackeliges Gebäude.
 
 Ein noch verborgenerer Kostenfaktor ist die „unverifizierte Akkumulation" — Feature-Code, der geschrieben wurde, bevor das Test-Framework konfiguriert ist, ist Code ohne Verifizierung. Wenn man schließlich zurückgeht, um Tests für diesen Code hinzuzufügen, könnte man feststellen, dass das Design von Anfang an falsch war — hätte man es gewusst, hätte man es anders implementiert. Wie Fliesen auf nassem Beton — wenn man entdeckt, dass der Boden nicht eben ist, müssen alle Fliesen herausgebrochen und neu verlegt werden.
@@ -45,7 +49,7 @@ Das Session-Budget wird ebenfalls verschwendet. Initialisierungsarbeit (Umgebung
 
 Das am leichtesten übersehene Problem sind implizite Annahmen-Landminen. Entscheidungen, die der Agent während der Initialisierung trifft (welches Test-Framework, wie Verzeichnisse organisieren, Abhängigkeitsverwaltung) — wenn sie nicht explizit dokumentiert werden, können nachfolgende Sessions diese Entscheidungen nicht nachvollziehen. Schlimmer noch, nachfolgende Sessions könnten widersprüchliche Entscheidungen treffen. Die erste Baumannschaft hat ein Betonfundament verwendet, die zweite weiß es nicht und hat Holzpfähle hineingetrieben — das Fundament reißt.
 
-Anthropics Forschung zur Entwicklung langlebiger Anwendungen empfiehlt ausdrücklich die Trennung von Initialisierung und Implementierung. Ihre experimentellen Daten: Projekte mit einer dedizierten Initialisierungsphase zeigten in Multi-Session-Szenarien eine um 31% höhere Feature-Abschlussrate im Vergleich zu gemischten Ansätzen. Die zentrale Erkenntnis — die in die Initialisierungsphase investierte Zeit wird in den nächsten 3–4 Sessions vollständig zurückgewonnen. Je solider das Fundament, desto schneller gehen die Wände hoch.
+[Anthropic: initializer / coding agent](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 OpenAIs Codex harness Engineering-Leitfaden betont ebenfalls das Prinzip „Repository als operativer Datensatz" — etablieren Sie von Anfang an eine klare Betriebsstruktur, sonst muss jede neue Session Projektkonventionen neu erschließen.
 
@@ -122,7 +126,9 @@ OpenAIs Codex harness Engineering-Leitfaden betont ebenfalls das Prinzip „Repo
 - [ ] Everything committed to git
 ```
 
-## Praxisbeispiel
+## Lehrbeispiel
+
+> Lehrbeispiel: Dieses Szenario und seine Zahlen dienen der Erklärung und sind keine Messwerte eines veröffentlichten Experiments.
 
 Zwei Initialisierungsansätze für ein React-Frontend-Projekt:
 

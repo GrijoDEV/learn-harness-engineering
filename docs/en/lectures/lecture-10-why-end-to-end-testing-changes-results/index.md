@@ -5,6 +5,8 @@
 
 # Lecture 10. Only a Full Pipeline Run Counts as Real Verification
 
+> Engineering guideline: numerical cutoffs here are adjustable teaching defaults, not experimentally established thresholds. Token counts depend on the tokenizer and content, not line count alone.
+
 You ask the agent to add a file export feature to an Electron app. It writes the renderer component, the preload script, and the service layer logic. Unit tests for every component pass. The agent says "done." You actually click the export button — the file path format is wrong, the progress bar doesn't respond, and exporting large files leaks memory. Five component boundary defects, and unit tests didn't catch a single one.
 
 Each part looks "correct" on its own, but problems surface the moment they are wired together. Google's Testing Pyramid tells us that a large base of unit tests is essential, but stopping there means you will systematically miss component interaction issues. For AI coding agents this problem is even worse, because agents tend to run only the fastest tests and then declare completion. **Only end-to-end testing can prove the absence of system-level defects.**
@@ -114,7 +116,9 @@ FIX: Move file operations to src/preload/file-ops.ts and call via window.api.rea
 
 Every time you discover a new category of agent error during code review, turn it into an automated check. A month later your harness will be far stronger than it was at the start of the month.
 
-## Real-World Case
+## Illustrative Example
+
+> Teaching illustration: this scenario and its numerical values are assumed for explanation, not observations from a published experiment.
 
 **Task**: Implement a file export feature in an Electron app. Involves renderer process UI, preload script filesystem proxy, and service layer data transformation.
 

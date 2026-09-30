@@ -5,6 +5,8 @@
 
 # Lektion 09. Verhindern, dass Agenten zu früh Erfolg melden
 
+> Technische Richtwerte: Die Zahlen sind anpassbare Lehrannahmen, keine experimentell bestätigten Grenzen. Tokenzahlen hängen von Tokenizer und Inhalt ab, nicht allein von Zeilen.
+
 Sie bitten einen Agenten, eine „Passwort zurücksetzen"-Funktion zu implementieren. Er ändert das Datenbankschema, schreibt den API-Endpunkt, fügt die E-Mail-Vorlage hinzu, führt Unit-Tests aus (alle bestanden) und teilt Ihnen zuversichtlich mit: „Es ist fertig." Wenn Sie es tatsächlich ausprobieren — der Link zum Zurücksetzen des Passworts kann nicht gesendet werden (E-Mail-Service-Konfiguration fehlt), die Datenbankmigration scheitert zur Hälfte (Schemainkonsistenz), und der End-to-End-Ablauf wurde kein einziges Mal ausgeführt.
 
 Dieses Gefühl sollte nicht un vertraut sein — es ist, als würde man das gesamte Klausurheft ausfüllen, zuversichtlich als Erster abgeben und dann durchfallen, wenn die Noten kommen. Nur weil das Heft voll ist, heißt das nicht, dass die Antworten richtig sind.
@@ -12,6 +14,8 @@ Dieses Gefühl sollte nicht un vertraut sein — es ist, als würde man das gesa
 Dies ist kein Einzelfall. Das klassische ICML-Papier von Guo et al. (2017) hat bewiesen: **Moderne neuronale Netze sind systematisch über confident** — die von Modellen berichtete Zuversicht ist deutlich höher als ihre tatsächliche Genauigkeit. Dasselbe gilt für KI-Coding-Agenten: Sie „fühlen", dass sie fertig sind, aber in Wirklichkeit sind sie weit davon entfernt. Ihr Harness muss die „Gefühle" des Agenten durch externalisierte, ausführungsbasierte Verifikation ersetzen.
 
 ## Die rutschige Abwärtsspirale
+
+> Gleiches Modell und gleicher Prompt, aber unterschiedliche Laufzeit- und Kostenbudgets. Kein Experiment mit gleichem Budget zur Isolation eines einzelnen Bestandteils. Das Spiel funktionierte im Kern, hatte aber weiterhin Fehler. [Anthropic](https://www.anthropic.com/engineering/harness-design-long-running-apps)
 
 Voreilige Fertigstellungsmeldungen folgen fast immer demselben Muster: Der Code sieht in Ordnung aus — Syntax ist korrekt, Logik erscheint plausibel, und die statische Analyse zeigt keine offensichtlichen Fehler. Aber der Harness erzwingt keine umfassende Ausführungs verifikation, also überspringt der Agent das tatsächliche Ausführen oder führt nur teilweise Tests durch. Er führt Unit-Tests durch, überspringt aber Integrationstests; er führt Tests durch, prüft aber keine Abdeckung. Letztendlich wird „der Code sieht gut aus" als Beweis dafür genommen, dass „die Funktion vollständig ist". Und das Klausurheft wird abgegeben.
 
@@ -111,7 +115,9 @@ Wirksame Laufzeit-Signale umfassen:
 - Waren Datenbank-Schreibvorgänge, Dateioperationen und andere Seiteneffekte korrekt?
 - Wurden temporäre Ressourcen bereinigt?
 
-## Fallbeispiel aus der Praxis
+## Lehrbeispiel
+
+> Lehrbeispiel: Dieses Szenario und seine Zahlen dienen der Erklärung und sind keine Messwerte eines veröffentlichten Experiments.
 
 **Aufgabe**: Passwort-Zurücksetzen-Funktionalität für Benutzer implementieren. Umfasst Datenbankoperationen, E-Mail-Versand und API-Endpunkt-Änderungen.
 

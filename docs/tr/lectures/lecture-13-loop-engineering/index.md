@@ -5,6 +5,8 @@
 
 # Ders 13. Manuel Prompting'den Otonom Loop'lara
 
+> Mühendislik önerisi: sayısal eşikler ayarlanabilir öğretim değerleridir, deneysel sınırlar değildir. Token sayısı yalnız satıra değil tokenizer ve içeriğe bağlıdır.
+
 İlk on iki derste öğrendiklerinizin hepsi tek bir varsayıma dayanıyor: **klavyenin başında oturup teker teker talimatlar yazıyorsunuz.**
 
 `AGENTS.md` yazdınız (Ders 1–4), durum yönetimi oluşturdunuz (Ders 5–6), özellik listeleriyle kapsamı kısıtladınız (Ders 7–8), oturum sonunda temiz devirler bıraktınız (Ders 9, 12) ve runtime'ı gözlemlenebilir kıldınız (Ders 10–11). Ama tüm bunların tetikleyicisi her zaman siz oldunuz. Ajan ne zaman çalışmaya başlayacağına kendi kendine karar vermedi — çünkü kimse "başlat" tuşuna basmadı.
@@ -84,7 +86,11 @@ Bu dersin konusu olan Loop Mühendisliği, tek bir komutla ilgili değildir. **T
 
 Her seferinde `/goal` yazmak zorunda değilsiniz. Ama nereden geldiğini ve neden göründüğü gibi olduğunu anlamak — loop mühendisliğinin özünü anlamaktır. Daha karmaşık loop'lar sadece zamanlama, paralellik, izolasyon ve bellek gibi parçaları aynı üç temel üzerine ekler: hedef, doğrulama, durdurma koşulu.
 
+> Öğretim örneği: senaryo ve sayılar açıklama için varsayılmıştır, yayımlanmış deney ölçümleri değildir.
+
 ## Haziran 2026: Üç kişi aynı haftada aynı sigortayı yaktı
+
+> Öğretim örneği: senaryo ve sayılar açıklama için varsayılmıştır, yayımlanmış deney ölçümleri değildir.
 
 2026 Haziran'ın ilk haftasında, kodlama ajan altyapısı inşa eden üç pratisyen — notlar karşılaştırmadan — farklı kelimelerle aynı şeyi söyledi.
 
@@ -96,7 +102,13 @@ Her seferinde `/goal` yazmak zorunda değilsiniz. Ama nereden geldiğini ve nede
 
 > **Loop mühendisliği, ajanı prompt eden kişi olarak kendinizi değiştirmektir. Onun yerine bunu yapan sistemi tasarlarsınız.**
 
-Cherny sayıları açıkladı: art arda 30 günden fazla, Claude Code'a tüm kod katkıları AI tarafından özerk olarak yapıldı — 259 merge edilmiş PR, üretim kodunun %80'inden fazlası Claude tarafından yazıldı ve açık uçlu yazılım görevlerinde %76 başarı oranı.
+Boris Cherny · 2025-12-27
+
+| PR | Git commits | + LoC | − LoC | Model |
+| --- | --- | --- | --- | --- |
+| 259 / 30 days | 497 | 40,000 | 38,000 | Claude Code + Opus 4.5 |
+
+Yazarın bildirdiği kişisel üretim, benchmark başarı oranı veya insan denetiminin yokluğu kanıtı değildir. [Boris Cherny](https://twitter.com/bcherny/status/2004887829252317325) · [quoted original post](https://simonwillison.net/tags/boris-cherny/)
 
 Üç kişi. Bir hafta. Aynı sonuç. Koordine oldukları için değil — altyapı sessizce bir eşiği aştığı için. Ajanlar önemsiz olmayan görevleri denetimsiz bitirecek kadar güvenilir hale gelmişti. Zamanlama ilkelleri (`/loop`, `/goal`, cron) artık araçlara yerleşmişti. Tek bir ajan çalıştırmanın maliyeti, bir zamanlayıcıda tekrar tekrar çalıştırmanın israfçı görünmemesini sağlayacak kadar düşmüştü. Tüm parçalar mevcut olduğunda, onları birleştiren hareket herkes için aynı anda açık hale gelir.
 
@@ -267,7 +279,7 @@ flowchart TD
 
 Bu artık tek bir ajan çalışması değil. Her sabah uyanan, kendi kendine yeri süpüren ve dikkatinizi gerektiren şeyleri önünüze koyan sürekli çalışan bir sistemdir. Rolünüz şu hale gelir: **gelen kutusu içeriğini gözden geçirin, kararlar verin ve sistemin kaldıramayacağı bir desen gördüğünüzde becerileri ve kuralları iyileştirin.**
 
-Cherny bu deseni kullanarak 30 günde 259 PR'ı tek bir IDE açmadan merge etti. OpenAI mühendisleri aynı deseni kullanarak kabaca bir milyon satırlık bir beta ürünü elle — tek bir satır kod kendileri yazmadan — inşa ettiler.
+Yazarın bildirdiği kişisel üretim, benchmark başarı oranı veya insan denetiminin yokluğu kanıtı değildir.
 
 ## Üretici/Değerlendirici Ayrımı: Neden Modelin Kendi Çalışmasını Notlandırmasına İzin Veremezsiniz
 
@@ -293,7 +305,7 @@ Hatırlanacak tek cümle: **ekibinizdeki biri size inanmamalıdır.**
 
 İyi tasarlanmış, gerçekten çalışan bir loop'un neye benzediğini görmek istiyorsanız, [Karpathy'nin autoresearch'ı](https://github.com/karpathy/autoresearch) ders kitabı örneğidir.
 
-Mart 2026'da Karpathy 630 satırlık bir Python projesi yayınladı. Ona bir GPU ve bir araştırma yönü verin ve bütün gece çalışır — yüzlerce ML eğitim deneyi tamamlar, sadece gerçekten iyileştirenleri tutar. Proje yayınlanmasından birkaç gün içinde 66.000+ yıldıza ulaştı.
+[Karpathy: autoresearch](https://github.com/karpathy/autoresearch) · [announcement](https://x.com/karpathy/status/2030371219518931079)
 
 ### Üç Dosya, Üç Rol
 
@@ -343,8 +355,6 @@ flowchart TD
     8b --> 9
 ```
 
-Saatte kabaca 12 deney çalıştırır. Bir gecelik çalışma (8 saat) yaklaşık 100 deneydir. Karpathy kendisi 2 gün çalıştırdı — ~700 deney.
-
 Sabit 5 dakikalık duvar saati bütçesi önemli bir tasarım seçimidir — ajan ne değiştirirse değiştirsin, her deney tam olarak aynı zamanı alır. Bu, tüm sonuçların aynı zaman bütçesi altında doğrudan karşılaştırılabilir olduğu anlamına gelir — "bunun daha uzun süre çalıştığı için daha iyi" tartışması yok.
 
 ### Çıktı: Uyandığınızda ne görürsünüz
@@ -358,6 +368,8 @@ Sadece gerçekten iyileştiren commit'ler ana dalda kalır. Başarısız olan he
 **2. results.tsv (tam deney kaydı)**
 
 Her tek deney — başarılı veya başarısız — günlüğe kaydedilir:
+
+> Öğretim örneği: senaryo ve sayılar açıklama için varsayılmıştır, yayımlanmış deney ölçümleri değildir.
 
 ```
 timestamp    commit_hash    val_bpb    vram_mb    description
@@ -375,11 +387,10 @@ Ajan ne denediğini, neyin işe yaradığını, neyin yaramadığını ve sırad
 
 ### Gerçekte ne buldu
 
-Karpathy'nin ilk 2 günlük ~700 deney çalışmasının sonuçları:
-
-- ~700 denemeden yaklaşık **20 yığılabilir gerçek iyileştirme** bulundu
 - nanochat'ın GPT-2 seviyesi eğitim süresini 8×H100'de **2,02 saat → 1,80 saat** olarak azalttı, yaklaşık **%11 daha hızlı**
-- Bulgular şunları içeriyordu: öğrenme oranı ayarlamaları, optimize edici ayarı, aktivasyon değişimleri, dikkat deseni optimizasyonları vb.
+- Bulgular şunları içeriyordu: öğrenme oranı ayarlamaları, optimize edici ayarı, aktivasyon değişimleri, dikkat deseni optimizasyonları vb. [Karpathy: leaderboard commit](https://github.com/karpathy/nanochat/commit/f06860494848db080c9a80a0ffa83203b042056b) · [tuning commit](https://github.com/karpathy/nanochat/commit/6ed7d1d82cee16c2e26f45d559ad3338447a6c1b)
+
+> Öğretim örneği: senaryo ve sayılar açıklama için varsayılmıştır, yayımlanmış deney ölçümleri değildir.
 
 Tüm iyileştirmeler yer sarsıcı keşifler miydi? Hayır. Çoğu yığılan küçük optimizasyonlardı. Ama bu 20 geçerli iyileştirme bir insan araştırmacının haftalarca manuel çalışmasını alırdı — ajan 48 saatte yaptı.
 
@@ -399,7 +410,7 @@ Hızlı loop'lar sizi doğrulamayı atlamaya kışkırtır. "Güzel görünüyor
 
 ### 2. Anlama Çürümesi
 
-Bir loop kod o kadar hızlı gönderir ki, kendi kod tabanınıza dair anlayışınız gerçeklikten o kadar uzaklaşır. Cherny'nin ekibinin kodunun %80'i ajanlar tarafından yazıldı — yani bir ekibin kodunun çoğu bir kişi tarafından yazılmadı. Loop'un ürettiğini okumaz ve kullanmazsanız, anlayışınız sürekli olarak çürür. **Hızlı loop'lar hızlı okuma gerektirir.**
+Üretim sonuçları tek nedeni ayırmaz. Benchmark skorları belirtilen model, scaffold, veri ve değerlendirme koşulları içindir.
 
 ### 3. Bilişsel Teslimiyet
 

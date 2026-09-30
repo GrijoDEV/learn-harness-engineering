@@ -261,7 +261,7 @@ Zuerst ziehe die Linie: **„Graph Engineering“ ist ein Name, der erst nach de
 
 **Projekte nach der Veröffentlichung (das eine, das wirklich Graph Engineering heißt)**
 
-- [GraphArc](https://github.com/CodeGraphContext/grapharc) (2026-08-02): nennt sich selbst „die erste Echtzeit-Implementierung von Graph Engineering“. Es verwandelt die Agenten-Ausführung von Traces, die in Logs vergraben sind, in einen **interaktiven Echtzeit-Orchestrierungsgraphen** — jeder Agent, jede Abhängigkeit und jeder Entscheidungspunkt wird gezeichnet, zur Freigabe vor der Ausführung visualisiert (du kannst es sogar vom Handy aus ansehen). Der Hintergrund des Autors ist das Bauen von Graph-Tools für 4.000+ Entwickler; die Richtung ist „beobachtbar, debugbar, engineerbar“. Sehr neu, noch in einem frühen Stadium.
+- [GraphArc](https://github.com/CodeGraphContext/grapharc)
 
 **Projekte vor der Veröffentlichung (sie nennen es nicht Graph Engineering — aber mit ihnen baust du tatsächlich)**
 

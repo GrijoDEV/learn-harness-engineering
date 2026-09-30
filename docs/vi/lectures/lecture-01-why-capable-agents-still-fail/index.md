@@ -5,17 +5,30 @@
 
 # Bài 01. Mô hình mạnh không có nghĩa là thực thi đáng tin cậy
 
-Tính đến cuối năm 2025, các coding agent mạnh nhất trên SWE-bench Verified đạt tỷ lệ vượt qua khoảng 50-60%. Nghe thì có vẻ khá, nhưng đừng vội ăn mừng. Đó là những tác vụ được lựa chọn cẩn thận với mô tả vấn đề rõ ràng và bộ test có sẵn. Đưa cho agent yêu cầu thực tế hàng ngày của bạn: đặc tả mơ hồ, không có test, quy tắc nghiệp vụ ẩn rải rác trong codebase, thì tỷ lệ vượt qua chỉ giảm thêm nữa. Bạn hào hứng giao một tác vụ, agent chạy 20 phút rồi báo "xong rồi", và bạn nhìn vào code: nó thêm một tính năng nhưng làm hỏng test, sửa một lỗi nhưng sinh ra lỗi mới, và kết quả cuối cùng còn không đúng thứ bạn yêu cầu.
+Claude Sonnet 4.5 · 2025-09-29 · SWE-bench Verified
+
+| Score | Tasks | Trials | Scaffold |
+| --- | --- | --- | --- |
+| 77.2% | 500 | 10 | bash + string replacement |
+
+Kết quả sản xuất không tách riêng nguyên nhân. Điểm benchmark chỉ áp dụng cho mô hình, scaffold, dữ liệu và điều kiện đánh giá đã nêu. [Anthropic: methodology](https://www.anthropic.com/news/claude-sonnet-4-5)
 
 Khi chuyện này xảy ra, phản ứng đầu tiên của hầu hết mọi người là "mô hình chưa đủ tốt, thử sang cái đắt tiền hơn xem sao". Trước khi mở ví, hãy cân nhắc: vấn đề có thể hoàn toàn không nằm ở mô hình.
 
 ## Cùng con ngựa, số phận khác nhau
 
-Anthropic đã thực hiện một thí nghiệm có kiểm soát minh họa chính xác điểm này. Cùng một prompt ("xây dựng một trình tạo trò chơi retro 2D"), cùng một mô hình (Opus 4.5), hai lần chạy. Lần chạy đầu tiên: trần trụi, không có hỗ trợ, 20 phút, $9, các tính năng cốt lõi của trò chơi không hoạt động. Lần chạy thứ hai: harness đầy đủ, kiến trúc ba agent gồm planner, generator, evaluator, 6 giờ, $200, trò chơi có thể chơi được hoàn toàn.
+> Cùng mô hình và prompt nhưng khác ngân sách thời gian và chi phí. Không phải thí nghiệm cùng ngân sách tách riêng một thành phần. Chức năng chơi cơ bản hoạt động nhưng vẫn còn lỗi. [Anthropic](https://www.anthropic.com/engineering/harness-design-long-running-apps)
+
+Cùng mô hình và prompt nhưng khác ngân sách thời gian và chi phí. Không phải thí nghiệm cùng ngân sách tách riêng một thành phần. Chức năng chơi cơ bản hoạt động nhưng vẫn còn lỗi. [Anthropic](https://www.anthropic.com/engineering/harness-design-long-running-apps)
+
+| Opus 4.5 | Duration | USD |
+| --- | --- | --- |
+| Solo | 20 min | 9 |
+| Full harness | 6 h | 200 |
 
 Họ không thay đổi mô hình. Opus 4.5 vẫn là Opus 4.5. Thứ thay đổi là bộ yên cương.
 
-Bài viết về harness engineering năm 2025 của OpenAI còn nói thẳng hơn. Họ cho biết Codex trong một kho lưu trữ được trang bị harness tốt đi từ "không đáng tin cậy" thẳng đến "đáng tin cậy". Chú ý cách diễn đạt: không phải "tốt hơn một chút", mà là một bước nhảy về chất. Harness ở đây có nghĩa là **toàn bộ cơ sở hạ tầng kỹ thuật bên ngoài trọng số mô hình**.
+Kết quả sản xuất không tách riêng nguyên nhân. Điểm benchmark chỉ áp dụng cho mô hình, scaffold, dữ liệu và điều kiện đánh giá đã nêu. [OpenAI: 2026-02-11](https://openai.com/index/harness-engineering/)
 
 ## Agent thực sự bị kẹt ở đâu
 
@@ -25,13 +38,13 @@ Các chế độ thất bại cụ thể thực ra chỉ gói gọn trong vài �
 - **Quy ước ẩn không được viết ra, agent không có cách nào tuân thủ.** Cả nhóm bạn dùng cú pháp SQLAlchemy 2.0, nhưng agent mặc định viết code 1.x. Mọi API endpoint phải đi qua xác thực OAuth 2.0, nhưng quy tắc đó chỉ tồn tại trong đầu bạn và một tin nhắn Slack từ ba tháng trước. Agent không hề biết, không phải nó không muốn tuân thủ, mà là nó chưa từng thấy quy tắc đó.
 - **Thiết lập môi trường chưa đầy đủ, agent tốn năng lượng sửa môi trường.** Môi trường dev chưa hoàn chỉnh, thiếu dependency, sai phiên bản công cụ, agent đốt cửa sổ ngữ cảnh quý giá vào lỗi `pip install` và xung đột phiên bản Node thay vì làm việc bạn thực sự giao.
 - **Không có phương pháp xác minh, agent tự coi là xong khi nó cảm thấy xong.** Không có test, không có lint, hoặc các lệnh xác minh chưa bao giờ được truyền đạt cho agent. Agent viết code, nhìn lại, thấy có vẻ ổn rồi tuyên bố hoàn thành. Anthropic cũng quan sát thấy một hiện tượng thú vị: khi agent cảm nhận ngữ cảnh sắp cạn, nó vội vàng kết thúc, bỏ qua bước xác minh, và chọn giải pháp đơn giản thay vì tối ưu. Họ gọi đây là "context anxiety" (lo lắng ngữ cảnh).
-- **Mất trạng thái giữa các phiên, mỗi phiên mới bắt đầu lại từ đầu.** Mọi phát hiện từ phiên trước đều biến mất. Mỗi phiên mới phải khám phá lại cấu trúc dự án và hiểu lại cách tổ chức code. Agent không có trạng thái liên tục thì tỷ lệ thất bại tăng vọt trên các tác vụ kéo dài quá 30 phút.
+- **Mất trạng thái giữa các phiên, mỗi phiên mới bắt đầu lại từ đầu.** — Ghi tiến độ và kết quả kiểm tra vào tệp quản lý phiên bản để phiên sau kiểm tra trạng thái. Nguồn mô tả cơ chế, không báo cáo phần trăm giảm thời gian khởi động. [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 ## Giải thích thuật ngữ chính
 
 Với các tình huống trên, những khái niệm này không còn chỉ là thuật ngữ suông:
 
-- **Khoảng cách Năng lực (Capability Gap)**: Khoảng cách lớn giữa hiệu suất mô hình trên benchmark và hiệu suất trên tác vụ thực tế. Tỷ lệ 50-60% trên SWE-bench Verified có nghĩa là gần một nửa vấn đề thực tế không được giải quyết.
+- Kết quả sản xuất không tách riêng nguyên nhân. Điểm benchmark chỉ áp dụng cho mô hình, scaffold, dữ liệu và điều kiện đánh giá đã nêu.
 - **Harness**: Mọi thứ bên ngoài mô hình, hướng dẫn, công cụ, môi trường, quản lý trạng thái, phản hồi xác minh. Không phải trọng số mô hình, thì đó là harness. Chính là thứ chúng ta vẫn gọi là "bộ yên cương".
 - **Lỗi Do Harness (Harness-Induced Failure)**: Mô hình có đủ năng lực, nhưng môi trường thực thi có khiếm khuyết cấu trúc. Thí nghiệm có kiểm soát của Anthropic đã chứng minh điều này.
 - **Khoảng cách Xác minh (Verification Gap)**: Khoảng cách giữa sự tự tin của agent về kết quả đầu ra và tính đúng đắn thực tế. Agent nói "tôi đã xong" khi chưa xong, đây là chế độ thất bại phổ biến nhất.
@@ -60,15 +73,17 @@ Từ đó, xây dựng vòng lặp chẩn đoán. Đừng xem lỗi là "mô hì
 
 ## Thí nghiệm triệu dòng code
 
-Vào năm 2025, ba kỹ sư tại OpenAI bắt đầu một thí nghiệm. Quy tắc đơn giản: chính họ không viết code, chỉ Codex viết. Bắt đầu từ một kho git trống, năm tháng sau kho chứa khoảng một triệu dòng code. Logic ứng dụng, hạ tầng, công cụ, tài liệu, tất cả đều do agent tạo. Ba kỹ sư mở tổng cộng 1.500 PR, trung bình 3.5 PR mỗi người mỗi ngày.
+Kết quả sản xuất không tách riêng nguyên nhân. Điểm benchmark chỉ áp dụng cho mô hình, scaffold, dữ liệu và điều kiện đánh giá đã nêu. [OpenAI: 2026-02-11](https://openai.com/index/harness-engineering/)
 
 Tiến độ ban đầu chậm hơn dự kiến một cách đáng ngạc nhiên. Codex không tệ, nó chỉ thiếu các công cụ và cấu trúc đủ hoàn chỉnh để hướng đến mục tiêu cấp cao. Ba kỹ sư dần tìm ra quy luật: chia nhỏ mục tiêu lớn thành các khối xây dựng nhỏ, thiết kế, code, review, test, để agent lắp ráp từng khối một, rồi dùng các khối đó để tổng hợp các tác vụ phức tạp hơn. Mỗi khi có trục trặc, vấn đề hầu như không bao giờ là "cố gắng chưa đủ", mà luôn là "agent còn thiếu năng lực gì, và thiếu năng lực đó có thể được cung cấp theo cách vừa dễ hiểu vừa có thể thực thi không".
 
-Thí nghiệm này chứng minh trực tiếp luận điểm cốt lõi của bài giảng: **cùng một mô hình, trong môi trường trần trụi và trong môi trường có harness đầy đủ, tạo ra kết quả về cơ bản khác nhau.** Mô hình không thay đổi. Môi trường thay đổi.
+Kết quả sản xuất không tách riêng nguyên nhân. Điểm benchmark chỉ áp dụng cho mô hình, scaffold, dữ liệu và điều kiện đánh giá đã nêu.
 
 > Nguồn: [OpenAI: Harness engineering: leveraging Codex in an agent-first world](https://openai.com/index/harness-engineering/)
 
-## Một ví dụ gần gũi hơn
+## Ví dụ giảng dạy
+
+> Minh họa giảng dạy: tình huống và số liệu là giả định để giải thích, không phải đo lường của thí nghiệm công bố.
 
 Một nhóm dùng Claude Sonnet để thêm API endpoint mới vào một ứng dụng web Python cỡ trung (FastAPI + PostgreSQL + Redis, khoảng 15.000 dòng code).
 
@@ -93,6 +108,8 @@ Họ không thay đổi mô hình. Họ thay đổi harness.
 - [HumanLayer: Skill Issue — Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
 - [SWE-bench Leaderboard](https://www.swebench.com/)
 - [Thoughtworks Technology Radar: Harness Engineering](https://www.thoughtworks.com/radar)
+
+- [Anthropic: Sonnet 4.5 SWE-bench methodology, 2025-09-29](https://www.anthropic.com/news/claude-sonnet-4-5)
 
 ## Bài tập
 

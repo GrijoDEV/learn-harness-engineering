@@ -9,13 +9,26 @@
 
 最初の反応は「このモデルはまだ足りない。アップグレードしよう」かもしれません。少し待ってください。財布を開く前に、問題はモデルではない可能性があります。
 
-数字を見てみましょう。2025 年後半時点で、最強クラスの coding agent でも SWE-bench Verified ではおおむね 50-60% 程度です。しかもこれは、明確な issue 説明と既存テストがある、慎重に選ばれたタスクでの数字です。日常の開発環境、つまり曖昧な要求、既存テストなし、暗黙のビジネスルールが散らばった環境に移ると、その数字はさらに下がります。
+Claude Sonnet 4.5 · 2025-09-29 · SWE-bench Verified
+
+| Score | Tasks | Trials | Scaffold |
+| --- | --- | --- | --- |
+| 77.2% | 500 | 10 | bash + string replacement |
+
+実際の開発結果は一つの要因だけの因果効果を示しません。ベンチマーク値は指定されたモデル、scaffold、データ、評価条件に限られます。 [Anthropic: methodology](https://www.anthropic.com/news/claude-sonnet-4-5)
 
 しかし、この数字の裏には直感に反する真実があります。
 
 ## 同じ馬、違う運命
 
-Anthropic は制御実験を行いました。同じプロンプト（「2D レトロゲームメーカーを作る」）、同じモデル（Opus 4.5）。1 回目は bare、支援なし。20 分、9 ドル、ゲームの中核機能はまったく動きませんでした。2 回目は完全な harness（planner + generator + evaluator の 3 エージェント構成）。6 時間、200 ドル、ゲームはプレイ可能でした。
+> モデルとプロンプトは同じですが、時間と費用の予算が異なります。同予算で一つの構成要素を分離した実験ではありません。基本的なゲーム操作は動作しましたが、不具合は残りました。 [Anthropic](https://www.anthropic.com/engineering/harness-design-long-running-apps)
+
+モデルとプロンプトは同じですが、時間と費用の予算が異なります。同予算で一つの構成要素を分離した実験ではありません。基本的なゲーム操作は動作しましたが、不具合は残りました。 [Anthropic](https://www.anthropic.com/engineering/harness-design-long-running-apps)
+
+| Opus 4.5 | Duration | USD |
+| --- | --- | --- |
+| Solo | 20 min | 9 |
+| Full harness | 6 h | 200 |
 
 モデルは変えていません。Opus 4.5 は同じ Opus 4.5 です。変わったのは馬具です。
 
@@ -39,7 +52,7 @@ OpenAI の harness engineering 記事ははっきり言っています。よく 
 
 こうした状況を踏まえると、次の概念は単なる流行語ではありません。
 
-- **能力ギャップ**: ベンチマーク上のモデル性能と実タスクでの性能の大きな差。SWE-bench Verified で 50-60% ということは、実 issue のほぼ半分は解けないということです。
+- 実際の開発結果は一つの要因だけの因果効果を示しません。ベンチマーク値は指定されたモデル、scaffold、データ、評価条件に限られます。
 - **Harness**: モデルの外側にあるすべて。指示、ツール、環境、状態管理、検証フィードバック。モデル重みでなければ harness です。この講義で言う「馬具」です。
 - **Harness 起因の失敗**: モデルには能力があるのに、実行環境に構造的欠陥があるため失敗すること。Anthropic の制御実験がこれを示しています。
 - **検証ギャップ**: エージェントの出力への自信と実際の正しさの差。エージェントが「完了」と言うが完了していない。最も多い失敗モードです。
@@ -72,17 +85,19 @@ Completion criteria:
 
 ## 100 万行の実験
 
-OpenAI は 2025 年に強烈な実験を行いました。空の git リポジトリから、Codex で完全な社内プロダクトを構築する。5 か月後、そのリポジトリにはおよそ 100 万行のコードがありました。アプリケーションロジック、インフラ、ツール、ドキュメント、社内開発ツール。すべてエージェント生成です。3 人のエンジニアが Codex を操作し、約 1,500 PR を作成してマージしました。1 人あたり 1 日平均 3.5 PR です。
+OpenAI は 2025 年に強烈な実験を行いました。空の git リポジトリから、Codex で完全な社内プロダクトを構築する。5 か月後、そのリポジトリにはおよそ 100 万行のコードがありました。アプリケーションロジック、インフラ、ツール、ドキュメント、社内開発ツール。すべてエージェント生成です。3 人のエンジニアが Codex を操作し、約 1,500 PR を作成してマージしました。1 人あたり 1 日平均 3.5 PR です。 [OpenAI](https://openai.com/index/harness-engineering/)
 
-重要な制約は、**人間が直接コードを書かない**ことでした。これは見世物ではありません。エンジニアの主仕事がコードを書くことではなく、環境を設計し、意図を表現し、フィードバックループを作ることになったとき、何が変わるかを強制的に学ぶための設計でした。
+実際の開発結果は一つの要因だけの因果効果を示しません。ベンチマーク値は指定されたモデル、scaffold、データ、評価条件に限られます。
 
 初期の進捗は予想より遅かった。Codex が無能だったからではなく、環境が不十分だったからです。エージェントには高レベル目標を進めるためのツール、抽象、内部構造が足りませんでした。エンジニアの仕事は、大きな目標を小さな構成要素（設計、コード、レビュー、テスト）に分解し、エージェントに組み立てさせ、それらの構成要素でより複雑なタスクを解けるようにすることになりました。何かが失敗したときの修正は、ほぼ常に「もっと頑張れ」ではなく、「エージェントに足りない能力は何か、それを理解可能かつ実行可能にするにはどうするか」でした。
 
-この実験は、本講義の中心命題を直接示しています。**同じモデルでも、bare な環境と完全な harness を持つ環境では根本的に違う出力を出す。** モデルは変わっていません。環境が変わったのです。
+実際の開発結果は一つの要因だけの因果効果を示しません。ベンチマーク値は指定されたモデル、scaffold、データ、評価条件に限られます。
 
 > Source: [OpenAI: Harness engineering: leveraging Codex in an agent-first world](https://openai.com/index/harness-engineering/)
 
-## もっと身近な例
+## 教育用の例
+
+> 教育用の例：この場面と数値は仕組みを説明するための仮定であり、公表された実験の測定値ではありません。
 
 あるチームは Claude Sonnet を使って、中規模の Python Web アプリ（FastAPI + PostgreSQL + Redis、約 15,000 行）に新しい API endpoint を追加しようとしました。
 
@@ -107,6 +122,8 @@ OpenAI は 2025 年に強烈な実験を行いました。空の git リポジ�
 - [HumanLayer: Skill Issue — Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
 - [SWE-bench Leaderboard](https://www.swebench.com/)
 - [Thoughtworks Technology Radar: Harness Engineering](https://www.thoughtworks.com/radar)
+
+- [Anthropic: Sonnet 4.5 SWE-bench methodology, 2025-09-29](https://www.anthropic.com/news/claude-sonnet-4-5)
 
 ## 演習
 

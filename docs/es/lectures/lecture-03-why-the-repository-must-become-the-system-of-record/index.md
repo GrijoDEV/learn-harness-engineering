@@ -5,6 +5,8 @@
 
 # Lección 03. Convierte el repositorio en la fuente única de verdad
 
+> Guía de ingeniería: los umbrales son valores didácticos ajustables, no límites demostrados. Los tokens dependen del tokenizador y del contenido, no solo de las líneas.
+
 Las decisiones de arquitectura de tu equipo están dispersas entre Confluence, Slack, Jira y la cabeza de unos cuantos ingenieros senior. Para los humanos esto apenas funciona: puedes preguntar a un compañero, buscar en el historial del chat, revisar documentación. Si todo falla, puedes acorralar a alguien en la sala de descanso. Pero para un agente de IA, la información que no está en el repositorio simplemente no existe.
 
 No es una exageración. Piensa en cuáles son realmente las entradas de un agente: prompts de sistema y descripciones de tarea, contenidos de archivos del repositorio y salidas de herramientas. Eso es todo. Tu historial de Slack, tickets de Jira, páginas de Confluence y esa decisión de arquitectura que hablaste con un compañero tomando café un viernes por la tarde: el agente no ve nada de eso. No puede "ir a preguntar a alguien" ni "buscar en el historial del chat". Es un ingeniero encerrado dentro del repositorio; de todo lo que queda fuera no sabe nada.

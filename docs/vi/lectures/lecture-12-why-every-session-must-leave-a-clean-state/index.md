@@ -5,6 +5,8 @@
 
 # Bài 12. Bàn giao sạch ở cuối mỗi phiên
 
+> Hướng dẫn kỹ thuật: ngưỡng số là mặc định giảng dạy có thể chỉnh, không phải ranh giới thực nghiệm. Token phụ thuộc tokenizer và nội dung, không chỉ số dòng.
+
 Agent của bạn chạy cả buổi chiều, sửa 20 tệp, commit code, rồi phiên kết thúc. Phiên agent tiếp theo vừa mở ra đã phát hiện ngay: build hỏng, test đang đỏ, các tệp debug tạm rải rác khắp nơi, feature list chưa cập nhật, và tiến độ hoàn toàn mù mờ. 30 phút đầu của phiên mới chỉ để dò xem "phiên trước thật sự đã làm gì".
 
 Cả OpenAI và Anthropic đều phát biểu rõ: **độ tin cậy dài hạn phụ thuộc vào kỷ luật vận hành, không chỉ thành công một lần chạy.** Chất lượng trạng thái khi thoát phiên trực tiếp quyết định hiệu quả của phiên kế tiếp. Cũng giống như thực hành tốt với Git vậy, mỗi commit nên là một thay đổi nguyên tử, build được, chứ không phải đống code làm dở.
@@ -15,7 +17,7 @@ Các định luật tiến hoá phần mềm của Lehman cho thấy hệ thốn
 
 Trong năm tháng thí nghiệm Codex, OpenAI quan sát thấy một điều đáng chú ý: **agent sao chép các pattern đang có trong kho lưu trữ, ngay cả khi những pattern ấy không nhất quán hoặc chưa tối ưu.** Lâu dần, việc sao chép này tất yếu dẫn đến trôi dạt. Người đầu tiên để lại một cái cốc cà phê ở khu vực chung; người thứ hai thấy "chỗ này đã lộn xộn rồi" và cũng để thêm một cái; một tuần sau, cả mặt bàn chìm trong cốc. Một codebase cũng vận hành y hệt thế.
 
-Đội ngũ OpenAI ban đầu dành 20% thời gian mỗi thứ Sáu để dọn thủ công "rác do AI", nhưng cách này rõ ràng không mở rộng được. Cuối cùng họ đi đến một giải pháp có hệ thống:
+OpenAI dành thứ Sáu để dọn dẹp: một ngày làm việc, 20% tuần, không phải 20% thứ Sáu. [OpenAI](https://openai.com/index/harness-engineering/)
 
 1. **Mã hoá "quy tắc vàng" vào kho lưu trữ**: Các quy tắc kiểu "ưu tiên dùng package tiện ích dùng chung thay vì helper tự chế tay" (giữ bất biến ở một nơi) và "đừng đoán mò cấu trúc dữ liệu" (xác minh ranh giới hoặc dựa vào SDK có kiểu). Những quy tắc này cụ thể, cơ học và kiểm tra được tự động.
 2. **Thiết lập quy trình dọn dẹp định kỳ**: Một đội các task Codex nền thường xuyên quét tìm sai lệch, cập nhật điểm chất lượng, mở PR tái cấu trúc có mục tiêu. Phần lớn có thể review và auto-merge trong vòng một phút.
@@ -43,7 +45,7 @@ flowchart LR
     Fix --> Build
 ```
 
-Nhưng thế vẫn chưa đủ. Tiến độ hiện tại phải được ghi vào artifact máy đọc được: các subtask đã hoàn thành kèm tiêu chí pass, các subtask đang làm dở kèm trạng thái hiện tại, các subtask chưa bắt đầu. Bản ghi tiến độ tốt giảm thời gian chẩn đoán lúc khởi động phiên từ 60-80%. Artifact tạm (debug log, tệp tạm, code bị comment out, marker TODO) cũng phải được dọn, vì chúng tăng tải nhận thức cho phiên sau. Đường khởi động chuẩn phải còn chạy được. Phiên sau có thể bắt đầu làm việc mà không cần can thiệp thủ công không? Khởi tạo môi trường, tải codebase, thu thập ngữ cảnh, chọn tác vụ, không đường nào được hỏng cả.
+Ghi tiến độ và kết quả kiểm tra vào tệp quản lý phiên bản để phiên sau kiểm tra trạng thái. Nguồn mô tả cơ chế, không báo cáo phần trăm giảm thời gian khởi động. [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
 ```mermaid
 flowchart LR
@@ -72,6 +74,8 @@ Cái bẫy tâm lý phổ biến nhất là "phiên này không có thời gian 
 
 Tệ hơn, mỗi phiên có mục tiêu tác vụ riêng. Phiên mới vào để làm việc mới, không phải dọn mớ hỗn độn của phiên trước. Nó sẽ phớt lờ sự lộn xộn rồi xây tiếp lên trên, lại đẻ thêm hỗn loạn. Đó chính là vòng phản hồi dương của entropy.
 
+> Minh họa giảng dạy: tình huống và số liệu là giả định để giải thích, không phải đo lường của thí nghiệm công bố.
+
 Con số kể lại tất cả. Một dự án phát triển bằng agent trong 12 tuần, không có chiến lược dọn dẹp:
 
 - Tuần 1: build pass 100%, test pass 100%, khởi động phiên mới 5 phút
@@ -83,8 +87,6 @@ Cùng dự án nhưng có chiến lược dọn dẹp:
 
 - Tuần 1: 100%, 100%, 5 phút
 - Tuần 12: 97%, 95%, 9 phút
-
-Sau 12 tuần: tỷ lệ build pass chênh 29 điểm phần trăm, thời gian khởi động phiên mới chênh 85%. Đây không phải lý thuyết, đây là khác biệt được quan sát.
 
 ## Cách làm đúng
 
@@ -137,7 +139,7 @@ Phiên mới đọc tài liệu này là biết ngay ưu tiên ở đâu. Sửa 
 
 Mỗi thành phần harness tồn tại vì mô hình chưa thể tự làm việc đó một cách đáng tin. Nhưng khi mô hình mạnh lên, những giả định ấy trở nên lỗi thời.
 
-Thí nghiệm của Anthropic chứng minh trực tiếp điều này. Harness ban đầu của họ có cơ chế chia sprint, chia việc thành từng khúc nhỏ để Sonnet 4.5 làm từng khúc một. Khi Opus 4.6 ra mắt, năng lực của mô hình đã tự phân rã công việc được, việc dựng sprint trở thành overhead thừa. Gỡ bỏ xong, agent builder làm việc liên tục hơn hai tiếng không trôi dạt, và còn trôi chảy hơn.
+Bảng thuộc harness cập nhật dùng Opus 4.6: một kiến trúc ba agent, không phải ba kiến trúc. Đã bỏ chia sprint. Planner viết đặc tả, builder triển khai, evaluator kiểm tra ứng dụng và gửi phản hồi cho vòng xây dựng sau. [Anthropic](https://www.anthropic.com/engineering/harness-design-long-running-apps)
 
 Nhưng câu chuyện ở evaluator lại khác. Kể cả với Opus 4.6 mạnh hơn, khi tác vụ tiệm cận biên năng lực mô hình, evaluator vẫn mang lại giá trị thật, bắt được các tính năng thiếu và stub của generator. Điều này nghĩa là evaluator không phải quyết định có/không cố định, nó phụ thuộc vào vị trí độ khó tác vụ so với năng lực mô hình.
 
@@ -162,15 +164,15 @@ Khi đầu ra của agent vượt xa năng lực review của người, triết 
 
 **Lưu ý**: Cách này thiếu trách nhiệm trong môi trường thông lượng thấp. Nhưng khi đầu ra của agent vượt xa sự chú ý của con người, đó thường là đánh đổi đúng. Tiêu chí then chốt: **chi phí trung bình sửa một bug so với chi phí trung bình chờ người review một PR.** Khi cái trước thấp hơn cái sau, merge nhanh là lựa chọn đúng.
 
-## Câu chuyện thật
+## Ví dụ giảng dạy
+
+> Minh họa giảng dạy: tình huống và số liệu là giả định để giải thích, không phải đo lường của thí nghiệm công bố.
 
 Một ứng dụng Electron phát triển bằng agent trong 12 tuần, so sánh hai cách tiếp cận:
 
 **Không có chiến lược dọn dẹp** (nhóm đối chứng): Tuần 12, build pass 68%, test pass 61%, khởi động phiên mới hơn 60 phút, 103 artifact cũ.
 
 **Có chiến lược dọn dẹp** (nhóm thực nghiệm): Kiểm tra trạng thái sạch đầy đủ cuối mỗi phiên, cộng với vòng dọn hàng tuần. Tuần 12, build pass 97%, test pass 95%, khởi động phiên mới 9 phút, 11 artifact cũ.
-
-Đến tuần 12, nhóm thực nghiệm có build pass cao hơn 29 điểm phần trăm, test pass cao hơn 34 điểm, và thời gian khởi động phiên mới thấp hơn 85%. Mỗi phiên chỉ tốn thêm 5 phút dọn dẹp, nhưng suốt 12 tuần nó tiết kiệm được hàng chục giờ hỗn loạn.
 
 ## Những điểm chính cần nhớ
 
