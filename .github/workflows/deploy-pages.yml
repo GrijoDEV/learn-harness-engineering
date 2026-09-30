@@ -38,6 +38,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Check heading anchor map
+        run: npm run anchors:check
+
       - name: Build with VitePress
         run: npm run docs:build
 

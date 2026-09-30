@@ -47,7 +47,7 @@ Claude Code 把擴充介面分成四類，每一類解決一種問題，這是�
 
 課程第十講談「跑通完整流程才算真正驗證」，Claude Code 對應的機制是雙軌制：
 
-**1. permissions 系統（確定性約束）。** Claude Code 的 permissions 不是「全部都詢問一遍」，根據 VILA Lab 對 v2.1.88 的拆解，當時的系統採用七種模式 + 一個基於 ML 的分類器：低風險操作放行，高風險操作則依原則詢問或拒絕（架構細節請參閱 [VILA Lab 拆解](https://zhiqiangshen.com/projects/Claude_Code_Report/Claude_Code_Report.pdf)）。注意 v2.1.88 之後 permissions 模式命名已有變動：目前官方文件（[permission modes](https://code.claude.com/docs/en/permission-modes)）列出 Manual（原 "default"，v2.1.200+ 起改名）、Plan、acceptEdits、Auto 與 bypassPermissions。這是把「為 agent 劃清邊界」（第七講）做成執行時期的強制機制，而不是靠提示詞懇求。
+**1. permissions 系統（確定性約束）。** Claude Code 的 permissions 不是「全部都詢問一遍」，根據 VILA Lab 對 v2.1.88 的拆解，當時的系統採用七種模式 + 一個基於 ML 的分類器：低風險操作放行，高風險操作則依原則詢問或拒絕（架構細節請參閱 [VILA Lab 拆解](https://zhiqiangshen.com/projects/Claude_Code_Report/Claude_Code_Report.pdf)）。注意 v2.1.88 之後 permissions 模式命名已有變動：目前官方文件（[permission modes](https://code.claude.com/docs/en/permission-modes)）列出 Manual（原 "default"，v2.1.200+ 起改名）、Plan、acceptEdits、Auto、dontAsk 與 bypassPermissions。這是把「為 agent 劃清邊界」（第七講）做成執行時期的強制機制，而不是靠提示詞懇求。
 
 **2. hooks（防止提前宣告完成）。** `PostToolUse` hooks 可以在工具執行後強制檢查、把結果寫回上下文；`Stop` hooks 則在 agent 宣告完成時介入。這就是「做事的人和檢查的人分開」，[Anthropic 在 harness 文章裡明確觀察到](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)，agent 會自信地稱讚自己的工作（"confidently praised their work"），因此用 hooks 注入**確定性**檢查，而不是信任模型的自我評估。
 
@@ -83,7 +83,7 @@ Claude Code 的日誌是完整的附加式記錄（history.jsonl），加上 `/c
 
 - **Claude Code 官方文件 · Memory**：每次 session 使用全新上下文、CLAUDE.md 四種作用範圍、子目錄隨選載入、auto memory（200 行 / 25KB）、`/init` 產生 CLAUDE.md。<br/>https://code.claude.com/docs/en/memory
 - **Claude Code 官方文件 · Skills / MCP / Hooks / Sub-agents**：四種擴充機制的定義與事件（PreToolUse / PostToolUse / Stop）。<br/>https://code.claude.com/docs/en/skills ｜ https://code.claude.com/docs/en/mcp ｜ https://code.claude.com/docs/en/hooks ｜ https://code.claude.com/docs/en/sub-agents
-- **Claude Code 官方文件 · Permission modes**：目前的模式名稱 Manual（原 "default"，v2.1.200+ 起改名）、Plan、acceptEdits、Auto 與 bypassPermissions。<br/>https://code.claude.com/docs/en/permission-modes
+- **Claude Code 官方文件 · Permission modes**：目前的模式名稱 Manual（原 "default"，v2.1.200+ 起改名）、Plan、acceptEdits、Auto、dontAsk 與 bypassPermissions。<br/>https://code.claude.com/docs/en/permission-modes
 - **Anthropic《Effective harnesses for long-running agents》**：「可靠性來自 harness 而非模型」、agent 會自信地稱讚自己的工作、用 hooks 進行驗證等觀點的出處。<br/>https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents
 
 ### 獨立研究 / 社群資源

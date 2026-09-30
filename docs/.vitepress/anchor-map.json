@@ -1,0 +1,2765 @@
+{
+  "harness-designs/claude-code/index.md": {
+    "ids": [
+      "breaking-down-claude-code-s-harness-design",
+      "in-one-sentence",
+      "instruction-subsystem-a-layered-memory-system",
+      "context-subsystem-a-five-layer-compaction-pipeline",
+      "tool-subsystem-four-extension-mechanisms",
+      "feedback-and-verification-deterministic-constraints-human-agent-division-of-labor",
+      "observability-and-session-persistence",
+      "mapping-to-the-course-framework",
+      "designs-worth-adopting",
+      "references",
+      "official-anthropic-documentation",
+      "independent-community-research"
+    ],
+    "locales": {
+      "ar": 10,
+      "de": 10,
+      "en": 12,
+      "es": 10,
+      "fr": 10,
+      "ja": 10,
+      "ko": 10,
+      "pt-BR": 10,
+      "ru": 10,
+      "tr": 10,
+      "uk": 10,
+      "uz": 10,
+      "vi": 10,
+      "zh": 10,
+      "zh-TW": 12
+    }
+  },
+  "harness-designs/codex/index.md": {
+    "ids": [
+      "breaking-down-codex-s-harness-design",
+      "in-one-sentence",
+      "instruction-subsystem-agents-md-is-a-directory-page-not-an-encyclopedia",
+      "context-subsystem-write-select-compress-isolate",
+      "tools-and-boundaries-worktree-isolation-subagents",
+      "feedback-subsystem-put-verification-commands-in-the-specification",
+      "mapping-to-the-course-framework",
+      "designs-worth-adopting",
+      "references-original-sources-source-code"
+    ],
+    "locales": {
+      "ar": 9,
+      "de": 9,
+      "en": 9,
+      "es": 9,
+      "fr": 9,
+      "ja": 9,
+      "ko": 9,
+      "pt-BR": 9,
+      "ru": 9,
+      "tr": 9,
+      "uk": 9,
+      "uz": 9,
+      "vi": 9,
+      "zh": 14,
+      "zh-TW": 9
+    }
+  },
+  "harness-designs/deepseek/index.md": {
+    "ids": [
+      "breaking-down-deepseek-harness-s-design",
+      "in-one-sentence",
+      "architectural-core-1-capability-seam",
+      "architectural-core-2-event-pipeline",
+      "architectural-core-3-session-event-log-and-model-visible-means-logged",
+      "mapping-to-the-course-framework",
+      "designs-worth-adopting",
+      "references-original-sources-source-code"
+    ],
+    "locales": {
+      "ar": 8,
+      "de": 8,
+      "en": 8,
+      "es": 8,
+      "fr": 8,
+      "ja": 8,
+      "ko": 8,
+      "pt-BR": 8,
+      "ru": 8,
+      "tr": 8,
+      "uk": 8,
+      "uz": 8,
+      "vi": 8,
+      "zh": 8,
+      "zh-TW": 8
+    }
+  },
+  "harness-designs/index.md": {
+    "ids": [
+      "frontier-harness-design-breakdowns",
+      "why-these-breakdowns-matter",
+      "articles",
+      "how-to-read-this-section"
+    ],
+    "locales": {
+      "ar": 4,
+      "de": 4,
+      "en": 4,
+      "es": 4,
+      "fr": 4,
+      "ja": 4,
+      "ko": 4,
+      "pt-BR": 4,
+      "ru": 4,
+      "tr": 4,
+      "uk": 4,
+      "uz": 4,
+      "vi": 4,
+      "zh": 4,
+      "zh-TW": 4
+    }
+  },
+  "harness-designs/pi/index.md": {
+    "ids": [
+      "breaking-down-pi-s-harness-design",
+      "in-one-sentence",
+      "core-loop",
+      "instruction-subsystem-agents-md-and-system-md",
+      "state-and-context-where-pi-is-most-granular",
+      "tool-subsystem-skills-and-extensions",
+      "feedback-and-verification-making-learning-part-of-the-harness",
+      "mapping-to-the-course-framework",
+      "designs-worth-adopting",
+      "references-original-sources-source-code"
+    ],
+    "locales": {
+      "ar": 10,
+      "de": 10,
+      "en": 10,
+      "es": 10,
+      "fr": 10,
+      "ja": 10,
+      "ko": 10,
+      "pt-BR": 10,
+      "ru": 10,
+      "tr": 10,
+      "uk": 10,
+      "uz": 10,
+      "vi": 10,
+      "zh": 10,
+      "zh-TW": 10
+    }
+  },
+  "index.md": {
+    "ids": [
+      "welcome-to-learn-harness-engineering",
+      "get-started",
+      "the-core-mechanism-of-a-harness",
+      "what-you-will-learn",
+      "next-steps"
+    ],
+    "locales": {
+      "ar": 5,
+      "de": 5,
+      "en": 5,
+      "es": 5,
+      "fr": 5,
+      "ja": 5,
+      "ko": 5,
+      "pt-BR": 5,
+      "ru": 5,
+      "tr": 5,
+      "uk": 5,
+      "uz": 5,
+      "vi": 5,
+      "zh": 5,
+      "zh-TW": 5
+    }
+  },
+  "lectures/lecture-01-why-capable-agents-still-fail/code/failure-signals-checklist.md": {
+    "ids": [
+      "failure-signals-checklist"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "lectures/lecture-01-why-capable-agents-still-fail/code/index.md": {
+    "ids": [
+      "code-for-lecture-01"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "lectures/lecture-01-why-capable-agents-still-fail/code/underspecified-task.md": {
+    "ids": [
+      "underspecified-task-example"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "lectures/lecture-01-why-capable-agents-still-fail/index.md": {
+    "ids": [
+      "lecture-01-strong-models-don-t-mean-reliable-execution",
+      "same-horse-different-fates",
+      "where-agents-actually-get-stuck",
+      "key-terminology",
+      "when-things-fail-fix-the-harness-first",
+      "the-million-line-experiment",
+      "a-more-down-to-earth-example",
+      "key-takeaways",
+      "further-reading",
+      "exercises"
+    ],
+    "locales": {
+      "ar": 10,
+      "de": 10,
+      "en": 10,
+      "es": 10,
+      "fr": 10,
+      "ja": 10,
+      "ko": 10,
+      "pt-BR": 10,
+      "ru": 10,
+      "tr": 10,
+      "uk": 10,
+      "uz": 10,
+      "vi": 10,
+      "zh": 10,
+      "zh-TW": 10
+    }
+  },
+  "lectures/lecture-02-what-a-harness-actually-is/code/harness-components.md": {
+    "ids": [
+      "harness-components-example"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "lectures/lecture-02-what-a-harness-actually-is/code/index.md": {
+    "ids": [
+      "code-for-lecture-02"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "lectures/lecture-02-what-a-harness-actually-is/index.md": {
+    "ids": [
+      "lecture-02-what-a-harness-actually-is",
+      "start-with-an-analogy",
+      "core-concepts",
+      "the-five-subsystem-harness-model",
+      "a-team-s-real-story",
+      "key-takeaways",
+      "further-reading",
+      "exercises"
+    ],
+    "locales": {
+      "ar": 8,
+      "de": 8,
+      "en": 8,
+      "es": 8,
+      "fr": 8,
+      "ja": 8,
+      "ko": 8,
+      "pt-BR": 8,
+      "ru": 8,
+      "tr": 8,
+      "uk": 8,
+      "uz": 8,
+      "vi": 8,
+      "zh": 8,
+      "zh-TW": 8
+    }
+  },
+  "lectures/lecture-03-why-the-repository-must-become-the-system-of-record/code/index.md": {
+    "ids": [
+      "code-for-lecture-03"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "lectures/lecture-03-why-the-repository-must-become-the-system-of-record/code/system-of-record-checklist.md": {
+    "ids": [
+      "system-of-record-checklist"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "lectures/lecture-03-why-the-repository-must-become-the-system-of-record/index.md": {
+    "ids": [
+      "lecture-03-making-the-repository-the-single-source-of-truth",
+      "what-belongs-on-the-map",
+      "knowledge-visibility",
+      "core-concepts",
+      "how-to-draw-a-good-map",
+      "managing-agent-state-with-acid-principles",
+      "a-real-transformation-story",
+      "key-takeaways",
+      "further-reading",
+      "exercises"
+    ],
+    "locales": {
+      "ar": 10,
+      "de": 10,
+      "en": 10,
+      "es": 10,
+      "fr": 10,
+      "ja": 10,
+      "ko": 10,
+      "pt-BR": 10,
+      "ru": 10,
+      "tr": 10,
+      "uk": 10,
+      "uz": 10,
+      "vi": 10,
+      "zh": 10,
+      "zh-TW": 10
+    }
+  },
+  "lectures/lecture-04-why-one-giant-instruction-file-fails/code/AGENTS-short.md": {
+    "ids": [
+      "agents-md",
+      "start-here",
+      "hard-rules"
+    ],
+    "locales": {
+      "ar": 3,
+      "de": 3,
+      "en": 3,
+      "es": 3,
+      "fr": 3,
+      "ja": 3,
+      "ko": 3,
+      "pt-BR": 3,
+      "ru": 3,
+      "tr": 3,
+      "uk": 3,
+      "uz": 3,
+      "vi": 3,
+      "zh": 3,
+      "zh-TW": 3
+    }
+  },
+  "lectures/lecture-04-why-one-giant-instruction-file-fails/code/anti-patterns.md": {
+    "ids": [
+      "instruction-file-anti-patterns"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "lectures/lecture-04-why-one-giant-instruction-file-fails/code/index.md": {
+    "ids": [
+      "code-for-lecture-04"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "lectures/lecture-04-why-one-giant-instruction-file-fails/index.md": {
+    "ids": [
+      "lecture-04-split-instructions-across-files",
+      "the-vicious-cycle-at-the-root",
+      "core-concepts",
+      "instruction-architecture",
+      "how-to-split",
+      "real-world-example",
+      "key-takeaways",
+      "further-reading",
+      "exercises"
+    ],
+    "locales": {
+      "ar": 9,
+      "de": 9,
+      "en": 9,
+      "es": 9,
+      "fr": 9,
+      "ja": 9,
+      "ko": 9,
+      "pt-BR": 9,
+      "ru": 9,
+      "tr": 9,
+      "uk": 9,
+      "uz": 9,
+      "vi": 9,
+      "zh": 9,
+      "zh-TW": 9
+    }
+  },
+  "lectures/lecture-05-why-long-running-tasks-lose-continuity/code/continuity-checklist.md": {
+    "ids": [
+      "continuity-checklist"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "lectures/lecture-05-why-long-running-tasks-lose-continuity/code/index.md": {
+    "ids": [
+      "code-for-lecture-05"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "lectures/lecture-05-why-long-running-tasks-lose-continuity/code/session-handoff.md": {
+    "ids": [
+      "session-handoff-example",
+      "completed",
+      "broken-or-unverified",
+      "next-best-step"
+    ],
+    "locales": {
+      "ar": 4,
+      "de": 4,
+      "en": 4,
+      "es": 4,
+      "fr": 4,
+      "ja": 4,
+      "ko": 4,
+      "pt-BR": 4,
+      "ru": 4,
+      "tr": 4,
+      "uk": 4,
+      "uz": 4,
+      "vi": 4,
+      "zh": 4,
+      "zh-TW": 4
+    }
+  },
+  "lectures/lecture-05-why-long-running-tasks-lose-continuity/index.md": {
+    "ids": [
+      "lecture-05-keeping-context-alive-across-sessions",
+      "context-windows-not-infinite",
+      "session-continuity-flow",
+      "core-concepts",
+      "what-happens-when-continuity-breaks",
+      "practical-approaches-to-state-persistence",
+      "a-deeper-look-at-context-anxiety",
+      "real-world-example",
+      "key-takeaways",
+      "further-reading",
+      "exercises"
+    ],
+    "locales": {
+      "ar": 11,
+      "de": 11,
+      "en": 11,
+      "es": 11,
+      "fr": 11,
+      "ja": 11,
+      "ko": 11,
+      "pt-BR": 11,
+      "ru": 11,
+      "tr": 11,
+      "uk": 11,
+      "uz": 11,
+      "vi": 11,
+      "zh": 11,
+      "zh-TW": 11
+    }
+  },
+  "lectures/lecture-06-why-initialization-needs-its-own-phase/code/index.md": {
+    "ids": [
+      "code-for-lecture-06"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "lectures/lecture-06-why-initialization-needs-its-own-phase/code/initializer-output-checklist.md": {
+    "ids": [
+      "initializer-output-checklist"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "lectures/lecture-06-why-initialization-needs-its-own-phase/index.md": {
+    "ids": [
+      "lecture-06-make-the-agent-initialize-before-every-work-session",
+      "two-fundamentally-different-kinds-of-work",
+      "initialization-lifecycle",
+      "what-happens-when-you-mix-them",
+      "core-concepts",
+      "how-to-do-initialization-right",
+      "real-world-example",
+      "key-takeaways",
+      "further-reading",
+      "exercises"
+    ],
+    "locales": {
+      "ar": 10,
+      "de": 10,
+      "en": 10,
+      "es": 10,
+      "fr": 10,
+      "ja": 10,
+      "ko": 10,
+      "pt-BR": 10,
+      "ru": 10,
+      "tr": 10,
+      "uk": 10,
+      "uz": 10,
+      "vi": 10,
+      "zh": 10,
+      "zh-TW": 10
+    }
+  },
+  "lectures/lecture-07-why-agents-overreach-and-under-finish/code/index.md": {
+    "ids": [
+      "code-for-lecture-07"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "lectures/lecture-07-why-agents-overreach-and-under-finish/code/next-task-template.md": {
+    "ids": [
+      "next-task-template"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "lectures/lecture-07-why-agents-overreach-and-under-finish/code/scope-surface-example.md": {
+    "ids": [
+      "scope-surface-example"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "lectures/lecture-07-why-agents-overreach-and-under-finish/index.md": {
+    "ids": [
+      "lecture-07-draw-clear-task-boundaries-for-agents",
+      "attention-is-a-finite-resource",
+      "wip-1-workflow",
+      "core-concepts",
+      "overreach-and-under-finish-are-two-sides-of-the-same-coin",
+      "how-to-do-it-right",
+      "_1-enforce-wip-1",
+      "_2-define-explicit-completion-evidence-for-every-task",
+      "_3-externalize-the-scope-surface",
+      "_4-monitor-verified-completion-rate",
+      "real-world-case",
+      "key-takeaways",
+      "further-reading",
+      "exercises"
+    ],
+    "locales": {
+      "ar": 14,
+      "de": 14,
+      "en": 14,
+      "es": 14,
+      "fr": 14,
+      "ja": 14,
+      "ko": 14,
+      "pt-BR": 14,
+      "ru": 14,
+      "tr": 14,
+      "uk": 14,
+      "uz": 14,
+      "vi": 14,
+      "zh": 14,
+      "zh-TW": 14
+    }
+  },
+  "lectures/lecture-08-why-feature-lists-are-harness-primitives/code/index.md": {
+    "ids": [
+      "code-for-lecture-08"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "lectures/lecture-08-why-feature-lists-are-harness-primitives/code/pass-gate-policy.md": {
+    "ids": [
+      "pass-gate-policy"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "lectures/lecture-08-why-feature-lists-are-harness-primitives/index.md": {
+    "ids": [
+      "lecture-08-use-feature-lists-to-constrain-what-the-agent-does",
+      "agents-don-t-know-what-done-means",
+      "feature-state-machine",
+      "core-concepts",
+      "why-feature-lists-must-be-primitives",
+      "how-to-do-it",
+      "_1-define-a-minimal-feature-list-format",
+      "_2-let-the-harness-control-state-transitions",
+      "_3-write-the-rules-in-claude-md",
+      "_4-calibrate-granularity",
+      "real-world-case",
+      "key-takeaways",
+      "further-reading",
+      "exercises"
+    ],
+    "locales": {
+      "ar": 14,
+      "de": 14,
+      "en": 14,
+      "es": 14,
+      "fr": 14,
+      "ja": 14,
+      "ko": 14,
+      "pt-BR": 14,
+      "ru": 14,
+      "tr": 14,
+      "uk": 14,
+      "uz": 14,
+      "vi": 14,
+      "zh": 14,
+      "zh-TW": 14
+    }
+  },
+  "lectures/lecture-09-why-agents-declare-victory-too-early/code/clean-state-checklist.md": {
+    "ids": [
+      "clean-state-checklist"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "lectures/lecture-09-why-agents-declare-victory-too-early/code/index.md": {
+    "ids": [
+      "code-for-lecture-09"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "lectures/lecture-09-why-agents-declare-victory-too-early/index.md": {
+    "ids": [
+      "lecture-9-preventing-agents-from-declaring-victory-too-early",
+      "the-slippery-slope",
+      "three-layer-termination-check",
+      "core-concepts",
+      "passing-unit-tests-task-complete",
+      "refactoring-while-we-re-at-it-is-poison-to-completion-judgment",
+      "systematic-bias-in-self-evaluation",
+      "how-to-prevent-premature-completion-declarations",
+      "_1-externalize-termination-judgment",
+      "_2-build-a-three-layer-termination-validation",
+      "_3-provide-actionable-error-feedback-to-the-agent",
+      "_4-capture-runtime-signals",
+      "real-world-case",
+      "key-takeaways",
+      "further-reading",
+      "exercises"
+    ],
+    "locales": {
+      "ar": 16,
+      "de": 16,
+      "en": 16,
+      "es": 16,
+      "fr": 16,
+      "ja": 16,
+      "ko": 16,
+      "pt-BR": 16,
+      "ru": 16,
+      "tr": 16,
+      "uk": 16,
+      "uz": 16,
+      "vi": 16,
+      "zh": 16,
+      "zh-TW": 16
+    }
+  },
+  "lectures/lecture-10-why-end-to-end-testing-changes-results/code/architecture-rules.md": {
+    "ids": [
+      "electron-architecture-rules"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "lectures/lecture-10-why-end-to-end-testing-changes-results/code/index.md": {
+    "ids": [
+      "code-for-lecture-10"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "lectures/lecture-10-why-end-to-end-testing-changes-results/code/review-feedback-to-rule.md": {
+    "ids": [
+      "example-turning-review-feedback-into-a-rule"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "lectures/lecture-10-why-end-to-end-testing-changes-results/index.md": {
+    "ids": [
+      "lecture-10-only-a-full-pipeline-run-counts-as-real-verification",
+      "the-blind-spots-of-unit-tests",
+      "end-to-end-testing-not-only-changes-results-—-it-changes-behavior",
+      "testing-pyramid-and-review-feedback-promotion",
+      "core-concepts",
+      "how-to-do-it",
+      "_0-define-architectural-boundaries-before-writing-e2e-tests",
+      "_1-the-harness-must-include-an-end-to-end-layer",
+      "_2-turn-architectural-rules-into-executable-checks",
+      "_3-design-agent-oriented-error-messages",
+      "_4-establish-a-review-feedback-promotion-process",
+      "real-world-case",
+      "key-takeaways",
+      "further-reading",
+      "exercises"
+    ],
+    "locales": {
+      "ar": 15,
+      "de": 15,
+      "en": 15,
+      "es": 15,
+      "fr": 15,
+      "ja": 15,
+      "ko": 15,
+      "pt-BR": 15,
+      "ru": 15,
+      "tr": 15,
+      "uk": 15,
+      "uz": 15,
+      "vi": 15,
+      "zh": 15,
+      "zh-TW": 15
+    }
+  },
+  "lectures/lecture-11-why-observability-belongs-inside-the-harness/code/evaluator-rubric.md": {
+    "ids": [
+      "evaluator-rubric-example"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "lectures/lecture-11-why-observability-belongs-inside-the-harness/code/index.md": {
+    "ids": [
+      "code-for-lecture-11"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "lectures/lecture-11-why-observability-belongs-inside-the-harness/code/sprint-contract.md": {
+    "ids": [
+      "sprint-contract-example"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "lectures/lecture-11-why-observability-belongs-inside-the-harness/index.md": {
+    "ids": [
+      "lecture-11-making-the-agent-s-runtime-observable",
+      "the-real-cost-of-missing-observability",
+      "a-real-claude-code-scenario",
+      "layered-observability",
+      "core-concepts",
+      "why-agents-can-t-solve-this-themselves",
+      "how-to-build-observability",
+      "_1-build-runtime-signal-collection-into-the-harness",
+      "_2-implement-sprint-contracts",
+      "_3-establish-an-evaluator-rubric",
+      "_4-standardize-with-opentelemetry",
+      "anthropic-s-three-agent-architecture-experiment",
+      "key-takeaways",
+      "further-reading",
+      "exercises"
+    ],
+    "locales": {
+      "ar": 17,
+      "de": 17,
+      "en": 15,
+      "es": 17,
+      "fr": 17,
+      "ja": 17,
+      "ko": 17,
+      "pt-BR": 15,
+      "ru": 17,
+      "tr": 17,
+      "uk": 15,
+      "uz": 17,
+      "vi": 15,
+      "zh": 15,
+      "zh-TW": 15
+    }
+  },
+  "lectures/lecture-12-why-every-session-must-leave-a-clean-state/code/benchmark-comparison-template.md": {
+    "ids": [
+      "benchmark-comparison-template"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "lectures/lecture-12-why-every-session-must-leave-a-clean-state/code/cleanup-loop.md": {
+    "ids": [
+      "cleanup-loop-example"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "lectures/lecture-12-why-every-session-must-leave-a-clean-state/code/index.md": {
+    "ids": [
+      "code-for-lecture-12"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "lectures/lecture-12-why-every-session-must-leave-a-clean-state/index.md": {
+    "ids": [
+      "lecture-12-leave-a-clean-handoff-at-the-end-of-every-session",
+      "entropy-growth-is-the-default-state",
+      "clean-state-more-than-the-code-compiles",
+      "core-concepts",
+      "clean-up-later-means-never-clean-up",
+      "how-to-do-it",
+      "_1-clean-state-is-a-necessary-condition-for-completion",
+      "_2-dual-mode-cleanup-strategy",
+      "_3-maintain-a-quality-document",
+      "_4-periodically-simplify-the-harness",
+      "_5-cleanup-operations-must-be-idempotent",
+      "_6-high-throughput-changes-the-merge-philosophy",
+      "real-world-case",
+      "key-takeaways",
+      "further-reading",
+      "exercises"
+    ],
+    "locales": {
+      "ar": 18,
+      "de": 17,
+      "en": 16,
+      "es": 17,
+      "fr": 18,
+      "ja": 18,
+      "ko": 18,
+      "pt-BR": 16,
+      "ru": 18,
+      "tr": 18,
+      "uk": 16,
+      "uz": 18,
+      "vi": 16,
+      "zh": 16,
+      "zh-TW": 16
+    }
+  },
+  "lectures/lecture-13-loop-engineering/code/checker-prompt.md": {
+    "ids": [
+      "checker-agent-prompt",
+      "your-role",
+      "checklist",
+      "functional-correctness",
+      "code-quality",
+      "testing",
+      "verification-commands",
+      "safety-and-impact",
+      "output-requirements"
+    ],
+    "locales": {
+      "ar": 9,
+      "de": 9,
+      "en": 9,
+      "es": 9,
+      "fr": 9,
+      "ja": 9,
+      "ko": 9,
+      "pt-BR": 9,
+      "ru": 9,
+      "tr": 9,
+      "uk": 9,
+      "uz": 9,
+      "vi": 9,
+      "zh": 9,
+      "zh-TW": 9
+    }
+  },
+  "lectures/lecture-13-loop-engineering/code/goal-template.md": {
+    "ids": [
+      "goal-loop-template",
+      "goal",
+      "acceptance-criteria",
+      "scope",
+      "fair-game",
+      "hands-off",
+      "verification-method",
+      "stop-conditions",
+      "how-to-work"
+    ],
+    "locales": {
+      "ar": 9,
+      "de": 9,
+      "en": 9,
+      "es": 9,
+      "fr": 9,
+      "ja": 9,
+      "ko": 9,
+      "pt-BR": 9,
+      "ru": 9,
+      "tr": 9,
+      "uk": 9,
+      "uz": 9,
+      "vi": 9,
+      "zh": 9,
+      "zh-TW": 9
+    }
+  },
+  "lectures/lecture-13-loop-engineering/code/index.md": {
+    "ids": [
+      "lecture-13-code-examples"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "lectures/lecture-13-loop-engineering/code/loop-state-template.md": {
+    "ids": [
+      "loop-state-template",
+      "basic-info",
+      "goal",
+      "round-log",
+      "round-1",
+      "issues-found",
+      "round-2",
+      "issues-found-1",
+      "cumulative-stats",
+      "blocker-list",
+      "final-result"
+    ],
+    "locales": {
+      "ar": 11,
+      "de": 11,
+      "en": 11,
+      "es": 11,
+      "fr": 11,
+      "ja": 11,
+      "ko": 11,
+      "pt-BR": 11,
+      "ru": 11,
+      "tr": 11,
+      "uk": 11,
+      "uz": 11,
+      "vi": 11,
+      "zh": 11,
+      "zh-TW": 11
+    }
+  },
+  "lectures/lecture-13-loop-engineering/code/maker-prompt.md": {
+    "ids": [
+      "maker-agent-prompt",
+      "your-role",
+      "working-rules",
+      "deliverables",
+      "output-format"
+    ],
+    "locales": {
+      "ar": 5,
+      "de": 5,
+      "en": 5,
+      "es": 5,
+      "fr": 5,
+      "ja": 5,
+      "ko": 5,
+      "pt-BR": 5,
+      "ru": 5,
+      "tr": 5,
+      "uk": 5,
+      "uz": 5,
+      "vi": 5,
+      "zh": 5,
+      "zh-TW": 5
+    }
+  },
+  "lectures/lecture-13-loop-engineering/index.md": {
+    "ids": [
+      "lecture-13-from-manual-prompting-to-autonomous-loops",
+      "goal-the-simplest-possible-loop",
+      "how-goal-grew-organically",
+      "there-s-more-than-one-kind-of-loop",
+      "don-t-confuse-goal-and-loop",
+      "june-2026-three-people-lit-the-same-fuse-in-one-week",
+      "inside-the-loop-vs-outside-the-loop",
+      "core-concepts",
+      "the-six-primitives-of-a-loop",
+      "_1-automations-—-the-heartbeat",
+      "_2-worktrees-—-isolation-at-scale",
+      "_3-skills-—-stop-re-explaining-your-project",
+      "_4-connectors-—-your-loop-touches-real-tools",
+      "_5-sub-agents-—-keep-the-maker-away-from-the-checker",
+      "_6-external-state-—-the-loop-s-memory",
+      "a-complete-loop-anatomized",
+      "generator-evaluator-separation-why-you-can-t-let-the-model-grade-its-own-work",
+      "karpathy-s-autoresearch-the-loop-exemplar",
+      "three-files-three-roles",
+      "input-what-program-md-looks-like",
+      "the-nine-step-ratchet-loop",
+      "output-what-you-see-when-you-wake-up",
+      "what-it-actually-found",
+      "the-most-telling-detail-the-loop-is-written-in-english-not-code",
+      "four-silent-costs",
+      "_1-verification-debt",
+      "_2-comprehension-rot",
+      "_3-cognitive-surrender",
+      "_4-token-blowout",
+      "building-your-first-loop",
+      "step-1-pick-one-recurring-task",
+      "step-2-write-a-goal-and-stopping-condition",
+      "step-3-split-maker-and-checker",
+      "step-4-add-memory",
+      "step-5-set-a-timer",
+      "the-maturity-ladder",
+      "key-takeaways",
+      "further-reading",
+      "exercises"
+    ],
+    "locales": {
+      "ar": 39,
+      "de": 39,
+      "en": 39,
+      "es": 39,
+      "fr": 39,
+      "ja": 39,
+      "ko": 39,
+      "pt-BR": 39,
+      "ru": 39,
+      "tr": 39,
+      "uk": 39,
+      "uz": 39,
+      "vi": 39,
+      "zh": 39,
+      "zh-TW": 39
+    }
+  },
+  "lectures/lecture-14-graph-engineering/code/index.md": {
+    "ids": [
+      "lecture-14-code"
+    ],
+    "locales": {
+      "en": 1,
+      "zh": 1
+    }
+  },
+  "lectures/lecture-14-graph-engineering/index.md": {
+    "ids": [
+      "lecture-14-from-single-loops-to-graph-engineering",
+      "prompt-context-loop-graph-four-names-one-stack",
+      "take-the-graph-apart-nodes-edges-state-routing",
+      "when-a-loop-stops-being-enough",
+      "three-structural-failures-of-a-single-loop-at-scale",
+      "_1-goodhart-the-numbers-went-up-the-business-got-worse",
+      "_2-blindness-upward-it-never-asks-is-this-the-right-goal",
+      "_3-conflict-independent-loops-fight-each-other",
+      "anchors-pin-the-loop-to-reality",
+      "graph-vs-workflow-not-just-a-rename",
+      "you-ve-been-drawing-graphs-all-along",
+      "build-your-first-graph-from-scratch",
+      "open-source-projects-after-the-name-before-the-name",
+      "cold-water-a-graph-is-not-a-silver-bullet",
+      "when-you-actually-need-a-graph",
+      "core-concepts",
+      "key-takeaways",
+      "further-reading",
+      "exercises"
+    ],
+    "locales": {
+      "ar": 19,
+      "de": 19,
+      "en": 19,
+      "es": 19,
+      "fr": 19,
+      "ja": 19,
+      "ko": 19,
+      "pt-BR": 19,
+      "ru": 19,
+      "tr": 19,
+      "uk": 19,
+      "uz": 19,
+      "vi": 19,
+      "zh": 19,
+      "zh-TW": 19
+    }
+  },
+  "projects/index.md": {
+    "ids": [
+      "welcome-to-projects",
+      "project-overview",
+      "how-to-proceed"
+    ],
+    "locales": {
+      "ar": 3,
+      "de": 3,
+      "en": 3,
+      "es": 3,
+      "fr": 3,
+      "ja": 3,
+      "ko": 3,
+      "pt-BR": 3,
+      "ru": 3,
+      "tr": 3,
+      "uk": 3,
+      "uz": 3,
+      "vi": 3,
+      "zh": 3,
+      "zh-TW": 3
+    }
+  },
+  "projects/project-01-baseline-vs-minimal-harness/index.md": {
+    "ids": [
+      "project-01-prompt-only-vs-rules-first-how-much-difference-does-it-make",
+      "what-you-do",
+      "use-the-checked-in-project",
+      "tools",
+      "harness-mechanism",
+      "run-protocol",
+      "preparation",
+      "first-run-weak-harness",
+      "second-run-strong-harness",
+      "how-to-measure-results",
+      "what-to-submit",
+      "experimental-framing",
+      "related-lectures"
+    ],
+    "locales": {
+      "ar": 5,
+      "de": 5,
+      "en": 13,
+      "es": 5,
+      "fr": 5,
+      "ja": 5,
+      "ko": 5,
+      "pt-BR": 5,
+      "ru": 5,
+      "tr": 5,
+      "uk": 5,
+      "uz": 5,
+      "vi": 5,
+      "zh": 11,
+      "zh-TW": 13
+    }
+  },
+  "projects/project-02-agent-readable-workspace/index.md": {
+    "ids": [
+      "project-02-make-the-project-readable-and-pick-up-where-you-left-off",
+      "what-you-do",
+      "tools",
+      "harness-mechanism",
+      "use-the-checked-in-project"
+    ],
+    "locales": {
+      "ar": 5,
+      "de": 5,
+      "en": 5,
+      "es": 5,
+      "fr": 5,
+      "ja": 5,
+      "ko": 5,
+      "pt-BR": 5,
+      "ru": 5,
+      "tr": 5,
+      "uk": 5,
+      "uz": 5,
+      "vi": 5,
+      "zh": 11,
+      "zh-TW": 12
+    }
+  },
+  "projects/project-03-multi-session-continuity/index.md": {
+    "ids": [
+      "project-03-keep-the-agent-working-across-session-restarts",
+      "what-you-do",
+      "tools",
+      "harness-mechanism",
+      "use-the-checked-in-project"
+    ],
+    "locales": {
+      "ar": 5,
+      "de": 5,
+      "en": 5,
+      "es": 5,
+      "fr": 5,
+      "ja": 5,
+      "ko": 5,
+      "pt-BR": 5,
+      "ru": 5,
+      "tr": 5,
+      "uk": 5,
+      "uz": 5,
+      "vi": 5,
+      "zh": 11,
+      "zh-TW": 12
+    }
+  },
+  "projects/project-04-incremental-indexing/index.md": {
+    "ids": [
+      "project-04-use-runtime-feedback-to-correct-agent-behavior",
+      "what-you-do",
+      "tools",
+      "harness-mechanism",
+      "use-the-checked-in-project"
+    ],
+    "locales": {
+      "ar": 5,
+      "de": 5,
+      "en": 5,
+      "es": 5,
+      "fr": 5,
+      "ja": 5,
+      "ko": 5,
+      "pt-BR": 5,
+      "ru": 5,
+      "tr": 5,
+      "uk": 5,
+      "uz": 5,
+      "vi": 5,
+      "zh": 11,
+      "zh-TW": 12
+    }
+  },
+  "projects/project-05-grounded-qa-verification/index.md": {
+    "ids": [
+      "project-05-make-the-agent-verify-its-own-work",
+      "what-you-do",
+      "tools",
+      "harness-mechanism",
+      "use-the-checked-in-project"
+    ],
+    "locales": {
+      "ar": 5,
+      "de": 5,
+      "en": 5,
+      "es": 5,
+      "fr": 5,
+      "ja": 5,
+      "ko": 5,
+      "pt-BR": 5,
+      "ru": 5,
+      "tr": 5,
+      "uk": 5,
+      "uz": 5,
+      "vi": 5,
+      "zh": 13,
+      "zh-TW": 14
+    }
+  },
+  "projects/project-06-runtime-observability-and-debugging/index.md": {
+    "ids": [
+      "project-06-build-a-complete-agent-harness-capstone",
+      "what-you-do",
+      "tools",
+      "harness-mechanism",
+      "use-the-checked-in-project"
+    ],
+    "locales": {
+      "ar": 5,
+      "de": 5,
+      "en": 5,
+      "es": 5,
+      "fr": 5,
+      "ja": 5,
+      "ko": 5,
+      "pt-BR": 5,
+      "ru": 5,
+      "tr": 5,
+      "uk": 5,
+      "uz": 5,
+      "vi": 5,
+      "zh": 13,
+      "zh-TW": 14
+    }
+  },
+  "projects/project-07-loop-engineering-first-loop/index.md": {
+    "ids": [
+      "project-07-build-your-first-automated-loop",
+      "what-you-ll-do",
+      "project-files",
+      "tools-you-ll-use",
+      "steps",
+      "prep",
+      "experiment-1-goal-loop-—-from-manual-run-to-auto-run",
+      "experiment-2-timer-loop-—-turn-monitoring-into-a-heartbeat",
+      "experiment-3-maker-checker-loop-—-take-yourself-out-of-the-loop",
+      "how-to-measure-results",
+      "what-to-submit",
+      "related-lectures"
+    ],
+    "locales": {
+      "ar": 12,
+      "de": 12,
+      "en": 12,
+      "es": 12,
+      "fr": 12,
+      "ja": 12,
+      "ko": 12,
+      "pt-BR": 12,
+      "ru": 12,
+      "tr": 12,
+      "uk": 12,
+      "uz": 12,
+      "vi": 12,
+      "zh": 12,
+      "zh-TW": 12
+    }
+  },
+  "projects/project-08-graph-engineering-first-graph/index.md": {
+    "ids": [
+      "project-08-draw-your-workflow-as-a-graph",
+      "what-you-ll-do",
+      "tools-you-ll-use",
+      "steps",
+      "prep",
+      "experiment-1-draw-the-loop-as-an-explicit-graph",
+      "experiment-2-add-a-parallel-fan-out-fan-in-node",
+      "experiment-3-add-a-rollback-edge-and-a-human-approval-node",
+      "how-to-measure-results",
+      "what-to-submit",
+      "related-lectures"
+    ],
+    "locales": {
+      "ar": 11,
+      "de": 11,
+      "en": 11,
+      "es": 11,
+      "fr": 11,
+      "ja": 11,
+      "ko": 11,
+      "pt-BR": 11,
+      "ru": 11,
+      "tr": 11,
+      "uk": 11,
+      "uz": 11,
+      "vi": 11,
+      "zh": 11,
+      "zh-TW": 11
+    }
+  },
+  "resources/index.md": {
+    "ids": [
+      "english-resource-library",
+      "when-to-use-it",
+      "start-here",
+      "library-structure",
+      "recommended-minimal-pack"
+    ],
+    "locales": {
+      "ar": 5,
+      "de": 5,
+      "en": 5,
+      "es": 5,
+      "fr": 5,
+      "ja": 5,
+      "ko": 5,
+      "pt-BR": 5,
+      "ru": 5,
+      "tr": 5,
+      "uk": 5,
+      "uz": 5,
+      "vi": 5,
+      "zh": 5,
+      "zh-TW": 5
+    }
+  },
+  "resources/openai-advanced/index.md": {
+    "ids": [
+      "openai-advanced-pack",
+      "included-starter-layout",
+      "how-to-adopt-it",
+      "sop-library",
+      "design-principles"
+    ],
+    "locales": {
+      "ar": 3,
+      "de": 5,
+      "en": 5,
+      "es": 5,
+      "fr": 5,
+      "ja": 5,
+      "ko": 5,
+      "pt-BR": 5,
+      "ru": 5,
+      "tr": 5,
+      "uk": 5,
+      "uz": 5,
+      "vi": 6,
+      "zh": 5,
+      "zh-TW": 5
+    }
+  },
+  "resources/openai-advanced/repo-template/AGENTS.md": {
+    "ids": [
+      "agents-md",
+      "startup-workflow",
+      "routing-map",
+      "working-contract",
+      "definition-of-done",
+      "end-of-session"
+    ],
+    "locales": {
+      "ar": 6,
+      "de": 6,
+      "en": 6,
+      "es": 6,
+      "fr": 6,
+      "ja": 6,
+      "ko": 6,
+      "pt-BR": 6,
+      "ru": 6,
+      "tr": 6,
+      "uk": 6,
+      "uz": 6,
+      "vi": 6,
+      "zh": 6,
+      "zh-TW": 6
+    }
+  },
+  "resources/openai-advanced/repo-template/ARCHITECTURE.md": {
+    "ids": [
+      "architecture-md",
+      "system-shape",
+      "domain-map",
+      "layer-model",
+      "hard-dependency-rules",
+      "cross-cutting-interfaces",
+      "current-hot-spots",
+      "change-checklist"
+    ],
+    "locales": {
+      "ar": 8,
+      "de": 8,
+      "en": 8,
+      "es": 8,
+      "fr": 8,
+      "ja": 8,
+      "ko": 8,
+      "pt-BR": 8,
+      "ru": 8,
+      "tr": 8,
+      "uk": 8,
+      "uz": 8,
+      "vi": 8,
+      "zh": 8,
+      "zh-TW": 8
+    }
+  },
+  "resources/openai-advanced/repo-template/docs/DESIGN.md": {
+    "ids": [
+      "design-md",
+      "purpose",
+      "read-this-when",
+      "canonical-design-docs",
+      "design-rules"
+    ],
+    "locales": {
+      "ar": 5,
+      "de": 5,
+      "en": 5,
+      "es": 5,
+      "fr": 5,
+      "ja": 5,
+      "ko": 5,
+      "pt-BR": 5,
+      "ru": 5,
+      "tr": 5,
+      "uk": 5,
+      "uz": 5,
+      "vi": 5,
+      "zh": 5,
+      "zh-TW": 5
+    }
+  },
+  "resources/openai-advanced/repo-template/docs/FRONTEND.md": {
+    "ids": [
+      "frontend-md",
+      "ui-principles",
+      "guardrails",
+      "verification-expectations"
+    ],
+    "locales": {
+      "ar": 4,
+      "de": 4,
+      "en": 4,
+      "es": 4,
+      "fr": 4,
+      "ja": 4,
+      "ko": 4,
+      "pt-BR": 4,
+      "ru": 4,
+      "tr": 4,
+      "uk": 4,
+      "uz": 4,
+      "vi": 4,
+      "zh": 4,
+      "zh-TW": 4
+    }
+  },
+  "resources/openai-advanced/repo-template/docs/PLANS.md": {
+    "ids": [
+      "plans-md",
+      "when-a-plan-is-required",
+      "plan-locations",
+      "minimum-plan-sections",
+      "operating-rules"
+    ],
+    "locales": {
+      "ar": 5,
+      "de": 5,
+      "en": 5,
+      "es": 5,
+      "fr": 5,
+      "ja": 5,
+      "ko": 5,
+      "pt-BR": 5,
+      "ru": 5,
+      "tr": 5,
+      "uk": 5,
+      "uz": 5,
+      "vi": 5,
+      "zh": 5,
+      "zh-TW": 5
+    }
+  },
+  "resources/openai-advanced/repo-template/docs/PRODUCT_SENSE.md": {
+    "ids": [
+      "product-sense-md",
+      "product-core",
+      "product-rules",
+      "no-go-patterns"
+    ],
+    "locales": {
+      "ar": 4,
+      "de": 4,
+      "en": 4,
+      "es": 4,
+      "fr": 4,
+      "ja": 4,
+      "ko": 4,
+      "pt-BR": 4,
+      "ru": 4,
+      "tr": 4,
+      "uk": 4,
+      "uz": 4,
+      "vi": 4,
+      "zh": 4,
+      "zh-TW": 4
+    }
+  },
+  "resources/openai-advanced/repo-template/docs/QUALITY_SCORE.md": {
+    "ids": [
+      "quality-score-md",
+      "grading-scale",
+      "product-domains",
+      "architectural-layers",
+      "benchmark-snapshots",
+      "simplification-log"
+    ],
+    "locales": {
+      "ar": 6,
+      "de": 6,
+      "en": 6,
+      "es": 6,
+      "fr": 5,
+      "ja": 6,
+      "ko": 6,
+      "pt-BR": 6,
+      "ru": 6,
+      "tr": 6,
+      "uk": 6,
+      "uz": 6,
+      "vi": 6,
+      "zh": 6,
+      "zh-TW": 6
+    }
+  },
+  "resources/openai-advanced/repo-template/docs/RELIABILITY.md": {
+    "ids": [
+      "reliability-md",
+      "standard-paths",
+      "required-runtime-signals",
+      "golden-journeys",
+      "reliability-rules"
+    ],
+    "locales": {
+      "ar": 5,
+      "de": 5,
+      "en": 5,
+      "es": 5,
+      "fr": 5,
+      "ja": 5,
+      "ko": 5,
+      "pt-BR": 5,
+      "ru": 5,
+      "tr": 5,
+      "uk": 5,
+      "uz": 5,
+      "vi": 5,
+      "zh": 5,
+      "zh-TW": 5
+    }
+  },
+  "resources/openai-advanced/repo-template/docs/SECURITY.md": {
+    "ids": [
+      "security-md",
+      "secrets-and-credentials",
+      "untrusted-input",
+      "external-actions",
+      "dependency-and-review-rules"
+    ],
+    "locales": {
+      "ar": 5,
+      "de": 5,
+      "en": 5,
+      "es": 5,
+      "fr": 4,
+      "ja": 5,
+      "ko": 5,
+      "pt-BR": 5,
+      "ru": 5,
+      "tr": 5,
+      "uk": 5,
+      "uz": 5,
+      "vi": 5,
+      "zh": 5,
+      "zh-TW": 5
+    }
+  },
+  "resources/openai-advanced/repo-template/docs/design-docs/core-beliefs.md": {
+    "ids": [
+      "core-beliefs"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "resources/openai-advanced/repo-template/docs/design-docs/index.md": {
+    "ids": [
+      "design-docs-index",
+      "accepted",
+      "proposed",
+      "deprecated",
+      "maintenance-rules"
+    ],
+    "locales": {
+      "ar": 5,
+      "de": 5,
+      "en": 5,
+      "es": 5,
+      "fr": 5,
+      "ja": 5,
+      "ko": 5,
+      "pt-BR": 5,
+      "ru": 5,
+      "tr": 5,
+      "uk": 5,
+      "uz": 5,
+      "vi": 5,
+      "zh": 5,
+      "zh-TW": 5
+    }
+  },
+  "resources/openai-advanced/repo-template/docs/exec-plans/active/index.md": {
+    "ids": [
+      "active-plans"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "resources/openai-advanced/repo-template/docs/exec-plans/completed/index.md": {
+    "ids": [
+      "completed-plans"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "resources/openai-advanced/repo-template/docs/exec-plans/tech-debt-tracker.md": {
+    "ids": [
+      "tech-debt-tracker"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "resources/openai-advanced/repo-template/docs/generated/db-schema.md": {
+    "ids": [
+      "database-schema",
+      "source",
+      "notes"
+    ],
+    "locales": {
+      "ar": 3,
+      "de": 3,
+      "en": 3,
+      "es": 3,
+      "fr": 3,
+      "ja": 3,
+      "ko": 3,
+      "pt-BR": 3,
+      "ru": 3,
+      "tr": 3,
+      "uk": 3,
+      "uz": 3,
+      "vi": 3,
+      "zh": 3,
+      "zh-TW": 3
+    }
+  },
+  "resources/openai-advanced/repo-template/docs/product-specs/index.md": {
+    "ids": [
+      "product-specs-index",
+      "active-specs",
+      "rules"
+    ],
+    "locales": {
+      "ar": 3,
+      "de": 3,
+      "en": 3,
+      "es": 3,
+      "fr": 3,
+      "ja": 3,
+      "ko": 3,
+      "pt-BR": 3,
+      "ru": 3,
+      "tr": 3,
+      "uk": 3,
+      "uz": 3,
+      "vi": 3,
+      "zh": 3,
+      "zh-TW": 3
+    }
+  },
+  "resources/openai-advanced/repo-template/docs/product-specs/new-user-onboarding.md": {
+    "ids": [
+      "new-user-onboarding",
+      "goal",
+      "entry-conditions",
+      "user-flow",
+      "acceptance-criteria",
+      "failure-states"
+    ],
+    "locales": {
+      "ar": 6,
+      "de": 6,
+      "en": 6,
+      "es": 6,
+      "fr": 6,
+      "ja": 6,
+      "ko": 6,
+      "pt-BR": 6,
+      "ru": 6,
+      "tr": 6,
+      "uk": 6,
+      "uz": 6,
+      "vi": 6,
+      "zh": 6,
+      "zh-TW": 6
+    }
+  },
+  "resources/openai-advanced/repo-template/index.md": {
+    "ids": [
+      "advanced-repo-template",
+      "copy-order",
+      "what-this-template-optimizes-for"
+    ],
+    "locales": {
+      "ar": 3,
+      "de": 3,
+      "en": 3,
+      "es": 3,
+      "fr": 3,
+      "ja": 3,
+      "ko": 3,
+      "pt-BR": 3,
+      "ru": 3,
+      "tr": 3,
+      "uk": 3,
+      "uz": 3,
+      "vi": 3,
+      "zh": 3,
+      "zh-TW": 3
+    }
+  },
+  "resources/openai-advanced/sops/chrome-devtools-validation-loop.md": {
+    "ids": [
+      "sop-chrome-devtools-validation-loop",
+      "goal",
+      "core-loop",
+      "required-inputs",
+      "execution-sop",
+      "clean-criteria",
+      "repo-artifacts-to-update"
+    ],
+    "locales": {
+      "ar": 7,
+      "de": 7,
+      "en": 7,
+      "es": 7,
+      "fr": 7,
+      "ja": 7,
+      "ko": 7,
+      "pt-BR": 7,
+      "ru": 7,
+      "tr": 7,
+      "uk": 7,
+      "uz": 7,
+      "vi": 7,
+      "zh": 7,
+      "zh-TW": 7
+    }
+  },
+  "resources/openai-advanced/sops/encode-knowledge-into-repo.md": {
+    "ids": [
+      "sop-encode-unseen-knowledge-into-the-repo",
+      "goal",
+      "trigger-signals",
+      "execution-sop",
+      "good-encoding-rules",
+      "definition-of-done"
+    ],
+    "locales": {
+      "ar": 6,
+      "de": 6,
+      "en": 6,
+      "es": 6,
+      "fr": 6,
+      "ja": 6,
+      "ko": 6,
+      "pt-BR": 6,
+      "ru": 6,
+      "tr": 6,
+      "uk": 6,
+      "uz": 6,
+      "vi": 6,
+      "zh": 6,
+      "zh-TW": 6
+    }
+  },
+  "resources/openai-advanced/sops/index.md": {
+    "ids": [
+      "openai-advanced-sops",
+      "included-sops",
+      "how-to-use-them"
+    ],
+    "locales": {
+      "ar": 3,
+      "de": 3,
+      "en": 3,
+      "es": 3,
+      "fr": 3,
+      "ja": 3,
+      "ko": 3,
+      "pt-BR": 3,
+      "ru": 3,
+      "tr": 3,
+      "uk": 3,
+      "uz": 3,
+      "vi": 3,
+      "zh": 3,
+      "zh-TW": 3
+    }
+  },
+  "resources/openai-advanced/sops/layered-domain-architecture.md": {
+    "ids": [
+      "sop-layered-domain-architecture",
+      "goal",
+      "target-model",
+      "setup-checklist",
+      "execution-sop",
+      "definition-of-done",
+      "repo-artifacts-to-update"
+    ],
+    "locales": {
+      "ar": 7,
+      "de": 7,
+      "en": 7,
+      "es": 7,
+      "fr": 7,
+      "ja": 7,
+      "ko": 7,
+      "pt-BR": 7,
+      "ru": 7,
+      "tr": 7,
+      "uk": 7,
+      "uz": 7,
+      "vi": 7,
+      "zh": 7,
+      "zh-TW": 7
+    }
+  },
+  "resources/openai-advanced/sops/observability-feedback-loop.md": {
+    "ids": [
+      "sop-observability-feedback-loop",
+      "goal",
+      "minimum-stack",
+      "execution-sop",
+      "debug-session-checklist",
+      "definition-of-done"
+    ],
+    "locales": {
+      "ar": 6,
+      "de": 6,
+      "en": 6,
+      "es": 6,
+      "fr": 6,
+      "ja": 6,
+      "ko": 6,
+      "pt-BR": 6,
+      "ru": 6,
+      "tr": 6,
+      "uk": 6,
+      "uz": 6,
+      "vi": 6,
+      "zh": 6,
+      "zh-TW": 6
+    }
+  },
+  "resources/reference/coding-agent-startup-flow.md": {
+    "ids": [
+      "coding-agent-startup-flow",
+      "fixed-startup-template",
+      "why-this-order-matters",
+      "end-of-session-mirror"
+    ],
+    "locales": {
+      "ar": 4,
+      "de": 4,
+      "en": 4,
+      "es": 4,
+      "fr": 4,
+      "ja": 4,
+      "ko": 4,
+      "pt-BR": 4,
+      "ru": 4,
+      "tr": 4,
+      "uk": 4,
+      "uz": 4,
+      "vi": 4,
+      "zh": 4,
+      "zh-TW": 4
+    }
+  },
+  "resources/reference/index.md": {
+    "ids": [
+      "english-reference",
+      "internal-reference-notes",
+      "primary-articles",
+      "_2026-extended-references",
+      "suggested-reading-order"
+    ],
+    "locales": {
+      "ar": 4,
+      "de": 5,
+      "en": 5,
+      "es": 5,
+      "fr": 5,
+      "ja": 4,
+      "ko": 3,
+      "pt-BR": 5,
+      "ru": 3,
+      "tr": 5,
+      "uk": 5,
+      "uz": 5,
+      "vi": 3,
+      "zh": 5,
+      "zh-TW": 5
+    }
+  },
+  "resources/reference/initializer-agent-playbook.md": {
+    "ids": [
+      "initializer-agent-playbook",
+      "goal",
+      "required-outputs",
+      "checklist",
+      "success-test"
+    ],
+    "locales": {
+      "ar": 5,
+      "de": 5,
+      "en": 5,
+      "es": 5,
+      "fr": 5,
+      "ja": 5,
+      "ko": 5,
+      "pt-BR": 5,
+      "ru": 5,
+      "tr": 5,
+      "uk": 5,
+      "uz": 5,
+      "vi": 5,
+      "zh": 5,
+      "zh-TW": 5
+    }
+  },
+  "resources/reference/method-map.md": {
+    "ids": [
+      "method-map",
+      "operating-principle"
+    ],
+    "locales": {
+      "ar": 2,
+      "de": 2,
+      "en": 2,
+      "es": 2,
+      "fr": 2,
+      "ja": 2,
+      "ko": 2,
+      "pt-BR": 2,
+      "ru": 2,
+      "tr": 2,
+      "uk": 2,
+      "uz": 2,
+      "vi": 2,
+      "zh": 2,
+      "zh-TW": 2
+    }
+  },
+  "resources/reference/prompt-calibration.md": {
+    "ids": [
+      "prompt-calibration",
+      "keep-in-the-root-file",
+      "move-out-of-the-root-file",
+      "working-rule"
+    ],
+    "locales": {
+      "ar": 4,
+      "de": 4,
+      "en": 4,
+      "es": 4,
+      "fr": 4,
+      "ja": 4,
+      "ko": 4,
+      "pt-BR": 4,
+      "ru": 4,
+      "tr": 4,
+      "uk": 4,
+      "uz": 4,
+      "vi": 4,
+      "zh": 4,
+      "zh-TW": 4
+    }
+  },
+  "resources/templates/AGENTS.md": {
+    "ids": [
+      "agents-md",
+      "startup-workflow",
+      "working-rules",
+      "required-artifacts",
+      "definition-of-done",
+      "end-of-session"
+    ],
+    "locales": {
+      "ar": 6,
+      "de": 6,
+      "en": 6,
+      "es": 6,
+      "fr": 6,
+      "ja": 6,
+      "ko": 6,
+      "pt-BR": 6,
+      "ru": 6,
+      "tr": 6,
+      "uk": 6,
+      "uz": 6,
+      "vi": 6,
+      "zh": 6,
+      "zh-TW": 6
+    }
+  },
+  "resources/templates/CLAUDE.md": {
+    "ids": [
+      "claude-md",
+      "operating-loop",
+      "rules",
+      "required-files",
+      "completion-gate",
+      "before-you-stop"
+    ],
+    "locales": {
+      "ar": 6,
+      "de": 6,
+      "en": 6,
+      "es": 6,
+      "fr": 6,
+      "ja": 6,
+      "ko": 6,
+      "pt-BR": 6,
+      "ru": 6,
+      "tr": 6,
+      "uk": 6,
+      "uz": 6,
+      "vi": 6,
+      "zh": 6,
+      "zh-TW": 6
+    }
+  },
+  "resources/templates/claude-progress.md": {
+    "ids": [
+      "progress-log",
+      "current-verified-state",
+      "session-log",
+      "session-001",
+      "session-002"
+    ],
+    "locales": {
+      "ar": 5,
+      "de": 5,
+      "en": 5,
+      "es": 5,
+      "fr": 5,
+      "ja": 5,
+      "ko": 5,
+      "pt-BR": 5,
+      "ru": 5,
+      "tr": 5,
+      "uk": 5,
+      "uz": 5,
+      "vi": 5,
+      "zh": 5,
+      "zh-TW": 5
+    }
+  },
+  "resources/templates/clean-state-checklist.md": {
+    "ids": [
+      "clean-state-checklist"
+    ],
+    "locales": {
+      "ar": 1,
+      "de": 1,
+      "en": 1,
+      "es": 1,
+      "fr": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "ru": 1,
+      "tr": 1,
+      "uk": 1,
+      "uz": 1,
+      "vi": 1,
+      "zh": 1,
+      "zh-TW": 1
+    }
+  },
+  "resources/templates/evaluator-rubric.md": {
+    "ids": [
+      "evaluator-rubric",
+      "verdict",
+      "required-follow-up"
+    ],
+    "locales": {
+      "ar": 3,
+      "de": 3,
+      "en": 3,
+      "es": 3,
+      "fr": 3,
+      "ja": 3,
+      "ko": 3,
+      "pt-BR": 3,
+      "ru": 3,
+      "tr": 3,
+      "uk": 3,
+      "uz": 3,
+      "vi": 3,
+      "zh": 3,
+      "zh-TW": 3
+    }
+  },
+  "resources/templates/index.md": {
+    "ids": [
+      "template-guide",
+      "how-to-get-started",
+      "agents-md",
+      "init-sh",
+      "claude-progress-md",
+      "feature-list-json",
+      "session-handoff-md",
+      "clean-state-checklist-md",
+      "evaluator-rubric-md",
+      "quality-document-md"
+    ],
+    "locales": {
+      "ar": 7,
+      "de": 10,
+      "en": 10,
+      "es": 10,
+      "fr": 10,
+      "ja": 7,
+      "ko": 10,
+      "pt-BR": 10,
+      "ru": 10,
+      "tr": 10,
+      "uk": 10,
+      "uz": 10,
+      "vi": 2,
+      "zh": 10,
+      "zh-TW": 10
+    }
+  },
+  "resources/templates/quality-document.md": {
+    "ids": [
+      "quality-document",
+      "product-domains",
+      "architectural-layers",
+      "change-history",
+      "yyyy-mm-dd"
+    ],
+    "locales": {
+      "ar": 5,
+      "de": 5,
+      "en": 5,
+      "es": 5,
+      "fr": 5,
+      "ja": 5,
+      "ko": 5,
+      "pt-BR": 5,
+      "ru": 5,
+      "tr": 5,
+      "uk": 5,
+      "uz": 5,
+      "vi": 5,
+      "zh": 5,
+      "zh-TW": 5
+    }
+  },
+  "resources/templates/session-handoff.md": {
+    "ids": [
+      "session-handoff",
+      "verified-now",
+      "changed-this-session",
+      "broken-or-unverified",
+      "next-best-step",
+      "commands"
+    ],
+    "locales": {
+      "ar": 6,
+      "de": 6,
+      "en": 6,
+      "es": 6,
+      "fr": 5,
+      "ja": 6,
+      "ko": 6,
+      "pt-BR": 6,
+      "ru": 6,
+      "tr": 6,
+      "uk": 6,
+      "uz": 6,
+      "vi": 6,
+      "zh": 6,
+      "zh-TW": 6
+    }
+  },
+  "skills/index.md": {
+    "ids": [
+      "skills",
+      "harness-creator",
+      "what-it-does",
+      "quick-start",
+      "reference-patterns",
+      "templates",
+      "scripts",
+      "how-this-skill-was-built"
+    ],
+    "locales": {
+      "ar": 8,
+      "de": 8,
+      "en": 8,
+      "es": 8,
+      "fr": 8,
+      "ja": 8,
+      "ko": 8,
+      "pt-BR": 8,
+      "ru": 8,
+      "tr": 8,
+      "uk": 8,
+      "uz": 8,
+      "vi": 8,
+      "zh": 8,
+      "zh-TW": 8
+    }
+  }
+}

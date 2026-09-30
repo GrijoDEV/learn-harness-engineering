@@ -12,6 +12,8 @@
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
     "lecture:run": "tsx",
+    "anchors:build": "node --import tsx scripts/build-anchor-map.ts",
+    "anchors:check": "node --import tsx scripts/validate-anchors.ts",
     "screenshots:readme": "node --import tsx scripts/capture-readme-screenshots.ts",
     "pdf:export": "node --import tsx scripts/build-course-pdfs.ts",
     "pdf:build": "npm run docs:build && npm run pdf:export"
