@@ -28,7 +28,7 @@ These four scopes form an **instruction hierarchy**: the official documentation 
 
 ## Context Subsystem: A Five-Layer Compaction Pipeline
 
-Claude Code manages context through a **five-layer compaction pipeline**, not simply by "summarizing when it gets full." This architectural detail comes from VILA Lab's source-level analysis, [Dive into Claude Code](https://zhiqiangshen.com/projects/Claude_Code_Report/Claude_Code_Report.pdf). Lecture 5 explains how long-running tasks lose continuity; Claude Code's answer is a multi-stage funnel: first apply lossless pruning (removing redundant tool results), then perform structured distillation, and only then use lossy LLM summaries, with circuit breakers to prevent excessive compaction.
+According to VILA Lab's source-level analysis of Claude Code v2.1.88, [Dive into Claude Code](https://zhiqiangshen.com/projects/Claude_Code_Report/Claude_Code_Report.pdf), the system used a **five-layer compaction pipeline** at that time, not simply by "summarizing when it gets full." Lecture 5 explains how long-running tasks lose continuity; Claude Code's answer is a multi-stage funnel: first apply lossless pruning (removing redundant tool results), then perform structured distillation, and only then use lossy LLM summaries, with circuit breakers to prevent excessive compaction.
 
 This is paired with the design of session storage: **append-oriented storage**. All history is appended to `history.jsonl`, with `/resume` recovery and fork branches. This ensures that "every session leaves a good handoff before ending"—not because the system has a good memory, but because the storage layer is append-oriented and replayable.
 
@@ -47,7 +47,7 @@ The key design is **separation of responsibilities**: CLAUDE.md manages "what," 
 
 Lecture 10 explains that "verification only counts when the complete flow works." Claude Code implements this through two tracks:
 
-**1. Permission system (deterministic constraints).** Claude Code's permissions do not simply "ask about everything." They combine seven modes with an ML-based classifier: low-risk operations are allowed, while high-risk operations are either confirmed or denied according to policy (for architectural details, see the [VILA Lab analysis](https://zhiqiangshen.com/projects/Claude_Code_Report/Claude_Code_Report.pdf)). This turns "setting clear task boundaries for the agent" (Lecture 7) into runtime enforcement instead of a plea in a prompt.
+**1. Permission system (deterministic constraints).** Claude Code's permissions do not simply "ask about everything." According to VILA Lab's analysis of v2.1.88, the system combined seven modes with an ML-based classifier at that time: low-risk operations are allowed, while high-risk operations are either confirmed or denied according to policy (for architectural details, see the [VILA Lab analysis](https://zhiqiangshen.com/projects/Claude_Code_Report/Claude_Code_Report.pdf)). Note that permission-mode naming has changed since v2.1.88: current Anthropic docs ([permission modes](https://code.claude.com/docs/en/permission-modes)) list Manual (formerly "default", relabeled in v2.1.200+), Plan, acceptEdits, Auto, and bypassPermissions. This turns "setting clear task boundaries for the agent" (Lecture 7) into runtime enforcement instead of a plea in a prompt.
 
 **2. Hooks (preventing premature declarations of completion).** `PostToolUse` hooks can force checks to run after tool execution and write the results back into the context; `Stop` hooks intervene when the agent declares completion. This separates "the one doing the work" from "the one checking the work." [Anthropic explicitly observed in its harness article](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) that agents "confidently praised their work," so hooks inject **deterministic** checks instead of trusting the model's self-evaluation.
 
@@ -64,7 +64,7 @@ Claude Code's logs are complete append-oriented records (history.jsonl). Togethe
 | Instructions | Layered scopes (organization/user/project/local) + auto memory | Layered memory is the benchmark implementation |
 | Tools | Four extension types: Skills + MCP + hooks + subagents | Clear separation of responsibilities is a core strength |
 | Environment | In-project settings + settings.json | Relies on users to describe the environment in CLAUDE.md |
-| State | Append-oriented session storage + five-layer compaction + resume/fork | Extremely strong; a reference implementation for long-running task continuity |
+| State | Append-oriented session storage + five-layer compaction (per VILA v2.1.88 analysis) + resume/fork | Extremely strong; a reference implementation for long-running task continuity |
 | Feedback | Permission classifier + mandatory checks through PostToolUse hooks | Turns "prevent premature declarations of completion" into a deterministic mechanism |
 
 ## Designs Worth Adopting
@@ -75,14 +75,22 @@ Claude Code's logs are complete append-oriented records (history.jsonl). Togethe
 4. **Isolate subagent context**: split the context when splitting a task so subtask results do not pollute the main loop.
 5. **Make session storage append-oriented and replayable**: handoffs depend on the storage layer, not memory.
 
-## References (Original Sources / Source Code)
+## References
 
-Every claim can be traced back to the original sources or source code below, avoiding secondhand recollections:
+Every claim can be traced back to the sources below, avoiding secondhand recollections.
+
+### Official Anthropic documentation
 
 - **Claude Code · Memory**: A fresh context for every session, the four CLAUDE.md scopes, on-demand loading by subdirectory, auto memory (200 lines / 25KB), and `/init` generation of CLAUDE.md.<br/>https://code.claude.com/docs/en/memory
-- **Claude Code · Skills / MCP / Hooks / Sub-agents**: Definitions of the four extension mechanisms and their events (PreToolUse / PostToolUse / Stop).<br/>https://code.claude.com/docs/en/skills ｜ https://code.claude.com/docs/en/mcp ｜ https://code.claude.com/docs/en/hooks ｜ https://code.claude.com/docs/en/sub-agents
-- **VILA Lab, Dive into Claude Code** (source-level analysis): The five-layer compaction pipeline, seven permission modes + ML classifier, sidechain subagents, and append-oriented session storage in history.jsonl.<br/>https://zhiqiangshen.com/projects/Claude_Code_Report/Claude_Code_Report.pdf
+- **Claude Code · Skills / MCP / Hooks / Sub-agents**: Definitions of the four extension mechanisms and their events (PreToolUse / PostToolUse / Stop).<br/>https://code.claude.com/docs/en/skills | https://code.claude.com/docs/en/mcp | https://code.claude.com/docs/en/hooks | https://code.claude.com/docs/en/sub-agents
+- **Claude Code · Permission modes**: Current mode names Manual (formerly "default", relabeled in v2.1.200+), Plan, acceptEdits, Auto, and bypassPermissions.<br/>https://code.claude.com/docs/en/permission-modes
 - **Anthropic, Effective harnesses for long-running agents**: The source for the claims that "reliability comes from the harness rather than the model," that agents "confidently praised their work," and that hooks should be used for verification.<br/>https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents
+
+### Independent/community research
+
+The sources in this group reflect a specific historical version (Claude Code v2.1.88 at the time of the VILA Lab analysis) and may not match current behavior.
+
+- **VILA Lab, Dive into Claude Code** (source-level analysis of v2.1.88): The five-layer compaction pipeline, seven permission modes + ML classifier, sidechain subagents, and append-oriented session storage in history.jsonl.<br/>https://zhiqiangshen.com/projects/Claude_Code_Report/Claude_Code_Report.pdf
 - **Claude Code Full Stack Guide** (community guide to the CLAUDE.md / Skills / MCP / Subagents / Hooks layers): Supplementary reading on the separation of responsibilities among extension mechanisms.<br/>https://jsmanifest.com/claude-code-full-stack-guide
 
 Related lectures: [Lecture 3 · Why the Repository Must Become the System of Record](../lectures/lecture-03-why-the-repository-must-become-the-system-of-record/) ｜ [Lecture 9 · Why Agents Declare Victory Too Early](../lectures/lecture-09-why-agents-declare-victory-too-early/) ｜ [Lecture 10 · Why End-to-End Testing Changes Results](../lectures/lecture-10-why-end-to-end-testing-changes-results/)
