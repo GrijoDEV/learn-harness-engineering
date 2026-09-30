@@ -5,7 +5,7 @@
  * a harness. The harness version adds explicit rules, verification steps,
  * and stop conditions.
  *
- * Run: npx tsx docs/lectures/lecture-02-what-a-harness-actually-is/code/harness-vs-no-harness.ts
+ * Run: npx tsx docs/en/lectures/lecture-02-what-a-harness-actually-is/code/harness-vs-no-harness.ts
  */
 
 // ---------------------------------------------------------------------------
