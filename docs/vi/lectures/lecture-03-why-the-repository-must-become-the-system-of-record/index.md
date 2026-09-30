@@ -106,6 +106,8 @@ OpenAI mô tả việc lưu kiến trúc, quyết định thiết kế, kế ho�
 
 [OpenAI](https://openai.com/index/harness-engineering/)
 
+OpenAI báo cáo khoảng 1.500 PR được mở và hợp nhất trong năm tháng, do ba kỹ sư điều phối Codex, trung bình 3,5 PR mỗi người mỗi ngày. Nhóm sau đó tăng lên bảy người. Đây là kết quả của toàn bộ quy trình; đóng góp riêng của tài liệu không được đo. [OpenAI: Harness engineering](https://openai.com/index/harness-engineering/)
+
 ## Những điểm chính cần nhớ
 
 - Kiến thức không nằm trong repo thì không tồn tại với agent. Đưa thông tin quyết định quan trọng vào kho lưu trữ là khoản đầu tư harness nền tảng nhất, hãy vẽ bản đồ cho tốt để không lạc.

@@ -99,6 +99,8 @@ OpenAI 嘗試過一個巨型 AGENTS.md，發現它擠占任務脈絡、混淆優
 
 效果取決於內容和任務。ETH Zurich 的研究發現，在其評估設定中，儲存庫脈絡檔案並未普遍提高任務成功率，卻使推理成本增加了 20% 以上，因此建議人工撰寫的要求保持精簡。檔案變短不代表效果必然變好，需要在實際任務上驗證。 [ETH Zurich: Evaluating AGENTS.md](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd)
 
+一項配對研究使用 gpt-5.2-codex，在 10 個儲存庫的 124 個 PR 衍生任務上，對比相同任務和快照有無 AGENTS.md。表 1 中，中位耗時從 98.57 秒降到 70.34 秒，降低 28.64%；輸出 token 中位數從 2,925 降到 2,440，降低 16.58%。任務最多改動 100 行、5 個檔案。這測量的是效率，而非拆分巨型檔案的效果；完整功能正確性驗證不在研究範圍內。 [Lulla et al., Table 1](https://arxiv.org/html/2601.20404v2)
+
 ## 關鍵要點
 
 - 「加條規則」是短期的止痛藥，長期的毒藥。每次加規則前想想：這條規則放主題文件是不是更合適。
@@ -116,6 +118,8 @@ OpenAI 嘗試過一個巨型 AGENTS.md，發現它擠占任務脈絡、混淆優
 - [Nielsen Norman Group: Progressive Disclosure](https://www.nngroup.com/articles/progressive-disclosure/)
 
 - [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): 儲存庫脈絡檔案的實證研究：任務成功率、推理成本，以及保持要求精簡的建議。見摘要和結論。
+
+- [Lulla et al., Table 1](https://arxiv.org/html/2601.20404v2)
 
 ## 練習
 

@@ -153,6 +153,8 @@ Bu misol uzluksizlik mexanizmini hujjatlashtiradi; bu yerda avval keltirilgan tu
 
 [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
+LangChain bir xil gpt-5.2-codex bilan 89 vazifali Terminal Bench 2.0 natijasi 52,8% dan 66,5% ga, 13,7 foiz punktga oshganini bildiradi. Tekshiruv ko‘rsatmalari, middleware va kontekst boshqaruvi birgalikda o‘zgargan. Bu bir nechta harness o‘zgarishining umumiy natijasi, faqat jarayon fayllarining ta’siri emas. [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
+
 ## Asosiy xulosalar
 
 - Kontekst oynalari cheklangan resursdir. Uzoq vazifalar sessiyalarga boʻlinadi, va sessiyalarda maʼlumot yoʻqoladi — har kuni hamma narsani unutadigan usta kabi, bu obyektiv haqiqatdir.
@@ -168,6 +170,8 @@ Bu misol uzluksizlik mexanizmini hujjatlashtiradi; bu yerda avval keltirilgan tu
 - [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)
 - [Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code)
 - [HumanLayer: Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
+
+- [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
 
 ## Mashqlar
 

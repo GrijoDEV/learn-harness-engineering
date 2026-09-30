@@ -99,6 +99,8 @@ OpenAI, büyük bir AGENTS.md dosyasının görev bağlamını daralttığını,
 
 Fayda içeriğe ve göreve bağlıdır. ETH Zurich araştırması, değerlendirdiği koşullarda bağlam dosyalarının genel bir başarı artışı sağlamadığını, çıkarım maliyetini ise %20’den fazla artırdığını buldu ve insan tarafından yazılan gereksinimleri asgari tutmayı önerdi. Kısa dosya iyileşmeyi garanti etmez; talimatları hedef görevlerde sınayın. [ETH Zurich: Evaluating AGENTS.md](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd)
 
+Eşleştirilmiş araştırma, 10 depodan 124 PR görevinde gpt-5.2-codex ile aynı görev ve snapshot’ı AGENTS.md varken ve yokken karşılaştırdı. Tablo 1: medyan süre 98,57→70,34 saniye (%28,64 azalma), medyan çıktı token’ı 2.925→2.440 (%16,58 azalma). Görevler en fazla 100 satır ve beş dosya değiştiriyordu. Verimlilik ölçüldü; büyük dosyaları bölmenin etkisi veya tam işlevsel doğruluk değerlendirilmedi. [Lulla et al., Table 1](https://arxiv.org/html/2601.20404v2)
+
 ## Önemli çıkarımlar
 
 - "Bir kural ekle" kısa vadeli ağrı kesicidir, uzun vadeli zehirdir. Bir kural eklemeden önce sorun: bu bir konu dokümanında daha iyi olur mu? Sadece bavula şeyleri tıkıştırmaya devam etmeyin.
@@ -116,6 +118,8 @@ Fayda içeriğe ve göreve bağlıdır. ETH Zurich araştırması, değerlendird
 - [Nielsen Norman Group: Progressive Disclosure](https://www.nngroup.com/articles/progressive-disclosure/)
 
 - [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): Bağlam dosyaları araştırması: görev başarısı, çıkarım maliyeti ve asgari gereksinimler. Özet ve sonuca bakın.
+
+- [Lulla et al., Table 1](https://arxiv.org/html/2601.20404v2)
 
 ## Alıştırmalar
 

@@ -106,6 +106,8 @@ OpenAI は Codex による社内製品の開発で、アーキテクチャ、設
 
 [OpenAI](https://openai.com/index/harness-engineering/)
 
+OpenAI は、Codex を指揮する 3 人のエンジニアが 5 か月で約 1,500 件の PR を作成・マージし、1 人 1 日平均 3.5 件だったと報告しています。その後チームは 7 人になりました。これは工程全体の実績で、文書だけの寄与を分離した数値ではありません。 [OpenAI: Harness engineering](https://openai.com/index/harness-engineering/)
+
 ## 重要なポイント
 
 - リポジトリにない知識は、エージェントにとって存在しない。重要な判断をリポジトリに置くことは、最も基本的な harness 投資だ。迷わないように、よい地図を描く。

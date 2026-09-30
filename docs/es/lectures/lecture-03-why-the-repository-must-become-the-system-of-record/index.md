@@ -106,6 +106,8 @@ Es una práctica de ingeniería documentada, no una medición controlada de la m
 
 [OpenAI](https://openai.com/index/harness-engineering/)
 
+OpenAI informa de unos 1.500 PR abiertos y fusionados en cinco meses por tres ingenieros que dirigían Codex, con 3,5 PR por ingeniero y día. El equipo creció después a siete. Son resultados del proceso completo; no se aisló el efecto de la documentación del repositorio. [OpenAI: Harness engineering](https://openai.com/index/harness-engineering/)
+
 ## Ideas clave
 
 - El conocimiento que no está en el repo no existe para el agente. Poner decisiones críticas en el repo es la inversión más básica en harness: dibuja un buen mapa para no perderte.

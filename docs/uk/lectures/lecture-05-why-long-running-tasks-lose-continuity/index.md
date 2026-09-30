@@ -151,6 +151,8 @@ Anthropic описує копію сайту Claude, для якої агент-
 
 [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
+LangChain повідомляє про зростання з 52,8% до 66,5%, на 13,7 відсоткового пункта, з незмінним gpt-5.2-codex на 89 завданнях Terminal Bench 2.0. Змінювали вказівки перевірки, middleware та керування контекстом. Це спільний результат кількох змін harness, не лише файлів прогресу. [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
+
 ## Головне
 
 - Контекстні вікна — обмежений ресурс. Тривалі задачі охоплюватимуть кілька сесій, а сесії втрачатимуть інформацію — це об'єктивна реальність.
@@ -166,6 +168,8 @@ Anthropic описує копію сайту Claude, для якої агент-
 - [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)
 - [Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code)
 - [HumanLayer: Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
+
+- [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
 
 ## Вправи
 

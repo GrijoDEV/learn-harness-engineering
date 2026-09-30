@@ -106,6 +106,8 @@ Der Bericht beschreibt eine technische Praxis, keine kontrollierte Messung der V
 
 [OpenAI](https://openai.com/index/harness-engineering/)
 
+OpenAI berichtet von rund 1.500 eröffneten und zusammengeführten PRs in fünf Monaten, getragen von drei Ingenieuren mit Codex, sowie 3,5 PRs pro Ingenieur und Tag. Das Team wuchs später auf sieben. Dies ist das Ergebnis des gesamten Arbeitsablaufs; der Beitrag der Repository-Dokumentation wurde nicht isoliert. [OpenAI: Harness engineering](https://openai.com/index/harness-engineering/)
+
 ## Wichtigste Erkenntnisse
 
 - Wissen, das nicht im Repo steht, existiert für den Agenten nicht. Kritische Entscheidungen ins Repo zu legen ist die grundlegendste Harness-Investition: Zeichne eine gute Karte, damit du dich nicht verläufst.

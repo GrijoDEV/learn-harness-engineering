@@ -99,6 +99,8 @@ OpenAI katta AGENTS.md vazifa kontekstini siqishi, ustuvorliklarni chalkashtiris
 
 Foyda mazmun va vazifaga bog‘liq. ETH Zurich tadqiqoti tekshirilgan sharoitlarda kontekst fayllari umumiy muvaffaqiyatni oshirmaganini, inferens xarajatini esa 20% dan ortiq oshirganini topdi. Inson yozgan talablarni minimal saqlash tavsiya etiladi. Qisqaroq fayl yaxshilanishni kafolatlamaydi; ko‘rsatmalarni kerakli vazifalarda sinang. [ETH Zurich: Evaluating AGENTS.md](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd)
 
+Juft taqqoslash tadqiqoti 10 repozitoriydagi 124 PR vazifasida gpt-5.2-codex bilan bir xil vazifa va holatni AGENTS.md bor va yo‘q sharoitlarda tekshirgan. 1-jadval: median vaqt 98,57→70,34 soniya (28,64% kamayish), median chiqish tokenlari 2 925→2 440 (16,58% kamayish). Vazifalar ko‘pi bilan 100 qator va besh faylni o‘zgartirgan. Samaradorlik o‘lchangan; katta faylni ajratish ta’siri yoki to‘liq funksional to‘g‘rilik baholanmagan. [Lulla et al., Table 1](https://arxiv.org/html/2601.20404v2)
+
 ## Asosiy xulosalar
 
 - “Qoida qoʻshish” — qisqa muddatli yengillik, ammo uzoq muddatli zahar. Qoida qoʻshishdan oldin oʻzingizga savol bering: buni mavzuviy hujjatda saqlagan maʼqul emasmi? Chamadonga shunchaki narsa tiqishni toʻxtating.
@@ -116,6 +118,8 @@ Foyda mazmun va vazifaga bog‘liq. ETH Zurich tadqiqoti tekshirilgan sharoitlar
 - [Nielsen Norman Group: Progressive Disclosure](https://www.nngroup.com/articles/progressive-disclosure/)
 
 - [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): Kontekst fayllari tadqiqoti: muvaffaqiyat, inferens xarajati va minimal talablar. Annotatsiya va xulosaga qarang.
+
+- [Lulla et al., Table 1](https://arxiv.org/html/2601.20404v2)
 
 ## Mashqlar
 

@@ -99,6 +99,8 @@ OpenAI는 거대한 AGENTS.md가 작업 컨텍스트를 차지하고 우선순�
 
 효과는 내용과 작업에 따라 달라집니다. ETH Zurich 연구는 평가한 환경에서 저장소 컨텍스트 파일이 성공률을 일반적으로 높이지 않았지만 추론 비용은 20% 이상 늘었다고 보고하며, 사람이 작성하는 요구사항을 최소화하도록 권합니다. 짧은 파일이 개선을 보장하지 않으므로 실제 대상 작업으로 검증해야 합니다. [ETH Zurich: Evaluating AGENTS.md](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd)
 
+짝지은 비교 연구는 gpt-5.2-codex로 10개 저장소의 PR 기반 작업 124개를 동일한 상태에서 AGENTS.md 유무로 비교했습니다. 표 1: 중위 실행 시간 98.57초→70.34초(28.64% 감소), 중위 출력 token 2,925→2,440(16.58% 감소). 작업은 최대 100줄, 5개 파일을 변경했습니다. 효율을 측정했으며 거대 파일 분할 효과나 완전한 기능적 정확성을 평가하지 않았습니다. [Lulla et al., Table 1](https://arxiv.org/html/2601.20404v2)
+
 ## 핵심 정리
 
 - "규칙 추가"는 단기 진통제이고 장기 독약입니다. 규칙을 추가하기 전에 먼저 물어보세요: 이게 주제 문서에 더 적합하지 않을까요? 가방에 물건을 계속 욱여넣지 마세요.
@@ -116,6 +118,8 @@ OpenAI는 거대한 AGENTS.md가 작업 컨텍스트를 차지하고 우선순�
 - [Nielsen Norman Group: Progressive Disclosure](https://www.nngroup.com/articles/progressive-disclosure/)
 
 - [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): 컨텍스트 파일의 실증 연구: 성공률, 추론 비용, 최소 요구사항. 초록과 결론 참고.
+
+- [Lulla et al., Table 1](https://arxiv.org/html/2601.20404v2)
 
 ## 연습 문제
 

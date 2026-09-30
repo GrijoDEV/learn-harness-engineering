@@ -106,6 +106,8 @@ Bu, belgelenmiş bir mühendislik uygulamasıdır; başarı oranındaki artış�
 
 [OpenAI](https://openai.com/index/harness-engineering/)
 
+OpenAI, Codex’i yönlendiren üç mühendisle beş ayda yaklaşık 1.500 PR açılıp birleştirildiğini ve mühendis başına günlük 3,5 PR üretildiğini bildiriyor. Ekip sonra yedi kişiye çıktı. Bunlar tüm sürecin sonuçlarıdır; depo belgelerinin katkısı ayrı ölçülmedi. [OpenAI: Harness engineering](https://openai.com/index/harness-engineering/)
+
 ## Önemli çıkarımlar
 
 - Depoda olmayan bilgi ajan için yoktur. Kritik kararları depoya koymak en temel harness yatırımıdır — iyi bir harita çizin ki kaybolmayasınız.

@@ -71,6 +71,8 @@ kalmıştır.
 
 - [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): Bağlam dosyaları araştırması: görev başarısı, çıkarım maliyeti ve asgari gereksinimler. Özet ve sonuca bakın.
 
+- [On the Impact of AGENTS.md Files on the Efficiency of AI Coding Agents](https://arxiv.org/html/2601.20404v2): gpt-5.2-codex; 10 repos / 124 PR tasks; Table 1.
+
 ## Önerilen Okuma Sırası
 
 1. `method-map.md`

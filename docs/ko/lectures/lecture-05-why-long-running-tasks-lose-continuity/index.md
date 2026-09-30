@@ -153,6 +153,8 @@ Anthropic은 Claude 웹사이트 복제 사례에서 초기화 에이전트가 2
 
 [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
+LangChain은 같은 gpt-5.2-codex로 89개 작업의 Terminal Bench 2.0 점수를 52.8%에서 66.5%로, 13.7%p 높였다고 보고합니다. 검증 지침, 미들웨어, 컨텍스트 관리를 함께 바꾼 결과로, 진행 파일만의 효과는 아닙니다. [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
+
 ## 핵심 정리
 
 - 컨텍스트 윈도는 유한한 자원입니다. 긴 작업은 세션에 걸쳐 이어지고, 세션은 정보를 잃습니다. 매일 잊어버리는 장인처럼, 이것은 객관적인 현실입니다.
@@ -168,6 +170,8 @@ Anthropic은 Claude 웹사이트 복제 사례에서 초기화 에이전트가 2
 - [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)
 - [Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code)
 - [HumanLayer: Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
+
+- [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
 
 ## 연습 문제
 

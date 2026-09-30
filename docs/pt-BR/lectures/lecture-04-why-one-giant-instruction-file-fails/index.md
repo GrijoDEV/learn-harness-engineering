@@ -109,6 +109,8 @@ A OpenAI relata que um AGENTS.md grande ocupava o contexto da tarefa, confundia 
 
 O benefício depende do conteúdo e da tarefa. Um estudo da ETH Zurich não encontrou melhoria geral do sucesso com arquivos de contexto nos cenários avaliados, mas custos de inferência mais de 20% maiores. Recomenda requisitos humanos mínimos. Um arquivo menor não garante melhoria: teste as instruções nas tarefas previstas. [ETH Zurich: Evaluating AGENTS.md](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd)
 
+Um estudo pareado usou gpt-5.2-codex em 124 tarefas de PR de 10 repositórios, comparando o mesmo estado com e sem AGENTS.md. Tabela 1: tempo mediano de 98,57 para 70,34 s (−28,64%) e tokens de saída medianos de 2.925 para 2.440 (−16,58%). As tarefas alteravam no máximo 100 linhas e cinco arquivos. Mede eficiência, não a divisão de arquivos grandes; não avaliou a correção funcional completa. [Lulla et al., Table 1](https://arxiv.org/html/2601.20404v2)
+
 ## Principais Conclusões
 
 * “Adicionar uma regra” é um alívio de curto prazo e um veneno de longo prazo. Antes de adicionar qualquer regra, avalie se ela deveria estar em um documento de tópico.
@@ -126,6 +128,8 @@ O benefício depende do conteúdo e da tarefa. Um estudo da ETH Zurich não enco
 * [Nielsen Norman Group: Progressive Disclosure](https://www.nngroup.com/articles/progressive-disclosure/)
 
 - [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): Estudo dos arquivos de contexto: sucesso, custo de inferência e requisitos mínimos. Veja o resumo e a conclusão.
+
+- [Lulla et al., Table 1](https://arxiv.org/html/2601.20404v2)
 
 ## Exercícios
 

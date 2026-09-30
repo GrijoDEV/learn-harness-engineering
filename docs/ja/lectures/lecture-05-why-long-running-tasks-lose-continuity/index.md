@@ -153,6 +153,8 @@ Anthropic は Claude のウェブサイトを再現する事例で、初期化�
 
 [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
+LangChain は、同じ gpt-5.2-codex を使う 89 タスクの Terminal Bench 2.0 で、52.8% から 66.5% へ 13.7 ポイント改善したと報告しています。検証指示、ミドルウェア、コンテキスト管理を変更した全体の結果で、進捗ファイルだけの効果ではありません。 [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
+
 ## 重要なポイント
 
 - コンテキストウィンドウは有限のリソースです。長時間のタスクはセッションにまたがり、セッションは情報を失います — 毎日忘れる職人のように、これは客観的な現実です。
@@ -168,6 +170,8 @@ Anthropic は Claude のウェブサイトを再現する事例で、初期化�
 - [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)
 - [Claude Code Documentation](https://docs.anthropic.com/ja/docs/claude-code)
 - [HumanLayer: Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
+
+- [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
 
 ## 演習
 

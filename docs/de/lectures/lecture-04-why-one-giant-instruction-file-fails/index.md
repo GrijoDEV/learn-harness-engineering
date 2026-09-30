@@ -99,6 +99,8 @@ OpenAI berichtet, dass eine große AGENTS.md den Aufgabenkontext verdrängte, Pr
 
 Der Nutzen hängt von Inhalt und Aufgabe ab. Eine ETH-Zürich-Studie fand in ihren untersuchten Szenarien keine allgemeine Verbesserung der Erfolgsquote durch Repository-Kontextdateien, aber über 20% höhere Inferenzkosten. Sie empfiehlt minimale, von Menschen geschriebene Anforderungen. Kürzere Dateien garantieren keine Verbesserung; die Anweisungen müssen an den vorgesehenen Aufgaben geprüft werden. [ETH Zurich: Evaluating AGENTS.md](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd)
 
+Eine gepaarte Studie verglich mit gpt-5.2-codex 124 PR-basierte Aufgaben aus 10 Repositories, jeweils mit und ohne AGENTS.md bei identischem Snapshot. Tabelle 1: mediane Laufzeit 98,57 auf 70,34 s (−28,64%), mediane Ausgabe-Tokens 2.925 auf 2.440 (−16,58%). Aufgaben änderten höchstens 100 Zeilen in fünf Dateien. Gemessen wurde Effizienz, nicht das Aufteilen großer Dateien; vollständige funktionale Korrektheit wurde nicht bewertet. [Lulla et al., Table 1](https://arxiv.org/html/2601.20404v2)
+
 ## Wichtigste Erkenntnisse
 
 - "Eine Regel hinzufügen" ist kurzfristige Schmerzlinderung und langfristig Gift. Bevor du eine Regel hinzufügst, frage: Wäre das besser in einem Themendokument? Stopf nicht einfach weiter Dinge in den Koffer.
@@ -116,6 +118,8 @@ Der Nutzen hängt von Inhalt und Aufgabe ab. Eine ETH-Zürich-Studie fand in ihr
 - [Nielsen Norman Group: Progressive Disclosure](https://www.nngroup.com/articles/progressive-disclosure/)
 
 - [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): Empirische Studie zu Kontextdateien: Aufgabenerfolg, Inferenzkosten und minimale Anforderungen. Siehe Zusammenfassung und Fazit.
+
+- [Lulla et al., Table 1](https://arxiv.org/html/2601.20404v2)
 
 ## Übungen
 

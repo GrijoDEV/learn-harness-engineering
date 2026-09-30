@@ -106,6 +106,8 @@ This is a documented engineering practice, not a controlled measurement of how m
 
 [OpenAI](https://openai.com/index/harness-engineering/)
 
+OpenAI reports roughly 1,500 opened and merged PRs over five months, driven by a small team of three engineers using Codex, and an average throughput of 3.5 PRs per engineer per day. The team later grew to seven. These are reported production outcomes for the whole engineering setup; the article does not isolate the contribution of repository documentation. [OpenAI: Harness engineering](https://openai.com/index/harness-engineering/)
+
 ## Key Takeaways
 
 - Knowledge not in the repo doesn't exist for the agent. Putting critical decision information into the repository is the most fundamental harness investment — draw a good map so you don't get lost.

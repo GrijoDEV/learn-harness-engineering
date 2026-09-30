@@ -149,6 +149,8 @@ O caso documenta um mecanismo de continuidade, não os percentuais de conclusão
 
 [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
+A LangChain relata aumento de 52,8% para 66,5%, 13,7 pontos percentuais, com o mesmo gpt-5.2-codex no Terminal Bench 2.0, de 89 tarefas. Mudou orientações de verificação, middleware e gestão de contexto. É um resultado conjunto de alterações do harness, não apenas dos arquivos de progresso. [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
+
 ## Principais Conclusões
 
 - Janelas de contexto são um recurso finito. Tarefas longas inevitavelmente se estenderão por múltiplas sessões, e as sessões perderão informações ao longo do tempo — essa é uma realidade objetiva.
@@ -164,6 +166,8 @@ O caso documenta um mecanismo de continuidade, não os percentuais de conclusão
 - [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)
 - [Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code)
 - [HumanLayer: Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
+
+- [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
 
 ## Exercícios
 

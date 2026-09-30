@@ -99,6 +99,8 @@ OpenAI は巨大な AGENTS.md がタスクのコンテキストを圧迫し、�
 
 効果は内容とタスク次第です。ETH Zurich の研究では、評価対象の設定でリポジトリのコンテキストファイルによる成功率の一般的な改善は見られず、推論コストは 20% 以上増えました。人が書く要件を最小限にすることを勧めています。短くすれば必ず良くなるわけではなく、対象タスクで検証が必要です。 [ETH Zurich: Evaluating AGENTS.md](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd)
 
+ペア比較研究では gpt-5.2-codex を用い、10 リポジトリの 124 の PR 由来タスクを同じ状態で AGENTS.md の有無により比較しました。表 1 の実行時間中央値は 98.57 秒から 70.34 秒（28.64% 減）、出力 token 中央値は 2,925 から 2,440（16.58% 減）。各タスクは最大 100 行・5 ファイルの変更です。効率の測定であり、大きなファイルの分割効果や完全な機能的正しさを評価した研究ではありません。 [Lulla et al., Table 1](https://arxiv.org/html/2601.20404v2)
+
 ## 重要なポイント
 
 - 「ルールを追加する」は短期的な鎮痛剤であり、長期的には毒になる。ルールを追加する前に問うこと: これはトピック文書のほうがよいのではないか？ スーツケースに詰め込み続けてはいけない。
@@ -116,6 +118,8 @@ OpenAI は巨大な AGENTS.md がタスクのコンテキストを圧迫し、�
 - [Nielsen Norman Group: Progressive Disclosure](https://www.nngroup.com/articles/progressive-disclosure/)
 
 - [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): コンテキストファイルの実証研究。成功率、推論コスト、最小限の要件を扱う。要旨と結論を参照。
+
+- [Lulla et al., Table 1](https://arxiv.org/html/2601.20404v2)
 
 ## 演習
 

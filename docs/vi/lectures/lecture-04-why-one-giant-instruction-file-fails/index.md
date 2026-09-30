@@ -99,6 +99,8 @@ OpenAI cho biết một AGENTS.md lớn chiếm ngữ cảnh của nhiệm vụ,
 
 Lợi ích phụ thuộc nội dung và nhiệm vụ. Nghiên cứu của ETH Zurich không thấy cải thiện thành công nói chung từ tệp ngữ cảnh trong các thiết lập đã đánh giá, nhưng chi phí suy luận tăng hơn 20%. Nghiên cứu khuyên giữ yêu cầu do con người viết ở mức tối thiểu. Tệp ngắn hơn không bảo đảm hiệu quả tốt hơn; cần thử trên nhiệm vụ thực tế. [ETH Zurich: Evaluating AGENTS.md](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd)
 
+Nghiên cứu ghép cặp dùng gpt-5.2-codex trên 124 nhiệm vụ từ PR của 10 kho mã, so cùng nhiệm vụ và phiên bản có hoặc không có AGENTS.md. Bảng 1: thời gian trung vị 98,57→70,34 giây (giảm 28,64%), token đầu ra trung vị 2.925→2.440 (giảm 16,58%). Mỗi nhiệm vụ đổi tối đa 100 dòng và năm tệp. Đây là phép đo hiệu suất, không phải tác động của chia tệp lớn; không đánh giá đầy đủ tính đúng đắn chức năng. [Lulla et al., Table 1](https://arxiv.org/html/2601.20404v2)
+
 ## Những điểm chính cần nhớ
 
 - "Thêm quy tắc" là giảm đau ngắn hạn, nhưng là thuốc độc dài hạn. Trước khi thêm quy tắc, hãy nghĩ xem nó có chỗ đứng tốt hơn trong một tài liệu chủ đề không.
@@ -116,6 +118,8 @@ Lợi ích phụ thuộc nội dung và nhiệm vụ. Nghiên cứu của ETH Zu
 - [Nielsen Norman Group: Progressive Disclosure](https://www.nngroup.com/articles/progressive-disclosure/)
 
 - [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): Nghiên cứu tệp ngữ cảnh: thành công, chi phí suy luận và yêu cầu tối thiểu. Xem tóm tắt và kết luận.
+
+- [Lulla et al., Table 1](https://arxiv.org/html/2601.20404v2)
 
 ## Bài tập
 

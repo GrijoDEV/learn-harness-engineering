@@ -153,6 +153,8 @@ Der Fall dokumentiert einen Kontinuitätsmechanismus, nicht die zuvor hier genan
 
 [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
+LangChain berichtet bei gleichem gpt-5.2-codex auf Terminal Bench 2.0 mit 89 Aufgaben einen Anstieg von 52,8% auf 66,5%, also 13,7 Prozentpunkte. Die Änderungen umfassten Verifikationsanweisungen, Middleware und Kontextmanagement. Dies ist der gemeinsame Effekt mehrerer Harness-Änderungen, nicht allein der Fortschrittsdateien. [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
+
 ## Wichtigste Erkenntnisse
 
 - Kontextfenster sind eine endliche Ressource. Lange Aufgaben werden Sessions überspannen, und Sessions werden Informationen verlieren — wie der Handwerker, der jeden Tag vergisst, ist das objektive Realität.
@@ -168,6 +170,8 @@ Der Fall dokumentiert einen Kontinuitätsmechanismus, nicht die zuvor hier genan
 - [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)
 - [Claude Code Documentation](https://docs.anthropic.com/de/docs/claude-code)
 - [HumanLayer: Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
+
+- [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
 
 ## Übungen
 

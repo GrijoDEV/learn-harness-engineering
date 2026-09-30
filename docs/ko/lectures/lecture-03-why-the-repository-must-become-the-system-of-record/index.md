@@ -106,6 +106,8 @@ OpenAI는 Codex로 내부 제품을 개발하며 아키텍처, 설계 결정, �
 
 [OpenAI](https://openai.com/index/harness-engineering/)
 
+OpenAI는 Codex를 지휘한 엔지니어 3명이 5개월 동안 약 1,500개의 PR을 열고 병합했으며, 1인당 하루 평균 3.5개였다고 보고합니다. 이후 팀은 7명으로 늘었습니다. 전체 개발 과정의 결과이며 저장소 문서만의 기여를 분리한 수치는 아닙니다. [OpenAI: Harness engineering](https://openai.com/index/harness-engineering/)
+
 ## 핵심 정리
 
 - 저장소에 없는 지식은 에이전트에게 존재하지 않습니다. 중요한 결정을 저장소에 두는 것이 가장 기본적인 하네스 투자입니다 — 길을 잃지 않도록 좋은 지도를 그리십시오.

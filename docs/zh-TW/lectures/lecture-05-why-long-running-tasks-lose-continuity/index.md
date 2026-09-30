@@ -151,6 +151,8 @@ Anthropic 介紹了一個 Claude 網站複製案例：初始化 agent 將需求�
 
 [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
+LangChain 報告了一組真實的 harness 改進結果：固定使用 gpt-5.2-codex，在包含 89 個任務的 Terminal Bench 2.0 上，得分從 52.8% 提升到 66.5%，提高 13.7 個百分點。改動包括驗證指導、中介軟體和脈絡管理。這是多項 harness 調整的整體結果，不能單獨歸因於進度檔案。 [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
+
 ## 關鍵要點
 
 - 脈絡視窗是有限的資源。長任務一定會跨工作階段，跨工作階段一定會丟資訊，這是客觀現實。
@@ -166,6 +168,8 @@ Anthropic 介紹了一個 Claude 網站複製案例：初始化 agent 將需求�
 - [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)
 - [Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code)
 - [HumanLayer: Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
+
+- [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
 
 ## 練習
 

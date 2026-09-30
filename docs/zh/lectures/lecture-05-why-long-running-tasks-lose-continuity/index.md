@@ -151,6 +151,8 @@ Anthropic 介绍了一个 Claude 网站克隆案例：初始化 agent 将需求�
 
 [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
+LangChain 报告了一组真实的 harness 改进结果：固定使用 gpt-5.2-codex，在包含 89 个任务的 Terminal Bench 2.0 上，得分从 52.8% 提升到 66.5%，提高 13.7 个百分点。改动包括验证指导、中间件和上下文管理。这是多项 harness 调整的整体结果，不能单独归因于进度文件。 [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
+
 ## 核心要点
 
 - 上下文窗口是有限的资源。长任务一定会跨会话，跨会话一定会丢信息，这是客观现实。
@@ -166,6 +168,8 @@ Anthropic 介绍了一个 Claude 网站克隆案例：初始化 agent 将需求�
 - [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)
 - [Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code)
 - [HumanLayer: Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
+
+- [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
 
 ## 练习
 

@@ -99,6 +99,8 @@ Python 3.11 FastAPI backend, PostgreSQL 15 database.
 
 تعتمد الفائدة على المحتوى والمهمة. لم تجد دراسة ETH Zurich تحسنًا عامًا في نجاح المهام بسبب ملفات السياق ضمن إعداداتها المقيمة، لكنها وجدت زيادة تكلفة الاستدلال بأكثر من 20%، وأوصت بمتطلبات بشرية مختصرة. الملف الأقصر لا يضمن التحسن؛ يجب اختبار التعليمات على المهام المستهدفة. [ETH Zurich: Evaluating AGENTS.md](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd)
 
+استخدمت دراسة مقارنة مزدوجة gpt-5.2-codex في 124 مهمة مشتقة من طلبات دمج في 10 مستودعات، مع المهمة والنسخة نفسيهما بوجود AGENTS.md وبدونه. الجدول 1: الزمن الوسيط 98.57→70.34 ثانية (انخفاض 28.64%)، ورموز الإخراج الوسيطة 2,925→2,440 (انخفاض 16.58%). غيرت المهام 100 سطر وخمسة ملفات كحد أقصى. قاست الدراسة الكفاءة، لا أثر تقسيم الملفات الكبيرة؛ ولم تقيّم الصحة الوظيفية الكاملة. [Lulla et al., Table 1](https://arxiv.org/html/2601.20404v2)
+
 ## الخلاصات الأساسية
 
 - "إضافة قاعدة" مسكن قصير الأمد وسم طويل الأمد. قبل إضافة قاعدة، اسأل: هل ستكون أفضل في مستند موضوعي؟ لا تواصل حشو الحقيبة.
@@ -116,6 +118,8 @@ Python 3.11 FastAPI backend, PostgreSQL 15 database.
 - [Nielsen Norman Group: Progressive Disclosure](https://www.nngroup.com/articles/progressive-disclosure/)
 
 - [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): دراسة ملفات السياق: نجاح المهام وتكلفة الاستدلال والمتطلبات المختصرة. راجع الملخص والخاتمة.
+
+- [Lulla et al., Table 1](https://arxiv.org/html/2601.20404v2)
 
 ## تمارين
 

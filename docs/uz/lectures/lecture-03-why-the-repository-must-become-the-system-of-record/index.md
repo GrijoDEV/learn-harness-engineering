@@ -106,6 +106,8 @@ Bu hujjatlashtirilgan muhandislik amaliyoti, muvaffaqiyat oshishini o‘lchagan 
 
 [OpenAI](https://openai.com/index/harness-engineering/)
 
+OpenAI Codex’ni boshqargan uch muhandis bilan besh oyda taxminan 1 500 PR ochilib birlashtirilganini, har muhandis kuniga o‘rtacha 3,5 PR yaratganini bildiradi. Jamoa keyin yetti kishiga yetgan. Bu butun jarayon natijasi; repozitoriy hujjatlari hissasi alohida o‘lchanmagan. [OpenAI: Harness engineering](https://openai.com/index/harness-engineering/)
+
 ## Asosiy xulosalar
 
 - Repoda boʻlmagan bilim agent uchun mavjud emas. Muhim qarorlarni repoga kiritish eng asosiy harness sarmoyasidir — adashib qolmaslik uchun yaxshi xarita chizing.

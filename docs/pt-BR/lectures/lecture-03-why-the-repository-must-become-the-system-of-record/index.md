@@ -106,6 +106,8 @@ A OpenAI descreve como manteve arquitetura, decisões de projeto, planos de exec
 
 [OpenAI](https://openai.com/index/harness-engineering/)
 
+A OpenAI relata cerca de 1.500 PR abertos e integrados em cinco meses por três engenheiros dirigindo Codex, com 3,5 PR por engenheiro por dia. A equipe depois chegou a sete. São resultados do processo inteiro; o efeito isolado da documentação não foi medido. [OpenAI: Harness engineering](https://openai.com/index/harness-engineering/)
+
 ## Principais Conclusões
 
 - Conhecimento que não está no repositório não existe para o agente. Colocar informações críticas de decisão dentro do repositório é o investimento mais fundamental em harness engineering — desenhe um bom mapa para não se perder.

@@ -151,6 +151,8 @@ This case documents a continuity mechanism; it does not report the feature-compl
 
 [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
+LangChain reports an actual harness improvement using the same gpt-5.2-codex model on Terminal Bench 2.0, an 89-task benchmark: the score rose from 52.8% to 66.5%, a gain of 13.7 percentage points. Changes included verification guidance, middleware, and context management. This is a result for several harness changes together, not a measured benefit of progress files alone. [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
+
 ## Key Takeaways
 
 - Context windows are a finite resource. Long tasks will span sessions, and sessions will lose information — this is objective reality.
@@ -166,6 +168,8 @@ This case documents a continuity mechanism; it does not report the feature-compl
 - [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)
 - [Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code)
 - [HumanLayer: Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
+
+- [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
 
 ## Exercises
 

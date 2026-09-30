@@ -153,6 +153,8 @@ Ce cas décrit un mécanisme de continuité, pas les pourcentages de réalisatio
 
 [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
+LangChain rapporte un score passant de 52,8% à 66,5%, soit 13,7 points, avec le même gpt-5.2-codex sur Terminal Bench 2.0 et ses 89 tâches. Les changements portaient sur la vérification, le middleware et la gestion du contexte. Ce résultat combine plusieurs modifications du harness ; il ne mesure pas le seul effet des fichiers d’avancement. [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
+
 ## Points clés
 
 - Les fenêtres de contexte sont une ressource finie. Les tâches longues s'étaleront sur plusieurs sessions, et les sessions perdront de l'information — comme l'artisan qui oublie chaque jour, c'est une réalité objective.
@@ -168,6 +170,8 @@ Ce cas décrit un mécanisme de continuité, pas les pourcentages de réalisatio
 - [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)
 - [Claude Code Documentation](https://docs.anthropic.com/fr/docs/claude-code)
 - [HumanLayer: Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
+
+- [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
 
 ## Exercices
 

@@ -99,6 +99,8 @@ OpenAI 尝试过一个巨型 AGENTS.md，发现它挤占任务上下文、混淆
 
 效果取决于内容和任务。ETH Zurich 的研究发现，在其评估设置中，仓库上下文文件并未普遍提高任务成功率，却使推理成本增加了 20% 以上，因而建议人工编写的要求保持精简。文件变短不等于效果必然变好，需要在实际任务上验证。 [ETH Zurich: Evaluating AGENTS.md](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd)
 
+一项配对研究使用 gpt-5.2-codex，在 10 个仓库的 124 个 PR 派生任务上，对比相同任务和仓库快照有无 AGENTS.md。表 1 中，中位耗时从 98.57 秒降到 70.34 秒，降低 28.64%；输出 token 中位数从 2,925 降到 2,440，降低 16.58%。任务最多改动 100 行、5 个文件。这测量的是效率，而非拆分巨型文件的效果；完整功能正确性验证不在研究范围内。 [Lulla et al., Table 1](https://arxiv.org/html/2601.20404v2)
+
 ## 核心要点
 
 - "加条规则"是短期的止痛药，长期的毒药。每次加规则前想想，这条规则放专题文档是不是更合适。
@@ -116,6 +118,8 @@ OpenAI 尝试过一个巨型 AGENTS.md，发现它挤占任务上下文、混淆
 - [Nielsen Norman Group: Progressive Disclosure](https://www.nngroup.com/articles/progressive-disclosure/)
 
 - [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): 仓库上下文文件的实证研究：任务成功率、推理成本，以及保持要求精简的建议。见摘要和结论。
+
+- [Lulla et al., Table 1](https://arxiv.org/html/2601.20404v2)
 
 ## 练习
 

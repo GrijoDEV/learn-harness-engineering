@@ -153,6 +153,8 @@ Ví dụ này mô tả cơ chế liên tục, không báo cáo các tỷ lệ ho
 
 [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
+LangChain báo cáo điểm tăng từ 52,8% lên 66,5%, tức 13,7 điểm phần trăm, với cùng gpt-5.2-codex trên 89 nhiệm vụ Terminal Bench 2.0. Thay đổi gồm hướng dẫn kiểm tra, middleware và quản lý ngữ cảnh. Đây là kết quả tổng hợp nhiều thay đổi harness, không riêng tệp tiến độ. [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
+
 ## Những điểm chính cần nhớ
 
 - Cửa sổ ngữ cảnh là tài nguyên hữu hạn. Tác vụ dài sẽ trải qua nhiều phiên, và các phiên sẽ mất thông tin, đó là thực tế khách quan.
@@ -168,6 +170,8 @@ Ví dụ này mô tả cơ chế liên tục, không báo cáo các tỷ lệ ho
 - [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)
 - [Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code)
 - [HumanLayer: Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
+
+- [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
 
 ## Bài tập
 

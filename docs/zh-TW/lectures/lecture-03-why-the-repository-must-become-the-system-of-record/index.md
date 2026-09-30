@@ -106,6 +106,8 @@ OpenAI 使用 Codex 開發內部產品時，把架構說明、設計決策、執
 
 [OpenAI](https://openai.com/index/harness-engineering/)
 
+OpenAI 報告：一個由 3 名工程師驅動 Codex 的小團隊，在 5 個月內開出並合入約 1,500 個 PR，平均每名工程師每天產出 3.5 個 PR；團隊後來增至 7 人。這是整套工程流程的實際產出，原文沒有單獨測量儲存庫文件的貢獻。 [OpenAI: Harness engineering](https://openai.com/index/harness-engineering/)
+
 ## 關鍵要點
 
 - 不在儲存庫裡的知識對 agent 來說等於不存在。把關鍵決策資訊放進儲存庫是最基本的 harness 投資。

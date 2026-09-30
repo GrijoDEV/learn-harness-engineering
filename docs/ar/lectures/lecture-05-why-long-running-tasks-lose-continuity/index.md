@@ -153,6 +153,8 @@ flowchart LR
 
 [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
+تذكر LangChain ارتفاع النتيجة من 52.8% إلى 66.5%، بفارق 13.7 نقطة مئوية، مع gpt-5.2-codex نفسه على مهام Terminal Bench 2.0 البالغ عددها 89. شملت التغييرات تعليمات التحقق والبرمجيات الوسيطة وإدارة السياق. هذه نتيجة عدة تغييرات في harness معًا، وليست أثر ملفات التقدم وحدها. [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
+
 ## الخلاصات الأساسية
 
 - نوافذ السياق مورد محدود. المهام الطويلة ستمتد عبر جلسات، والجلسات ستفقد معلومات — مثل الحرفي الذي ينسى كل يوم، هذا واقع موضوعي.
@@ -168,6 +170,8 @@ flowchart LR
 - [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)
 - [Claude Code Documentation](https://docs.anthropic.com/ar/docs/claude-code)
 - [HumanLayer: Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
+
+- [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
 
 ## تمارين
 

@@ -99,6 +99,8 @@ OpenAI rapporte qu’un grand AGENTS.md occupait le contexte de la tâche, broui
 
 Le bénéfice dépend du contenu et de la tâche. Une étude de l’ETH Zurich n’a pas trouvé d’amélioration générale de la réussite avec les fichiers de contexte dans les situations évaluées, mais un coût d’inférence supérieur de plus de 20%. Elle recommande des exigences humaines minimales. Un fichier plus court ne garantit pas une amélioration : il faut tester les instructions sur les tâches visées. [ETH Zurich: Evaluating AGENTS.md](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd)
 
+Une étude appariée a utilisé gpt-5.2-codex sur 124 tâches issues de PR dans 10 dépôts, avec et sans AGENTS.md sur le même état du dépôt. Tableau 1 : durée médiane de 98,57 à 70,34 s (−28,64%) et tokens de sortie médians de 2 925 à 2 440 (−16,58%). Les tâches modifiaient au plus 100 lignes dans cinq fichiers. Elle mesure l’efficacité, pas le découpage des fichiers ; la correction fonctionnelle complète n’a pas été évaluée. [Lulla et al., Table 1](https://arxiv.org/html/2601.20404v2)
+
 ## Points clés
 
 - "Ajouter une règle" soulage à court terme, mais empoisonne à long terme. Avant d'ajouter une règle, demandez : serait-elle mieux dans un document thématique ? Ne continuez pas à tasser la valise.
@@ -116,6 +118,8 @@ Le bénéfice dépend du contenu et de la tâche. Une étude de l’ETH Zurich n
 - [Nielsen Norman Group: Progressive Disclosure](https://www.nngroup.com/articles/progressive-disclosure/)
 
 - [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): Étude des fichiers de contexte : réussite, coût d’inférence et exigences minimales. Voir le résumé et la conclusion.
+
+- [Lulla et al., Table 1](https://arxiv.org/html/2601.20404v2)
 
 ## Exercices
 

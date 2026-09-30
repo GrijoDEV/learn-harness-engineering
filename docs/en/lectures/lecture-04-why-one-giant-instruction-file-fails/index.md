@@ -99,6 +99,8 @@ OpenAI reports that a single large AGENTS.md crowded out task context, blurred p
 
 The benefit depends on the content and task. An ETH Zurich study found that repository context files did not generally improve task success in its evaluated settings and increased inference cost by over 20%. Its recommendation is to keep human-written requirements minimal. A shorter file is not a guarantee of improvement; test the instructions on the tasks they are meant to support. [ETH Zurich: Evaluating AGENTS.md](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd)
 
+A paired study used gpt-5.2-codex on 124 PR-derived tasks from 10 repositories, comparing the same task and repository snapshot with and without AGENTS.md. Table 1 reports median runtime falling from 98.57 s to 70.34 s (28.64% lower), and median output tokens from 2,925 to 2,440 (16.58% lower). Tasks changed at most 100 lines across at most five files. This measures efficiency, not the effect of splitting a large file: full functional correctness was outside the study’s scope. [Lulla et al., Table 1](https://arxiv.org/html/2601.20404v2)
+
 ## Key Takeaways
 
 - "Add a rule" is short-term pain relief and long-term poison. Before adding any rule, consider whether it belongs in a topic document instead.
@@ -116,6 +118,8 @@ The benefit depends on the content and task. An ETH Zurich study found that repo
 - [Nielsen Norman Group: Progressive Disclosure](https://www.nngroup.com/articles/progressive-disclosure/)
 
 - [ETH Zurich: Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?](https://www.sri.inf.ethz.ch/publications/gloaguen2026agentsmd): Study of repository context files; task success, inference cost, and the recommendation to keep requirements minimal. See the abstract and conclusion.
+
+- [Lulla et al., Table 1](https://arxiv.org/html/2601.20404v2)
 
 ## Exercises
 

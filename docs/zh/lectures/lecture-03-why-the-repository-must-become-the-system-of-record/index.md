@@ -106,6 +106,8 @@ OpenAI 在用 Codex 开发内部产品时，把架构说明、设计决策、执
 
 [OpenAI](https://openai.com/index/harness-engineering/)
 
+OpenAI 报告：一个由 3 名工程师驱动 Codex 的小团队，在 5 个月内开出并合入约 1,500 个 PR，平均每名工程师每天产出 3.5 个 PR；团队后来增至 7 人。这是整套工程流程的实际产出，原文没有单独测量仓库文档的贡献。 [OpenAI: Harness engineering](https://openai.com/index/harness-engineering/)
+
 ## 核心要点
 
 - 不在仓库里的知识对 agent 来说等于不存在。把关键决策信息放进仓库是最基本的 harness 投资，画好地图才不会迷路。

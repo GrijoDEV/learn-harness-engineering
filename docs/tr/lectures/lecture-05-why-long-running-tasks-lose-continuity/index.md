@@ -153,6 +153,8 @@ Bu örnek süreklilik mekanizmasını belgeler; daha önce burada verilen tamaml
 
 [Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
+LangChain, aynı gpt-5.2-codex ile 89 görevlik Terminal Bench 2.0 skorunun %52,8’den %66,5’e, 13,7 yüzde puan yükseldiğini bildiriyor. Doğrulama talimatları, middleware ve bağlam yönetimi birlikte değiştirildi. Sonuç birkaç harness değişikliğinin ortak etkisidir, yalnızca ilerleme dosyalarının değil. [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
+
 ## Önemli çıkarımlar
 
 - Bağlam pencereleri sonlu bir kaynaktır. Uzun görevler oturumları aşacak ve oturumlar bilgi kaybedecektir — her gün unutan zanaatkâr gibi, bu objektif bir gerçektir.
@@ -168,6 +170,8 @@ Bu örnek süreklilik mekanizmasını belgeler; daha önce burada verilen tamaml
 - [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172)
 - [Claude Code Dokümantasyonu](https://docs.anthropic.com/en/docs/claude-code)
 - [HumanLayer: Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents)
+
+- [LangChain: Improving Deep Agents](https://www.langchain.com/blog/improving-deep-agents-with-harness-engineering)
 
 ## Alıştırmalar
 
