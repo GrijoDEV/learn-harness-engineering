@@ -180,7 +180,11 @@ async function renderCoverPage(
 ) {
   const page = await context.newPage()
   const generatedAt = new Date().toISOString().slice(0, 10)
-  const languageLabel = language === 'en' ? 'English' : '简体中文'
+  const coverMetadata =
+    language === 'pt-BR'
+      ? `Apostila em português do Brasil · gerada em ${generatedAt}`
+      : `${language === 'en' ? 'English' : '简体中文'} coursebook PDF · generated ${generatedAt}`
+  const coverContentsHeading = language === 'pt-BR' ? 'Conteúdo da apostila' : 'Included sections'
   const contents = manifest
     .map(
       (entry) =>
@@ -230,8 +234,8 @@ async function renderCoverPage(
         </head>
         <body>
           <h1>Learn Harness Engineering</h1>
-          <p class="meta">${languageLabel} coursebook PDF · generated ${generatedAt}</p>
-          <h2>Included sections</h2>
+          <p class="meta">${coverMetadata}</p>
+          <h2>${coverContentsHeading}</h2>
           <ol>${contents}</ol>
         </body>
       </html>`,
@@ -274,7 +278,7 @@ function parseRequestedLanguages(args: string[]): Language[] {
   }
 
   const value = args[languageIndex + 1]
-  if (value === 'en' || value === 'zh') {
+  if (value === 'en' || value === 'zh' || value === 'pt-BR') {
     return [value]
   }
 

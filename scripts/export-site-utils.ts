@@ -3,7 +3,7 @@ import path from 'node:path'
 import { existsSync } from 'node:fs'
 import { promises as fs } from 'node:fs'
 
-export type Language = 'en' | 'zh'
+export type Language = 'en' | 'zh' | 'pt-BR'
 
 export type CoursePage = {
   filePath: string
