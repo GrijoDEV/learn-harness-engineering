@@ -1,0 +1,107 @@
+{
+  // ===== Formatação =====
+
+  // Ctrl+S → formata com Prettier (usa o .prettierrc da raiz)
+  "editor.formatOnSave": true,
+
+  // Garante que Prettier é o formatador (senão o VS Code usaria o formatter padrão do TypeScript)
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // Ctrl+S → aplica as correções automáticas disponíveis no ESLint.
+  // O modo "explicit" executa a ação apenas em um salvamento explícito.
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    // Remove imports não utilizados e reorganiza os imports via TypeScript.
+    "source.organizeImports": "explicit"
+  },
+
+  // ===== Editor =====
+  "editor.fontSize": 15,
+  "terminal.integrated.fontSize": 14,
+  "window.zoomLevel": 1.8,
+  "editor.minimap.enabled": false,
+
+  // Limite visual de 97 caracteres
+  "editor.rulers": [97],
+
+  // Quebra visual das linhas em 97 caracteres
+  "editor.wordWrap": "wordWrapColumn",
+  "editor.wordWrapColumn": 97,
+
+  // Indentação
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
+
+  // Final de arquivo
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+
+  // ===== Explorer =====
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "explorer.confirmPasteNative": false,
+
+  // ===== Aparência =====
+  "workbench.colorTheme": "Webstorm IntelliJ Darcula Theme",
+  "workbench.iconTheme": "material-icon-theme",
+
+  // ===== Segurança =====
+  "security.promptForLocalFileProtocolHandling": false,
+  "security.workspace.trust.untrustedFiles": "open",
+  "task.allowAutomaticTasks": "on",
+
+  // Usa a instalação do TypeScript do monorepo para o IntelliSense.
+  "js/ts.tsdk.path": "./node_modules/typescript/lib",
+
+  // Nome da organização usado nos packages internos do monorepo.
+  "cSpell.words": ["grijo"],
+
+  // Atualiza automaticamente os caminhos dos imports ao mover ou renomear arquivos.
+  "js/ts.updateImportsOnFileMove.enabled": "always",
+
+  // ===== Terminal Padrão =====
+  "terminal.integrated.profiles.linux": {
+    "bash": {
+      "path": "/bin/bash",
+      "icon": "terminal-bash"
+    }
+  },
+  "terminal.integrated.defaultProfile.linux": "bash",
+
+  // Banco de dados (Pode apagar aqui caso queira)
+  "sqltools.connections": [
+    {
+      "ssh": "Disabled",
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 55432,
+      "driver": "PostgreSQL",
+      "name": "base-project",
+      "database": "base-project",
+      "username": "base-project",
+      "password": "base-project"
+    }
+  ]
+}

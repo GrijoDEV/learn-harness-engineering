@@ -1,0 +1,296 @@
+{
+  "checks": [
+    {
+      "name": "Python 3",
+      "type": "command",
+      "commands": ["python3", "python"],
+      "minimumVersion": "3.0.0",
+      "installer": "./.vscode/tools/bootstrap/install-python.sh"
+    },
+    {
+      "name": "Grijó Commit AI",
+      "type": "vscode-extension",
+      "id": "grijo.grijo-commit-ai",
+      "installer": "./.vscode/tools/vscode-commit-ai/install.sh"
+    },
+    {
+      "name": "Grijó Workspace Keybindings",
+      "type": "vscode-extension",
+      "id": "grijo.grijo-workspace-keybindings",
+      "installer": "./.vscode/tools/vscode-workspace-keybindings/install.sh"
+    },
+    {
+      "name": "Webstorm IntelliJ Darcula Theme",
+      "type": "vscode-extension",
+      "id": "xr0master.webstorm-intellij-darcula-theme",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["xr0master.webstorm-intellij-darcula-theme"]
+    },
+    {
+      "name": "Material Icon Theme",
+      "type": "vscode-extension",
+      "id": "PKief.material-icon-theme",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["PKief.material-icon-theme"]
+    },
+    {
+      "name": "Better Comments",
+      "type": "vscode-extension",
+      "id": "aaron-bond.better-comments",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["aaron-bond.better-comments"]
+    },
+    {
+      "name": "CodeSnap",
+      "type": "vscode-extension",
+      "id": "adpyke.codesnap",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["adpyke.codesnap"]
+    },
+    {
+      "name": "Bookmarks",
+      "type": "vscode-extension",
+      "id": "alefragnani.bookmarks",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["alefragnani.bookmarks"]
+    },
+    {
+      "name": "Bracket Pair Color DLW",
+      "type": "vscode-extension",
+      "id": "bracketpaircolordlw.bracket-pair-color-dlw",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["bracketpaircolordlw.bracket-pair-color-dlw"]
+    },
+    {
+      "name": "npm Intellisense",
+      "type": "vscode-extension",
+      "id": "christian-kohler.npm-intellisense",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["christian-kohler.npm-intellisense"]
+    },
+    {
+      "name": "markdownlint",
+      "type": "vscode-extension",
+      "id": "davidanson.vscode-markdownlint",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["davidanson.vscode-markdownlint"]
+    },
+    {
+      "name": "ESLint",
+      "type": "vscode-extension",
+      "id": "dbaeumer.vscode-eslint",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["dbaeumer.vscode-eslint"]
+    },
+    {
+      "name": "Prettier - Code formatter",
+      "type": "vscode-extension",
+      "id": "esbenp.prettier-vscode",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["esbenp.prettier-vscode"]
+    },
+    {
+      "name": "Debugger for Firefox",
+      "type": "vscode-extension",
+      "id": "firefox-devtools.vscode-firefox-debug",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["firefox-devtools.vscode-firefox-debug"]
+    },
+    {
+      "name": "Auto Rename Tag",
+      "type": "vscode-extension",
+      "id": "formulahendry.auto-rename-tag",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["formulahendry.auto-rename-tag"]
+    },
+    {
+      "name": "Code Runner",
+      "type": "vscode-extension",
+      "id": "formulahendry.code-runner",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["formulahendry.code-runner"]
+    },
+    {
+      "name": "GitHub Actions",
+      "type": "vscode-extension",
+      "id": "github.vscode-github-actions",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["github.vscode-github-actions"]
+    },
+    {
+      "name": "REST Client",
+      "type": "vscode-extension",
+      "id": "humao.rest-client",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["humao.rest-client"]
+    },
+    {
+      "name": "SVG",
+      "type": "vscode-extension",
+      "id": "jock.svg",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["jock.svg"]
+    },
+    {
+      "name": "Rainbow CSV",
+      "type": "vscode-extension",
+      "id": "mechatroner.rainbow-csv",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["mechatroner.rainbow-csv"]
+    },
+    {
+      "name": "Container Tools",
+      "type": "vscode-extension",
+      "id": "ms-azuretools.vscode-containers",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["ms-azuretools.vscode-containers"]
+    },
+    {
+      "name": "Docker",
+      "type": "vscode-extension",
+      "id": "ms-azuretools.vscode-docker",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["ms-azuretools.vscode-docker"]
+    },
+    {
+      "name": "Python Debugger",
+      "type": "vscode-extension",
+      "id": "ms-python.debugpy",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["ms-python.debugpy"]
+    },
+    {
+      "name": "Python",
+      "type": "vscode-extension",
+      "id": "ms-python.python",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["ms-python.python"]
+    },
+    {
+      "name": "Pylance",
+      "type": "vscode-extension",
+      "id": "ms-python.vscode-pylance",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["ms-python.vscode-pylance"]
+    },
+    {
+      "name": "Python Environments",
+      "type": "vscode-extension",
+      "id": "ms-python.vscode-python-envs",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["ms-python.vscode-python-envs"]
+    },
+    {
+      "name": "Jupyter",
+      "type": "vscode-extension",
+      "id": "ms-toolsai.jupyter",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["ms-toolsai.jupyter"]
+    },
+    {
+      "name": "Jupyter Keymap",
+      "type": "vscode-extension",
+      "id": "ms-toolsai.jupyter-keymap",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["ms-toolsai.jupyter-keymap"]
+    },
+    {
+      "name": "Jupyter Notebook Renderers",
+      "type": "vscode-extension",
+      "id": "ms-toolsai.jupyter-renderers",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["ms-toolsai.jupyter-renderers"]
+    },
+    {
+      "name": "Jupyter Cell Tags",
+      "type": "vscode-extension",
+      "id": "ms-toolsai.vscode-jupyter-cell-tags",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["ms-toolsai.vscode-jupyter-cell-tags"]
+    },
+    {
+      "name": "Jupyter Slide Show",
+      "type": "vscode-extension",
+      "id": "ms-toolsai.vscode-jupyter-slideshow",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["ms-toolsai.vscode-jupyter-slideshow"]
+    },
+    {
+      "name": "Dev Containers",
+      "type": "vscode-extension",
+      "id": "ms-vscode-remote.remote-containers",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["ms-vscode-remote.remote-containers"]
+    },
+    {
+      "name": "Nx Console",
+      "type": "vscode-extension",
+      "id": "nrwl.angular-console",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["nrwl.angular-console"]
+    },
+    {
+      "name": "Codex – OpenAI’s coding agent",
+      "type": "vscode-extension",
+      "id": "openai.chatgpt",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["openai.chatgpt"]
+    },
+    {
+      "name": "Excalidraw",
+      "type": "vscode-extension",
+      "id": "pomdtr.excalidraw-editor",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["pomdtr.excalidraw-editor"]
+    },
+    {
+      "name": "CSS Peek",
+      "type": "vscode-extension",
+      "id": "pranaygp.vscode-css-peek",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["pranaygp.vscode-css-peek"]
+    },
+    {
+      "name": "Prisma",
+      "type": "vscode-extension",
+      "id": "prisma.prisma",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["prisma.prisma"]
+    },
+    {
+      "name": "Live Server",
+      "type": "vscode-extension",
+      "id": "ritwickdey.liveserver",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["ritwickdey.liveserver"]
+    },
+    {
+      "name": "Code Spell Checker",
+      "type": "vscode-extension",
+      "id": "streetsidesoftware.code-spell-checker",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["streetsidesoftware.code-spell-checker"]
+    },
+    {
+      "name": "open in browser",
+      "type": "vscode-extension",
+      "id": "techer.open-in-browser",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["techer.open-in-browser"]
+    },
+    {
+      "name": "Sort lines",
+      "type": "vscode-extension",
+      "id": "tyriar.sort-lines",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["tyriar.sort-lines"]
+    },
+    {
+      "name": "JavaScript (ES6) code snippets",
+      "type": "vscode-extension",
+      "id": "xabikos.javascriptsnippets",
+      "installer": "./.vscode/tools/bootstrap/install-vscode-extension.sh",
+      "arguments": ["xabikos.javascriptsnippets"]
+    }
+  ]
+}

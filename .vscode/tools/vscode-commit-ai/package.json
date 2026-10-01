@@ -1,0 +1,67 @@
+{
+  "name": "grijo-commit-ai",
+  "displayName": "Grijó Commit AI",
+  "description": "Gera mensagens de commit usando uma API OpenAI-compatible e preenche o campo Git do VS Code.",
+  "version": "0.1.4",
+  "publisher": "grijo",
+  "license": "UNLICENSED",
+  "engines": {
+    "vscode": ">=1.90.0"
+  },
+  "main": "./extension.js",
+  "extensionKind": [
+    "workspace"
+  ],
+  "extensionDependencies": [
+    "vscode.git"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "grijo.commitAi.generate",
+        "title": "Grijó: Gerar mensagem de commit",
+        "icon": "$(sparkle)"
+      }
+    ],
+    "menus": {
+      "scm/title": [
+        {
+          "command": "grijo.commitAi.generate",
+          "when": "scmProvider == git",
+          "group": "navigation@2"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "grijo.commitAi.generate",
+        "key": "ctrl+alt+m",
+        "when": "scmProvider == git"
+      }
+    ],
+    "configuration": {
+      "title": "Grijó Commit AI",
+      "properties": {
+        "grijo.commitAi.envFile": {
+          "type": "string",
+          "default": ".vscode/tools/vscode-commit-ai/.env",
+          "description": "Arquivo de ambiente relativo à raiz do repositório Git. Não inclua a chave no settings.json."
+        },
+        "grijo.commitAi.scriptPath": {
+          "type": "string",
+          "default": ".vscode/tools/vscode-commit-ai/generate-commit-message.mjs",
+          "description": "Caminho do gerador relativo à raiz do repositório Git."
+        },
+        "grijo.commitAi.maxDiffChars": {
+          "type": "integer",
+          "default": 120000,
+          "minimum": 1000,
+          "description": "Limite de caracteres das alterações não commitadas enviadas ao provedor."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "test": "node --test __tests__/generate-commit-message.test.mjs"
+  }
+}

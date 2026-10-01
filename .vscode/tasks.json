@@ -1,0 +1,22 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Grijó: verificar pré-requisitos",
+      "type": "process",
+      "command": "node",
+      "args": [
+        ".vscode/tools/bootstrap/ensure-prerequisites.mjs"
+      ],
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared",
+        "close": true
+      }
+    }
+  ]
+}
